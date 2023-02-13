@@ -22,15 +22,6 @@
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
+  --gray-100: #bdbdbd
 }
 
-@media (min-width: 1400px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl,
-  .container-xxl {
-    max-width: 1420px;
-  }
-}

@@ -1,16 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import { HeaderNav } from './Components'
+import { useState } from "react";
+import "./App.css";
+import { Header} from "./Components";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <HeaderNav/>
+      <Header/>
+      <Routes>
+        <Route>
+        
+        </Route>
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

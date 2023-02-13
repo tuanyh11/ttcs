@@ -1,83 +1,88 @@
 import React from "react";
-import { Col, Container, Row } from "reactstrap";
+import { Link } from "react-router-dom";
+import Col from "../Col/Col";
+import Container from "../Container/Container";
+import Row from "../Row/Row";
+// import "./header.css";
 
-const langues = [
+const data = [
   {
     id: 1,
-    name: "English"
+    title: "Home",
+    link: "/",
   },
   {
     id: 2,
-    name: "Français"
-  }, 
+    title: "About",
+    link: "/about",
+  },
   {
     id: 3,
-    name: "Español"
-  }
-]
-
-
+    title: "shop",
+    link: "/shop",
+  },
+  {
+    id: 4,
+    title: "Contact us",
+    link: "/contact",
+  },
+  {
+    id: 5,
+    title: "Blog",
+    link: "/blog",
+  },
+  {
+    id: 6,
+    title: "Contact us",
+    link: "/contact",
+  },
+];
 
 const HeaderNav = () => {
   return (
     <div>
       <Container>
-        <Row>
-          <Col>
-            <div class="top-left">
-              {" "}
-              <ul id="menu-top-left" class="top-left-menu top-menu">
-                <li
-                  id="menu-item-698"
-                  class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-698"
-                >
-                  {langues.map((langue) => {
-                    return (
-                      <a
-                        href="#"
-                        key={langue.id}
-                        class="menu-link menu-link-type-custom menu-link-object-custom menu-link-has-children menu-link-698"
-                      >
-                        {langue.name}
-                      </a>
-                    );
-                  })}
-                </li>{" "}
-                <li
-                  id="menu-item-702"
-                  class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-702"
-                >
-                  <a href="#">USD</a>{" "}
-                  <ul class="sub-menu">
-                    {" "}
-                    <li
-                      id="menu-item-704"
-                      class="menu-item menu-item-type-custom menu-item-object-custom menu-item-704"
-                    >
-                      <a href="#">USD</a>
-                    </li>{" "}
-                    <li
-                      id="menu-item-703"
-                      class="menu-item menu-item-type-custom menu-item-object-custom menu-item-703"
-                    >
-                      <a href="#">EUR</a>
-                    </li>{" "}
-                    <li
-                      id="menu-item-705"
-                      class="menu-item menu-item-type-custom menu-item-object-custom menu-item-705"
-                    >
-                      <a href="#">GBR</a>
-                    </li>{" "}
-                  </ul>{" "}
-                </li>{" "}
-              </ul>
+        <div className="flex justify-between items-center py-[15px] xl:py-0">
+          <Link to="/">
+            <img
+              className="w-[192px] h-auto max-w-full"
+              src="https://klbtheme.com/chakta/wp-content/uploads/2021/01/logo.png"
+              alt="Chakta – Auto Parts Shop WooCommerce Theme"
+            />
+          </Link>
+
+
+          {/* default: off xl: display */}
+          <nav className="hidden xl:flex items-center">
+            {data.map((nav) => 
+              <Link className="text-[16px] font-poppins py-[34px] px-[15px] block font-semibold text-dark-color uppercase" key={nav.id} to={nav.link}>
+                {nav.title}
+              </Link>
+            )}
+          </nav>
+
+            {/* default: off xl: display */}
+          <div className="hidden xl:flex items-center">
+            <div className="relative">
+              <input type="text" className="h-[45px] w-[170px] rounded-[22px] border-[2px] px-5" placeholder="Search" />
+              <button className="absolute top-1/2 right-0 -translate-y-1/2 -translate-x-5">
+              <i className="fas fa-search"></i>
+              </button>
             </div>
-          </Col>
+            <div className="mr-[10px] ml-[30px]">
+              <Link to={"/cart"} className="relative">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span className="absolute text-[11px] rounded-full min-w-[16px] h-4 text-center bg-main-color leading-4 text-white  top-[-5px] right-[-13px]">0</span>
+              </Link>
+            </div>
+          </div>
 
-          <Col></Col>
-
-          <Col></Col>
-        </Row>
+          <div className="">
+            <span className="h-[3px] w-[30px] bg-main-color block mt-[5px] rounded-[3px] cursor-pointer transition duration-300"></span>
+            <span className="h-[3px] w-[30px] bg-main-color block mt-[5px] rounded-[3px] cursor-pointer transition duration-300"></span>
+            <span className="h-[3px] w-[30px] bg-main-color block mt-[5px] rounded-[3px] cursor-pointer transition duration-300"></span>
+          </div>
+        </div>
       </Container>
     </div>
   );
