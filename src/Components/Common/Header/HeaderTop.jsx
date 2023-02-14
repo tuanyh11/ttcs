@@ -38,7 +38,7 @@ const HeaderTop = () => {
   const [currency, setCurrency] = useState(currencies[0]);
   return (
     <div className="p-[2px] bg-dark-color text-gray-color-100">
-      <Container>
+      <Container className={"xl:max-w-[1420px]"}>
         <Row className={"items-center"}>
           <Col className="md:w-4/12 lg:w-3/12">
             <div>
@@ -46,7 +46,7 @@ const HeaderTop = () => {
                 <li className="leading-[42px] pr-[15px] relative group">
                   <div className="cursor-pointer">
                     {langue?.name}
-                    <i class="fa-solid fa-chevron-down text-[10px] -translate-y-[2px] pl-1 cursor-default"></i>
+                    <i className="fa-solid fa-chevron-down text-[10px] -translate-y-[2px] pl-1 cursor-default"></i>
                   </div>
                   <ul className="absolute top-full left-0 bg-[#111] z-[999] shadow-[0_0_0_1px_rgb(68_68_68_/_11%)] hidden group-hover:block">
                     {langues.map((lang) => (
@@ -62,7 +62,7 @@ const HeaderTop = () => {
                     <i className="fa-solid fa-chevron-down  text-[10px] -translate-y-[2px] pl-1 cursor-default"></i>
                   </div>
 
-                  <ul class="absolute top-full left-0 bg-[#111] z-[999] shadow-[0_0_0_1px_rgb(68_68_68_/_11%)] hidden group-hover:block">
+                  <ul className="absolute top-full left-0 bg-[#111] z-[999] shadow-[0_0_0_1px_rgb(68_68_68_/_11%)] hidden group-hover:block">
                     {currencies.map((item) => (
                       <li key={item.id} className="leading-[35px] px-[18px]">
                         {item.name}
@@ -91,11 +91,11 @@ const HeaderTop = () => {
           <Col className="md:w-3/12 lg:w-3/12">
             <div className="flex lg:justify-end flex-wrap">
               <Link to="/sign-in" className="pl-[15px] leading-[42px]">
-                <i class="fa-solid fa-lock mr-[6px]"></i>
+                <i className="fa-solid fa-lock mr-[6px]"></i>
                 Sign in
               </Link>
               <Link to="/sign-up" className="pl-[15px] leading-[42px]">
-                <i class="fa-solid fa-user mr-[6px]"></i>
+                <i className="fa-solid fa-user mr-[6px]"></i>
                 Sign up
               </Link>
             </div>

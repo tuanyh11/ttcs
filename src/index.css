@@ -12,13 +12,30 @@ body {
   color: #646a7c ;
   font-size: 15px ;
   overflow-x: hidden ;
-  line-height: 1 ;
+  line-height: 27px;
 }
 
 #root {
 	max-width: 100%;
 	padding: 0;
 	text-align: start;
+  position: relative;
+}
+
+/* nav-menu toggle */
+
+.nav-toggle span:nth-of-type(1) {
+  transform: rotate3d(0, 0, 1, 45deg);
+  top: 8px;
+}
+
+.nav-toggle span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.nav-toggle span:nth-of-type(3) {
+  transform: rotate3d(0, 0, 1, -45deg);
+  top: -8px;
 }
 
 /* button */

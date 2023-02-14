@@ -19,7 +19,7 @@ module.exports = {
       },
       container: {
         'screens': {
-          xl: '1420px'
+          xl: '1200px'
         },
         padding: {
           '2xl': '12px',
