@@ -38,6 +38,13 @@ body {
   top: -8px;
 }
 
+.text-limit {
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical; */
+}
+
 /* button */
 @layer components  {
   .button-v1,

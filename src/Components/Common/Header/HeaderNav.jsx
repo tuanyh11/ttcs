@@ -79,7 +79,7 @@ const HeaderNav = () => {
           </nav>
 
           {/* default: off xl: display */}
-          <div className="hidden xl:flex items-center">
+          <div className="hidden xl:flex  items-center">
             <div className="relative">
               <input
                 type="text"

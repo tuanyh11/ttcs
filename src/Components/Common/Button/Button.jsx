@@ -1,14 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ButtonV1 = ({ label, onClick, children, className, style, type = "button", Tag = 'button', to }) => {
-  if(Tag !== 'Link') return (
-    <Tag className={className || 'button-v1'} style={style} to={to}  onClick={onClick}>
+  if(Tag === 'Link') return (
+    <Link className={`button-v1 ${className}`} style={style} to={to}  onClick={onClick}>
       {label || children}
-    </Tag>
+    </Link>
   )
 
   return (
-    <button type={type} className={className || 'button-v1'} style={style} onClick={onClick} >
+    <button type={type} className={`button-v1 ${className}`} style={style} onClick={onClick} >
       {label || children}
     </button>
   );

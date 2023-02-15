@@ -2,6 +2,7 @@ import React from "react";
 import { BreadCrumb } from "../../Components";
 import { Col, Container, Row } from "../../Components";
 import Sidebar from "./Sidebar";
+import Content from "./Content";
 
 const Blog = () => {
   return (
@@ -12,7 +13,7 @@ const Blog = () => {
 
         <Container>
           <Row>
-            <Col className={"w-4/12"}>
+            <Col className={"w-full lg:w-4/12"}>
               <div className="">
                 <div className="relative mb-[30px]">
                   <input
@@ -28,7 +29,9 @@ const Blog = () => {
                 <Sidebar />
               </div>
             </Col>
-            <Col className={"w-8/12"}></Col>
+            <Col className={"w-full lg:w-8/12"}>
+              <Content/>
+            </Col>
           </Row>
         </Container>
       </div>
