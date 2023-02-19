@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../../Components";
 import Banner from "./Banner";
-import Categories from "./Categories";
+import Category from "./Category";
 import Popular from "./Popular";
 import Tags from "./Tags";
 
@@ -11,7 +11,7 @@ const Sidebar = () => {
     <div>
       <ul>
         <li className="mb-[30px]">
-          <Categories />
+          <Category />
         </li>
         <li className="mb-[30px]">
           <Popular />
