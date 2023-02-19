@@ -13,7 +13,7 @@ const Blog = () => {
 
         <Container>
           <Row>
-            <Col className={"w-full lg:w-4/12"}>
+            <Col className={"w-full lg:w-4/12 order-2 mt-10 md:mt-0  md:order-1"}>
               <div className="">
                 <div className="relative mb-[30px]">
                   <input
@@ -29,7 +29,7 @@ const Blog = () => {
                 <Sidebar />
               </div>
             </Col>
-            <Col className={"w-full lg:w-8/12"}>
+            <Col className={"w-full lg:w-8/12 order-1 md:order-2"}>
               <Content/>
             </Col>
           </Row>
