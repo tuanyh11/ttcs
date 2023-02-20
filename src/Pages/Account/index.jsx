@@ -1,8 +1,25 @@
 import React from 'react'
+import { BreadCrumb, Col, Row } from '../../Components'
+import SinginForm from './SignIn/SinginForm'
+import SignOut from './SignOut/SignOut'
 
 const Account = () => {
   return (
-    <div>Account</div>
+    <div>
+      <BreadCrumb />
+      <div className='py-20'>
+        <div className='max-w-[1200px] ml-auto mr-auto relative px-[15px]'>
+          <Row>
+            <Col className={'md:w-1/2 w-full'}>
+              <SinginForm />
+            </Col>
+            <Col className={'md:w-1/2 w-full md:mt-0 mt-[30px]'}>
+              <SignOut />
+            </Col>
+          </Row>
+        </div>
+      </div>
+    </div>
   )
 }
 
