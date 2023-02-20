@@ -8,6 +8,7 @@ export {default as Shop} from './Shop'
 export { default as Checkout } from './Checkout'
 export {default as ProductDetail } from './ProductDetail'
 export { default as Blog } from './Blog'
+export { default as BlogDetail } from './BlogDetail'
 export { default as Account } from './Account'
 export { default as Auth } from './Auth'
  

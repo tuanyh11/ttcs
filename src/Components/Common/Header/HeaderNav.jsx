@@ -123,7 +123,7 @@ const HeaderNav = () => {
 function ResHeaderNav({ onSetOpen, data, isOpen }) {
   return (
     <div
-      className={`xl:hidden fixed w-[300px] bg-white duration-500 shadow-[0_5px_20px_rgb(0_0_0_/_10%)]  top-0 bottom-0 pt-[70px] left-0 transition ${
+      className={`xl:hidden fixed w-[300px] z-[9999999] bg-white duration-500 shadow-[0_5px_20px_rgb(0_0_0_/_10%)]  top-0 bottom-0 pt-[70px] left-0 transition ${
         isOpen ? "" : "-translate-x-full"
       }`}
     >
