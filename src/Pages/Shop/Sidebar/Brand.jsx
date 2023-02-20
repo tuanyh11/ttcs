@@ -1,33 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useBlogContext } from "../../../hooks";
 
-const Categories = () => {
-
-
-  const {state} = useBlogContext()
-
-  const categories = state.categories
-
- 
+const Brand = () => {
   return (
     <div>
-      <div className="p-10  border-[2px] ">
+      {" "}
+      <div className="py-10 px-[30px] border-[2px] ">
         <h4 className="pb-[13px] mb-5 border-b-[2px] text-dark-color font-semibold text-2xl font-poppins">
-          Categories
+          Brand
         </h4>
         <ul>
-          {categories?.map((category) => {
+          {[...new Array(5).keys()].map((index) => {
             return (
               <li
-                key={category?.node?.categoryId}
+                key={index}
                 className="pb-[15px] last:pb-0 flex items-center justify-between"
               >
-                <Link to={`/blog?category=${category?.node?.slug}`}>
+                <Link to={`/shop?brand=${index}`}>
                   <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>
-                  {category?.node?.name}
+                  Auto Parts
                 </Link>
-                <span className="">({category?.node?.count})</span>
+                <span className="">({1})</span>
               </li>
             );
           })}
@@ -37,4 +30,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Brand;

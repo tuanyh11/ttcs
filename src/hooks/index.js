@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import { BlogContext, ShopContext } from "../Contexts";
 export const useDebounce = (value, time) => {
   // console.log(value)
   const [data, setData] = useState(value);
@@ -28,3 +28,22 @@ export const useDate = () => {
   }
   return getDate;
 };
+
+export const useBlogContext = () => {
+
+  const Context = useContext(BlogContext)
+  return {
+    state: Context,
+    ...BlogContext,
+  }
+}
+
+export const useShopContext = () => {
+
+
+  const Context = useContext(ShopContext)
+  return {
+    state: Context,
+    ...ShopContext,
+  }
+}

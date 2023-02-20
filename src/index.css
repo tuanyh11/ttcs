@@ -13,6 +13,7 @@ body {
   font-size: 15px ;
   overflow-x: hidden ;
   line-height: 27px;
+  position: relative;
 }
 
 #root {
@@ -57,4 +58,8 @@ body {
 }
 
 
-/* css reset */
+/* input shop checked */
+
+.input-shop[type="checkbox"]:checked + label span::after {
+  opacity: 1 !important;
+}

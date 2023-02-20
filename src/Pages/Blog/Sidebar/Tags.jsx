@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useBlogContext } from "../../../hooks";
 
 const Tags = () => {
+  const { state } = useBlogContext();
+
+  const tags = state.tags;
+
   return (
     <div>
       {" "}
@@ -10,14 +15,17 @@ const Tags = () => {
           Tags
         </h4>
         <ul>
-          {[...new Array(5).keys()].map((index) => {
+          {tags?.map((tag) => {
             return (
-              <li key={index} className=" last:pb-0   inline-block">
+              <li
+                key={tag?.node?.databaseId}
+                className=" last:pb-0  inline-block"
+              >
                 <Link
-                  to={"/"}
-                  className="py-2 px-[11px] leading-[1] block bg-[#f5f7fa] text-[#646a7c] mr-[14px] mb-[10px]"
+                  to={`/blog?tag=${tag?.node?.slug}`}
+                  className="py-2 px-[11px] leading-[1] block bg-[#f5f7fa] hover:bg-main-color hover:text-white transition-all text-[#646a7c] mr-[14px] mb-[10px]"
                 >
-                  ecommerce
+                  {tag?.node?.name}
                 </Link>
               </li>
             );
