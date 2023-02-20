@@ -9,8 +9,10 @@ module.exports = {
       colors: {
         'dark-color': '#111111',
         'main-color': '#ff4545',
-        
-        'gray-color':  {
+        '#646a7c': '#646a7c',
+        '#F5F7FA': '#F5F7FA',
+
+        'gray-color': {
           '100': '#bdbdbd'
         }
       },
@@ -23,11 +25,21 @@ module.exports = {
         },
         padding: {
           '2xl': '12px',
-          'sm': '2rem'
-        }
-      }
-      
-      
+          'sm': '2rem',
+          '70px': '70px',
+        },
+        zIndex: {
+          '1': 1
+        },
+      },
+      maxWidth: {
+        '1200': '1200px'
+      },
+      lineHeight: {
+        '50px': '50px'
+      },
+
+
     },
   },
   plugins: [require('@tailwindcss/line-clamp')],
