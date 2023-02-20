@@ -11,21 +11,10 @@ const Popular = () => {
     })),
   ];
 
-  const {state: {filter, setFilter}} = useShopContext()
+  const {
+    state: { filter, setFilter, handleOnSelectStatus },
+  } = useShopContext();
 
-  const handleOnClick = (status) => {
-
-    const isExisting = filter.status.find((item) => item.id === status.id);
-    
-    if (isExisting) {
-      setFilter({
-        ...filter,
-        status: [...filter?.status.filter((item) => item.id !== status.id)],
-      });
-    } else setFilter({ ...filter, status: [...filter?.status, status] });
-  };
-
-  
   return (
     <div>
       <div className="py-10 px-[30px]  border-[2px] ">
@@ -36,19 +25,19 @@ const Popular = () => {
           <ul className="">
             {categories.map((status, index) => (
               <li key={index} className="pb-[15px]">
-                <div
-                  className="group"
-                >
+                <div className="group">
                   <input
                     type="checkbox"
                     className=" opacity-0  hidden input-shop "
                     name=""
                     id={`input-productstatus${index}`}
-                  onClick={(e) => handleOnClick(status)}
-
+                    onChange={(e) => handleOnSelectStatus(status)}
+                    checked={filter?.status?.some(
+                      (item) => item.id === status.id
+                    )}
                   />
                   <label
-                    className="flex items-center gap-[10px] hover:text-main-color transition duration-300 "
+                    className="flex items-center  cursor-pointer gap-[10px] hover:text-main-color transition duration-300 "
                     htmlFor={`input-productstatus${index}`}
                   >
                     <span

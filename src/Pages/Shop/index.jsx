@@ -14,12 +14,59 @@ const Shop = () => {
     price: [],
   });
 
+  const handleOnSelectCate = (category) => {
+    const isExisting = filter.category.find((item) => item.id === category.id);
+
+    if (isExisting) {
+      setFilter({
+        ...filter,
+        category: [
+          ...filter?.category.filter((item) => item.id !== category.id),
+        ],
+      });
+    } else setFilter({ ...filter, category: [...filter?.category, category] });
+  };
+
+  const handleOnSelectStatus = (status) => {
+    const isExisting = filter.status.find((item) => item.id === status.id);
+
+    if (isExisting) {
+      setFilter({
+        ...filter,
+        status: [...filter?.status.filter((item) => item.id !== status.id)],
+      });
+    } else setFilter({ ...filter, status: [...filter?.status, status] });
+  };
+
+  const handleOnRemoveStatus = (status) => {
+    setFilter({
+      ...filter,
+      status: [...filter?.status.filter((item) => item.id !== status.id)],
+    });
+  };
+
+  const handleOnRemoveCate = (category) => {
+    setFilter({
+      ...filter,
+      category: [...filter?.category.filter((item) => item.id !== category.id)],
+    });
+  };
+
   const { Provider } = useShopContext();
 
   return (
     <div>
-      <Provider value={{ filter, setFilter }}>
-      <BreadCrumb />
+      <Provider
+        value={{
+          filter,
+          setFilter,
+          handleOnSelectCate,
+          handleOnSelectStatus,
+          handleOnRemoveCate,
+          handleOnRemoveStatus,
+        }}
+      >
+        <BreadCrumb />
         <div className="py-20">
           <Container>
             <Row>

@@ -12,21 +12,7 @@ const Categories = () => {
     id: k
   }))];
 
-  const {state: {filter, setFilter}} = useShopContext()
-
-
-
-  const handleOnClick = (category) => {
-  
-    const isExisting = filter.category.find((item) => item.id === category.id);
-
-    if (isExisting) {
-      setFilter({
-        ...filter,
-        category: [...filter?.category.filter((item) => item.id !== category.id)],
-      });
-    } else setFilter({ ...filter, category: [...filter?.category, category] });
-  };
+  const {state: {filter ,handleOnSelectCate}} = useShopContext()
 
   return (
     <div>
@@ -44,10 +30,11 @@ const Categories = () => {
                     className=" opacity-0  hidden input-shop"
                     name=""
                     id={`input-cate${index}`}
-                    onChange={(e) => handleOnClick(category)}
+                    onChange={(e) => handleOnSelectCate(category)}
+                    checked={filter?.category?.some((item) => item.id === category.id)}
                   />
-                  <label className="flex items-center gap-[10px] hover:text-main-color transition duration-300" htmlFor={`input-cate${index}`}>
-                    <span className="w-4 h-4 border inline-block relative after:opacity-0 group-hover:after:opacity-100 after:-rotate-45 after:border-solid after:border-[#222] after:border-t-0 after:border-r-0 after:border-b-[2px] after:border-l-[2px] after:h-[4px] after:w-[8px] after:absolute  after:top-[4px] after:left-[3px]"></span>
+                  <label className="cursor-pointer flex items-center gap-[10px] hover:text-main-color transition duration-300" htmlFor={`input-cate${index}`}>
+                    <span className={`w-4 h-4  border inline-block relative after:opacity-0 group-hover:after:opacity-100 after:-rotate-45 after:border-solid after:border-[#222] after:border-t-0 after:border-r-0 after:border-b-[2px] after:border-l-[2px] after:h-[4px] after:w-[8px] after:absolute  after:top-[4px] after:left-[3px]`}></span>
                     <span className=" line-clamp-1">{category.name}</span>
                   </label>
                 </div>

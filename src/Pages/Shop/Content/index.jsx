@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { fakeData } from "../../../assets/data";
 import {
@@ -7,6 +7,7 @@ import {
   Pagination,
   ProductCardGrid,
   ProductCardList,
+  QuickView,
   Row,
 } from "../../../Components";
 import { useShopContext } from "../../../hooks";
@@ -49,7 +50,7 @@ const sortDatatypes = [
 
 const Content = () => {
   const {
-    state: { filter },
+    state: { filter, handleOnRemoveCate, handleOnRemoveStatus },
   } = useShopContext();
 
   const [featured, setFeatured] = useState("list");
@@ -61,163 +62,53 @@ const Content = () => {
     end: 10,
   });
 
-  const [value, setValue] = useState(1);
-
-  const handleKeyDown = (event) => {
-    console.log(event.key);
-    // Check if the key pressed is a number
-    if (!/[\d]/.test(event.key)) {
-      // Prevent the default behavior of the event
-      event.preventDefault();
-    }
-  };
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
   const [products, setProducts] = useState([]);
-
-  const filterContent = (() => {
-    let content = [];
-    Object.entries(filter).forEach(([key, value]) => {
-      console.log(value);
-      return content.push(...value);
-    });
-    return content;
-  })();
 
   useEffect(() => {
     setProducts(data.slice(offset.start, offset.end));
   }, [offset]);
 
+  
+
   return (
     <div>
       {quickView && (
-        <div>
-          <div className="fixed inset-0 z-[9999999]">
-            <div className=" absolute inset-0 bg-[#0b0b0b] opacity-80 z-[9999999]"></div>
-            <div className="px-5 absolute  top-1/2 left-1/2 z-[99999999999] -translate-y-1/2 -translate-x-1/2 w-full xl:max-w-[980px] xl:px-0">
-              <button
-                onClick={() => setQuickView(null)}
-                className="fa-solid fa-xmark absolute top-0 right-0 text-xl font-semibold -translate-x-8 translate-y-2  xl:-translate-x-4 xl:translate-y-2 "
-              ></button>
-              <div className=" w-full  bg-white p-[30px]">
-                <Row>
-                  <Col className={"w-6/12 "}>
-                    <div>
-                      <div>
-                        <img
-                          src={quickView?.image}
-                          alt=""
-                          className="w-full h-full"
-                        />
-                      </div>
-                      <ul className="flex -mx-[5px] mt-[10px]">
-                        <li className="w-4/12 mx-[5px]">
-                          <img src={quickView?.image} alt="" className="" />
-                        </li>
-                        <li className="w-4/12 mx-[5px]">
-                          <img src={quickView?.image} alt="" className="" />
-                        </li>
-                        <li className="w-4/12 mx-[5px]">
-                          <img src={quickView?.image} alt="" className="" />
-                        </li>
-                      </ul>
-                    </div>
-                  </Col>
-
-                  <Col className={"w-6/12"}>
-                    <div className="">
-                      <h3 className="text-[27px] font-poppins text-black font-semibold">
-                        {quickView?.title}
-                      </h3>
-
-                      <p className=" my-4 font-poppins font-semibold ">
-                        <del className="text-[#696969] text-sm mr-1 ">
-                          ${quickView?.salePrice}
-                        </del>
-                        <span className="text-main-color text-[19px] ">
-                          ${quickView?.price}
-                        </span>
-                      </p>
-                      <div className="leading-[0.8] mb-[15px]">
-                        {quickView?.stars}
-                      </div>
-                      <p className="">{quickView?.description}</p>
-
-                      <div className="my-5">
-                        <span className="">In Stock</span>
-                        <div className="flex">
-                          <button className="fa-solid fa-minus w-[50px] h-[50px] border"></button>
-                          <input
-                            type="text"
-                            value={value}
-                            onChange={handleChange}
-                            onKeyDown={handleKeyDown}
-                            className="w-[50px] h-[50px] border outline-none text-center"
-                          />
-                          <button class="fa-solid fa-plus w-[50px] h-[50px] border"></button>
-                          <div className="ml-3">
-                            <Button label={"ADD TO CART"} />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="">
-                        <div className="uppercase mb-[10px]">
-                          <span className="text-black font-medium">sku:</span>
-                          <span className="ml-2">SUR4JK74</span>
-                        </div>
-                        <div className="capitalize flex ">
-                          <span className="text-black font-medium">
-                            Category:
-                          </span>
-                          <div className="ml-2">
-                            {[...new Array(3)].map((_, i) => {
-                              return (
-                                <Link
-                                  key={i}
-                                  className=" capitalize"
-                                  to={`/category/:1`}
-                                >
-                                  Engine Parts + {i + 1}{" "}
-                                  {i === 3 - 1 ? "" : ", "}
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </div>
-          </div>
-        </div>
+        <QuickView {...quickView} onQuickViewClick={() => setQuickView(null)} />
       )}
 
-      {filterContent.length > 0 && (
-        <ul className="mb-2">
-          {filterContent.map((item, index) => {
+      {
+        <ul >
+          {filter?.category?.map((item, index) => {
             return (
               <li
-                className="relative inline-block mr-[10px] text-[#555555] cursor-pointer hover:after:rotate-0 hover:before:rotate-0 after:transition-all before:transition-all after:duration-300 before:duration-300 after:w-[10px] after:absolute after:left-0 after:bg-black after:rotate-45 after:top-[14px] after:h-[2px]     before:w-[10px] before:absolute before:left-0 before:bg-black before:-rotate-45 before:top-[14px] before:h-[2px] pl-4  "
+                className="relative mb-2 inline-block mr-[10px] text-[#555555] cursor-pointer hover:after:rotate-0 hover:before:rotate-0 after:transition-all before:transition-all after:duration-300 before:duration-300 after:w-[10px] after:absolute after:left-0 after:bg-black after:rotate-45 after:top-[14px] after:h-[2px]     before:w-[10px] before:absolute before:left-0 before:bg-black before:-rotate-45 before:top-[14px] before:h-[2px] pl-4  "
                 key={index}
+                onClick={() => handleOnRemoveCate(item)}
+              >
+                {item.name}
+              </li>
+            );
+          })}
+
+          {filter?.status?.map((item, index) => {
+            return (
+              <li
+                className="relative mb-2 inline-block mr-[10px] text-[#555555] cursor-pointer hover:after:rotate-0 hover:before:rotate-0 after:transition-all before:transition-all after:duration-300 before:duration-300 after:w-[10px] after:absolute after:left-0 after:bg-black after:rotate-45 after:top-[14px] after:h-[2px]     before:w-[10px] before:absolute before:left-0 before:bg-black before:-rotate-45 before:top-[14px] before:h-[2px] pl-4  "
+                key={index}
+                onClick={() => handleOnRemoveStatus(item)}
               >
                 {item.name}
               </li>
             );
           })}
         </ul>
-      )}
+      }
 
       <div className="flex items-center justify-between mb-[30px]">
         <div className="hidden md:block">
           <button
             onClick={() => setFeatured("grid")}
-            className={`border fa-solid fa-list w-[50px] h-[50px]  ${
+            className={`border fa-solid fa-grip-vertical w-[50px] h-[50px]  ${
               featured === "grid" ? "bg-main-color  text-white" : "bg-white"
             } mr-[5px]`}
           ></button>
