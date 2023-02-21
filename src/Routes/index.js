@@ -93,4 +93,11 @@ export default [
     index: false,
     childrens: [],
   },
+  {
+    path: "/categories/:slug",
+    name: "categories",
+    component: Shop,
+    index: false,
+    childrens: [],
+  },
 ];
