@@ -1,12 +1,12 @@
 import React from 'react'
-import { BreadCrumb, Col, Row } from '../../Components'
+import { BreadCrumb, BreadcrumbPath, Col, Row } from '../../Components'
 import ContactFromLeft from './ContactForm/ContactFromLeft'
 import ContactFromRight from './ContactForm/ContactFromRight'
-import SliderForm from './Slider/SliderForm'
+import SliderForm from '../../Components/Common/Slider/SliderForm'
 const Contact = () => {
   return (
     <div className="list-none">
-      <BreadCrumb />
+      <BreadcrumbPath pathname={'Contact Us'} />
       <div className="max-w-[1200px] ml-auto mr-auto relative">
         <Row className={'w-full !mx-0 my-0 lg:flex-row md:flex-col'}>
           <Col className={'lg:w-1/3 md:w-full'}>

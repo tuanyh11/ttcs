@@ -1,12 +1,12 @@
 import React from 'react'
-import { BreadCrumb, Col, Row } from '../../Components'
+import { BreadCrumb, BreadcrumbPath, Col, Row } from '../../Components'
 import SinginForm from './SignIn/SinginForm'
 import SignOut from './SignOut/SignOut'
 
 const Account = () => {
   return (
     <div>
-      <BreadCrumb />
+      <BreadcrumbPath pathname={'My account'} />
       <div className='py-20'>
         <div className='max-w-[1200px] ml-auto mr-auto relative px-[15px]'>
           <Row>
