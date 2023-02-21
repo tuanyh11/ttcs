@@ -35,7 +35,7 @@ const ProductCardGrid = ({
     : null;
   return (
     <div>
-      <div>
+      <div className="group">
         <div className="mb-5 relative">
           <img src={image} alt="" className="w-full h-full" />
           {saleInfo && (

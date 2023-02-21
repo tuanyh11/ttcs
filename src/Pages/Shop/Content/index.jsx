@@ -138,7 +138,7 @@ const Content = () => {
             {products.map((item, index) => {
               return (
                 <Col key={index} className=" w-full md:w-6/12 lg:w-4/12">
-                  <div className="mb-[30px] group">
+                  <div className="mb-[30px] ">
                     <ProductCardGrid
                       {...item}
                       onQuickView={(data) => setQuickView(data)}
