@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { useParams } from "react-router-dom";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
 import { useShopContext } from "../../hooks";
 import Content from "./Content";
@@ -53,7 +54,8 @@ const Shop = () => {
   };
 
   const { Provider } = useShopContext();
-
+  const { slug } = useParams();
+  console.log(slug);
   return (
     <div>
       <Provider
@@ -79,7 +81,7 @@ const Shop = () => {
                       type="text"
                       className=" h-[50px] border-[1px] pl-5  w-full pr-[84px]  outline-none "
                       placeholder="Search..."
-                      // onChange={handleOnSearch}
+                    // onChange={handleOnSearch}
                     />
                     <button className="absolute top-1/2 right-0 -translate-y-1/2 px-4  ">
                       <i className="fas fa-search"></i>
