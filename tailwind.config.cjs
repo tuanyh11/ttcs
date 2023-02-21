@@ -14,7 +14,8 @@ module.exports = {
 
         'gray-color': {
           '100': '#bdbdbd'
-        }
+        },
+        'border-color': '#eaeaea'
       },
       fontFamily: {
         poppins: "Poppins, sans-serif"
