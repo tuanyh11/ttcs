@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Categories = () => {
+const Filter = () => {
 
   const trackRef = React.useRef(null);
 
@@ -41,4 +41,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Filter;

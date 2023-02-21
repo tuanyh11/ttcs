@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useBlogContext, useDate } from "../../../hooks";
 
 const Popular = () => {
+
+  const {state} = useBlogContext()
+
+  const getData = useDate()
+
+  const posts = state?.posts
+
   return (
     <div>
       <div className="p-10  border-[2px] ">
@@ -9,10 +17,10 @@ const Popular = () => {
           Popular Posts
         </h4>
         <ul>
-          {[...new Array(5).keys()].map((index) => {
+          {posts?.map((post) => {
             return (
               <li
-                key={index}
+                key={post?.node?.id}
                 className="pb-[15px] last:pb-0 flex items-center justify-between mb-5"
               >
                 <Link to={"/"} className="block mr-[13px] h-full">
@@ -28,18 +36,14 @@ const Popular = () => {
                     <Link to={"/"}>
                       <i className="fa-solid fa-calendar-days text-main-color mr-2"></i>
                       <span className="transition-all duration-300 ease-out hover:text-main-color">
-                        {new Date().toLocaleDateString("en-US", {
-                          month: "long",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
+                        {getData(post?.node?.data)}
                       </span>
                     </Link>
                     <Link
                       to={"/"}
                       className=" text-dark-color font-medium  font-poppins block line-clamp-2 transition-all duration-300 ease-out hover:text-main-color"
                     >
-                      But I must explain to you how all this mistaken idea
+                      {post?.node?.title}
                     </Link>
                   </div>
                 </div>
