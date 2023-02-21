@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import { BlogCard, Button } from "../../../Components";
 import { useDate } from "../../../hooks";
 import ReactPlayer from "react-player";
+import {blogData} from "../../../assets/data/blog"
 
 function ProgressBar(props) {
   // This is the style object for the progress bar
@@ -48,7 +49,7 @@ const Content = () => {
     start = 0;
     end = 2;
   }
-
+  
   const pages = [...Array(Math.ceil(items / 3)).keys()];
 
   const showPages = pages.slice(start, end);
@@ -86,7 +87,7 @@ const Content = () => {
             </li>
           ) : null}
           {showPages.map((page, index) => (
-            <li>
+            <li key={page}>
               {
                 <PagiButton
                   key={index}

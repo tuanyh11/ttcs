@@ -13,6 +13,7 @@ body {
   font-size: 15px ;
   overflow-x: hidden ;
   line-height: 27px;
+  position: relative;
 }
 
 #root {
@@ -57,4 +58,14 @@ body {
 }
 
 
-/* css reset */
+/* input shop checked */
+
+.input-shop[type="checkbox"]:checked + label span::after {
+  opacity: 1 !important;
+}
+
+/* home css */
+
+.home-banner::after {
+  background: linear-gradient(10deg, rgba(17, 17, 17, 0.70196) 0%, rgba(17, 17, 17, 0.01) 99%, #111111 100%);
+}

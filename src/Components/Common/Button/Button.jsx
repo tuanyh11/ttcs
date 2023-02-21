@@ -15,7 +15,7 @@ const ButtonV1 = ({
   if (Tag === "Link")
     return (
       <Link
-        className={`button-v1 ${className}`}
+        className={`button-v1 uppercase ${className}`}
         style={style}
         to={to}
         onClick={onClick}
