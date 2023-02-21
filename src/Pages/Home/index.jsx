@@ -87,8 +87,8 @@ const Home = () => {
                   Exclusive Products{" "}
                 </h2>
                 <p>
-                  Quis autem vel eum iure reprehenderit qui in ea voluptate velit
-                  esse quam nihil molestiae consequatur vel illum dolorem
+                  Quis autem vel eum iure reprehenderit qui in ea voluptate
+                  velit esse quam nihil molestiae consequatur vel illum dolorem
                 </p>
               </div>
             </div>
@@ -115,6 +115,34 @@ const Home = () => {
                 View More Products
               </ButtonArrow>
             </div>
+          </Container>
+        </div>
+      </section>
+
+      <section>
+        <div
+          className="py-20"
+          style={{
+            backgroundImage: `url(${"https://klbtheme.com/chakta/wp-content/plugins/chakta-core/elementor/images/newsletter-bg.jpg"})`,
+          }}
+        >
+          <Container>
+            <Row className={"justify-center"}>
+              <Col className=" w-8/12">
+                <div className="text-center ">
+                  <h4 className="uppercase underline text-[#fbb71c]">
+                    NEWSLETTER SUBSCRIBE
+                  </h4>
+                  <h2 className="mb-[35px]">Every Update Subscribe Our Newsletter</h2>
+                  <form action="">
+                    <div className="">
+                      <input type="text" />
+                      <ButtonArrow>subscribe now</ButtonArrow>
+                    </div>
+                  </form>
+                </div>
+              </Col>
+            </Row>
           </Container>
         </div>
       </section>
