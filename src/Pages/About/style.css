@@ -1,0 +1,78 @@
+.content-more p {
+    padding-bottom: 35px;
+}
+
+.content-more .list li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 10px;
+}
+
+.content-more .list li::before {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background: #ff4545;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 25px;
+    content: '\f058';
+    font-family: "Font Awesome 6 Free";
+}
+
+.popup-overlay {
+    background-color: #33252543;
+}
+
+.popup-about .social-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.popup-about .social-link li {
+    margin-right: 15px;
+}
+
+.popup-about .social-link li:hover {
+    color: red;
+}
+
+.content-custom-review .rating {
+    margin-top: 30px;
+    display: flex;
+    font-size: 13px;
+}
+
+.content-custom-review .rating li i {
+    color: #fbb71c;
+}
+
+.content-custom-review .testimonial-content p:last-child {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    font-size: 30px;
+    color: #ff4545;
+}
+
+.content-custom-review .testimonial-content p:last-child ::before {
+    content: '\f10e';
+    font-weight: 600;
+    font-family: "Font Awesome 6 Free";
+}
+
+.latess-new-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(17, 17, 17, 0.94902) 0%, rgba(17, 17, 17, 0.47) 56%, rgba(17, 17, 17, 0.01) 100%, #111111 100%);
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+}
