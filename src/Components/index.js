@@ -13,6 +13,11 @@ export { default as ProductCardList } from './UI/Product/ProductCardList'
 export { default as ProductCardGrid } from './UI/Product/ProductCardGrid'
 export { default as ProductCardGridV2 } from './UI/Product/ProductCardGridV2'
 export { default as QuickView } from './UI/Product/QuickView'
+export {default as SpinningLoader} from './Common/Spinning/Spinning'
+
+export {default as NextButton} from './UI/Product/NextButton'
+export {default as PreButton} from './UI/Product/PreButton'
+ 
 
 
 

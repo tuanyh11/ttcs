@@ -33,11 +33,13 @@ const currencies = [
     name: "gbr",
   },
 ];
+
+
 const HeaderTop = () => {
   const [langue, setLangue] = useState(langues[0]);
   const [currency, setCurrency] = useState(currencies[0]);
   return (
-    <div className="p-[2px] bg-dark-color text-gray-color-100">
+    <div className={`p-[2px] bg-dark-color text-gray-color-100 `}>
       <Container className={"xl:max-w-[1420px]"}>
         <Row className={"items-center"}>
           <Col className="md:w-4/12 lg:w-3/12">

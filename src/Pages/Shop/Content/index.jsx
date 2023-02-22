@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { fakeData } from "../../../assets/data";
 import {
@@ -55,6 +55,10 @@ const Content = () => {
 
   const [featured, setFeatured] = useState("list");
 
+  const [sortDatatypesFilter, setSortDatatypesFilter] = useState(
+    sortDatatypes[0]
+  );
+
   const [quickView, setQuickView] = useState(null);
 
   const [offset, setOffset] = useState({
@@ -68,8 +72,6 @@ const Content = () => {
     setProducts(data.slice(offset.start, offset.end));
   }, [offset]);
 
-  
-
   return (
     <div>
       {quickView && (
@@ -77,7 +79,7 @@ const Content = () => {
       )}
 
       {
-        <ul >
+        <ul>
           {filter?.category?.map((item, index) => {
             return (
               <li
@@ -119,15 +121,9 @@ const Content = () => {
             } `}
           ></button>
         </div>
+
         <div className="flex-1 md:flex-grow-0 md:flex-shrink-0 ">
-          <select
-            id="countries"
-            className="block  p-2.5 leading-[50px] h-[50px] px-5 border focus:border-[#111] outline-none w-full md:w-[250px]"
-          >
-            {sortDatatypes.map((item, index) => (
-              <option key={index}>{item.name}</option>
-            ))}
-          </select>
+          {Selecector(sortDatatypesFilter, setSortDatatypesFilter)}
         </div>
       </div>
 
@@ -189,3 +185,56 @@ const Content = () => {
 };
 
 export default Content;
+
+function Selecector(sortDatatypesFilter, setSortDatatypesFilter) {
+
+  const [isOpening, setIsOpening] = useState(false);
+
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (selectRef.current && !selectRef.current.contains(event.target)) {
+        setIsOpening(false)
+
+      }
+    }
+
+    function handleClickInside(event) {
+      if (selectRef.current && selectRef.current.contains(event.target)) {
+        setIsOpening(pre => !pre)
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("click", handleClickInside);
+    
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickInside);
+    };
+  }, [selectRef]);
+
+  return <div    ref={selectRef} className=" relative">
+    <div className="block relative p-2.5 h-[50px] px-5 border border-[#111] outline-none w-full md:w-[250px]">
+      {sortDatatypesFilter?.name}
+      <i className="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs"></i>
+    </div>
+    {isOpening && (
+      <ul className=" absolute top-full bg-white left-0 right-0 bg-[0_0_0_1px_rgb(68_68_68/11%)] border">
+        {sortDatatypes.map((item, index) => (
+          <li
+            onClick={() => setSortDatatypesFilter(item)}
+            className={`h-10 leading-10 pl-[18px] pr-[30px] cursor-pointer ${sortDatatypesFilter.name === item?.name
+                ? "bg-[#f6f6f6] font-semibold"
+                : ""}`}
+            key={index}
+          >
+            {item.name}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>;
+}
+

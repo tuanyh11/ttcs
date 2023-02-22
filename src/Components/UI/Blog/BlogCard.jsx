@@ -16,9 +16,11 @@ const BlogCard = ({
   hiddenDescription = true,
   hiddenButton = false,
   hiddenBlockquote = true,
+  ...rest
 }) => {
   const getDate = useDate();
 
+  // console.log(rest);
   return (
     <div>
       {type === "image" ? (
@@ -26,7 +28,7 @@ const BlogCard = ({
           <Slider {...settings}>
             {images.map((image, index) => (
               <div key={index} className="h-full">
-                <Link  to={"/"} className="block">
+                <Link to={"/"} className="block">
                   <img
                     onClick={(e) => e.preventDefault()}
                     src={image}
@@ -37,6 +39,16 @@ const BlogCard = ({
               </div>
             ))}
           </Slider>
+          {/* <div  className="h-full">
+                <Link to={"/"} className="block">
+                  <img
+                    onClick={(e) => e.preventDefault()}
+                    src={rest?.image}
+                    alt=""
+                    className="max-w-full block "
+                  />
+                </Link>
+              </div> */}
         </div>
       ) : (
         <div>
@@ -66,48 +78,38 @@ const BlogCard = ({
           to={"/"}
           className="text-[30px] leading-[35px] mb-5 block text-black font-poppins font-semibold"
         >
-          Mirage Deep Dive Under anding Timin Response
+          {rest?.title}
         </Link>
         <div className="">
-          <p
-            className={`mb-[25px] text-limit ${
-              hiddenDescription ? "line-clamp-6" : ""
-            } `}
-          >
-            Sed ut perspiciatis unde omnis iste natus error voluptatem
-            accusantium doloremque laudantium totam rem aperiam, eaque ipsa quae
-            ab illo inventore veritatis et quasi architecto beatae vitae dicta
-            sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-            aspernatur aut odit Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit, sed do eiusmod tempor incididunt ut labore Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt.
-          </p>
+          <div
+            className={`mb-[25px] `}
+            dangerouslySetInnerHTML={{ __html: rest?.paragraph }}
+          ></div>
           {!hiddenBlockquote && (
             <div className="">
               <blockquote className=" border-l-[5px] border-main-color my-[30px] py-10 px-[50px] bg-[#f8f8f8]">
-                <p className=" text-[23px] font-medium leading-[1.3] text-[#222] mb-[15px]">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam.
-                </p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: rest?.blockquote }}
+                  className=" text-[23px] font-medium leading-[1.3] text-[#222] mb-[15px]"
+                ></div>
                 <span className=" text-sm font-medium uppercase text-[#222] tracking-widest">
                   – Rosalina Pong
                 </span>
               </blockquote>
             </div>
           )}
+
+          <div
+            className={`mb-[25px] text-limit `}
+            dangerouslySetInnerHTML={{ __html: rest?.contentParagraph }}
+          ></div>
+          
           <div className="mb-[25px]">
             {!hiddenButton && (
               <Button
                 Tag="Link"
-                to={`/blog/${'Mirage Deep Dive Under anding Timin Response'}`}
-                state={{id: 1}}
+                to={`/blog/${"Mirage Deep Dive Under anding Timin Response"}`}
+                state={{ id: 1 }}
                 className="py-[10px] text-[14px] px-[35px] hover:bg-main-color hover:text-white transition-all duration-300 ease-out hover:border-main-color  leading-[27px] rounded-[28px] bg-white border-[#e5e5e5] border-solid border-2 text-[#696969]"
               >
                 Read More

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { generateStart } from "../../../utils";
+import QuickView from "./QuickView";
 
 const ProductCardGridV2 = ({
   image,
@@ -11,30 +13,37 @@ const ProductCardGridV2 = ({
   rating = 0,
   isOnSale = false,
   onQuickView = () => {},
+  ...rest
 }) => {
-  const filledStars = Math.round(rating);
-  const emptyStars = 5 - filledStars;
-  const stars = [];
 
-  for (let i = 0; i < filledStars; i++) {
-    stars.push(
-      <i key={i} className="fa fa-star filled text-[#F6BC3E] text-xs"></i>
-    );
-  }
-  for (let i = 0; i < emptyStars; i++) {
-    stars.push(
-      <i
-        key={filledStars + i}
-        className="fa-regular fa-star text-[#ccc] text-xs"
-      ></i>
-    );
-  }
+  const product = {
+    image,
+    title,
+    salePrice,
+    price,
+    description,
+    id,
+    rating,
+    isOnSale,
+    ...rest
+  };
+
+  const stars = generateStart(rating);
 
   const saleInfo = isOnSale ? -Math.round((1 - salePrice / price) * 100) : null;
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
+      {isOpen && (
+        <QuickView {...product} onQuickViewClick={() => setIsOpen(false)} />
+      )}
       <div className="group">
         <div className="mb-5 relative">
+        <Link
+            to={`/product/${id}`}
+          >
           <img src={image} alt="" className="w-full h-full" />
           {saleInfo && (
             <span className=" absolute z-[70] text-white bg-main-color translate-x-4 px-[7px] py-1 text-xs leading-[1] translate-y-4 top-0 left-0 rounded-sm">
@@ -49,23 +58,12 @@ const ProductCardGridV2 = ({
             <div className="relative z-50">
               <button className="fa-solid fa-cart-shopping w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
               <button
-                onClick={() =>
-                  onQuickView({
-                    image,
-                    title,
-                    salePrice,
-                    price,
-                    description,
-                    id,
-                    rating,
-                    isOnSale,
-                    stars,
-                  })
-                }
+                onClick={() => setIsOpen(true)}
                 className="fa-solid fa-magnifying-glass w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
               ></button>
             </div>
           </div>
+          </Link>
         </div>
 
         <div className="text-start font-poppins flex justify-between items-center">
@@ -82,7 +80,7 @@ const ProductCardGridV2 = ({
               <span className="text-main-color ">${price}</span>
             </p>
           </div>
-          <div >
+          <div>
             <button className="fa-solid fa-heart w-10 h-10  bg-white border border-border-color rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out "></button>
           </div>
         </div>

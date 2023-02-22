@@ -2,28 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
+html {
+  overflow-x: hidden;
+}
 
 body {
-  font-family: "Rubik", sans-serif ;
+  font-family: "Rubik", sans-serif;
   font-weight: normal;
   font-style: normal;
-  color: #646a7c ;
-  font-size: 15px ;
-  overflow-x: hidden ;
+  color: #646a7c;
+  font-size: 15px;
+  overflow-x: hidden;
   line-height: 27px;
   position: relative;
 }
 
 #root {
-	max-width: 100%;
-	padding: 0;
-	text-align: start;
+  max-width: 100%;
+  padding: 0;
+  text-align: start;
   position: relative;
 }
 
 /* nav-menu toggle */
+
+.transition-main {
+  transition: all 0.3s ease-out 0s;
+}
 
 .nav-toggle span:nth-of-type(1) {
   transform: rotate3d(0, 0, 1, 45deg);
@@ -47,7 +52,7 @@ body {
 }
 
 /* button */
-@layer components  {
+@layer components {
   .button-v1,
   .button-v2 {
     @apply px-4 text-[14px] inline-block font-semibold border-none leading-[50px] font-poppins text-[#fff] bg-main-color cursor-pointer;
@@ -55,8 +60,25 @@ body {
   .button-v2 {
     @apply rounded-[13px];
   }
-}
 
+  .product-detail-slider .slick-prev {
+    @apply !opacity-0 invisible transition-all duration-200 ease-linear 
+  }
+
+  .product-detail-slider .slick-next {
+    @apply !opacity-0 invisible transition-all duration-200 ease-linear 
+  }
+
+  .product-detail-slider:hover .slick-prev {
+    @apply !opacity-100 visible !left-0
+  }
+
+  .product-detail-slider:hover .slick-next {
+    @apply !opacity-100 visible !right-4
+  }
+
+
+}
 
 /* input shop checked */
 
@@ -67,5 +89,28 @@ body {
 /* home css */
 
 .home-banner::after {
-  background: linear-gradient(10deg, rgba(17, 17, 17, 0.70196) 0%, rgba(17, 17, 17, 0.01) 99%, #111111 100%);
+  background: linear-gradient(
+    10deg,
+    rgba(17, 17, 17, 0.70196) 0%,
+    rgba(17, 17, 17, 0.01) 99%,
+    #111111 100%
+  );
 }
+
+.triangle::after {
+  position: absolute;
+  content: "";
+  top: -14px;
+  left: 40px;
+  width: 0;
+  height: 0;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 14px solid #fff;
+}
+
+
+
+/* product-detail */
+
+

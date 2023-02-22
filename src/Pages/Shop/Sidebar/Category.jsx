@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ShopContext } from "..";
 import { useShopContext } from "../../../hooks";
 
 const Categories = () => {

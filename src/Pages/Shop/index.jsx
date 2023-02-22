@@ -4,7 +4,6 @@ import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
 
-export const ShopContext = createContext();
 
 const Shop = () => {
   const [filter, setFilter] = useState({

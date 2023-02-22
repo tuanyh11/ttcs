@@ -23,7 +23,7 @@ const Popular = () => {
                 key={post?.node?.id}
                 className="pb-[15px] last:pb-0 flex items-center justify-between mb-5"
               >
-                <Link to={"/"} className="block mr-[13px] h-full">
+                <Link to={`/blog/${post?.node?.slug}`} className="block mr-[13px] h-full" state={{popularId: post?.node?.id}}>
                   <img
                     src="https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-3-80x65.jpg"
                     alt=""
@@ -33,14 +33,15 @@ const Popular = () => {
                 </Link>
                 <div className="leading-[1.5] flex-1">
                   <div>
-                    <Link to={"/"}>
+                    <Link to={`/blog/${post?.node?.slug}`} state={{popularId: post?.node?.id}}>
                       <i className="fa-solid fa-calendar-days text-main-color mr-2"></i>
                       <span className="transition-all duration-300 ease-out hover:text-main-color">
                         {getData(post?.node?.data)}
                       </span>
                     </Link>
                     <Link
-                      to={"/"}
+                      to={`/blog/${post?.node?.slug}`}
+                      state={{postId: post?.node?.id}}
                       className=" text-dark-color font-medium  font-poppins block line-clamp-2 transition-all duration-300 ease-out hover:text-main-color"
                     >
                       {post?.node?.title}
