@@ -9,6 +9,8 @@ import {
   Home,
   ProductDetail,
   Shop,
+  CateDetail,
+  Cart
 } from "../Pages";
 
 export default [
@@ -96,7 +98,14 @@ export default [
   {
     path: "/categories/:slug",
     name: "categories",
-    component: Shop,
+    component: CateDetail,
+    index: false,
+    childrens: [],
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart,
     index: false,
     childrens: [],
   },

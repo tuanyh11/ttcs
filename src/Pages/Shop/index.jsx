@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar/index";
 
 export const ShopContext = createContext();
 
-const Shop = () => {
+const Shop = ({ categoris }) => {
   const [filter, setFilter] = useState({
     status: [],
     category: [],
@@ -87,7 +87,7 @@ const Shop = () => {
                       <i className="fas fa-search"></i>
                     </button>
                   </div>
-                  <Sidebar />
+                  <Sidebar categoris={categoris} />
                 </div>
               </Col>
               <Col className={"w-full lg:w-9/12 order-1 md:order-2"}>

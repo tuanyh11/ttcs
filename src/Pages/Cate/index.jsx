@@ -21,7 +21,6 @@ const Cate = () => {
                 </Col>
 
               ))
-
             }
 
           </div>
