@@ -1,0 +1,122 @@
+import React from "react";
+import Slider from "react-slick";
+import { fakeData } from "../../../assets/data";
+import { Container } from "../../../Components";
+import { generateStart } from "../../../utils";
+
+const customerReview = fakeData(6, (i) => {
+  return {
+    rating: Math.floor(Math.random() * 5) + 1,
+    career: "Delivery",
+    name: `Oliver Greenwood ${i}`,
+    quote:
+      "Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt",
+
+    image: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
+      Math.floor(Math.random() * 3) + 1
+    }.jpg`,
+  };
+});
+const Review = () => {
+
+  const customerReviewSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+  };
+  return (
+    <div>
+      <div className="pt-[65px] pb-[80px] bg-[#F7F7F7]">
+        <Container>
+          <div className="md:p-[15px]  text-center flex justify-center">
+            <div className="w-full md:w-9/12 lg:w-6/12  mb-[30px]">
+              <h2 className="mb-[15px] font-poppins text-[27px] text-black leading-[32px] font-semibold">
+                Customer Reviews{" "}
+              </h2>
+              <p>
+                Quis autem vel eum iure reprehenderit qui in ea voluptate velit
+                esse quam nihil molestiae consequatur vel illum dolorem
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <Slider {...customerReviewSettings} className="-mx-[15px]">
+                {customerReview.map((review, i) => {
+                  const stars = generateStart(review.rating, "!text-sm");
+
+                  return (
+                    <div key={i}>
+                      <div className="px-[15px]">
+                        <div>
+                          <div className="flex pl-[30px] pb-[30px]">
+                            <div className="min-w-[50px] max-w-[50px] h-[50px]">
+                              <img
+                                src={review.image}
+                                alt=""
+                                className=" rounded-full"
+                              />
+                            </div>
+
+                            <div className="ml-[15px]">
+                              <h3 className=" text-black font-poppins text-lg leading-[1] font-semibold">
+                                {review.name}
+                              </h3>
+                              <span className=" text-main">
+                                {review.career}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="p-10 bg-white relative triangle">
+                            <p className="pb-5">{review?.quote}</p>
+                            <div className="flex justify-between items-center">
+                              <div>{stars}</div>
+                              <div>
+                                <i className="fa-solid fa-quote-right text-5xl text-main-color"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </Slider>
+            </div>
+          </div>
+        </Container>
+      </div>
+    </div>
+  );
+};
+
+export default Review;

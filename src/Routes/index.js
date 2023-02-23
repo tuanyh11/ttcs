@@ -3,6 +3,7 @@ import {
   Account,
   Blog,
   BlogDetail,
+  BlogList,
   Cate,
   Checkout,
   Contact,
@@ -15,7 +16,7 @@ import {
 
 export default [
   {
-    path: "/",
+    path: "/home",
     name: "home",
     component: Home,
     index: false,
@@ -47,15 +48,23 @@ export default [
     name: "blog",
     component: Blog,
     index: false,
-    childrens: [],
+    childrens: [
+      {
+        path: "/blog",
+        name: "blog",
+        component: BlogList,
+        index: false,
+      }, 
+      {
+        path: ":slug",
+        name: "blog",
+        component: BlogDetail,
+        index: false,
+        childrens: [],
+      },
+    ],
   },
-  {
-    path: "/blog/:slug",
-    name: "blog",
-    component: BlogDetail,
-    index: false,
-    childrens: [],
-  },
+ 
   {
     path: "/contact",
     name: "contact us",

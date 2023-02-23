@@ -5,7 +5,6 @@ import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
 
-export const ShopContext = createContext();
 
 const Shop = ({ categoris }) => {
   const [filter, setFilter] = useState({

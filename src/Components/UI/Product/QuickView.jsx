@@ -1,6 +1,7 @@
 import { Button } from "bootstrap";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useQuickView } from "../../../hooks";
 import ButtonV1 from "../../Common/Button/Button";
 import Col from "../../Common/Col/Col";
 import Row from "../../Common/Row/Row";
@@ -36,7 +37,7 @@ const QuickView = ({
         <div className=" absolute inset-0 bg-[#0b0b0b] opacity-80 z-[9999999]"></div>
         <div className="md:px-[6px] lg:px-5 absolute  md:top-1/2 md:left-1/2 z-[99999999999] md:-translate-y-1/2 md:-translate-x-1/2 w-full xl:max-w-[980px] xl:px-0">
           <button
-            onClick={() => onQuickViewClick(null)}
+            onClick={() => onQuickViewClick()}
             className="fa-solid fa-xmark absolute top-0 right-0 text-lg font-semibold -translate-x-4 translate-y-2 md:-translate-x-4 md:translate-y-1  xl:-translate-x-4 xl:translate-y-2 "
           ></button>
           <div className=" w-full  bg-white p-[30px]">

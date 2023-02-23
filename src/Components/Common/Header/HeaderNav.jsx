@@ -1,48 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useDebounce } from "../../../hooks";
 import Col from "../Col/Col";
 import Container from "../Container/Container";
 import Row from "../Row/Row";
 // import "./header.css";
-
-const data = [
-  {
-    id: 1,
-    title: "Home",
-    link: "/",
-  },
-  {
-    id: 2,
-    title: "About",
-    link: "/about",
-  },
-  {
-    id: 3,
-    title: "shop",
-    link: "/shop",
-  },
-  {
-    id: 4,
-    title: "Categories",
-    link: "/contact",
-  },
-  {
-    id: 5,
-    title: "Blog",
-    link: "/blog",
-  },
-  {
-    id: 6,
-    title: "Contact us",
-    link: "/contact",
-  },
-];
+import { getHeaderData } from "../../../api/index";
 
 // lg, md, sm, xs display
 
 const HeaderNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [sticky, setSticky] = useState(false);
 
   const [text, setText] = useState("");
 
@@ -52,9 +23,36 @@ const HeaderNav = () => {
     setText(e.target.value);
   };
 
+  const { data: headerData = [] } = useQuery({
+    queryKey: ["data"],
+    queryFn: () =>
+      getHeaderData().then(
+        (res) => res?.data?.menus?.edges?.[0]?.node?.menuItems?.nodes
+      ),
+  });
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 100) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div>
+    <div
+      className={` transition-all duration-200  ${
+        sticky
+          ? "bg-white  z-[9999999] fixed top-0 left-0 right-0 shadow-[0px_7px_12px_0px_rgb(225_225_225_/50%)] "
+          : ""
+      }`}
+    >
       <Container className={"xl:max-w-[1420px]"}>
         <div className="flex justify-between items-center py-[15px] xl:py-0">
           <Link to="/">
@@ -67,15 +65,41 @@ const HeaderNav = () => {
 
           {/* default: off xl: display */}
           <nav className="hidden xl:flex items-center">
-            {data.map((nav) => (
-              <Link
-                className="text-[16px] font-poppins py-[34px] px-[15px] block font-semibold text-dark-color uppercase"
-                key={nav.id}
-                to={nav.link}
-              >
-                {nav.title}
-              </Link>
-            ))}
+            {headerData?.map((nav) => {
+              const slug = nav?.label?.replace(" ", "-")?.toLowerCase();
+              const children = nav?.childItems?.edges;
+              const isHasChildren = children?.length > 0;
+              return (
+                <div key={nav?.databaseId} className="relative group">
+                  <Link
+                    className="text-[16px] font-poppins hover:text-main-color transition-main  py-[34px] px-[15px] block font-semibold text-dark-color uppercase"
+                    to={`/${slug}`}
+                  >
+                    {nav?.label}
+                    {isHasChildren && (
+                      <i className="fa-solid fa-chevron-down ml-1 text-[10px] -translate-y-[2px] font-bold"></i>
+                    )}
+                  </Link>
+                  <div className="absolute top-[120%] left-0 transition-main  w-[200px] bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible z-[9999] group-hover:top-[102%] after:inset-0 after:absolute after:h-2 after:z-[9999] after:-translate-y-2  ">
+                    {children?.map((child) => {
+                      const slug = child?.node?.label
+                        ?.replace(" ", "-")
+                        ?.toLowerCase();
+
+                      return (
+                        <Link
+                          className="text-[16px] font-poppins hover:text-main-color transition-main  py-2 border border-t-0 px-[15px] block font-semibold text-dark-color uppercase"
+                          to={`/${slug}`}
+                          key={child?.node?.id}
+                        >
+                          {child?.node?.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </nav>
 
           {/* default: off xl: display */}
@@ -113,7 +137,7 @@ const HeaderNav = () => {
         <ResHeaderNav
           onSetOpen={() => setIsOpen(!isOpen)}
           isOpen={isOpen}
-          data={data}
+          data={headerData}
         />
       </Container>
     </div>
@@ -121,6 +145,18 @@ const HeaderNav = () => {
 };
 
 function ResHeaderNav({ onSetOpen, data, isOpen }) {
+  const [slectedPage, setSlectedPage] = useState([]);
+
+  const handleOnSelect = (e, id) => {
+    e.preventDefault();
+
+    if (slectedPage.includes(id)) {
+      setSlectedPage(slectedPage.filter((item) => item !== id));
+      return;
+    }
+    setSlectedPage([...slectedPage, id]);
+  };
+
   return (
     <div
       className={`xl:hidden fixed w-[300px] z-[9999999] bg-white duration-500 shadow-[0_5px_20px_rgb(0_0_0_/_10%)]  top-0 bottom-0 pt-[70px] left-0 transition ${
@@ -139,15 +175,56 @@ function ResHeaderNav({ onSetOpen, data, isOpen }) {
 
       <div className="">
         <div className="">
-          {data.map((nav) => (
-            <Link
-              className="text-[16px] font-poppins py-[13px] px-[26px] block font-semibold text-dark-color uppercase border-b last:border-none leading-[27px]"
-              key={nav.id}
-              to={nav.link}
-            >
-              {nav.title}
-            </Link>
-          ))}
+          {data.map((nav) => {
+            const slug = nav?.label?.replace(" ", "-")?.toLowerCase();
+            const children = nav?.childItems?.edges;
+            const isHasChildren = children?.length > 0;
+            return (
+              <div key={nav?.databaseId} className="border-b last:border-none ">
+                <Link
+                  className="text-[16px] block  relative justify-between font-poppins py-[13px] px-[26px]  font-semibold text-dark-color uppercase leading-[27px]"
+                  // onClick={() => setSlectedPage(nav?.databaseId)}
+                  to={`/${slug}`}
+                >
+                  {nav?.label}
+                  {isHasChildren && (
+                    <button
+                      onClick={(e) => handleOnSelect(e, nav?.databaseId)}
+                      className="fa-solid fa-chevron-down  text-xs  font-bold absolute top-1/2 right-4 -translate-y-1/2  "
+                    ></button>
+                  )}
+                </Link>
+
+                {isHasChildren && (
+                  <div
+                    className={`${
+                      slectedPage.includes(nav?.databaseId) ? "block" : "hidden"
+                    }`}
+                  >
+                    {children?.map((child) => {
+                      const slug = child?.node?.label
+                        ?.replace(" ", "-")
+                        ?.toLowerCase();
+
+                      return (
+                        <div
+                          key={child?.node?.id}
+                          className="border-b first:border-t  "
+                        >
+                          <Link
+                            className="text-[16px] block  relative justify-between font-poppins py-[13px] pl-[48px] pr-[26px]  font-semibold text-dark-color uppercase leading-[27px]"
+                            to={`/${slug}`}
+                          >
+                            {child?.node?.label}
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

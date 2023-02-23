@@ -4,12 +4,16 @@ import { Button } from "../../../Components";
 import Banner from "./Banner";
 import Categories from "./Categories";
 import Popular from "./Popular";
+import Search from "./Search";
 import Tags from "./Tags";
 
 const Sidebar = () => {
   return (
     <div>
       <ul>
+        <li>
+          <Search/>
+        </li>
         <li className="mb-[30px]">
           <Categories />
         </li>

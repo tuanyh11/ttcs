@@ -7,9 +7,10 @@ const Categories = () => {
 
   const {state} = useBlogContext()
 
-  const categories = state.categories
+  const categories = state?.categories
 
- 
+
+  
   return (
     <div>
       <div className="p-10  border-[2px] ">
@@ -23,7 +24,7 @@ const Categories = () => {
                 key={category?.node?.categoryId}
                 className="pb-[15px] last:pb-0 flex items-center justify-between"
               >
-                <Link to={`/blog?category=${category?.node?.slug}`}>
+                <Link to={`/blog?category=${category?.node?.slug}`} state={{categoryId: category?.node?.categoryId}}>
                   <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>
                   {category?.node?.name}
                 </Link>

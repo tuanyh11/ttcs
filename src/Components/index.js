@@ -15,6 +15,11 @@ export { default as ProductCardGridV2 } from './UI/Product/ProductCardGridV2'
 export { default as QuickView } from './UI/Product/QuickView'
 export { default as BreadcrumbPath } from './Common/Breadcrumb/BreadcrumbPath'
 export { default as SliderForm } from './Common/Slider/SliderForm'
+export {default as SpinningLoader} from './Common/Spinning/Spinning'
+
+export {default as NextButton} from './UI/Product/NextButton'
+export {default as PreButton} from './UI/Product/PreButton'
+ 
 
 
 

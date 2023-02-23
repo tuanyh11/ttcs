@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { ShopContext } from "..";
 import { useShopContext } from "../../../hooks";
 
 const Popular = () => {

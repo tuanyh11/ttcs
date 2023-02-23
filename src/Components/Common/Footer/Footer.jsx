@@ -1,10 +1,21 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { getFooterData } from "../../../api";
 import Col from "../Col/Col";
 import Container from "../Container/Container";
 import Row from "../Row/Row";
+import { fakeData } from "../../../utils/index";
 
 const Footer = () => {
+  const { data } = useQuery({
+    queryKey: ["footer"],
+    queryFn: () =>
+      getFooterData().then((res) => res?.data?.menus?.edges?.[0]?.node),
+  });
+
+  const useFullData = fakeData(2, () => data);
+
   return (
     <div className="footer bg-dark-color text-white">
       <Container>
@@ -46,65 +57,33 @@ const Footer = () => {
               </div>
             </Col>
 
-            <Col className={" w-full lg:w-3/12 md:w-6/12"}>
-            <div className="mb-10 lg:mb-0">
-                <h3 className=" text-2xl font-poppins font-semibold mb-[22px] lg:text-center">
-                  Useful
-                </h3>
-                <div className="flex lg:justify-center lg:ml-[45px]">
-                  <ul className="">
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Site Map</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Search Terms</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Advanced Search</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>About Us</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Contact Us</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Suppliers</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </Col>
+            {useFullData.map((item, index) => {
+              const label = item?.name
 
-            <Col className={" w-full lg:w-3/12 md:w-6/12"}>
-              <div className="mb-10 lg:mb-0">
-                <h3 className=" text-2xl font-poppins font-semibold mb-[22px] lg:text-center">
-                  Useful
-                </h3>
-                <div className="flex lg:justify-center lg:ml-[45px]">
-                  <ul className="">
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Site Map</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Search Terms</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Advanced Search</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>About Us</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Contact Us</Link>
-                    </li>
-                    <li className="pb-[10px]">
-                      <Link to={"/"}>Suppliers</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </Col>
+              const nodes = item?.menuItems?.nodes ;
+              return (
+                <Col key={index} className={" w-full lg:w-3/12 md:w-6/12"}>
+                  <div className="mb-10 lg:mb-0">
+                    <h3 className=" text-2xl font-poppins font-semibold mb-[22px] lg:text-center">
+                      {label}
+                    </h3>
+                    <div className="flex lg:justify-center lg:ml-[45px]">
+                      <ul className="">
+                        {nodes?.map(node => {
+
+                          return (
+                          <li key={node?.id} className="pb-[10px]">
+                            <Link to={`/${node?.label?.replace(" ", "-")?.toLowerCase()}`}>{node?.label}</Link>
+                          </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+                </Col>
+              );
+            })}
+
 
             <Col className={"md:w-6/12 w-full lg:w-3/12"}>
               <div className="mb-10 lg:mb-0">
@@ -125,7 +104,11 @@ const Footer = () => {
                     <p>+898 - 123 - 456 - 98</p>
                   </li>
                   <li className="pb-[10px] relative ">
-                    <img src="https://klbtheme.com/chakta/wp-content/uploads/2021/01/payment.png" alt="" className="" />
+                    <img
+                      src="https://klbtheme.com/chakta/wp-content/uploads/2021/01/payment.png"
+                      alt=""
+                      className=""
+                    />
                   </li>
                 </ul>
               </div>
