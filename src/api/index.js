@@ -2,6 +2,7 @@ import { blogData } from "../assets/data/Blog";
 import blogDetail from "../assets/data/blogdetail";
 import footerData from "../assets/data/footer";
 import headerData from "../assets/data/header";
+import productDetail from "../assets/data/productdetail";
 
 export const getSibarBlogdata = async () => {
   return blogData;
@@ -17,4 +18,8 @@ export const getFooterData = async () => {
 
 export const getBlogDetail = async (id) => {
   return blogDetail
+}
+
+export const getProductDetai = async () => {
+  return productDetail
 }
