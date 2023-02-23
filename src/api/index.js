@@ -20,6 +20,6 @@ export const getBlogDetail = async (id) => {
   return blogDetail
 }
 
-export const getProductDetai = async () => {
+export const getProductDetail = async (id) => {
   return productDetail
 }
