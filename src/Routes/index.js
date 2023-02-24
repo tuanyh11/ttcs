@@ -8,7 +8,7 @@ import {
   Checkout,
   Contact,
   Home,
-  // ProductDetail,
+  ProductDetail,
   Shop,
   CateDetail,
   Cart,
@@ -98,13 +98,13 @@ export default [
     index: false,
     childrens: [],
   },
-  // {
-  //   path: "/product/:id",
+  {
+    path: "/product/:id",
 
-  //   component: ProductDetail,
-  //   index: false,
-  //   childrens: [],
-  // },
+    component: ProductDetail,
+    index: false,
+    childrens: [],
+  },
   {
     path: "/categories/:slug",
     name: "categories",
