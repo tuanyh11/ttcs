@@ -27,7 +27,7 @@ const CartList = () => {
                         <td className='border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]'>
                             <div className='inline-flex justify-self-stretch'>
                                 <div className='dec w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px] '><i className="fa-solid fa-minus"></i></div>
-                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' value='1' type='text' />
+                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' defaultValue='1' type='text' />
                                 <div className='inc w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px]'><i className="fa-solid fa-plus"></i></div>
                             </div>
                         </td>
@@ -46,7 +46,7 @@ const CartList = () => {
                         <td className='border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]'>
                             <div className='inline-flex justify-self-stretch'>
                                 <div className='dec w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px] '><i className="fa-solid fa-minus"></i></div>
-                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' value='1' type='text' />
+                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' defaultValue='1' type='text' />
                                 <div className='inc w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px]'><i className="fa-solid fa-plus"></i></div>
                             </div>
                         </td>

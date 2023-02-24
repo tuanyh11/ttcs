@@ -67,7 +67,7 @@ export default [
   },
 
   {
-    path: "/contact",
+    path: "/contact-us",
     name: "contact us",
     component: Contact,
     index: false,
