@@ -11,7 +11,8 @@ const dataCategory =
                         "slug": "brake-discs",
                         "image": {
                             "mediaItemUrl": "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-16.jpg"
-                        }
+                        },
+                        "description": "But must explain to you how all this mistaken idea denoue",
                     }
                 },
                 {
@@ -22,7 +23,8 @@ const dataCategory =
                         "slug": "camshafts-bearing",
                         "image": {
                             "mediaItemUrl": "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-20.jpg"
-                        }
+                        },
+                        "description": "But must explain to you how all this mistaken idea denoue"
                     }
                 },
                 {
@@ -33,7 +35,8 @@ const dataCategory =
                         "slug": "engine-parts",
                         "image": {
                             "mediaItemUrl": "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-22.jpg"
-                        }
+                        },
+                        "description": "But must explain to you how all this mistaken idea denoue"
                     }
                 },
                 {
@@ -44,7 +47,8 @@ const dataCategory =
                         "slug": "suspension-systems",
                         "image": {
                             "mediaItemUrl": "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-17.jpg"
-                        }
+                        },
+                        "description": "But must explain to you how all this mistaken idea denoue"
                     }
                 },
                 {
@@ -55,7 +59,8 @@ const dataCategory =
                         "slug": "tire_part",
                         "image": {
                             "mediaItemUrl": "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-14.jpg"
-                        }
+                        },
+                        "description": "But must explain to you how all this mistaken idea denoue"
                     }
                 },
                 {
@@ -66,7 +71,8 @@ const dataCategory =
                         "slug": "universal-parts",
                         "image": {
                             "mediaItemUrl": "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-15.jpg"
-                        }
+                        },
+                        "description": "But must explain to you how all this mistaken idea denoue"
                     }
                 }
             ]

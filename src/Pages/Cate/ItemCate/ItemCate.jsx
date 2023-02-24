@@ -19,7 +19,7 @@ const ItemCate = ({ className, item }) => {
                             <Link to={`/categories/${item.node.slug}`}>{item.node.name}</Link>
                         </h3>
                         <p className='pb-[15px] text-[#646a7c]'>
-                            But must explain to you how all this mistaken idea denoue
+                            {item.node.description}
                         </p>
                         <Link to={`/categories/${item.node.slug}`}
                             className='inline-block font-semibold font-poppins text-white uppercase rounded-[28px] py-[6px] px-[17px] leading-[23px] bg-main-color'>
