@@ -5,32 +5,34 @@ import QuickView from "./QuickView";
 
 const ProductCardGridV2 = ({
   image,
-  title,
-  salePrice,
-  price,
+  name,
   description,
   id,
-  rating = 0,
-  isOnSale = false,
+  salePrice,
+  regularPrice = 0,
+  slug,
+  averageRating,
   onQuickView = () => {},
   ...rest
 }) => {
 
+  const stars = generateStart(averageRating);
+
   const product = {
     image,
-    title,
-    salePrice,
-    price,
+    name,
     description,
     id,
-    rating,
-    isOnSale,
+    salePrice,
+    regularPrice,
+    slug,
+    averageRating,
+    stars,
     ...rest
   };
 
-  const stars = generateStart(rating);
 
-  const saleInfo = isOnSale ? -Math.round((1 - salePrice / price) * 100) : null;
+  const saleInfo = salePrice ? -Math.round((1 - Number(salePrice?.toString()?.substring(1)) / Number(regularPrice?.toString()?.substring(1))) * 100) : null;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,7 +47,7 @@ const ProductCardGridV2 = ({
             to={`/product/${id}`}
           >
           <img src={image} alt="" className="w-full h-full" />
-          {saleInfo && (
+          {salePrice && (
             <span className=" absolute z-[70] text-white bg-main-color translate-x-4 px-[7px] py-1 text-xs leading-[1] translate-y-4 top-0 left-0 rounded-sm">
               {saleInfo}%
             </span>
@@ -72,12 +74,12 @@ const ProductCardGridV2 = ({
               to={`/product/:id`}
               className=" text-[15px] text-black  font-semibold hover:text-main-color transition-all duration-300"
             >
-              {title}
+              {name}
             </Link>
 
             <p className=" font-semibold ">
               <del className="text-[#696969] text-sm mr-1">${salePrice}</del>
-              <span className="text-main-color ">${price}</span>
+              <span className="text-main-color ">${regularPrice}</span>
             </p>
           </div>
           <div>

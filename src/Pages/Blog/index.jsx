@@ -22,10 +22,30 @@ const Blog = () => {
     getData();
   }, []);
 
+  console.log(sidebarData);
 
   return (
     <div>
+      <BreadCrumb />
+      <div className="py-[80px]">
+        <Provider value={
+          {
+          ...sidebarData,
 
+          }
+        }>
+          <Container>
+            <Row>
+              <Col className={"w-4/12"}>
+                <Sidebar />
+              </Col>
+              <Col className={"w-8/12"}>
+                <Outlet />
+              </Col>
+            </Row>
+          </Container>
+        </Provider>
+      </div>
     </div>
   );
 };

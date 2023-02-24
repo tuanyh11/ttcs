@@ -8,7 +8,7 @@ const Popular = () => {
 
   const getData = useDate()
 
-  const posts = state?.posts
+  const posts = state?.posts?.edges
 
   return (
     <div>

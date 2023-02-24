@@ -9,10 +9,13 @@ import Row from "../../Common/Row/Row";
 const QuickView = ({
   onQuickViewClick = () => {},
   image,
-  title,
+  name,
   description,
+  id,
   salePrice,
-  price, 
+  regularPrice = 0,
+  slug,
+  averageRating,
   stars
 }) => {
   const [value, setValue] = useState(1);
@@ -64,7 +67,7 @@ const QuickView = ({
               <Col className={"w-full md:w-6/12"}>
                 <div className="">
                   <h3 className="text-[27px] font-poppins text-black font-semibold">
-                    {title}
+                    {name}
                   </h3>
 
                   <p className=" my-4 font-poppins font-semibold ">
@@ -72,7 +75,7 @@ const QuickView = ({
                       ${salePrice}
                     </del>
                     <span className="text-main-color text-[19px] ">
-                      ${price}
+                      ${regularPrice}
                     </span>
                   </p>
                   <div className="leading-[0.8] mb-[15px]">{stars}</div>

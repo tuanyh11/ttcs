@@ -12,8 +12,6 @@ const Search = () => {
     setText(e.target.value);
   };
 
-  console.log(textSearch);
-
 
 
   return (

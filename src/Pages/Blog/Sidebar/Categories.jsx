@@ -7,7 +7,9 @@ const Categories = () => {
 
   const {state} = useBlogContext()
 
-  const categories = state?.categories
+  const categories = state?.categories?.edges
+
+
 
 
   

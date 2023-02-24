@@ -37,8 +37,8 @@ function App() {
             if(childrens.length > 0 ) {
               return <Route key={index} path={path} element={<Component/>} >
                 {
-                  childrens.map(({ path, component: ComponentChil, childrens }, index) => {
-                    return <Route key={index} path={path} element={<ComponentChil />} />;
+                  childrens.map(({ path, component: ComponentChil, childrens, index }, i) => {
+                    return <Route key={i} index={index} path={path} element={<ComponentChil />} />;
                   })
                 }
               </Route>

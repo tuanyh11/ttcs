@@ -5,7 +5,7 @@ import { useBlogContext } from "../../../hooks";
 const Tags = () => {
   const { state } = useBlogContext();
 
-  const tags = state?.tags;
+  const tags = state?.tags?.edges;
 
   return (
     <div>
