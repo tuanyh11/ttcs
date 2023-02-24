@@ -4,7 +4,7 @@ const YourOrder = () => {
     return (
         <div className=' px-[15px]'>
             <h3 className='text-[27px] mb-[10px] font-poppins font-semibold text-dark-color mt-[20px]'>Your Order</h3>
-            <div className='overflow-x-scroll'>
+            <div className='overflow-x-auto'>
                 <table className='mb-[20px] w-full border-collapse'>
                     <thead>
                         <tr>
