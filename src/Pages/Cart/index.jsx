@@ -7,8 +7,8 @@ const Cart = () => {
   return (
     <div>
       <BreadcrumbPath pathname={'Cart'} />
-      <div className='py-[80px] overflow-x-scroll'>
-        <div className='max-w-[1200px] m-auto py-[65px] px-[0px]'>
+      <div className='py-[80px] '>
+        <div className='max-w-[1200px] m-auto py-[65px] px-[15px]'>
           <CartList />
           <CartTotal />
         </div>

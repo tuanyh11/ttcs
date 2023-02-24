@@ -3,7 +3,7 @@ import React from 'react';
 const WishItems = () => {
     return (
         <div>
-            <form>
+            <form className='overflow-x-auto max-w-full '>
                 <table className='max-w-full bg-transparent w-full border-gray-500'>
                     <thead>
                         <tr>
@@ -32,7 +32,7 @@ const WishItems = () => {
                             <td className='p-[15px] text-left border-[1px] border-[#dee2e6] '>
                                 <a href='#'>
                                     <img src='https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-6-90x90.jpg' alt=''
-                                        className='m-auto'
+                                        className='m-auto md:max-w'
                                     />
                                 </a>
                             </td>

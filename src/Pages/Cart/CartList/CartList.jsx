@@ -2,7 +2,7 @@ import React from 'react';
 
 const CartList = () => {
     return (
-        <form>
+        <form className='overflow-x-auto'>
             <table className='max-w-full bg-transparent w-full border-gray-500'>
                 <thead>
                     <tr>
@@ -19,7 +19,7 @@ const CartList = () => {
                         <td className='border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]'>
                             <a href='#'>
                                 <img src='https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-6-90x90.jpg' alt=''
-                                    className='text-center m-auto' />
+                                    className='text-center m-auto max-w-[50px]' />
                             </a>
                         </td>
                         <td className='border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]'><a href='#'>Winter Royal Black Tire</a></td>
@@ -27,7 +27,7 @@ const CartList = () => {
                         <td className='border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]'>
                             <div className='inline-flex justify-self-stretch'>
                                 <div className='dec w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px] '><i className="fa-solid fa-minus"></i></div>
-                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' value='1' type='text' />
+                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' defaultValue='1' type='text' />
                                 <div className='inc w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px]'><i className="fa-solid fa-plus"></i></div>
                             </div>
                         </td>
@@ -46,7 +46,7 @@ const CartList = () => {
                         <td className='border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]'>
                             <div className='inline-flex justify-self-stretch'>
                                 <div className='dec w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px] '><i className="fa-solid fa-minus"></i></div>
-                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' value='1' type='text' />
+                                <input className='w-[50px] h-auto bg-transparent border-[1px] border-[#eaeaea] text-center focus:outline-none' defaultValue='1' type='text' />
                                 <div className='inc w-[50px] h-[50px] bg-transparent border-[1px] border-[#eaeaea] cursor-pointer text-center pt-[10px]'><i className="fa-solid fa-plus"></i></div>
                             </div>
                         </td>
@@ -56,11 +56,11 @@ const CartList = () => {
                 </tbody>
 
             </table>
-            <div className='border-x-[1px] border-b-[1px] py-[20px] px-[10px] flex justify-between'>
-                <div className=''>
+            <div className='border-x-[1px] border-b-[1px] py-[20px] px-[10px] sm:flex justify-between block w-full'>
+                <div className='sm:mb-0 mb-[15px]'>
                     <input className='h-[50px] border-[1px] border[#eaeaea] px-[20px] float-left focus:outline-none'
                         type='text' placeholder='Coupon code' />
-                    <button className='inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white'>Apply coupon</button>
+                    <button className='inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white sm:mt-0 mt-[10px]'>Apply coupon</button>
                 </div>
                 <button className='inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white opacity-[0.7]'>Update cart</button>
             </div>
