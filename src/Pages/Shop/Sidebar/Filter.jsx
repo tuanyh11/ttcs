@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import RangeSlider from "react-range-slider-input";
 
 const Filter = () => {
-  const trackRef = React.useRef(null);
-
-  const thumbRef = React.useRef(null);
 
   return (
     <div>
@@ -14,7 +11,7 @@ const Filter = () => {
           Filter by price
         </h4>
         <div>
-
+ 
           <div className="mb-6">
             <RangeSlider className="filter-price h-1" onInput={(e) => console.log(e)} />
           </div>

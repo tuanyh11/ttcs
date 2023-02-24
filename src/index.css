@@ -19,7 +19,7 @@ body {
 
 #root {
   max-width: 100%;
-  padding: 0;
+  padding: 0; 
   text-align: start;
   position: relative;
 }
@@ -44,12 +44,7 @@ body {
   top: -8px;
 }
 
-.text-limit {
-  /* overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical; */
-}
+
 
 /* button */
 @layer components {
