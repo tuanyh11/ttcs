@@ -10,6 +10,9 @@ import {
   Home,
   ProductDetail,
   Shop,
+  CateDetail,
+  Cart,
+  Wishlist,
 } from "../Pages";
 
 export default [
@@ -52,7 +55,7 @@ export default [
         name: "blog",
         component: BlogList,
         index: false,
-      }, 
+      },
       {
         path: ":slug",
         name: "blog",
@@ -62,7 +65,7 @@ export default [
       },
     ],
   },
- 
+
   {
     path: "/contact",
     name: "contact us",
@@ -73,7 +76,7 @@ export default [
   {
     path: "/wishlist",
     name: "wish list",
-    component: Contact,
+    component: Wishlist,
     index: false,
     childrens: [],
   },
@@ -105,7 +108,14 @@ export default [
   {
     path: "/categories/:slug",
     name: "categories",
-    component: Shop,
+    component: CateDetail,
+    index: false,
+    childrens: [],
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart,
     index: false,
     childrens: [],
   },

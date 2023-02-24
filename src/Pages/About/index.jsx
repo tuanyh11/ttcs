@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom';
 import data from '../../assets/data/Aboutus';
 import { BreadcrumbPath, SliderForm } from '../../Components';
 import ContentTop from './ContentTop/ContentTop';
@@ -8,6 +9,8 @@ import OurMainGoals from './OurMainGoals/OurMainGoals';
 import './style.css';
 import TeamMembers from './TeamMembers/TeamMembers';
 const About = () => {
+  // const { pathname } = useLocation();
+  // console.log(pathname);
   let dataAbout = data.data.pages.edges.filter(item => item.node.title.includes('About'));
   // console.log(dataAbout);
   let dataContent = [];
