@@ -8,10 +8,11 @@ import {
   Checkout,
   Contact,
   Home,
-  ProductDetail,
+  // ProductDetail,
   Shop,
   CateDetail,
-  Cart
+  Cart,
+  Wishlist,
 } from "../Pages";
 
 export default [
@@ -54,7 +55,7 @@ export default [
         name: "blog",
         component: BlogList,
         index: false,
-      }, 
+      },
       {
         path: ":slug",
         name: "blog",
@@ -64,7 +65,7 @@ export default [
       },
     ],
   },
- 
+
   {
     path: "/contact",
     name: "contact us",
@@ -75,7 +76,7 @@ export default [
   {
     path: "/wishlist",
     name: "wish list",
-    component: Contact,
+    component: Wishlist,
     index: false,
     childrens: [],
   },
@@ -97,13 +98,13 @@ export default [
     index: false,
     childrens: [],
   },
-  {
-    path: "/product/:id",
+  // {
+  //   path: "/product/:id",
 
-    component: ProductDetail,
-    index: false,
-    childrens: [],
-  },
+  //   component: ProductDetail,
+  //   index: false,
+  //   childrens: [],
+  // },
   {
     path: "/categories/:slug",
     name: "categories",
