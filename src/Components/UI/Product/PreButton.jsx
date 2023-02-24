@@ -1,7 +1,6 @@
 import React from "react";
 
 const PreButton = ({className, onClick, classCustom}) => {
-  console.log(className);
   return (
     <div>
       {" "}

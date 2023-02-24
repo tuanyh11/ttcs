@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { BlogContext, ShopContext } from "../Contexts";
+import { BlogContext, ProductDetailContext, ShopContext } from "../Contexts";
 export const useDebounce = (value, time) => {
   // console.log(value)
   const [data, setData] = useState(value);
@@ -49,6 +49,13 @@ export const useShopContext = () => {
   }
 }
 
+export const useProductDetailContext = () => {
+  const Context = useContext(ProductDetailContext)
+  return {
+    state: Context,
+    ...ProductDetailContext,
+  }
+}
  
 export const useQuickView = () => {
   const { data: isOpen = false, refetch } = useQuery('quickView', () => false);
