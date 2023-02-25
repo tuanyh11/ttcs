@@ -1,25 +1,9 @@
 import React from 'react'
 import Slider from 'react-slick';
-import { fakeData } from '../../../assets/data';
 import { Container, NextButton, PreButton, ProductCardGrid } from '../../../Components';
 
-const bestSellingProducts = fakeData(8, (i) => {
-    return {
-      id: new Date().getTime() + i,
-      rating: Math.floor(Math.random() * 5) + 1,
-      title: `Titanium Wheel Cover ${i}`,
-      name: `Product Name ${i}`,
-      description: `Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem udantium, totam rem aperiam, eaque ipsa quae abventore ${i}`,
-      price: 99.99,
-      isOnSale: true,
-      salePrice: 79.99,
-      image:
-        "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-1.jpg",
-      categories: [].push(i),
-    };
-  });
 
-const BestSelling = () => {
+const BestSelling = ({data}) => {
 
 
     const bestSellingSettings = {
@@ -75,11 +59,11 @@ const BestSelling = () => {
             <div className="">
               <div className="">
                 <Slider {...bestSellingSettings} className="-mx-[15px]">
-                  {bestSellingProducts.map((product, i) => {
+                  {data?.map((product, i) => {
                     return (
                       <div key={i}>
                         <div className="px-[15px]">
-                          <ProductCardGrid {...product} />
+                          <ProductCardGrid {...product?.node} />
                         </div>
                       </div>
                     );

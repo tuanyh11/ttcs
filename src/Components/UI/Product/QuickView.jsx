@@ -72,14 +72,14 @@ const QuickView = ({
 
                   <p className=" my-4 font-poppins font-semibold ">
                     <del className="text-[#696969] text-sm mr-1 ">
-                      ${salePrice}
+                      {salePrice}
                     </del>
                     <span className="text-main-color text-[19px] ">
-                      ${regularPrice}
+                      {regularPrice}
                     </span>
                   </p>
                   <div className="leading-[0.8] mb-[15px]">{stars}</div>
-                  <p className="">{description}</p>
+                  <div dangerouslySetInnerHTML={{__html: description}}>{}</div>
 
                   <div className="my-5">
                     <span className="">In Stock</span>

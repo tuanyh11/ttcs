@@ -23,7 +23,7 @@ const Tags = () => {
               >
                 <Link
                   to={`/blog?tag=${tag?.node?.slug}`}
-                  state={{ tag: tag?.node?.id }}
+                  state={{ tag: tag?.node?.databaseId }}
                   className="py-2 px-[11px] leading-[1] block bg-[#f5f7fa] hover:bg-main-color hover:text-white transition-all text-[#646a7c] mr-[14px] mb-[10px]"
                 >
                   {tag?.node?.name}

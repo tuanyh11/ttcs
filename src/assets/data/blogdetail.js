@@ -1,4 +1,4 @@
-const blogDetail = {
+ const blogDetail = {
   data: {
     post: {
       id: "cG9zdDoxNDA=",

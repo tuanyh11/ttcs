@@ -2,15 +2,15 @@ import React from "react";
 import Slider from "react-slick";
 import { ButtonArrow, Col, Container, Row } from "../../../Components";
 
-const Hero = () => {
-  console.log(123)
+const Hero = ({data}) => {
+
 
   return (
     <div>
       <div
         className="py-[100px] bg-center bg-cover bg-no-repeat"
         style={{
-          backgroundImage: `url(${"https://klbtheme.com/chakta/wp-content/uploads/2021/01/hero-bg-1.jpg"})`,
+          backgroundImage: `url(${`${data?.image?.mediaItemUrl}`})`,
         }}
       >
         <div className="">

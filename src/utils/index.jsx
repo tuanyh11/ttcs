@@ -29,3 +29,15 @@ export const fakeData = (num, schema) => {
     }
   });
 }
+
+export  function randomDateInCurrentMonth() {
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+  const startTime = startOfMonth.getTime();
+  const endTime = endOfMonth.getTime();
+  const randomTime = startTime + Math.random() * (endTime - startTime);
+
+  return new Date(randomTime);
+}

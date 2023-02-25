@@ -1,19 +1,101 @@
-export const blogData = {
+import { randomDateInCurrentMonth } from "../../utils";
+
+const radom = () => {
+  let randomValue = 2;
+  while (randomValue === 2) {
+    randomValue = Math.floor(Math.random() * 4) + 1;
+  }
+
+  return randomValue;
+};
+
+const blogData = {
   data: {
     posts: {
       edges: [
         {
           node: {
+            publishedAt: randomDateInCurrentMonth().toLocaleDateString(),
+            comments: {
+              nodes: [
+                {
+                  commentId: 3,
+                  databaseId: 3,
+                  id: "Y29tbWVudDoz",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:41",
+                  content:
+                    "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                  replies: {
+                    nodes: [],
+                  },
+                },
+                {
+                  commentId: 2,
+                  databaseId: 2,
+                  id: "Y29tbWVudDoy",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:25",
+                  content:
+                    "<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pawas born and I will give you a complete account</p>\n",
+                  replies: {
+                    nodes: [
+                      {
+                        author: {
+                          node: {
+                            avatar: {
+                              url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                            },
+                            email: null,
+                            id: "dXNlcjox",
+                            databaseId: 1,
+                            url: null,
+                            name: "leo",
+                          },
+                        },
+                        commentId: 3,
+                        id: "Y29tbWVudDoz2",
+                        content:
+                          "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                        date: "2023-02-20 07:48:41",
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
             acf_post: {
               fieldGroupName: "acf_post",
               component: [
                 {
+                  blockquote:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>\n<footer>– Rosalina Pong</footer>\n",
+                  contentParagraph:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>\n",
+                  fieldGroupName: "Post_AcfPost_Component_ContentPost",
                   paragraph:
                     "Sed ut perspiciatis unde omnis iste natus error voluptatem accusantium doloremque laudantium totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit",
                   title: "On the other hand we provide denounce with righteous",
                   image: {
-                    mediaItemUrl:
-                      "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/blog-4.webp",
+                    mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-${radom()}-370x360.jpg`,
                   },
                 },
               ],
@@ -26,9 +108,9 @@ export const blogData = {
             categories: {
               nodes: [
                 {
-                  databaseId: 103,
-                  slug: "engine-parts",
-                  name: "Engine Parts",
+                  categoryId: 119,
+                  name: "Brake Discs",
+                  slug: "brake-discs",
                 },
               ],
             },
@@ -54,16 +136,87 @@ export const blogData = {
         },
         {
           node: {
+            publishedAt: randomDateInCurrentMonth().toLocaleDateString(),
+            comments: {
+              nodes: [
+                {
+                  commentId: 3,
+                  databaseId: 3,
+                  id: "Y29tbWVudDoz",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:41",
+                  content:
+                    "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                  replies: {
+                    nodes: [],
+                  },
+                },
+                {
+                  commentId: 2,
+                  databaseId: 2,
+                  id: "Y29tbWVudDoy",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:25",
+                  content:
+                    "<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pawas born and I will give you a complete account</p>\n",
+                  replies: {
+                    nodes: [
+                      {
+                        author: {
+                          node: {
+                            avatar: {
+                              url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                            },
+                            email: null,
+                            id: "dXNlcjox",
+                            databaseId: 1,
+                            url: null,
+                            name: "leo",
+                          },
+                        },
+                        commentId: 3,
+                        id: "Y29tbWVudDoz2",
+                        content:
+                          "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                        date: "2023-02-20 07:48:41",
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
             acf_post: {
               fieldGroupName: "acf_post",
               component: [
                 {
+                  blockquote:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>\n<footer>– Rosalina Pong</footer>\n",
+                  contentParagraph:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>\n",
+                  fieldGroupName: "Post_AcfPost_Component_ContentPost",
                   paragraph:
                     "Sed ut perspiciatis unde omnis iste natus error voluptatem accusantium doloremque laudantium totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit",
                   title: "But I must explain to you how all this mistaken idea",
                   image: {
-                    mediaItemUrl:
-                      "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/blog-3.webp",
+                    mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-${radom()}-370x360.jpg`,
                   },
                 },
               ],
@@ -76,9 +229,10 @@ export const blogData = {
             categories: {
               nodes: [
                 {
-                  databaseId: 119,
-                  slug: "brake-discs",
-                  name: "Brake Discs",
+                  categoryId: 103,
+                  name: "Engine Parts",
+                  slug: "engine-parts",
+                  count: 1,
                 },
               ],
             },
@@ -97,14 +251,88 @@ export const blogData = {
         },
         {
           node: {
+            publishedAt: randomDateInCurrentMonth().toLocaleDateString(),
+            comments: {
+              nodes: [
+                {
+                  commentId: 3,
+                  databaseId: 3,
+                  id: "Y29tbWVudDoz",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:41",
+                  content:
+                    "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                  replies: {
+                    nodes: [],
+                  },
+                },
+                {
+                  commentId: 2,
+                  databaseId: 2,
+                  id: "Y29tbWVudDoy",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:25",
+                  content:
+                    "<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pawas born and I will give you a complete account</p>\n",
+                  replies: {
+                    nodes: [
+                      {
+                        author: {
+                          node: {
+                            avatar: {
+                              url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                            },
+                            email: null,
+                            id: "dXNlcjox",
+                            databaseId: 1,
+                            url: null,
+                            name: "leo",
+                          },
+                        },
+                        commentId: 3,
+                        id: "Y29tbWVudDoz2",
+                        content:
+                          "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                        date: "2023-02-20 07:48:41",
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
             acf_post: {
               fieldGroupName: "acf_post",
               component: [
                 {
+                  blockquote:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>\n<footer>– Rosalina Pong</footer>\n",
+                  contentParagraph:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>\n",
+                  fieldGroupName: "Post_AcfPost_Component_ContentPost",
                   paragraph:
                     "Sed ut perspiciatis unde omnis iste natus error voluptatem accusantium doloremque laudantium totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit",
                   title: "Mirage Deep Dive Under anding Timin Response",
-                  image: null,
+                  image: {
+                    mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-${radom()}-370x360.jpg`,
+                  },
                 },
               ],
             },
@@ -115,10 +343,11 @@ export const blogData = {
             date: "2023-02-20T02:53:03",
             categories: {
               nodes: [
-                {
-                  databaseId: 110,
-                  slug: "video",
-                  name: "Video",
+                 {
+                  categoryId: 90,
+                  name: "Gallery",
+                  slug: "gallery",
+                  count: 1,
                 },
               ],
             },
@@ -144,16 +373,87 @@ export const blogData = {
         },
         {
           node: {
+            publishedAt: randomDateInCurrentMonth().toLocaleDateString(),
+            comments: {
+              nodes: [
+                {
+                  commentId: 3,
+                  databaseId: 3,
+                  id: "Y29tbWVudDoz",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:41",
+                  content:
+                    "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                  replies: {
+                    nodes: [],
+                  },
+                },
+                {
+                  commentId: 2,
+                  databaseId: 2,
+                  id: "Y29tbWVudDoy",
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      name: "chakta",
+                    },
+                  },
+                  date: "2023-02-20 07:48:25",
+                  content:
+                    "<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pawas born and I will give you a complete account</p>\n",
+                  replies: {
+                    nodes: [
+                      {
+                        author: {
+                          node: {
+                            avatar: {
+                              url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                            },
+                            email: null,
+                            id: "dXNlcjox",
+                            databaseId: 1,
+                            url: null,
+                            name: "leo",
+                          },
+                        },
+                        commentId: 3,
+                        id: "Y29tbWVudDoz2",
+                        content:
+                          "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                        date: "2023-02-20 07:48:41",
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
             acf_post: {
               fieldGroupName: "acf_post",
               component: [
                 {
+                  blockquote:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>\n<footer>– Rosalina Pong</footer>\n",
+                  contentParagraph:
+                    "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>\n<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>\n",
+                  fieldGroupName: "Post_AcfPost_Component_ContentPost",
                   paragraph:
                     "Sed ut perspiciatis unde omnis iste natus error voluptatem accusantium doloremque laudantium totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit",
                   title: "The Problem With Typefaces on the Web",
                   image: {
-                    mediaItemUrl:
-                      "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/blog-1.webp",
+                    mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-${radom()}-370x360.jpg`,
                   },
                 },
               ],
@@ -166,9 +466,10 @@ export const blogData = {
             categories: {
               nodes: [
                 {
-                  databaseId: 90,
-                  slug: "gallery",
-                  name: "Gallery",
+                  categoryId: 1,
+                  name: "Uncategorized",
+                  slug: "uncategorized",
+                  count: null,
                 },
               ],
             },
@@ -225,7 +526,7 @@ export const blogData = {
             categoryId: 1,
             name: "Uncategorized",
             slug: "uncategorized",
-            count: null,
+            count: 0,
           },
         },
         {
@@ -298,3 +599,5 @@ export const blogData = {
     },
   },
 };
+
+export default blogData;

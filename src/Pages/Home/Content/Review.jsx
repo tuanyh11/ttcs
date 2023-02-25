@@ -17,7 +17,9 @@ const customerReview = fakeData(6, (i) => {
     }.jpg`,
   };
 });
-const Review = () => {
+const Review = ({data}) => {
+
+  const quoteList = data?.contentQuote
 
   const customerReviewSettings = {
     dots: false,
@@ -70,17 +72,17 @@ const Review = () => {
           <div>
             <div>
               <Slider {...customerReviewSettings} className="-mx-[15px]">
-                {customerReview.map((review, i) => {
+                {quoteList?.map((review) => {
                   const stars = generateStart(review.rating, "!text-sm");
 
                   return (
-                    <div key={i}>
+                    <div key={review?.id}>
                       <div className="px-[15px]">
                         <div>
                           <div className="flex pl-[30px] pb-[30px]">
                             <div className="min-w-[50px] max-w-[50px] h-[50px]">
                               <img
-                                src={review.image}
+                                src={review.image?.mediaItemUrl}
                                 alt=""
                                 className=" rounded-full"
                               />
@@ -88,16 +90,16 @@ const Review = () => {
 
                             <div className="ml-[15px]">
                               <h3 className=" text-black font-poppins text-lg leading-[1] font-semibold">
-                                {review.name}
+                                {review?.name}
                               </h3>
                               <span className=" text-main">
-                                {review.career}
+                                {review?.position}
                               </span>
                             </div>
                           </div>
 
                           <div className="p-10 bg-white relative triangle">
-                            <p className="pb-5">{review?.quote}</p>
+                            <div dangerouslySetInnerHTML={{__html: review?.contentData}} className="pb-5"/>
                             <div className="flex justify-between items-center">
                               <div>{stars}</div>
                               <div>

@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "../../../Components";
+import { useProductDetailContext } from "../../../hooks";
 import BodyLeft from "./BodyLeft";
 import BodyRight from "./BodyRight";
-import Footer from "./Footer";
+import Nav from "./Nav";
+import Pages from "./Pages";
 
 const index = () => {
+  const [page, setPage] = useState("description");
+  const {state: data} = useProductDetailContext()
+
   return (
     <div>
       <div className="bg-[#f7f7f7] py-20">
         <Container>
           <Row>
             <Col className={"w-full lg:w-6/12"}>
-              <BodyLeft />
+              <BodyLeft featuredImage={data?.featuredImage?.node?.mediaItemUrl} galleryImages={data?.galleryImages?.nodes} />
             </Col>
             <Col className={"w-full lg:w-6/12"}>
               <BodyRight />
@@ -22,7 +27,8 @@ const index = () => {
 
       <div className="bg-white">
         <Container>
-            <Footer/>
+            <Nav onSetPage={setPage} commentCount={data?.commentCount} page={page}/>
+            <Pages page={page} data={data}/>
         </Container>
       </div>
     </div>

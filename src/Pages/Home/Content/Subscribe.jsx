@@ -1,13 +1,22 @@
 import React from 'react'
 import { ButtonArrow, Col, Container, Row } from '../../../Components'
 
-const Subscribe = () => {
+const Subscribe = ({data}) => {
+
+  const backgroundImage = data?.images?.[0]
+
+  const subTitle = data?.subTitle
+
+  const title = data?.title
+
+  const button = data?.button
+
   return (
     <div>
          <div
           className="py-20 bg-center relative bg-cover bg-no-repeat after:inset-0 after:absolute after:bg-[rgba(0,0,0,0.65)] after:z-10"
           style={{
-            backgroundImage: `url(${"https://klbtheme.com/chakta/wp-content/plugins/chakta-core/elementor/images/newsletter-bg.jpg"})`,
+            backgroundImage: `url(${`${backgroundImage}`})`,
           }}
         >
           <Container>
@@ -15,10 +24,10 @@ const Subscribe = () => {
               <Col className="w-full lg:w-8/12">
                 <div className="text-center relative  z-20 ">
                   <h4 className="uppercase underline text-[#fbb71c] mb-5">
-                    NEWSLETTER SUBSCRIBE
+                    {subTitle}
                   </h4>
                   <h2 className="mb-[35px]  lg:px-[50px] leading-[1.2] text-[27px]  md:text-[32px] lg:text-[48px] text-white font-poppins font-semibold">
-                    Every Update Subscribe Our Newsletter
+                    {title}
                   </h2>
                   <form action="">
                     <div className="relative">
@@ -32,10 +41,10 @@ const Subscribe = () => {
                           Tag="Link"
                           to="/shop"
                           className={
-                            " px-[45px] py-[15px] rounded-[28px] leading-[27px]"
+                            " px-[45px] py-[15px] rounded-[28px] leading-[27px] uppercase"
                           }
                         >
-                          subscribe now
+                          {button?.titleButton}
                         </ButtonArrow>
                       </div>
                     </div>

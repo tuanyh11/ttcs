@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { getProducts } from "../../../api";
 import { fakeData } from "../../../assets/data";
 import {
   Button,
@@ -12,20 +14,6 @@ import {
 } from "../../../Components";
 import { useShopContext } from "../../../hooks";
 
-const data = fakeData(25, (i) => {
-  return {
-    rating: Math.floor(Math.random() * 5) + 1,
-    title: `Titanium Wheel Cover ${i}`,
-    name: `Product Name ${i}`,
-    description: `Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem udantium, totam rem aperiam, eaque ipsa quae abventore ${i}`,
-    price: 99.99,
-    isOnSale: true,
-    salePrice: 79.99,
-    image:
-      "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-1.jpg",
-    categories: [].push(i),
-  };
-});
 
 const sortDatatypes = [
   {
@@ -53,7 +41,7 @@ const Content = () => {
     state: { filter, handleOnRemoveCate, handleOnRemoveStatus },
   } = useShopContext();
 
-  const [featured, setFeatured] = useState("list");
+  const [featured, setFeatured] = useState("grid");
 
   const [sortDatatypesFilter, setSortDatatypesFilter] = useState(
     sortDatatypes[0]
@@ -66,11 +54,11 @@ const Content = () => {
     end: 10,
   });
 
-  const [products, setProducts] = useState([]);
+  const {data: products} = useQuery({
+    queryKey: ['productList'],
+    queryFn: () => getProducts().then(res => res)
+  })
 
-  useEffect(() => {
-    setProducts(data.slice(offset.start, offset.end));
-  }, [offset]);
 
   return (
     <div>
@@ -123,7 +111,7 @@ const Content = () => {
         </div>
 
         <div className="flex-1 md:flex-grow-0 md:flex-shrink-0 ">
-          {Selecector(sortDatatypesFilter, setSortDatatypesFilter)}
+          {Selector(sortDatatypesFilter, setSortDatatypesFilter)}
         </div>
       </div>
 
@@ -131,12 +119,13 @@ const Content = () => {
       {featured === "grid" ? (
         <div>
           <Row className="flex flex-wrap">
-            {products.map((item, index) => {
+            {products?.data?.map((item, index) => {
+              const product = item?.node
               return (
                 <Col key={index} className=" w-full md:w-6/12 lg:w-4/12">
                   <div className="mb-[30px] ">
                     <ProductCardGrid
-                      {...item}
+                      {...product}
                       onQuickView={(data) => setQuickView(data)}
                     />
                   </div>
@@ -152,12 +141,14 @@ const Content = () => {
       {featured === "list" ? (
         <div>
           <Row className="flex flex-wrap">
-            {products.map((item, index) => {
+            {products?.data?.map((item, index) => {
+              const product = item?.node
+              console.log(product)
               return (
                 <Col key={index} className=" w-full">
                   <div className="mb-[30px]">
                     <ProductCardList
-                      {...item}
+                      {...product}
                       onQuickView={(data) => setQuickView(data)}
                     />
                   </div>
@@ -168,9 +159,9 @@ const Content = () => {
         </div>
       ) : null}
 
-      <div className="">
+      <div >
         <Pagination
-          items={data.length}
+          items={products?.totalLength}
           itemToShow={12}
           getOffset={(start, end) =>
             setOffset({
@@ -186,7 +177,7 @@ const Content = () => {
 
 export default Content;
 
-function Selecector(sortDatatypesFilter, setSortDatatypesFilter) {
+function Selector(sortDatatypesFilter, setSortDatatypesFilter) {
 
   const [isOpening, setIsOpening] = useState(false);
 
@@ -221,7 +212,7 @@ function Selecector(sortDatatypesFilter, setSortDatatypesFilter) {
       <i className="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs"></i>
     </div>
     {isOpening && (
-      <ul className=" absolute top-full bg-white left-0 right-0 bg-[0_0_0_1px_rgb(68_68_68/11%)] border">
+      <ul className=" absolute z-[9999] top-full bg-white left-0 right-0 bg-[0_0_0_1px_rgb(68_68_68/11%)] border">
         {sortDatatypes.map((item, index) => (
           <li
             onClick={() => setSortDatatypesFilter(item)}

@@ -9,7 +9,9 @@ const data = {
       featuredImage: {
         node: {
           mediaItemUrl:
-            "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/products-1-768x768-1.webp",
+            `https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-${
+              Math.floor(Math.random() * 8) + 1
+            }-600x600.jpg`,
         },
       },
       galleryImages: {
@@ -18,31 +20,41 @@ const data = {
             id: "cG9zdDoxODY=",
             databaseId: 186,
             mediaItemUrl:
-              "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/products-1-768x768-2.webp",
+            `https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-${
+              Math.floor(Math.random() * 8) + 1
+            }-600x600.jpg`,
           },
           {
             id: "cG9zdDoxODg=",
             databaseId: 188,
             mediaItemUrl:
-              "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/products-3-768x768-1.webp",
+            `https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-${
+              Math.floor(Math.random() * 8) + 1
+            }-600x600.jpg`,
           },
           {
             id: "cG9zdDoxOTA=",
             databaseId: 190,
             mediaItemUrl:
-              "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/products-6.webp",
+            `https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-${
+              Math.floor(Math.random() * 8) + 1
+            }-600x600.jpg`,
           },
           {
             id: "cG9zdDoxOTI=",
             databaseId: 192,
             mediaItemUrl:
-              "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/products-8.webp",
+            `https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-${
+              Math.floor(Math.random() * 8) + 1
+            }-600x600.jpg`,
           },
           {
             id: "cG9zdDoxOTQ=",
             databaseId: 194,
             mediaItemUrl:
-              "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/products-10-768x768-1.webp",
+            `https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-${
+              Math.floor(Math.random() * 8) + 1
+            }-600x600.jpg`,
           },
         ],
       },
@@ -96,14 +108,87 @@ const data = {
         ],
         fieldGroupName: "act_product",
       },
+      comments: {
+        nodes: [
+          {
+            rating: Math.floor(Math.random() * 5),
+
+            commentId: 3,
+            databaseId: 3,
+            id: "Y29tbWVudDoz",
+            author: {
+              node: {
+                avatar: {
+                  url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                },
+                email: null,
+                id: "dXNlcjox",
+                name: "chakta",
+              },
+            },
+            date: "2023-02-20 07:48:41",
+            content:
+              "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+            replies: {
+              nodes: [],
+            },
+          },
+          {
+            rating: Math.floor(Math.random() * 5),
+
+            commentId: 2,
+            databaseId: 2,
+            id: "Y29tbWVudDoy",
+            author: {
+              node: {
+                avatar: {
+                  url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                },
+                email: null,
+                id: "dXNlcjox",
+                name: "chakta",
+              },
+            },
+            date: "2023-02-20 07:48:25",
+            content:
+              "<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pawas born and I will give you a complete account</p>\n",
+            replies: {
+              nodes: [
+                {
+                  author: {
+                    node: {
+                      avatar: {
+                        url: "http://0.gravatar.com/avatar/92c2a5ef5dcbd564ed3bf66c4d978022?s=96&d=mm&r=g",
+                      },
+                      email: null,
+                      id: "dXNlcjox",
+                      databaseId: 1,
+                      url: null, 
+                      name: "leo",
+                    },
+                  
+                
+                 },
+                 rating: Math.floor(Math.random() * 5),
+                  commentId: 3,
+                  id: "Y29tbWVudDoz2",
+                  content:
+                    "<p>Again is there anyone who loves or pursues or desires to obtain paiits ecause it is pain, but because occasionally circumstances occur in which</p>\n",
+                  date: "2023-02-20 07:48:41",
+                },
+              ],
+            },
+          },
+        ],
+      },
     },
   },
   extensions: {
     debug: [],
     queryAnalyzer: {
-      keys: "69acbe2ab4338ed9c2c88229b4e2c6fcc38885d126ff6f1cebfc41d4d7be70aa graphql:Query operation:ProductDetail list:mediaitem list:productcategory list:page list:variableproduct list:externalproduct list:groupproduct list:simpleproduct list:menu list:menuitem list:tag list:category list:comment list:post cG9zdDoxODQ= cG9zdDoxODY= cG9zdDoxODg= cG9zdDoxOTA= cG9zdDoxOTI= cG9zdDoxOTQ= dGVybTozNA== dXNlcjox",
-      keysLength: 397,
-      keysCount: 24,
+      keys: "0ac8ab620e4cb671b3130dc9cc7c1b871ea6569d03faa469ad0210a9af7f68df graphql:Query operation:ProductDetail list:mediaitem list:productcategory list:comment list:page list:variableproduct list:externalproduct list:groupproduct list:simpleproduct list:menu list:menuitem list:tag list:category list:post cG9zdDoxODQ= cG9zdDoxODY= cG9zdDoxODg= cG9zdDoxOTA= cG9zdDoxOTI= cG9zdDoxOTQ= dGVybTozNA== Y29tbWVudDo0 dXNlcjox",
+      keysLength: 410,
+      keysCount: 25,
       skippedKeys: "",
       skippedKeysSize: 0,
       skippedKeysCount: 0,
@@ -112,5 +197,4 @@ const data = {
   },
 };
 
-
-export default data
+export default data;

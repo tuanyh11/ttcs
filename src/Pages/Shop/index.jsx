@@ -68,7 +68,7 @@ const Shop = ({ categoris }) => {
         }}
       >
         <BreadCrumb />
-        <div className="py-20">
+        <div className="py-20 relative">
           <Container>
             <Row>
               <Col

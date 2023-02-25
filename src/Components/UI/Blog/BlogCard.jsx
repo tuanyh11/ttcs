@@ -10,35 +10,41 @@ const images = [
   "https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-3.jpg",
   "https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-4.jpg",
 ];
-const BlogCard = ({
-  type = "image",
-  settings = {},
-  hiddenDescription = true,
-  hiddenButton = false,
-  hiddenBlockquote = true,
-  ...rest
-}) => {
+const BlogCard = ({ type = "image", settings = {}, list = true, ...rest }) => {
   const getDate = useDate();
 
-  // console.log(rest);
+  const content = rest?.acf_post?.component?.[0];
+
+  const image = content?.image?.mediaItemUrl;
+
+  const id = rest?.id;
+
+  const published = rest?.publishedAt;
+
+  const paragraph = content?.paragraph;
+
+  const contentParagraph = content?.contentParagraph;
+
+  // const
+
   return (
     <div>
       {type === "image" ? (
         <div className="">
-          <Slider {...settings}>
-            {images.map((image, index) => (
-              <div key={index} className="h-full">
-                <Link to={"/"} className="block">
-                  <img
-                    onClick={(e) => e.preventDefault()}
-                    src={image}
-                    alt=""
-                    className="max-w-full block "
-                  />
-                </Link>
-              </div>
-            ))}
-          </Slider>
+          {/* <Slider {...settings}> */}
+          {/* {images.map((image, index) => ( */}
+          <div className="h-full min-w-full  w-full">
+            <Link to={`/blog/${id}`} className="block">
+              <img
+                onClick={(e) => e.preventDefault()}
+                src={image}
+                alt=""
+                className="min-w-[100%] max-h-[470px] object-center"
+              />
+            </Link>
+          </div>
+          {/* ))} */}
+          {/* </Slider> */}
           {/* <div  className="h-full">
                 <Link to={"/"} className="block">
                   <img
@@ -62,30 +68,32 @@ const BlogCard = ({
         <div className="flex items-center gap-[22px] pb-[10px] mb-[15px] border-b capitalize">
           <div className="">
             <i className="mr-[10px] text-main-color fa-regular fa-calendar-days"></i>
-            <Link to="/">{getDate()}</Link>
+            <Link to={`/blog/${id}`}>{getDate(published)}</Link>
           </div>
           <div className="">
             <i className="mr-[10px] text-main-color fa-regular fa-folder"></i>
-            <Link to="/">Video</Link>
+            <Link to={`/blog/${id}`}>Video</Link>
           </div>
 
           <div className="">
             <i className="mr-[10px] text-main-color fa-regular fa-bookmark"></i>
-            <Link to="/">video, Images</Link>
+            <Link to={`/blog/${id}`}>video, Images</Link>
           </div>
         </div>
         <Link
-          to={"/"}
+          to={`/blog/${id}`}
           className="text-[30px] leading-[35px] mb-5 block text-black font-poppins font-semibold"
         >
           {rest?.title}
         </Link>
         <div className="">
-          <div
-            className={`mb-[25px] `}
-            dangerouslySetInnerHTML={{ __html: rest?.paragraph }}
-          ></div>
-          {!hiddenBlockquote && (
+          {list && (
+            <div
+              className={`mb-[25px] `}
+              dangerouslySetInnerHTML={{ __html: paragraph }}
+            ></div>
+          )}
+          {!list && (
             <div className="">
               <blockquote className=" border-l-[5px] border-main-color my-[30px] py-10 px-[50px] bg-[#f8f8f8]">
                 <div
@@ -99,16 +107,19 @@ const BlogCard = ({
             </div>
           )}
 
-          <div
-            className={`mb-[25px] text-limit `}
-            dangerouslySetInnerHTML={{ __html: rest?.contentParagraph }}
+          {!list && (
+            <div
+            className={`mb-[25px]  `}
+            dangerouslySetInnerHTML={{ __html: contentParagraph }}
           ></div>
+          )}
           
+
           <div className="mb-[25px]">
-            {!hiddenButton && (
+            {!list && (
               <Button
                 Tag="Link"
-                to={`/blog/${"Mirage Deep Dive Under anding Timin Response"}`}
+                to={`/blog/${id}`}
                 state={{ id: 1 }}
                 className="py-[10px] text-[14px] px-[35px] hover:bg-main-color hover:text-white transition-all duration-300 ease-out hover:border-main-color  leading-[27px] rounded-[28px] bg-white border-[#e5e5e5] border-solid border-2 text-[#696969]"
               >
