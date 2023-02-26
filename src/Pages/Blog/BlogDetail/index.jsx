@@ -1,38 +1,27 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {  useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import { useLocation } from "react-router-dom";
-import { getBlogDetail, getSibarBlogdata } from "../../../api";
+import {  useParams } from "react-router-dom";
+import { getBlogDetail } from "../../../api";
 import {
   BlogCard,
   Button,
-  Col,
-  Container,
   InputV2,
-  Row,
 } from "../../../Components";
-import { useBlogContext, useDate } from "../../../hooks";
-import Sidebar from "../Sidebar";
+import { useDate } from "../../../hooks";
 
 const BlogDetail = () => {
   const getDate = useDate();
 
-  const location = useLocation();
+  const id = useParams()?.slug;
 
-  const [selectId, setSelectId] = React.useState(null);
-
-  const { Provider } = useBlogContext();
-
-  const { data } = useQuery({
-    queryKey: ["blogSidebarData"],
-    queryFn: () => getSibarBlogdata().then((res) => res?.data),
-  });
+  const [selectId, setSelectId] = useState(null);
 
   const { data: blogData } = useQuery({
-    queryKey: ["blogDetailData"],
-    queryFn: () => getBlogDetail().then((res) => res?.data?.post),
+    queryKey: ["blogDetailData", id],
+    queryFn: () => getBlogDetail(id).then((res) => res?.node),
   });
 
-  const content = blogData?.acf_post?.component?.[0];
+
 
   const commentData = blogData?.comments?.nodes || [];
 
@@ -44,8 +33,9 @@ const BlogDetail = () => {
         0
       ),
 
-    []
+    [blogData]
   );
+
 
   return (
     <div >
@@ -54,7 +44,7 @@ const BlogDetail = () => {
           hiddenButton={true}
           hiddenBlockquote={false}
           hiddenDescription={false}
-          {...content}
+          {...blogData}
         />
         <div className="mt-[50px]">
           <h4 className="mb-[30px] text-2xl text-dark-color font-semibold font-poppins">

@@ -11,7 +11,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const client = new QueryClient();
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={client}>

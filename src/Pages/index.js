@@ -11,7 +11,8 @@ export { default as Blog } from './Blog'
 export { default as BlogList } from './Blog/BlogList'
 export { default as BlogDetail } from './Blog/BlogDetail'
 export { default as Account } from './Account'
-export { default as Auth } from './Auth'
 export { default as CateDetail } from './CateDetail'
+export { default as Auth } from './Account/Auth/'
+export { default as ResetPassword } from './Account/ResetPassword'
 
 

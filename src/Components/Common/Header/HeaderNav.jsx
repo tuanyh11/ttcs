@@ -7,6 +7,7 @@ import Container from "../Container/Container";
 import Row from "../Row/Row";
 // import "./header.css";
 import { getHeaderData } from "../../../api/index";
+import { useCartStore } from "../../store";
 
 // lg, md, sm, xs display
 
@@ -44,6 +45,9 @@ const HeaderNav = () => {
 
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const {length} = useCartStore()
+
 
   return (
     <div
@@ -116,10 +120,13 @@ const HeaderNav = () => {
               </button>
             </div>
             <div className="mr-[10px] ml-[30px]">
-              <Link to={"/cart"} className="relative">
+              <Link to={"/my-account"} className="relative">
+                <i className="fa-solid fa-user"></i>
+              </Link>
+              <Link to={"/cart"} className="relative ml-5">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <span className="absolute text-[11px] rounded-full min-w-[16px] h-4 text-center bg-main-color leading-4 text-white  top-[-5px] right-[-13px]">
-                  0
+                  {length()}
                 </span>
               </Link>
             </div>
@@ -145,16 +152,16 @@ const HeaderNav = () => {
 };
 
 function ResHeaderNav({ onSetOpen, data, isOpen }) {
-  const [slectedPage, setSlectedPage] = useState([]);
+  const [selectedPage, setSelectedPage] = useState([]);
 
   const handleOnSelect = (e, id) => {
     e.preventDefault();
 
-    if (slectedPage.includes(id)) {
-      setSlectedPage(slectedPage.filter((item) => item !== id));
+    if (selectedPage.includes(id)) {
+      setSelectedPage(selectedPage.filter((item) => item !== id));
       return;
     }
-    setSlectedPage([...slectedPage, id]);
+    setSelectedPage([...selectedPage, id]);
   };
 
   return (
@@ -183,7 +190,7 @@ function ResHeaderNav({ onSetOpen, data, isOpen }) {
               <div key={nav?.databaseId} className="border-b last:border-none ">
                 <Link
                   className="text-[16px] block  relative justify-between font-poppins py-[13px] px-[26px]  font-semibold text-dark-color uppercase leading-[27px]"
-                  // onClick={() => setSlectedPage(nav?.databaseId)}
+                  // onClick={() => setSelectedPage(nav?.databaseId)}
                   to={`/${slug}`}
                 >
                   {nav?.label}
@@ -198,7 +205,9 @@ function ResHeaderNav({ onSetOpen, data, isOpen }) {
                 {isHasChildren && (
                   <div
                     className={`${
-                      slectedPage.includes(nav?.databaseId) ? "block" : "hidden"
+                      selectedPage.includes(nav?.databaseId)
+                        ? "block"
+                        : "hidden"
                     }`}
                   >
                     {children?.map((child) => {

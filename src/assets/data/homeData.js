@@ -7,7 +7,7 @@ const data = {
             fieldGroupName: "Page_Acf_Component_Banner",
             image: {
               mediaItemUrl:
-                "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/hero-bg-1.webp",
+                "https://klbtheme.com/chakta/wp-content/uploads/2021/01/hero-bg-1.jpg",
             },
             contentBanner: {
               description: null,
@@ -24,8 +24,9 @@ const data = {
                 content: "<p>Modern Auto Wheel Up To 25% Offer</p>\n",
                 title: "25% big offer",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/of-bg-1.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
+                    Math.floor(Math.random() * 4) + 1
+                  }.jpg`,
                 },
                 button: {
                   titleButton: null,
@@ -35,8 +36,9 @@ const data = {
                 content: "<p>BMW i880s Model Best Remote Control Car</p>\n",
                 title: "flash sale (15%)",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/of-bg-2.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
+                    Math.floor(Math.random() * 4) + 1
+                  }.jpg`,
                 },
                 button: {
                   titleButton: null,
@@ -46,8 +48,9 @@ const data = {
                 content: "<p>Hobbypark 5x10x4mm Ball Bearings RC Car</p>\n",
                 title: "New arrival",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/of-bg-3.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
+                    Math.floor(Math.random() * 4) + 1
+                  }.jpg`,
                 },
                 button: {
                   titleButton: null,
@@ -57,8 +60,9 @@ const data = {
                 content: "<p>OEM ODM Customized High Precision CNC</p>\n",
                 title: "30% big offer",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/of-bg-4.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
+                    Math.floor(Math.random() * 4) + 1
+                  }.jpg`,
                 },
                 button: {
                   titleButton: null,
@@ -76,7 +80,7 @@ const data = {
               {
                 image: {
                   mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/newsletter-bg.jpg",
+                    "https://klbtheme.com/chakta/wp-content/plugins/chakta-core/elementor/images/newsletter-bg.jpg",
                 },
               },
             ],
@@ -88,43 +92,55 @@ const data = {
             fieldGroupName: "Page_Acf_Component_Quote",
             contentQuote: [
               {
+                id: new Date().getTime() * Math.random(),
+                rating: Math.floor(Math.random() * 5),
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "Daisy Lana",
                 position: "Web Designer",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/thumb-3.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
+                    Math.floor(Math.random() * 3) + 1
+                  }.jpg`,
                 },
               },
               {
+                id: new Date().getTime() * Math.random(),
+                rating: Math.floor(Math.random() * 5),
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "Oliver Greenwood",
                 position: "Computer Engineer",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/thumb-2.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
+                    Math.floor(Math.random() * 3) + 1
+                  }.jpg`,
                 },
               },
               {
+                id: new Date().getTime() * Math.random(),
+                rating: Math.floor(Math.random() * 5),
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "David Warner",
                 position: "Business Manager",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/thumb-1.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
+                    Math.floor(Math.random() * 3) + 1
+                  }.jpg`,
                 },
               },
               {
+                id: new Date().getTime() * Math.random(),
+                rating: Math.floor(Math.random() * 5),
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "Alden Smith",
                 position: "Designer",
                 image: {
-                  mediaItemUrl:
-                    "http://localhost/WPClickReactjs/wp-content/uploads/2023/02/thumb-1.webp",
+                  mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
+                    Math.floor(Math.random() * 3) + 1
+                  }.jpg`,
                 },
               },
             ],
@@ -147,5 +163,4 @@ const data = {
   },
 };
 
-
-export default data
+export default data;

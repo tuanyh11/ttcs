@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
-import { BreadCrumb, Col, Footer, Header, Row } from "./Components";
+import { Col, Footer, Header, Row } from "./Components";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import routeData from "./Routes";
 
@@ -28,25 +28,40 @@ function App() {
   const Children = useMemo(() => {
     return (
       <>
-        <Header />
+          <Header />
 
-        <Routes>
-          <Route  path={'/'} element={<Navigate to={'/home'} />} />
-          {routeData.map(({ path, component: Component, childrens }, index) => {
-
-            if(childrens.length > 0 ) {
-              return <Route key={index} path={path} element={<Component/>} >
-                {
-                  childrens.map(({ path, component: ComponentChil, childrens, index }, i) => {
-                    return <Route key={i} index={index} path={path} element={<ComponentChil />} />;
-                  })
+          <Routes>
+            <Route path={"/"} element={<Navigate to={"/home"} />} />
+            {routeData.map(
+              ({ path, component: Component, children }, index) => {
+                if (children.length > 0) {
+                  return (
+                    <Route key={index} path={path} element={<Component />}>
+                      {children.map(
+                        (
+                          { path, component: ComponentChil, children, index },
+                          i
+                        ) => {
+                          return (
+                            <Route
+                              key={i}
+                              index={index}
+                              path={path}
+                              element={<ComponentChil />}
+                            />
+                          );
+                        }
+                      )}
+                    </Route>
+                  );
                 }
-              </Route>
-            }
-            return <Route key={index} path={path} element={<Component />} />;
-          })}
-        </Routes>
-        <Footer />
+                return (
+                  <Route key={index} path={path} element={<Component />} />
+                );
+              }
+            )}
+          </Routes>
+          <Footer />
       </>
     );
   }, []);
@@ -70,7 +85,9 @@ function App() {
           <Col className={"w-3/12"}>
             <div className="py-5 relative">
               <Link to={"/cart"} className="fa-solid fa-cart-shopping"></Link>
-              <span className="w-[18px] h-[18px] text-white text-[10px] rounded-full bg-main-color block text-center leading-[18px] absolute z-10 top-1/2 -translate-y-full -translate-x-1/2 right-0">1</span>
+              <span className="w-[18px] h-[18px] text-white text-[10px] rounded-full bg-main-color block text-center leading-[18px] absolute z-10 top-1/2 -translate-y-full -translate-x-1/2 right-0">
+                1
+              </span>
             </div>
           </Col>
           <Col className={"w-3/12"}>

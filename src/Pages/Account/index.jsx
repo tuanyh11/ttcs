@@ -1,22 +1,17 @@
 import React from 'react'
-import { BreadCrumb, BreadcrumbPath, Col, Row } from '../../Components'
-import SinginForm from './SignIn/SinginForm'
-import SignOut from './SignOut/SignOut'
+import { Outlet } from 'react-router'
+import { BreadCrumb } from '../../Components'
 
 const Account = () => {
+
+
+
   return (
     <div>
-      <BreadcrumbPath pathname={'My account'} />
+      <BreadCrumb  label="My Account" />
       <div className='py-20'>
         <div className='max-w-[1200px] ml-auto mr-auto relative px-[15px]'>
-          <Row>
-            <Col className={'md:w-1/2 w-full'}>
-              <SinginForm />
-            </Col>
-            <Col className={'md:w-1/2 w-full md:mt-0 mt-[30px]'}>
-              <SignOut />
-            </Col>
-          </Row>
+          <Outlet/>
         </div>
       </div>
     </div>

@@ -1,44 +1,69 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { getBestSellingProducts, getExclusiveProducts, getHomepageData, getLatestBlog } from "../../api";
 import Banner from "./Content/Banner";
 import BestSelling from "./Content/BestSelling";
 import Brand from "./Content/Brand";
 import Exclusive from "./Content/Exclusive";
 import Hero from "./Content/Hero";
-import LastestBlog from "./Content/LastestBlog";
+import LatestBlog from "./Content/LatestBlog";
 import Review from "./Content/Review";
 import Subscribe from "./Content/Subscribe";
 
 const Home = () => {
 
+  const {data} = useQuery({
+    queryKey: ['homeData'],
+    queryFn:  () => Promise.all([
+       getHomepageData().then((res) => res?.data?.page?.acf?.component),
+       getExclusiveProducts().then((res) => res?.data?.products?.edges),
+       getBestSellingProducts().then((res) => res?.data?.products?.edges),
+       getLatestBlog(3).then((res) => res)
+    ]).then(([sectionData, exclusiveProduct, bestSellingProduct, latestBlog]) => {
+      return { sectionData, exclusiveProduct, bestSellingProduct, latestBlog };
+    })
+  })
+
+  const sectionData  = data?.sectionData
+  const exclusiveProduct  = data?.exclusiveProduct
+  const bestSellingProduct = data?.bestSellingProduct
+  const latestBlog = data?.latestBlog
+
+  const sectionOne = sectionData?.find(data => data?.fieldGroupName === 'Page_Acf_Component_Banner')
+  const sectionTwo = sectionData?.find(data => data?.fieldGroupName === 'Page_Acf_Component_ImageWithTextCol')
+  const subscribeData = sectionData?.find(data => data?.fieldGroupName === 'Page_Acf_Component_ImageWithText')
+  const quoteData = sectionData?.find(data => data?.fieldGroupName === 'Page_Acf_Component_Quote')
+
+
 
   return (
     <div>
       <section>
-        <Hero />
+        <Hero data={sectionOne} />
       </section>
 
       <section>
-        <Banner/>
+        <Banner data={sectionTwo}/>
       </section>
 
       <section>
-        <Exclusive/>
+        <Exclusive data={exclusiveProduct} />
       </section>
 
       <section>
-        <Subscribe/>
+        <Subscribe data={subscribeData}/>
       </section>
 
       <section>
-        <BestSelling/>
+        <BestSelling data={bestSellingProduct}/>
       </section>
 
       <section>
-        <Review/>
+        <Review data={quoteData}/>
       </section>
 
       <section>
-        <LastestBlog/>
+        <LatestBlog data={latestBlog}/>
       </section>
 
       <section>

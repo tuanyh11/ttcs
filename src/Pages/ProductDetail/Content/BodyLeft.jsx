@@ -3,19 +3,12 @@ import Slider from "react-slick";
 import { NextButton, PreButton } from "../../../Components";
 import { fakeData } from "../../../utils";
 
-const images = fakeData(5, (i) => {
-  return {
-    url: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-${
-      i + 1
-    }-600x600.jpg`,
-  };
-});
 
 
-const BodyLeft = () => {
+const BodyLeft = ({featuredImage, galleryImages}) => {
   const slider1 = useRef(null);
   const slider2 = useRef(null);
-  
+
   const settings1 = {
     dots: false,
     arrows: false,
@@ -46,14 +39,13 @@ const BodyLeft = () => {
   return (
     <div>
       <Slider {...settings1} ref={slider1}>
-        {images.map((image, index) => {
-          console.log(image);
+        {galleryImages?.map((image) => {
 
           return (
-            <div key={index} className="">
+            <div key={image?.id} className="">
               <img
                 className="w-full p-2 bg-white border border-[#ddd] outline-none overflow-hidden"
-                src={image.url}
+                src={image?.mediaItemUrl}
                 alt=""
               />
             </div>
@@ -66,13 +58,13 @@ const BodyLeft = () => {
         ref={slider2}
         className="-mx-[3px] product-detail-slider"
       >
-        {images.map((image, index) => {
+        {galleryImages?.map((image) => {
           return (
-            <div key={index}>
+            <div key={image?.id}>
               <div className=" w-full px-1">
                 <img
                   className="w-full p-2 bg-white border border-[#ddd] outline-none overflow-hidden"
-                  src={image.url}
+                  src={image?.mediaItemUrl}
                   alt=""
                 />
               </div>

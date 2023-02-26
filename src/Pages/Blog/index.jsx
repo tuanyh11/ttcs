@@ -3,35 +3,29 @@ import { BreadCrumb } from "../../Components";
 import { Col, Container, Row } from "../../Components";
 import Sidebar from "./Sidebar";
 import { useBlogContext } from "../../hooks";
-import { getSibarBlogdata } from "../../api";
+import { getSideBarBlogData } from "../../api";
 import { Outlet } from "react-router-dom";
+import { useQuery } from "react-query";
 
 const Blog = () => {
   const { Provider } = useBlogContext();
 
-  const [sidebarData, setSidebarData] = useState({});
 
-  const getData = async () => {
-    try {
-      const res = await getSibarBlogdata();
-      setSidebarData(res.data);
-    } catch (error) {}
-  };
+  const  {data} = useQuery({
+    queryKey: ['blogCategory'],
+    queryFn: () => getSideBarBlogData().then(res => res.data)
+  });
 
-  useEffect(() => {
-    getData();
-  }, []);
 
-  console.log(sidebarData);
+  
 
   return (
     <div>
-      <BreadCrumb />
+      <BreadCrumb label={"Blog Posts"} />
       <div className="py-[80px]">
         <Provider value={
           {
-          ...sidebarData,
-
+          ...data,
           }
         }>
           <Container>

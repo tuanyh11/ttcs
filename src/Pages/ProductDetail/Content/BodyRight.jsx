@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ButtonV1 from "../../../Components/Common/Button/Button";
+import { useCartStore } from "../../../Components/store";
 import { useProductDetailContext } from "../../../hooks";
 import { generateStart } from "../../../utils";
 
@@ -20,6 +21,8 @@ const BodyRight = () => {
   };
 
   const {state: data} = useProductDetailContext()
+
+  const {addItemWithQuantity} = useCartStore()
 
   return (
     <div>
@@ -94,7 +97,7 @@ const BodyRight = () => {
               className="fa-solid fa-plus w-[50px] h-[50px] border"
             ></button>
             <div className="ml-3">
-              <ButtonV1 label={"ADD TO CART"} />
+              <ButtonV1 onClick={() => addItemWithQuantity({...data, quantity: value})} label={"ADD TO CART"} />
             </div>
           </div>
         </div>

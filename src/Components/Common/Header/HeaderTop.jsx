@@ -51,7 +51,7 @@ const HeaderTop = () => {
                     <i className="fa-solid fa-chevron-down text-[10px] -translate-y-[2px] pl-1 cursor-default"></i>
                   </div>
                   <ul className="absolute top-full left-0 bg-[#111] z-[999] shadow-[0_0_0_1px_rgb(68_68_68_/_11%)] hidden group-hover:block">
-                    {langues.map((lang) => (
+                    {langues?.map((lang) => (
                       <li key={lang.id} className="leading-[35px] px-[18px] ">
                         {lang.name}
                       </li>
@@ -65,7 +65,7 @@ const HeaderTop = () => {
                   </div>
 
                   <ul className="absolute top-full left-0 bg-[#111] z-[999] shadow-[0_0_0_1px_rgb(68_68_68_/_11%)] hidden group-hover:block">
-                    {currencies.map((item) => (
+                    {currencies?.map((item) => (
                       <li key={item.id} className="leading-[35px] px-[18px]">
                         {item.name}
                       </li>

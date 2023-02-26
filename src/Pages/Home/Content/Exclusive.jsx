@@ -1,24 +1,10 @@
 import React from "react";
-import { fakeData } from "../../../assets/data";
 import { ButtonArrow, Col, Container, ProductCardGridV2, Row } from "../../../Components";
 
-const exclusiveProducts = fakeData(8, (i) => {
-    return {
-      rating: Math.floor(Math.random() * 5) + 1,
-      title: `Titanium Wheel Cover ${i}`,
-      name: `Product Name ${i}`,
-      description: `Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolorem udantium, totam rem aperiam, eaque ipsa quae abventore ${i}`,
-      price: 99.99,
-      isOnSale: true,
-      salePrice: 79.99,
-      image:
-        "https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-1.jpg",
-      categories: [].push(i),
-    };
-  });
+
   
 
-const Exclusive = () => {
+const Exclusive = ({data}) => {
   return (
     <div>
       <div className="pb-20">
@@ -36,11 +22,12 @@ const Exclusive = () => {
           </div>
           <div>
             <Row>
-              {exclusiveProducts.map((product, i) => {
+              {data?.map((product, i) => {
+                
                 return (
                   <Col key={i} className="w-full md:w-6/12 lg:w-3/12">
                     <div className="mb-[35px]">
-                      <ProductCardGridV2 {...product} />
+                      <ProductCardGridV2 {...product?.node} />
                     </div>
                   </Col>
                 );

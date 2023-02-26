@@ -1,22 +1,23 @@
 import { Button } from "bootstrap";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useQuickView } from "../../../hooks";
+import { Link, useNavigate } from "react-router-dom";
+import { generateStart } from "../../../utils";
 import ButtonV1 from "../../Common/Button/Button";
 import Col from "../../Common/Col/Col";
 import Row from "../../Common/Row/Row";
+import { useCartStore } from "../../store";
 
 const QuickView = ({
   onQuickViewClick = () => {},
-  image,
-  name,
-  description,
-  id,
-  salePrice,
-  regularPrice = 0,
-  slug,
-  averageRating,
-  stars
+    featuredImage,
+    name,
+    description,
+    id,
+    salePrice,
+    regularPrice,
+    slug,
+    averageRating = 0,
+    shortDescription
 }) => {
   const [value, setValue] = useState(1);
 
@@ -32,7 +33,29 @@ const QuickView = ({
     setValue(event.target.value);
   };
 
+  const image = featuredImage?.node?.mediaItemUrl
 
+  const stars = generateStart(averageRating)
+
+  const {addItemWithQuantity} = useCartStore()
+
+  const nav = useNavigate()
+
+  const handleOnAddCart = () => {
+    addItemWithQuantity({
+      featuredImage,
+      name,
+      description,
+      id,
+      salePrice,
+      regularPrice,
+      slug,
+      averageRating,
+      shortDescription,
+      quantity: value
+    })
+    nav(`/product/${id}`)
+  }
 
   return (
     <div>
@@ -72,14 +95,14 @@ const QuickView = ({
 
                   <p className=" my-4 font-poppins font-semibold ">
                     <del className="text-[#696969] text-sm mr-1 ">
-                      ${salePrice}
+                      {salePrice}
                     </del>
                     <span className="text-main-color text-[19px] ">
-                      ${regularPrice}
+                      {regularPrice}
                     </span>
                   </p>
                   <div className="leading-[0.8] mb-[15px]">{stars}</div>
-                  <p className="">{description}</p>
+                  <div dangerouslySetInnerHTML={{__html: shortDescription}}>{}</div>
 
                   <div className="my-5">
                     <span className="">In Stock</span>
@@ -95,7 +118,7 @@ const QuickView = ({
                       />
                       <button onClick={() => setValue(value + 1)} className="fa-solid fa-plus w-[50px] h-[50px] border"></button>
                       <div className="ml-3">
-                        <ButtonV1 label={"ADD TO CART"} />
+                        <ButtonV1 onClick={() => handleOnAddCart()} label={"ADD TO CART"} />
                       </div>
                     </div>
                   </div>
