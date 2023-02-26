@@ -15,6 +15,14 @@ const product = {
                     name: "Tire Parts",
                   },
                 },
+                {
+                  node: {
+                    databaseId: 137,
+                    count: null,
+                    name: "Brake Discs",
+                    slug: "brake-discs",
+                  },
+                },
               ],
             },
             act_product: {

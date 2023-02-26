@@ -10,7 +10,7 @@ const Breadcrumb = ({ image, label }) => {
         }}
       >
         <h3 className="text-center text-white relative z-50 pb-[10px] text-[32px] md:text-4xl lg:text-[40px] xl:text-[60px] font-[600] font-poppins leading-[1.2] ">
-          Blog Post{" "}
+          {label}
         </h3>
       </div>
     </div>

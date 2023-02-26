@@ -41,3 +41,25 @@ export  function randomDateInCurrentMonth() {
 
   return new Date(randomTime);
 }
+
+export function sortProduct(products, sortBy) {
+  if(sortBy === 'averageRating') {
+    return products?.data?.sort((a, b) => {
+      return Number(b?.node?.averageRating) - Number(a?.node?.averageRating)
+    })
+  }
+
+  if(sortBy === 'priceHigh') {
+    return products?.data?.sort((a, b) => {
+      return Number(a?.node?.regularPrice?.substring(1)) - Number(b?.node?.regularPrice?.substring(1))
+    })
+  }
+
+  if(sortBy === 'priceLow') {
+    return products?.data?.sort((a, b) => {
+      return Number(b?.node?.regularPrice?.substring(1)) - Number(a?.node?.regularPrice?.substring(1))
+    })
+  }
+
+  return products?.data
+}

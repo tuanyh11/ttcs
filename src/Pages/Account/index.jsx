@@ -1,6 +1,6 @@
 import React from 'react'
 import { BreadCrumb, BreadcrumbPath, Col, Row } from '../../Components'
-import SinginForm from './SignIn/SinginForm'
+import SingIn from './SignIn/SignIn'
 import SignOut from './SignOut/SignOut'
 
 const Account = () => {
@@ -11,7 +11,7 @@ const Account = () => {
         <div className='max-w-[1200px] ml-auto mr-auto relative px-[15px]'>
           <Row>
             <Col className={'md:w-1/2 w-full'}>
-              <SinginForm />
+              <SingIn />
             </Col>
             <Col className={'md:w-1/2 w-full md:mt-0 mt-[30px]'}>
               <SignOut />

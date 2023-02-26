@@ -72,6 +72,13 @@ body {
     @apply !opacity-100 visible !right-4
   }
 
+  .filter-price .range-slider__thumb {
+    @apply bg-main-color w-4 h-4
+  }
+
+  .filter-price .range-slider__range {
+    @apply bg-main-color 
+  }
 
 }
 

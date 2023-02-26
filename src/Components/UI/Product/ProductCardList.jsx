@@ -95,8 +95,8 @@ const ProductCard = ({
             </Link>
 
             <p className=" mb-[5px]">
-              <del className="text-[#696969] text-sm mr-1">${salePrice}</del>
-              <span className="text-main-color ">${regularPrice}</span>
+              <del className="text-[#696969] text-sm mr-1">{salePrice}</del>
+              <span className="text-main-color ">{regularPrice}</span>
             </p>
 
             <div dangerouslySetInnerHTML={{__html: shortDescription}} className=" line-clamp-3 pb-4">{}</div>

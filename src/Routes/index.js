@@ -13,6 +13,7 @@ import {
   CateDetail,
   Cart,
   Wishlist,
+  ResetPassword,
 } from "../Pages";
 
 export default [
@@ -21,35 +22,35 @@ export default [
     name: "home",
     component: Home,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/about",
     name: "about",
     component: About,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/shop",
     name: "shop",
     component: Shop,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/Categories",
     name: "Categories",
     component: Cate,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/blog",
     name: "blog",
     component: Blog,
     index: false,
-    childrens: [
+    children: [
       {
         path: "/blog",
         name: "blog",
@@ -61,7 +62,7 @@ export default [
         name: "blog",
         component: BlogDetail,
         index: false,
-        childrens: [],
+        children: [],
       },
     ],
   },
@@ -71,52 +72,59 @@ export default [
     name: "contact us",
     component: Contact,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/wishlist",
     name: "wish list",
     component: Wishlist,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/checkout",
     component: Checkout,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/categories",
     component: Cate,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
-    path: "/account",
+    path: "/my-account",
     component: Account,
     index: false,
-    childrens: [],
+    children: [
+      
+      {
+        path: "lost-password",
+        component: ResetPassword,
+        index: false,
+      }
+    ],
   },
   {
     path: "/product/:id",
 
     component: ProductDetail,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/categories/:slug",
     name: "categories",
     component: CateDetail,
     index: false,
-    childrens: [],
+    children: [],
   },
   {
     path: "/cart",
     name: "cart",
     component: Cart,
     index: false,
-    childrens: [],
+    children: [],
   },
 ];

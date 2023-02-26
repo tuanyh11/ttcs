@@ -1,38 +1,43 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { getProducts } from "../../../api";
+import { getProductByCategory, getProducts } from "../../../api";
 import { fakeData } from "../../../assets/data";
 import {
-  Button,
   Col,
   Pagination,
   ProductCardGrid,
   ProductCardList,
-  QuickView,
   Row,
 } from "../../../Components";
+import Spinning from "../../../Components/Common/Spinning/Spinning";
 import { useShopContext } from "../../../hooks";
-
+import { sortProduct } from "../../../utils";
 
 const sortDatatypes = [
   {
     name: "Sort by popularity",
+    slug: "popularity",
   },
   {
     name: "Sort by average rating",
+    slug: "averageRating",
   },
   {
-    name: "Sort by lastest",
+    name: "Sort by latest",
+    slug: "Latest"
   },
   {
     name: "Numerical",
+    slug: "numerical"
   },
   {
     name: "Sort by price: Low to High",
+    slug: "priceHigh"
   },
   {
     name: "Sort by price: High to Low",
+    slug: "priceLow"
   },
 ];
 
@@ -47,138 +52,167 @@ const Content = () => {
     sortDatatypes[0]
   );
 
-  const [quickView, setQuickView] = useState(null);
-
   const [offset, setOffset] = useState({
     start: 0,
     end: 10,
   });
 
-  const {data: products} = useQuery({
-    queryKey: ['productList'],
-    queryFn: () => getProducts().then(res => res)
-  })
+  const [selectedFilter, setSelectedFilter] = useState()
+
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["productList", filter],
+    queryFn: () => {
+      if (filter?.category?.length > 0 || filter?.price?.length > 0)
+        return getProductByCategory({...filter, selectedFilter}).then((res) => res);
+
+      return getProducts().then((res) => res);
+    },
+  });
+
+  const categories = filter?.category
+
+  const showProducts = selectedFilter ? (
+    sortProduct(products, selectedFilter?.slug)
+  ) : products?.data
+
+  console.log(showProducts)
+
+
+  if (isLoading)
+    return (
+      <div className="relative h-full">
+        <div className="absolute top-0 left-1/2 ">
+          <Spinning />
+        </div>
+      </div>
+    );
 
 
   return (
     <div>
-      {quickView && (
-        <QuickView {...quickView} onQuickViewClick={() => setQuickView(null)} />
-      )}
-
-      {
-        <ul>
-          {filter?.category?.map((item, index) => {
-            return (
-              <li
-                className="relative mb-2 inline-block mr-[10px] text-[#555555] cursor-pointer hover:after:rotate-0 hover:before:rotate-0 after:transition-all before:transition-all after:duration-300 before:duration-300 after:w-[10px] after:absolute after:left-0 after:bg-black after:rotate-45 after:top-[14px] after:h-[2px]     before:w-[10px] before:absolute before:left-0 before:bg-black before:-rotate-45 before:top-[14px] before:h-[2px] pl-4  "
-                key={index}
-                onClick={() => handleOnRemoveCate(item)}
-              >
-                {item.name}
-              </li>
-            );
-          })}
-
-          {filter?.status?.map((item, index) => {
-            return (
-              <li
-                className="relative mb-2 inline-block mr-[10px] text-[#555555] cursor-pointer hover:after:rotate-0 hover:before:rotate-0 after:transition-all before:transition-all after:duration-300 before:duration-300 after:w-[10px] after:absolute after:left-0 after:bg-black after:rotate-45 after:top-[14px] after:h-[2px]     before:w-[10px] before:absolute before:left-0 before:bg-black before:-rotate-45 before:top-[14px] before:h-[2px] pl-4  "
-                key={index}
-                onClick={() => handleOnRemoveStatus(item)}
-              >
-                {item.name}
-              </li>
-            );
-          })}
-        </ul>
-      }
-
-      <div className="flex items-center justify-between mb-[30px]">
-        <div className="hidden md:block">
-          <button
-            onClick={() => setFeatured("grid")}
-            className={`border fa-solid fa-grip-vertical w-[50px] h-[50px]  ${
-              featured === "grid" ? "bg-main-color  text-white" : "bg-white"
-            } mr-[5px]`}
-          ></button>
-          <button
-            onClick={() => setFeatured("list")}
-            className={`border fa-solid fa-list w-[50px] h-[50px] ${
-              featured === "list" ? "bg-main-color  text-white" : "bg-white"
-            } `}
-          ></button>
-        </div>
-
-        <div className="flex-1 md:flex-grow-0 md:flex-shrink-0 ">
-          {Selector(sortDatatypesFilter, setSortDatatypesFilter)}
-        </div>
-      </div>
-
-      {/* Card gird product */}
-      {featured === "grid" ? (
-        <div>
-          <Row className="flex flex-wrap">
-            {products?.data?.map((item, index) => {
-              const product = item?.node
+      {showProducts.length === 0 ? (
+          <span className="text-lg" >Not found Products</span>
+      ) : 
+      
+      <>
+        {
+          <ul>
+            {categories?.map((item, index) => {
               return (
-                <Col key={index} className=" w-full md:w-6/12 lg:w-4/12">
-                  <div className="mb-[30px] ">
-                    <ProductCardGrid
-                      {...product}
-                      onQuickView={(data) => setQuickView(data)}
-                    />
-                  </div>
-                </Col>
+                <li
+                  className="relative mb-2 inline-block mr-[10px] text-[#555555] cursor-pointer hover:after:rotate-0 hover:before:rotate-0 after:transition-all before:transition-all after:duration-300 before:duration-300 after:w-[10px] after:absolute after:left-0 after:bg-black after:rotate-45 after:top-[14px] after:h-[2px]     before:w-[10px] before:absolute before:left-0 before:bg-black before:-rotate-45 before:top-[14px] before:h-[2px] pl-4  "
+                  key={index}
+                  onClick={() => handleOnRemoveCate(item)}
+                >
+                  {item.name}
+                </li>
               );
             })}
-          </Row>
-        </div>
-      ) : null}
 
-      {/* Card List Product */}
-
-      {featured === "list" ? (
-        <div>
-          <Row className="flex flex-wrap">
-            {products?.data?.map((item, index) => {
-              const product = item?.node
-              console.log(product)
+            {filter?.status?.map((item, index) => {
               return (
-                <Col key={index} className=" w-full">
-                  <div className="mb-[30px]">
-                    <ProductCardList
-                      {...product}
-                      onQuickView={(data) => setQuickView(data)}
-                    />
-                  </div>
-                </Col>
+                <li
+                  className="relative mb-2 inline-block mr-[10px] text-[#555555] cursor-pointer hover:after:rotate-0 hover:before:rotate-0 after:transition-all before:transition-all after:duration-300 before:duration-300 after:w-[10px] after:absolute after:left-0 after:bg-black after:rotate-45 after:top-[14px] after:h-[2px]     before:w-[10px] before:absolute before:left-0 before:bg-black before:-rotate-45 before:top-[14px] before:h-[2px] pl-4  "
+                  key={index}
+                  onClick={() => handleOnRemoveStatus(item)}
+                >
+                  {item.name}
+                </li>
               );
             })}
-          </Row>
-        </div>
-      ) : null}
+          </ul>
+        }
 
-      <div >
-        <Pagination
-          items={products?.totalLength}
-          itemToShow={12}
-          getOffset={(start, end) =>
-            setOffset({
-              start,
-              end,
-            })
-          }
-        />
-      </div>
+        <div className="flex items-center justify-between mb-[30px]">
+          <div className="hidden md:block">
+            <button
+              onClick={() => setFeatured("grid")}
+              className={`border fa-solid fa-grip-vertical w-[50px] h-[50px]  ${
+                featured === "grid" ? "bg-main-color  text-white" : "bg-white"
+              } mr-[5px]`}
+            ></button>
+            <button
+              onClick={() => setFeatured("list")}
+              className={`border fa-solid fa-list w-[50px] h-[50px] ${
+                featured === "list" ? "bg-main-color  text-white" : "bg-white"
+              } `}
+            ></button>
+          </div>
+
+          <div className="flex-1 md:flex-grow-0 md:flex-shrink-0 ">
+            <Selector
+              onSelect={(item) => setSelectedFilter(item)}
+              sortDatatypesFilter={sortDatatypesFilter}
+              setSortDatatypesFilter={setSortDatatypesFilter}
+            />
+          </div>
+        </div>
+
+        {/* Card gird product */}
+        {featured === "grid" ? (
+          <div>
+            <Row className="flex flex-wrap">
+              {showProducts?.map((item, index) => {
+                const product = item?.node;
+                return (
+                  <Col key={index} className=" w-full md:w-6/12 lg:w-4/12">
+                    <div className="mb-[30px] ">
+                      <ProductCardGrid
+                        {...product}
+                        onQuickView={(data) => setQuickView(data)}
+                      />
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
+          </div>
+        ) : null}
+
+        {/* Card List Product */}
+
+        {featured === "list" ? (
+          <div>
+            <Row className="flex flex-wrap">
+              {products?.data?.map((item, index) => {
+                const product = item?.node;
+                console.log(product);
+                return (
+                  <Col key={index} className=" w-full">
+                    <div className="mb-[30px]">
+                      <ProductCardList
+                        {...product}
+                        onQuickView={(data) => setQuickView(data)}
+                      />
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
+          </div>
+        ) : null}
+
+        <div>
+          <Pagination
+            items={showProducts?.totalLength}
+            itemToShow={12}
+            getOffset={(start, end) =>
+              setOffset({
+                start,
+                end,
+              })
+            }
+          />
+        </div>
+      </>
+    }
     </div>
   );
 };
 
 export default Content;
 
-function Selector(sortDatatypesFilter, setSortDatatypesFilter) {
-
+function Selector({ sortDatatypesFilter, setSortDatatypesFilter, onSelect = () => {} }) {
   const [isOpening, setIsOpening] = useState(false);
 
   const selectRef = useRef(null);
@@ -186,46 +220,53 @@ function Selector(sortDatatypesFilter, setSortDatatypesFilter) {
   useEffect(() => {
     function handleClickOutside(event) {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
-        setIsOpening(false)
-
+        setIsOpening(false);
       }
     }
 
     function handleClickInside(event) {
       if (selectRef.current && selectRef.current.contains(event.target)) {
-        setIsOpening(pre => !pre)
+        setIsOpening((pre) => !pre);
       }
     }
 
     document.addEventListener("click", handleClickOutside);
     document.addEventListener("click", handleClickInside);
-    
+
     return () => {
       document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("click", handleClickInside);
     };
   }, [selectRef]);
 
-  return <div    ref={selectRef} className=" relative">
-    <div className="block relative p-2.5 h-[50px] px-5 border border-[#111] outline-none w-full md:w-[250px]">
-      {sortDatatypesFilter?.name}
-      <i className="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs"></i>
-    </div>
-    {isOpening && (
-      <ul className=" absolute z-[9999] top-full bg-white left-0 right-0 bg-[0_0_0_1px_rgb(68_68_68/11%)] border">
-        {sortDatatypes.map((item, index) => (
-          <li
-            onClick={() => setSortDatatypesFilter(item)}
-            className={`h-10 leading-10 pl-[18px] pr-[30px] cursor-pointer ${sortDatatypesFilter.name === item?.name
-                ? "bg-[#f6f6f6] font-semibold"
-                : ""}`}
-            key={index}
-          >
-            {item.name}
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>;
-}
+  const handleOnSelect = (item) => {
+    setSortDatatypesFilter(item)
+    onSelect(item)
+  }
 
+  return (
+    <div ref={selectRef} className=" relative">
+      <div className="block relative cursor-pointer p-2.5 h-[50px] px-5 border border-[#111] outline-none w-full md:w-[250px]">
+        {sortDatatypesFilter?.name}
+        <i className="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs"></i>
+      </div>
+      {isOpening && (
+        <ul className=" absolute z-[9999] top-full bg-white left-0 right-0 bg-[0_0_0_1px_rgb(68_68_68/11%)] border">
+          {sortDatatypes.map((item, index) => (
+            <li
+              onClick={() => handleOnSelect(item)}
+              className={`h-10 leading-10 pl-[18px] pr-[30px] cursor-pointer ${
+                sortDatatypesFilter.name === item?.name
+                  ? "bg-[#f6f6f6] font-semibold"
+                  : ""
+              }`}
+              key={index}
+            >
+              {item.name}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}

@@ -1,12 +1,10 @@
-import React, { createContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
 import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
 
-
-const Shop = ({ categoris }) => {
+const Shop = ({ categories }) => {
   const [filter, setFilter] = useState({
     status: [],
     category: [],
@@ -15,13 +13,14 @@ const Shop = ({ categoris }) => {
   });
 
   const handleOnSelectCate = (category) => {
-    const isExisting = filter.category.find((item) => item.id === category.id);
+    const id = category.databaseId;
+    const isExisting = filter.category.find((item) => item.databaseId === id);
 
     if (isExisting) {
       setFilter({
         ...filter,
         category: [
-          ...filter?.category.filter((item) => item.id !== category.id),
+          ...filter?.category.filter((item) => item.databaseId !== id),
         ],
       });
     } else setFilter({ ...filter, category: [...filter?.category, category] });
@@ -46,15 +45,19 @@ const Shop = ({ categoris }) => {
   };
 
   const handleOnRemoveCate = (category) => {
+    const id = category.databaseId;
     setFilter({
       ...filter,
-      category: [...filter?.category.filter((item) => item.id !== category.id)],
+      category: [...filter?.category.filter((item) => item.databaseId !== id)],
     });
   };
 
+  const handleFilterPrice = (price) => {
+    setFilter({ ...filter, price})
+  }
+
   const { Provider } = useShopContext();
-  const { slug } = useParams();
-  console.log(slug);
+
   return (
     <div>
       <Provider
@@ -65,6 +68,7 @@ const Shop = ({ categoris }) => {
           handleOnSelectStatus,
           handleOnRemoveCate,
           handleOnRemoveStatus,
+          handleFilterPrice
         }}
       >
         <BreadCrumb />
@@ -80,13 +84,13 @@ const Shop = ({ categoris }) => {
                       type="text"
                       className=" h-[50px] border-[1px] pl-5  w-full pr-[84px]  outline-none "
                       placeholder="Search..."
-                    // onChange={handleOnSearch}
+                      // onChange={handleOnSearch}
                     />
                     <button className="absolute top-1/2 right-0 -translate-y-1/2 px-4  ">
                       <i className="fas fa-search"></i>
                     </button>
                   </div>
-                  <Sidebar categoris={categoris} />
+                  <Sidebar categories={categories} />
                 </div>
               </Col>
               <Col className={"w-full lg:w-9/12 order-1 md:order-2"}>

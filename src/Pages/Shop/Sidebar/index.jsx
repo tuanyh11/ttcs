@@ -6,8 +6,20 @@ import Category from "./Category";
 import ProductStatus from "./ProducStatus";
 import Brand from "./Brand";
 import Filter from "./Filter";
+import { useQuery } from "react-query";
+import { getProductCate } from "../../../api";
 
-const Sidebar = ({ categoris }) => {
+const Sidebar = ({ categories }) => {
+
+  
+  const {data} = useQuery({
+    queryKey: ["shop"],
+    queryFn: () =>
+      Promise.all([getProductCate()]).then(([categories]) => ({ categories })),
+  });
+
+  const categoriesData = data?.categories
+
 
   return (
     <div>
@@ -19,14 +31,14 @@ const Sidebar = ({ categoris }) => {
           <Filter />
         </li>
         {
-          categoris == true ? (
+          categories == true ? (
             null
           ) : (
             <li
               className="mb-[30px]"
               style={{ boxShadow: `0 5px 0 rgb(200 200 200 / 20%)` }}
             >
-              <Category />
+              <Category data={categoriesData} />
             </li>
           )
         }

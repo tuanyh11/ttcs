@@ -32,12 +32,14 @@ function App() {
 
         <Routes>
           <Route  path={'/'} element={<Navigate to={'/home'} />} />
-          {routeData.map(({ path, component: Component, childrens }, index) => {
+          {routeData.map(({ path, component: Component, children }, index) => {
 
-            if(childrens.length > 0 ) {
+            if(children.length > 0 ) {
+              console.log(children)
               return <Route key={index} path={path} element={<Component/>} >
+                
                 {
-                  childrens.map(({ path, component: ComponentChil, childrens, index }, i) => {
+                  children.map(({ path, component: ComponentChil, children, index }, i) => {
                     return <Route key={i} index={index} path={path} element={<ComponentChil />} />;
                   })
                 }
