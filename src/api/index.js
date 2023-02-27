@@ -5,7 +5,7 @@ import homeData from "../assets/data/homeData";
 import product from "../assets/data/product";
 import categories from "../assets/data/ListCategory";
 
-
+const products = product.data.products.edges;
 
 export const getHeaderData = async () => {
   return headerData;
@@ -59,7 +59,7 @@ export const getLatestBlog = async (limit = 3) => {
 // start product
 
 export const getProductDetail = async (id) => {
-  return product.data.products.edges.find(product => product.node.id === id)
+  return products.find(product => product.node.id === id)
 }
 
 export const getHomepageData = async () => {
@@ -76,7 +76,7 @@ export const getBestSellingProducts = async () => {
 
 export const getProducts = async (start = 0, end = 12)  => {
   await new Promise(resolve => setTimeout(resolve, 2000));
-  const length = product.data.products.edges.length
+  const length = products.length
   return {
     data: product.data.products.edges.slice(start, end),
     totalLength: length
@@ -90,7 +90,6 @@ export const getProductCate = async (limit) => {
 
 export const getProductByCategory = async (filter, start = 0, end = 12) => {
   await new Promise(resolve => setTimeout(resolve, 2000));
-  const products = product.data.products.edges;
 
   let newProducts = products
   if(filter?.category?.length > 0) {
@@ -118,7 +117,6 @@ export const getProductByCategory = async (filter, start = 0, end = 12) => {
 
 
 export const getRangePriceProduct =  () => {
-  const products = product.data.products.edges;
   let max = 0
   let currency = ''
   products.map(item => {
@@ -132,5 +130,14 @@ export const getRangePriceProduct =  () => {
   }
 }
 // end product
+
+// start header search 
+export const searchProducts = async (text) => {
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  return products.filter(({node: product}) => product.name.toLocaleLowerCase().indexOf(text?.toLocaleLowerCase()) >= 0)
+}
+
+// end header search 
+
 
 

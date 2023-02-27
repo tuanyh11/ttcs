@@ -6,8 +6,6 @@ import currency from "currency.js";
 const CartList = () => {
   const { items } = useCartStore();
 
-  console.log(items);
-
   return (
     <form className="overflow-x-auto">
       <table className="max-w-full bg-transparent w-full border-gray-500">
@@ -38,14 +36,14 @@ const CartList = () => {
             const image = item?.featuredImage?.node?.mediaItemUrl;
             const price = item?.salePrice || item?.regularPrice;
             const priceNumber = currency(price);
-            const subTotal = currency(item.quantity * priceNumber?.intValue, {
-              decimal: ",",
-              precision: 0,
-            }).format();
+            const subTotal = currency(item.quantity * priceNumber?.intValue, {fromCents: true, decimal: "."}).format();
+            const name = item?.name;
+            const id = item?.id;
+
             return (
               <tr>
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
-                  <Link to={`/product/${item?.id}`}>
+                  <Link to={`/product/${name}`} state={{id}}>
                     <img
                       src={image}
                       alt=""
@@ -54,7 +52,7 @@ const CartList = () => {
                   </Link>
                 </td>
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
-                  <Link to={`/product/${item?.id}`}>{item?.name}</Link>
+                  <Link to={`/product/${name}`} state={{id}}>{item?.name}</Link>
                 </td>
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
                   {price}

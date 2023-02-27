@@ -77,7 +77,7 @@ const ProductCard = ({
       <Row className="group ">
         <Col className="w-full lg:w-4/12">
           <div className=" relative">
-            <Link to={`/product/${id}`}>
+            <Link to={`/product/${name}`} state={{id}}>
               <img src={ image} alt="" className="w-full h-full" />
               {saleInfo && (
                 <span className=" absolute z-[70] text-white bg-main-color translate-x-4 px-[7px] py-1 text-xs leading-[1] translate-y-4 top-0 left-0 rounded-sm">
@@ -110,7 +110,7 @@ const ProductCard = ({
             <div className="leading-[1] mb-2">{stars}</div>
 
             <Link
-              to={`/product/${id}`}
+              to={`/product/${name}`} state={{id}}
               className=" text-lg mb-1 font-poppins block text-black  font-semibold hover:text-main-color transition-all duration-300"
             >
               {name}

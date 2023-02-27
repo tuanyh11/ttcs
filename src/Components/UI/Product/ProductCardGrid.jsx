@@ -64,8 +64,6 @@ const ProductCardGrid = ({
     });
   };
 
-  console.log(items);
-
   return (
     <div>
       {isOpen && (
@@ -74,7 +72,7 @@ const ProductCardGrid = ({
 
       <div className="group">
         <div className="mb-5 relative">
-          <Link to={`/product/${id}`}>
+          <Link to={`/product/${name}`} state={{id}}>
             <img
               src={featuredImage?.node?.mediaItemUrl}
               alt=""
@@ -112,7 +110,7 @@ const ProductCardGrid = ({
           <div className="leading-[1]">{stars}</div>
 
           <Link
-            to={`/product/${id}`}
+            to={`/product/${name}`} state={{id}}
             className=" text-[15px] text-black  font-semibold hover:text-main-color transition-all duration-300"
           >
             {name}

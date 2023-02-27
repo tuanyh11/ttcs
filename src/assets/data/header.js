@@ -41,14 +41,6 @@ const headerData = {
                   },
                 },
                 {
-                  databaseId: 282,
-                  id: "cG9zdDoyODI=",
-                  label: "Cart",
-                  childItems: {
-                    edges: [],
-                  },
-                },
-                {
                   databaseId: 259,
                   id: "cG9zdDoyNTk=",
                   label: "Categories",

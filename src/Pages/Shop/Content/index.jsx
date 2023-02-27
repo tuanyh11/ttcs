@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getProductByCategory, getProducts } from "../../../api";
 import { fakeData } from "../../../assets/data";
 import {
@@ -52,6 +52,9 @@ const Content = () => {
     sortDatatypes[0]
   );
 
+  const loc = useLocation()
+  const productSearchedByLocation = loc.state?.products
+
   const [offset, setOffset] = useState({
     start: 0,
     end: 10,
@@ -67,14 +70,18 @@ const Content = () => {
 
       return getProducts().then((res) => res);
     },
+    enabled: !productSearchedByLocation
   });
 
   const categories = filter?.category
 
-  const showProducts = selectedFilter ? (
-    sortProduct(products, selectedFilter?.slug)
-  ) : products?.data
+  const showProducts = productSearchedByLocation ||  (
+    selectedFilter ? (
+      sortProduct(products, selectedFilter?.slug)
+    ) : products?.data
+  )
 
+  console.log(productSearchedByLocation, showProducts)
 
 
   if (isLoading)
@@ -89,7 +96,7 @@ const Content = () => {
 
   return (
     <div>
-      {showProducts.length === 0 ? (
+      {showProducts?.length === 0 ? (
           <span className="text-lg" >Not found Products</span>
       ) : 
       

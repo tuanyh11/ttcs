@@ -25,7 +25,7 @@ const Breadcrumb = ({ image, label}) => {
         <div className="flex justify-center relative z-50">
           <Link to={"/"} className="text-white uppercase">Home</Link>
           {pathname.map((item, i) => {
-            const  path = item?.replace("-", " ")
+            const  path = decodeURIComponent(item?.replace("-", " "))
             return (
               <div key={item}>
                 <i className="fa-solid fa-angle-right text-white ml-3 mr-2"></i>
