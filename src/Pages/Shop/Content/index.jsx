@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Link, useLocation } from "react-router-dom";
-import { getProductByCategory, getProducts } from "../../../api";
+import {  getProducts } from "../../../api";
 import { fakeData } from "../../../assets/data";
 import {
   Col,
