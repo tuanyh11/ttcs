@@ -29,7 +29,7 @@ export const getSideBarBlogData = async () => {
     }, blog.node.comments.nodes[0]); // initialize with the first comment
     
     return {
-      blogId: blog.node.databaseId,
+      blogId: blog.node.databaseId, 
       blogTitle: blog.node.title,
       newestComment: newestComment,
     };
