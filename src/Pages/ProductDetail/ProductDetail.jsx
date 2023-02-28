@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import {  useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getProductDetail } from "../../api";
 import product from "../../assets/data/product";
 import {
@@ -11,36 +11,31 @@ import {
   Row,
 } from "../../Components";
 import { useProductDetailContext } from "../../hooks";
-import Content from './Content'
-
-
+import Content from "./Content";
 
 const ProductDetail = () => {
+  const state = useLocation().state
+  const id = state?.id;
+  const productBySearch  = state?.product
 
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => getProductDetail(id).then((res) => res?.node),
+    enabled: !productBySearch
+  });
 
-
-  const id = useLocation().state?.id;
-
-  const { data, isLoading, error } = useQuery(["product", id], () =>
-    getProductDetail(id).then((res) => res?.node)
-  );
-
-
-  const {Provider} = useProductDetailContext()
-
+  const { Provider } = useProductDetailContext();
 
   return (
     <div>
       <BreadCrumb />
-      <div >
-        <Provider value={data}>
-          <Content/>
+      <div>
+        <Provider value={productBySearch || data}>
+          <Content />
         </Provider>
-       
       </div>
     </div>
   );
 };
 
 export default ProductDetail;
-

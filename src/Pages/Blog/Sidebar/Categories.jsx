@@ -3,16 +3,10 @@ import { Link } from "react-router-dom";
 import { useBlogContext } from "../../../hooks";
 
 const Categories = () => {
+  const { state } = useBlogContext();
 
+  const categories = state?.categories?.edges;
 
-  const {state} = useBlogContext()
-
-  const categories = state?.categories?.edges
-
-
-
-
-  
   return (
     <div>
       <div className="p-10  border-[2px] ">
@@ -21,16 +15,26 @@ const Categories = () => {
         </h4>
         <ul>
           {categories?.map((category) => {
+            const id = category?.node?.categoryId
+            const name = category.node.name
+            const count = category?.node?.count
             return (
               <li
-                key={category?.node?.categoryId}
+                key={id}
                 className="pb-[15px] last:pb-0 flex items-center justify-between"
               >
-                <Link to={`/blog?category=${category?.node?.slug}`} state={{categoryId: category?.node?.categoryId}}>
+                <Link
+                  className="hover:text-main-color transition-main"
+                  to={`/blog?category=${id}`}
+                  state={{
+                    categoryId: id,
+                    cateName: name,
+                  }}
+                >
                   <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>
-                  {category?.node?.name}
+                  {name}
                 </Link>
-                <span className="">({category?.node?.count})</span>
+                <span className="">({count})</span>
               </li>
             );
           })}

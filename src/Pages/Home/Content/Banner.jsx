@@ -17,18 +17,18 @@ const Banner = ({data}) => {
                     className="bg-center min-h-[240px] bg-cover bg-no-repeat relative after:absolute after:inset-0 after:bg home-banner after:z-10"
                     style={{ backgroundImage: `url(${item?.image?.mediaItemUrl})` }}
                   >
-                    <div className="p-[50px] text-start relative z-40">
-                      <h2 className="text-[15px] text-[#fbb71c] font-normal ">
+                    <div className="py-[50px] px-[15px] md:p-[50px] text-start relative z-40">
+                      <h2 className="text-[15px] uppercase text-[#fbb71c] font-normal ">
                         {item.title}
                       </h2>
-                      <div dangerouslySetInnerHTML={{__html: item?.content}} className="text-white mb-[15px] text-[24px] font-poppins pr-[30%]  ">
+                      <div dangerouslySetInnerHTML={{__html: item?.content}} className=" font-semibold text-white mb-[15px] text-[24px] font-poppins md:pr-[30%]  ">
                         {item.desc}
                       </div>
                       <ButtonArrow
                         Tag="Link"
                         to="/shop"
                         className={
-                          "py-[6px] px-[17px] leading-[27px] rounded-[28px]"
+                          "py-[6px] px-[17px] leading-[23px] rounded-[28px]"
                         }
                       >
                         Shop now

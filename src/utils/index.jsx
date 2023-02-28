@@ -7,14 +7,14 @@ export const generateStart =  (rating = 0, className) => {
 
   for (let i = 0; i < filledStars; i++) {
     stars.push(
-      <i key={i} className={`fa fa-star filled text-[#F6BC3E] text-xs ${className || ''}`}></i>
+      <i key={i} className={`fa fa-star filled text-[#fbb71c] text-xs ${className || ''}`}></i>
     );
   }
   for (let i = 0; i < emptyStars; i++) {
     stars.push(
       <i
         key={filledStars + i}
-        className={`fa-regular fa-star text-[#ccc] text-xs ${className || ''}`}
+        className={`fa-light fa-star text-[#ccc] text-xs ${className || ''}`}
       ></i>
     );
   }
@@ -42,24 +42,44 @@ export  function randomDateInCurrentMonth() {
   return new Date(randomTime);
 }
 
-export function sortProduct(products, sortBy) {
+export function sortProduct(products, sortBy, filter) {
+  let newProducts = products
+
   if(sortBy === 'averageRating') {
-    return products?.data?.sort((a, b) => {
+    newProducts =  newProducts?.sort((a, b) => {
       return Number(b?.node?.averageRating) - Number(a?.node?.averageRating)
     })
   }
 
   if(sortBy === 'priceHigh') {
-    return products?.data?.sort((a, b) => {
+    newProducts = newProducts?.sort((a, b) => {
       return Number(a?.node?.regularPrice?.substring(1)) - Number(b?.node?.regularPrice?.substring(1))
     })
   }
 
   if(sortBy === 'priceLow') {
-    return products?.data?.sort((a, b) => {
+    newProducts = newProducts?.sort((a, b) => {
       return Number(b?.node?.regularPrice?.substring(1)) - Number(a?.node?.regularPrice?.substring(1))
     })
   }
 
-  return products?.data
+  if(filter?.category?.length > 0) {
+    newProducts = newProducts?.filter(({node: product}) => 
+      product.productCategories.edges.some(({node}) => filter?.category?.some(cate => cate?.databaseId == node.databaseId)) 
+    );
+  }
+
+  if(filter?.price?.length > 0) {
+    newProducts =  newProducts?.filter(({node: product}) => {
+      const priceOne = filter?.price?.[0]
+      const priceTwo = filter?.price?.[1]
+      const price = Number(product.regularPrice?.substring(1))
+      return price >= priceOne && price <= priceTwo
+    })
+
+  }
+
+  
+
+  return newProducts
 }

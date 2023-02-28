@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { ButtonArrow, Col, Container, Row } from "../../../Components";
 
@@ -8,26 +9,26 @@ const Hero = ({data}) => {
   return (
     <div>
       <div
-        className="py-[100px] bg-center bg-cover bg-no-repeat"
+        className=" pb-[100px] pt-[90px] md:py-[100px] bg-center bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url(${`${data?.image?.mediaItemUrl}`})`,
         }}
       >
         <div className="">
-          <Container>
-            <Row>
+          <Container >
+            <Row  >
               <Col className={"w-full lg:w-8/12"}>
                 <div className="md:p-[70px] md:pb-[80px] p-5 bg-white font-semibold">
                   <div className="">
                     <Slider fade={true}>
-                      <div>
-                        <h3 className="mb-6 uppercase text-[#4bc871] underline ">
+                      <div className="relative z-[9999]">
+                        <h3 className="mb-6 uppercase text-[#4bc871] underline font-bold ">
                           great offer for every auto & cars
                         </h3>
-                        <h1 className="text-[32px] md:text-[48px] leading-[44px] md:leading-[60px]  lg:text-[70px] lg:leading-[70px] text-black mb-5 font-poppins">
+                        <h1 className="text-[32px] tracking-tighter text-dark-color md:text-[48px] leading-[44px] md:leading-[60px]  lg:text-[70px] lg:leading-[70px] font-semibold mb-5 font-poppins">
                           25% Off For Auto Car Services
                         </h1>
-                        <p className="text-black font-normal pb-5">
+                        <p className="text-dark-color font-normal pb-5">
                           Sed ut perspiciatis unde omnis iste natus error
                           voluptatem accusantium remque laudantium totam aperiam
                           eaque ipsa quae abillo inventore veritatis
@@ -36,27 +37,27 @@ const Hero = ({data}) => {
                           <ButtonArrow
                             Tag="Link"
                             to="/shop"
-                            className="py-[14px] block md:inline-block  mb-2 text-center md:mr-2 text-[14px] px-[45px]  leading-[27px] rounded-[28px]"
+                            className="py-[14px]  inline-block  mb-2 text-center md:mr-2 text-[14px] px-[40px]  leading-[29px] rounded-[28px]"
                           >
                             Shop Now
                           </ButtonArrow>
                           <ButtonArrow
                             Tag="Link"
                             to="/shop"
-                            className="py-[14px] block md:inline-block text-[14px] text-center px-[45px]  leading-[27px] rounded-[28px] bg-white border-2 border-[#eaeaea] border-solid text-[#777777]"
+                            className="py-[14px]  inline-block text-[14px] text-center px-[40px]  leading-[29px] rounded-[28px] bg-white hover:border-main-color transition-main hover:text-white  hover:bg-main-color border-2 border-[#eaeaea] border-solid text-[#777777]"
                           >
                             Read more
                           </ButtonArrow>
                         </div>
                       </div>
-                      <div>
+                      <div className="relative z-[9999]">
                         <h3 className="mb-6 uppercase text-[#4bc871] underline">
                           great offer for every auto & cars
                         </h3>
-                        <h1 className="text-[32px] md:text-[48px] lg:text-[70px] leading-[44px] md:leading-[60px] lg:leading-[70px] text-black mb-5 font-poppins">
+                        <h1 className="text-[32px] tracking-tighter md:text-[48px] lg:text-[70px] font-semibold leading-[44px] md:leading-[60px] lg:leading-[70px] text-dark-color mb-5 font-poppins">
                           35% Off For Auto Parts Services
                         </h1>
-                        <p className="text-black font-normal pb-5">
+                        <p className="text-dark-color font-normal pb-5  max-[320px]:hidden">
                           Sed ut perspiciatis unde omnis iste natus error
                           voluptatem accusantium remque laudantium totam aperiam
                           eaque ipsa quae abillo inventore veritatis
@@ -65,14 +66,14 @@ const Hero = ({data}) => {
                           <ButtonArrow
                             Tag="Link"
                             to="/shop"
-                            className="py-[14px] mb-2 mr-2 text-[14px] px-[45px]  leading-[27px] rounded-[28px]"
+                            className="py-[14px] mb-2 mr-2 text-[14px] px-[40px]  leading-[29px] rounded-[28px]"
                           >
                             Shop Now
                           </ButtonArrow>
                           <ButtonArrow
                             Tag="Link"
                             to="/shop"
-                            className="py-[14px] text-[14px] px-[45px]  leading-[27px] rounded-[28px] bg-white border-2 border-[#eaeaea] border-solid text-[#777777]"
+                            className="py-[14px] text-[14px] px-[40px]  leading-[29px] rounded-[28px] bg-white border-2 border-[#eaeaea] border-solid text-[#777777]"
                           >
                             Read more
                           </ButtonArrow>
@@ -100,35 +101,35 @@ const Hero = ({data}) => {
             <Row>
               <Col className="w-full lg:w-3/12 mb-5 ">
                 <div className="">
-                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px]">
+                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px] outline-none">
                     <span className="text-[#444] font-medium">Select Make</span>
-                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-5 text-main-color  text-xs"></i>
+                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-7 text-main-color  text-xs"></i>
                   </button>
                 </div>
               </Col>
 
               <Col className="w-full lg:w-3/12 mb-5">
                 <div className="">
-                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px]">
+                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px] outline-none">
                     <span className="text-[#444] font-medium">Select Mode</span>
-                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-5 text-main-color  text-xs"></i>
+                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-7 text-main-color  text-xs"></i>
                   </button>
                 </div>
               </Col>
 
               <Col className="w-full lg:w-3/12 mb-5">
                 <div className="">
-                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px]">
+                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px] outline-none">
                     <span className="text-[#444] font-medium">Select Year</span>
-                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-5 text-main-color  text-xs"></i>
+                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-7 text-main-color  text-xs"></i>
                   </button>
                 </div>
               </Col>
 
               <Col className="w-full lg:w-3/12 mb-5">
                 <div className="">
-                  <button className=" text-[12px] line-clamp-1 relative w-full text-center transition-all duration-[400] font-medium  font-poppins py-[11px] px-[15px] xl:px-[35px] bg-main-color border-2 border-white border-solid hover:bg-white hover:text-main-color text-white   rounded-[28px]">
-                    <span className="  font-medium uppercase">
+                  <button className=" text-[14px] font-semibold line-clamp-1 relative w-full text-center transition-all duration-[400]  outline-none   font-poppins py-[11px] px-[15px] xl:px-[35px] bg-main-color border-2 border-white border-solid hover:bg-white hover:text-main-color text-white   rounded-[28px]">
+                    <span className="uppercase">
                       find auto parts
                     </span>
                     <i className="fa-solid fa-circle-arrow-right  ml-3"></i>

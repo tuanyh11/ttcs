@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Breadcrumb = ({ image, label}) => {
+const Breadcrumb = ({ image, label, offPath = false}) => {
 
   const loc = useLocation()
 
   const pathname = loc.pathname.substring(1).split("/")
-
-  
+  //  `Search Results for: ${label}`
   return (
     <div>
       <div
@@ -18,11 +17,11 @@ const Breadcrumb = ({ image, label}) => {
       >
         <h3
           to={"/"}
-          className="text-center pb-8 block text-white relative z-50  text-[32px] md:text-4xl lg:text-[40px] xl:text-[60px] font-[600] font-poppins  "
+          className="text-center mb-[10px] block text-white relative z-50  text-[32px] md:text-4xl lg:text-[40px] xl:text-[60px] font-[600] font-poppins  "
         >
-          {label}
+          { label}
         </h3>
-        <div className="flex justify-center relative z-50">
+        {!offPath && <div className="flex justify-center relative z-50">
           <Link to={"/"} className="text-white uppercase">Home</Link>
           {pathname.map((item, i) => {
             const  path = decodeURIComponent(item?.replace("-", " "))
@@ -35,7 +34,7 @@ const Breadcrumb = ({ image, label}) => {
               </div>
             );
           })}
-        </div>
+        </div>}
       </div>
     </div>
   );

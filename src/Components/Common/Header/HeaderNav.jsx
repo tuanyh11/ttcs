@@ -23,10 +23,13 @@ const HeaderNav = () => {
 
   const nav = useNavigate()
 
+
   const handleOnSearch = async () => {
     const data = await  searchProducts(text)
-    if(data?.length > 0) {
-      nav("/shop", {state: {products: data}})
+    if(data?.length > 1 || data?.length === 0) 
+      nav("/shop", {state: {products: data, searchText: text}})
+    if(data?.length === 1) {
+      nav(`/product/${data?.[0]?.node?.name}`, {state: {product: data?.[0]?.node, searchText: text}}) 
     }
   };
 

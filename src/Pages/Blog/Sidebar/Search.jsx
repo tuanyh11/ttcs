@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import { useDebounce } from "../../../hooks";
+import { Link } from "react-router-dom";
+import { useBlogContext, useDebounce } from "../../../hooks";
 
 const Search = () => {
 
-      
+
   const [text, setText] = useState("");
-
-  const textSearch = useDebounce(text, 900);
-
-  const handleOnSearch = (e) => {
-    setText(e.target.value);
-  };
-
 
 
   return (
@@ -21,11 +15,11 @@ const Search = () => {
           type="text"
           className=" h-[80px] border-[1px] pl-5  w-full pr-[84px]  outline-none "
           placeholder="Search..."
-          onChange={handleOnSearch}
+          onChange={(e) => setText(e.target.value)}
         />
-        <button className="absolute top-1/2 right-0 -translate-y-1/2 w-20 h-20 bg-main-color  text-white">
+        <Link to={`/blog?search=${text}`} state={{search: text}} className="absolute top-1/2 right-0 inline-block leading-[80px] text-center -translate-y-1/2 w-20 h-20 bg-main-color  text-white">
           <i className="fas fa-search"></i>
-        </button>
+        </Link>
       </div>
     </div>
   );

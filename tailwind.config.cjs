@@ -3,10 +3,14 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        '920': '920px'
+      },
       transformOrigin: {
         'top-left-1/4-0': 'calc(100% - 30px) 0'
       },
       colors: {
+        "black": "#111111",
         "dark-color": "#111111",
         "main-color": "#ff4545",
         "#646a7c": "#646a7c",

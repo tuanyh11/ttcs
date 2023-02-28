@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
-import { Col, Footer, Header, Row } from "./Components";
+import { Col, Footer, Header, QuickView, Row } from "./Components";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import routeData from "./Routes";
+import { useUiStore } from "./Components/store";
 
 function App() {
   const [backToHeader, setBackToHeader] = useState(false);
+
+  const {  product, selectProduct } = useUiStore();
+
 
   useEffect(() => {
     const onScroll = () => {
@@ -28,46 +32,46 @@ function App() {
   const Children = useMemo(() => {
     return (
       <>
-          <Header />
+        <Header />
 
-          <Routes>
-            <Route path={"/"} element={<Navigate to={"/home"} />} />
-            {routeData.map(
-              ({ path, component: Component, children }, index) => {
-                if (children.length > 0) {
-                  return (
-                    <Route key={index} path={path} element={<Component />}>
-                      {children.map(
-                        (
-                          { path, component: ComponentChil, children, index },
-                          i
-                        ) => {
-                          return (
-                            <Route
-                              key={i}
-                              index={index}
-                              path={path}
-                              element={<ComponentChil />}
-                            />
-                          );
-                        }
-                      )}
-                    </Route>
-                  );
-                }
-                return (
-                  <Route key={index} path={path} element={<Component />} />
-                );
-              }
-            )}
-          </Routes>
-          <Footer />
+        <Routes>
+          <Route path={"/"} element={<Navigate to={"/home"} />} />
+          {routeData.map(({ path, component: Component, children }, index) => {
+            if (children.length > 0) {
+              return (
+                <Route key={index} path={path} element={<Component />}>
+                  {children.map(
+                    (
+                      { path, component: ComponentChil, children, index },
+                      i
+                    ) => {
+                      return (
+                        <Route
+                          key={i}
+                          index={index}
+                          path={path}
+                          element={<ComponentChil />}
+                        />
+                      );
+                    }
+                  )}
+                </Route>
+              );
+            }
+            return <Route key={index} path={path} element={<Component />} />;
+          })}
+        </Routes>
+        <Footer />
       </>
     );
   }, []);
 
   return (
     <div className="App relative">
+      {product && (
+        <QuickView {...product} onQuickViewClick={() => selectProduct(null)} />
+      )}
+
       {Children}
 
       <div className="fixed z-[999999] bottom-0 right-0 left-0 text-[21px] text-[#9b9b9b] lg:hidden">
@@ -102,7 +106,7 @@ function App() {
         <div className="fixed z-[999999] bottom-[50px] right-[30px]">
           <button
             onClick={() => backToHeaderHandler()}
-            className="fa-solid fa-angle-up w-[50px] h-[50px] bg-main-color text-white rounded-full"
+            className="fas fa-angle-up text-[20px] hover:bg-black transition-main font-black w-[50px] h-[50px] bg-main-color text-white rounded-full"
           ></button>
         </div>
       )}

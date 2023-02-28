@@ -53,35 +53,39 @@ const Content = () => {
   );
 
   const loc = useLocation()
-  const productSearchedByLocation = loc.state?.products
+  const productSearch = loc.state?.products
 
   const [offset, setOffset] = useState({
     start: 0,
     end: 10,
   });
 
+  const [products, setProducts] = useState([]);
+
+
+
   const [selectedFilter, setSelectedFilter] = useState()
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: ["productList", filter],
+  const { data, isLoading } = useQuery({
+    queryKey: ["productList"],
     queryFn: () => {
-      if (filter?.category?.length > 0 || filter?.price?.length > 0)
-        return getProductByCategory({...filter, selectedFilter}).then((res) => res);
-
       return getProducts().then((res) => res);
     },
-    enabled: !productSearchedByLocation
+    enabled: !productSearch,
+    refetchOnWindowFocus: false,
+    
   });
+
+
+  useEffect(() => {
+    setProducts( productSearch || data?.data)
+  }, [data, productSearch])
 
   const categories = filter?.category
 
-  const showProducts = productSearchedByLocation ||  (
-    selectedFilter ? (
-      sortProduct(products, selectedFilter?.slug)
-    ) : products?.data
-  )
-
-  console.log(productSearchedByLocation, showProducts)
+  const showProducts = sortProduct(products, selectedFilter?.slug, filter)
+  
+    
 
 
   if (isLoading)
@@ -97,7 +101,7 @@ const Content = () => {
   return (
     <div>
       {showProducts?.length === 0 ? (
-          <span className="text-lg" >Not found Products</span>
+          <span className="text-[15px]" >No products were found matching your selection.</span>
       ) : 
       
       <>
@@ -180,7 +184,7 @@ const Content = () => {
         {featured === "list" ? (
           <div>
             <Row className="flex flex-wrap">
-              {products?.data?.map((item, index) => {
+              {showProducts?.map((item, index) => {
                 const product = item?.node;
                 console.log(product);
                 return (

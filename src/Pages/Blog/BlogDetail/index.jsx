@@ -1,6 +1,6 @@
-import React, {  useMemo, useState } from "react";
+import React, {  useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import {  useParams } from "react-router-dom";
+import {  useLocation, useParams } from "react-router-dom";
 import { getBlogDetail } from "../../../api";
 import {
   BlogCard,
@@ -12,7 +12,9 @@ import { useDate } from "../../../hooks";
 const BlogDetail = () => {
   const getDate = useDate();
 
-  const id = useParams()?.slug;
+  const loc = useLocation().state;
+  const id = loc?.id;
+  const commentId = loc?.comment
 
   const [selectId, setSelectId] = useState(null);
 
@@ -20,7 +22,6 @@ const BlogDetail = () => {
     queryKey: ["blogDetailData", id],
     queryFn: () => getBlogDetail(id).then((res) => res?.node),
   });
-
 
 
   const commentData = blogData?.comments?.nodes || [];
@@ -35,6 +36,13 @@ const BlogDetail = () => {
 
     [blogData]
   );
+
+  useEffect(() => {
+    const element = commentId ? document.getElementById(commentId) : null;
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [commentId]);
 
 
   return (
@@ -58,7 +66,7 @@ const BlogDetail = () => {
               // console.log(comment)
 
               return (
-                <div key={comment.id}>
+                <div id={comment.id} key={comment.id}>
                   <Comment
                     comment={comment}
                     getDate={getDate}

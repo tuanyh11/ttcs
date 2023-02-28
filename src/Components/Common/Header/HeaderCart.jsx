@@ -9,7 +9,7 @@ const HeaderCart = () => {
   return (
     <>
       <Link to={"/cart"} className="relative ml-5">
-        <i className="fa-solid fa-cart-shopping"></i>
+        <i className="far fa-shopping-cart"></i>
         <span className="absolute text-[11px] rounded-full min-w-[16px] h-4 text-center bg-main-color leading-4 text-white  top-[-5px] right-[-13px]">
           {length()}
         </span>

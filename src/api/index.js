@@ -15,104 +15,148 @@ export const getFooterData = async () => {
   return footerData;
 };
 
-
-// blog 
+// blog
 export const getSideBarBlogData = async () => {
-  return blogData;
+  const { categories, tags, posts } = blogData.data;
+  const topNewComments = posts.edges.map((blog) => {
+    const newestComment = blog.node.comments.nodes.reduce(
+      (prevComment, currComment) => {
+        const prevDate = new Date(prevComment.date);
+        const currDate = new Date(currComment.date);
+        return currDate > prevDate ? currComment : prevComment;
+      },
+      blog.node.comments.nodes[0]
+    ); // initialize with the first comment
+
+    return {
+      blogId: blog.node.id,
+      blogTitle: blog.node.title,
+      newestComment: newestComment,
+    };
+  });
+  return {
+    data: {
+      categories,
+      tags,
+      posts,
+      recentPosts: posts.edges.map(({ node }) => ({
+        node: {
+          id: node.id,
+          title: node.title,
+        },
+      })),
+      recentComments: topNewComments,
+    },
+  };
 };
 
 export const getListBlog = async (limit = 2) => {
   return {
     data: blogData.data.posts.edges.slice(0, limit),
-    totalLength: blogData.data.posts.edges.length
+    totalLength: blogData.data.posts.edges.length,
   };
 };
 
-export const getListBlogByCategory= (id) => {
-  const data =  blogData.data.posts.edges.filter(blog => blog.node.categories.nodes.some(cate => cate.categoryId === id))
+export const getListBlogByCategory = (id) => {
+  const data = blogData.data.posts.edges.filter((blog) =>
+    blog.node.categories.nodes.some((cate) => cate.categoryId === id)
+  );
   return {
     data,
-    totalLength: data.length
+    totalLength: data.length,
   };
-}
+};
 
-export const getListBlogByTag= (id) => {
-  const data =  blogData.data.posts.edges.filter(blog => blog.node.tags.edges.some(tag => tag.node.databaseId === id))
+export const getListBlogByTag = (id) => {
+  const data = blogData.data.posts.edges.filter((blog) =>
+    blog.node.tags.edges.some((tag) => tag.node.databaseId === id)
+  );
   return {
     data,
-    totalLength: data.length
+    totalLength: data.length,
   };
-}
+};
 
 export const getBlogDetail = async (id) => {
-  return  blogData?.data.posts?.edges.find(post => post.node.id === id)
-  
-}
+  return blogData?.data.posts?.edges.find((post) => post.node.id === id);
+};
 
 export const getLatestBlog = async (limit = 3) => {
-  const blog = blogData.data.posts.edges.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)).slice(0, limit)
-  return blog
-}
+  const blog = blogData.data.posts.edges
+    .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+    .slice(0, limit);
+  return blog;
+};
 
-// blog end 
- 
+// blog end
+
 // start product
 
 export const getProductDetail = async (id) => {
-  return products.find(product => product.node.id === id)
-}
+  return products.find((product) => product.node.id === id);
+};
 
 export const getHomepageData = async () => {
-  return homeData
-}
+  return homeData;
+};
 
 export const getExclusiveProducts = async () => {
-  return product
-}
+  return product;
+};
 
 export const getBestSellingProducts = async () => {
-  return product
-}
+  return product;
+};
 
-export const getProducts = async (start = 0, end = 12)  => {
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  const length = products.length
+export const getProducts = async (start = 0, end = 12) => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  const length = products.length;
   return {
     data: product.data.products.edges.slice(start, end),
-    totalLength: length
-  }
-}
+    totalLength: length,
+  };
+};
 
 export const getProductCate = async (limit) => {
-  return categories.data.productCategories.edges.slice(0, limit)
-}
+  return categories.data.productCategories.edges.slice(0, limit);
+};
 
+export const getProductByCategory = async (filter, start = 0, end = 12) => {
+  let newProducts = products;
+};
 
-
-
-
-export const getRangePriceProduct =  () => {
-  let max = 0
-  let currency = ''
-  products.map(item => {
-    currency =item.node.regularPrice.charAt(0)
-    max = Math.max(max, Number(item.node.regularPrice.substring(1)))
-  })
+export const getRangePriceProduct = () => {
+  let max = 0;
+  let currency = "";
+  products.map((item) => {
+    currency = item.node.regularPrice.charAt(0);
+    max = Math.max(max, Number(item.node.regularPrice.substring(1)));
+  });
 
   return {
     max,
-    currency
-  }
-}
+    currency,
+  };
+};
 // end product
 
-// start header search 
+// start header search
 export const searchProducts = async (text) => {
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  return products.filter(({node: product}) => product.name.toLocaleLowerCase().indexOf(text?.toLocaleLowerCase()) >= 0)
-}
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return products.filter(
+    ({ node: product }) =>
+      product.name.toLocaleLowerCase().indexOf(text?.toLocaleLowerCase()) >= 0
+  );
+};
 
-// end header search 
+export const searchBlogs = async (text) => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return {
+    data: blogData.data.posts.edges.filter(
+      ({ node: blog }) =>
+        blog.title.toLocaleLowerCase().indexOf(text?.toLocaleLowerCase()) >= 0
+    )
+  }
+};
 
-
-
+// end header search
