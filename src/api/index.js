@@ -18,7 +18,34 @@ export const getFooterData = async () => {
 
 // blog 
 export const getSideBarBlogData = async () => {
-  return blogData;
+  const data = blogData.data
+  const topNewComments = data.posts.edges.map((blog) => {
+    console.log(blog)
+    
+    const newestComment = blog.node.comments.nodes.reduce((prevComment, currComment) => {
+      const prevDate = new Date(prevComment.date);
+      const currDate = new Date(currComment.date);
+      return currDate > prevDate ? currComment : prevComment;
+    }, blog.node.comments.nodes[0]); // initialize with the first comment
+    
+    return {
+      blogId: blog.node.databaseId,
+      blogTitle: blog.node.title,
+      newestComment: newestComment,
+    };
+  });
+  return {
+    data: {
+      ...blogData.data,
+      recentPosts: data.posts.edges.map(({node}) => ({
+        node: {
+          id: node.id,
+          title: node.title,
+        }
+      })),
+      recentComments: topNewComments
+    }
+  };
 };
 
 export const getListBlog = async (limit = 2) => {

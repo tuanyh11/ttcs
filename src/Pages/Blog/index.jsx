@@ -18,6 +18,8 @@ const Blog = () => {
     queryFn: () => getSideBarBlogData().then(res => res.data)
   });
 
+  console.log(data);
+
   const handleOnSearch = (text) => {
     setText(text)
   }
