@@ -10,8 +10,6 @@ const Categories = () => {
   const categories = state?.categories?.edges
 
 
-
-
   
   return (
     <div>

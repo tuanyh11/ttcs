@@ -4,19 +4,6 @@ import { fakeData } from "../../../assets/data";
 import { Container } from "../../../Components";
 import { generateStart } from "../../../utils";
 
-const customerReview = fakeData(6, (i) => {
-  return {
-    rating: Math.floor(Math.random() * 5) + 1,
-    career: "Delivery",
-    name: `Oliver Greenwood ${i}`,
-    quote:
-      "Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt",
-
-    image: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
-      Math.floor(Math.random() * 3) + 1
-    }.jpg`,
-  };
-});
 const Review = ({data}) => {
 
   const quoteList = data?.contentQuote
@@ -37,6 +24,15 @@ const Review = ({data}) => {
             dots: true
           }
         },
+
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            initialSlide: 2
+          }
+        },
         {
           breakpoint: 768,
           settings: {
@@ -44,6 +40,14 @@ const Review = ({data}) => {
             slidesToScroll: 1,
             initialSlide: 2
           }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: 2,
+          },
         },
         {
           breakpoint: 480,
@@ -71,9 +75,9 @@ const Review = ({data}) => {
           </div>
           <div>
             <div>
-              <Slider {...customerReviewSettings} className="-mx-[15px]">
+              <Slider {...customerReviewSettings} className="-mx-[15px] ">
                 {quoteList?.map((review) => {
-                  const stars = generateStart(review.rating, "!text-sm");
+                  const stars = generateStart(review.rating, "!text-[13px] !font-semibold ");
 
                   return (
                     <div key={review?.id}>
@@ -92,7 +96,7 @@ const Review = ({data}) => {
                               <h3 className=" text-black font-poppins text-lg leading-[1] font-semibold">
                                 {review?.name}
                               </h3>
-                              <span className=" text-main">
+                              <span className=" text-main text-main-color">
                                 {review?.position}
                               </span>
                             </div>

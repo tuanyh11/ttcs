@@ -10,7 +10,7 @@ const images = [
   "https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-3.jpg",
   "https://klbtheme.com/chakta/wp-content/uploads/2021/01/blog-4.jpg",
 ];
-const BlogCard = ({ type = "image", settings = {}, list = true, ...rest }) => {
+const BlogCard = ({ type = "image", settings = {}, list = false, ...rest }) => {
   const getDate = useDate();
 
   const content = rest?.acf_post?.component?.[0];
@@ -64,7 +64,7 @@ const BlogCard = ({ type = "image", settings = {}, list = true, ...rest }) => {
         </div>
       )}
 
-      <div className="pt-[30px] pb-[10px] px-[15px] md:px-10 border-2 -mt-[9px]">
+      <div className="pt-[30px] pb-[10px] px-[15px] md:px-10 border-2 border-t-0">
         <div className="flex items-center gap-[22px] pb-[10px] mb-[15px] border-b capitalize">
           <div className="">
             <i className="mr-[10px] text-main-color fa-regular fa-calendar-days"></i>
@@ -116,12 +116,12 @@ const BlogCard = ({ type = "image", settings = {}, list = true, ...rest }) => {
           
 
           <div className="mb-[25px]">
-            {!list && (
+            {list && (
               <Button
                 Tag="Link"
                 to={`/blog/${id}`}
                 state={{ id: 1 }}
-                className="py-[10px] text-[14px] px-[35px] hover:bg-main-color hover:text-white transition-all duration-300 ease-out hover:border-main-color  leading-[27px] rounded-[28px] bg-white border-[#e5e5e5] border-solid border-2 text-[#696969]"
+                className="py-[10px] text-[14px] px-[35px] hover:bg-main-color hover:text-white transition-main hover:border-main-color  leading-[27px] rounded-[28px] bg-white border-[#e5e5e5] border-solid border-2 text-[#696969]"
               >
                 Read More
                 <i className="fa-solid fa-circle-arrow-right ml-[10px]"></i>

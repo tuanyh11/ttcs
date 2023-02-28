@@ -38,19 +38,22 @@ const Footer = () => {
                 </p>
 
                 <div className="">
-                  <h5 className="text-[18px] mb-[10px]">Follow Us</h5>
+                  <h5 className="text-[18px] mb-[10px] font-semibold font-poppins">Follow Us</h5>
                   <ul className="flex">
                     <li className="mr-[15px]">
-                      <i className="fa-brands fa-facebook"></i>
+                      <a href="#" className="fa-brands transition-main hover:text-main-color cursor-pointer fab fa-facebook-f"></a>
                     </li>
                     <li className="mr-[15px]">
-                      <i className="fa-brands fa-twitter"></i>
+                      <a href="#"  className="fa-brands transition-main hover:text-main-color cursor-pointer  fa-twitter"></a>
                     </li>
                     <li className="mr-[15px]">
-                      <i className="fa-brands fa-instagram"></i>
+                      <a href="#"  className="fa-brands transition-main hover:text-main-color cursor-pointer  fab fa-instagram"></a>
                     </li>
                     <li className="mr-[15px]">
-                      <i className="fa-brands fa-youtube"></i>
+                      <a href="#"  className="fa-brands transition-main hover:text-main-color cursor-pointer  fab fa-behance"></a>
+                    </li>
+                    <li className="mr-[15px]">
+                      <a href="#"  className="fa-brands transition-main hover:text-main-color cursor-pointer  fa-youtube"></a>
                     </li>
                   </ul>
                 </div>
@@ -73,7 +76,7 @@ const Footer = () => {
 
                           return (
                           <li key={node?.id} className="pb-[10px]">
-                            <Link to={`/${node?.label?.replace(" ", "-")?.toLowerCase()}`}>{node?.label}</Link>
+                            <Link className="transition-main hover:text-main-color" to={`/${node?.label?.replace(" ", "-")?.toLowerCase()}`}>{node?.label}</Link>
                           </li>
                           )
                         })}
@@ -92,15 +95,15 @@ const Footer = () => {
                 </h3>
                 <ul className="text-[#c5cad8]">
                   <li className="pb-[10px] relative pl-[27px]">
-                    <i className="fa-solid fa-location-dot absolute text-main-color  top-[7px] left-0"></i>
+                    <i className="fal fa-map-marker-alt absolute text-main-color  top-[7px] left-0"></i>
                     <p>250 Main Street. 2nd Floor D - Block, New York</p>
                   </li>
                   <li className="pb-[10px] relative pl-[27px] ">
-                    <i className="fa-solid fa-envelope absolute text-main-color top-[7px] left-0"></i>
+                    <i className="fal fa-envelope absolute text-main-color top-[7px] left-0"></i>
                     <p>support@example.com</p>
                   </li>
                   <li className="pb-[10px] relative pl-[27px]">
-                    <i className="fa-solid fa-phone absolute text-main-color top-[7px] left-0"></i>
+                    <i className="fal fa-phone absolute text-main-color top-[7px] left-0"></i>
                     <p>+898 - 123 - 456 - 98</p>
                   </li>
                   <li className="pb-[10px] relative ">
@@ -114,6 +117,10 @@ const Footer = () => {
               </div>
             </Col>
           </Row>
+        </div>
+
+        <div className="py-[30px] border-[#252525] border-t">
+          <h3 className="text-[15px] text-white text-center">Copyright 2022.KlbTheme . All rights reserved</h3>
         </div>
       </Container>
     </div>

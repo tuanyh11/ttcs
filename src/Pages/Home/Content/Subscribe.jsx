@@ -3,7 +3,8 @@ import { ButtonArrow, Col, Container, Row } from '../../../Components'
 
 const Subscribe = ({data}) => {
 
-  const backgroundImage = data?.images?.[0]
+
+  const backgroundImage = data?.images?.[0]?.image?.mediaItemUrl
 
   const subTitle = data?.subTitle
 
@@ -26,7 +27,7 @@ const Subscribe = ({data}) => {
                   <h4 className="uppercase underline text-[#fbb71c] mb-5">
                     {subTitle}
                   </h4>
-                  <h2 className="mb-[35px]  lg:px-[50px] leading-[1.2] text-[27px]  md:text-[32px] lg:text-[48px] text-white font-poppins font-semibold">
+                  <h2 className="mb-[35px]  lg:px-[50px] leading-[1.2] text-[27px]  md:text-[32px] lg:text-[36px] xl:text-[48px] text-white font-poppins font-semibold">
                     {title}
                   </h2>
                   <form action="">
@@ -34,9 +35,9 @@ const Subscribe = ({data}) => {
                       <input
                         type="text"
                         placeholder="Enter Your Email Address"
-                        className="h-[85px] leading-[85px] w-full rounded-[43px] outline-none border px-5"
+                        className="h-[85px] leading-[85px] placeholder-[#757575] w-full rounded-[43px] outline-none border px-5"
                       />
-                      <div className="absolute top-1/2 right-[15px] -translate-y-1/2">
+                      <div className="md:absolute mt-[15px] md:mt-0 top-1/2 right-[15px] md:-translate-y-1/2">
                         <ButtonArrow
                           Tag="Link"
                           to="/shop"

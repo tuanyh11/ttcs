@@ -29,14 +29,14 @@ const Content = () => {
           const blog = item.node;
           return (
             <div className="mb-10" key={index}>
-              <BlogCard {...blog} />
+              <BlogCard {...blog} list={true} />
             </div>
           );
         })}
       </div>
 
       <div className="">
-        { data?.totalLength && <ul className="flex">
+        { data?.totalLength > 1&& <ul className="flex">
           <Pagination items={data?.totalLength} />
         </ul>}
       </div>

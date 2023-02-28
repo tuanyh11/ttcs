@@ -13,6 +13,8 @@ const Shop = ({ categories }) => {
     price: [],
   });
 
+  const searchText = useLocation().state?.searchText;
+
   const handleOnSelectCate = (category) => {
     const id = category.databaseId;
     const isExisting = filter.category.find((item) => item.databaseId === id);
@@ -73,7 +75,7 @@ const Shop = ({ categories }) => {
           handleFilterPrice
         }}
       >
-        <BreadCrumb label={"Products"}/>
+        <BreadCrumb label={searchText} isForSearching={searchText}/>
         <div className="py-20 relative">
           <Container>
             <Row>

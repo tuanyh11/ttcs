@@ -36,8 +36,10 @@ function Pagination({ items = 2, itemToShow = 2, getOffset = () => {} }) {
 
   const isLastPage = currentPage === pages.length - 1;
   const isFirstPage = currentPage - 2 >= 0;
+  if(pages.length === 1) return <></>
+
   return (
-    <div className="">
+    <div >
       <ul className="flex">
         {isFirstPage ? (
           <li>

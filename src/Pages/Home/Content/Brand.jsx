@@ -19,7 +19,7 @@ const Brand = () => {
     infinite: true,
     arrows: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 6,
     slidesToScroll: 1,
     responsive: [
         {
@@ -28,7 +28,14 @@ const Brand = () => {
             slidesToShow: 4,
             slidesToScroll: 1,
             infinite: true,
-            dots: true
+          }
+        },
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            initialSlide: 2
           }
         },
         {
@@ -55,9 +62,9 @@ const Brand = () => {
           <Container>
             <Slider {...brandSettings}>
               {brandsData.map((brand, i) => {
-                return <div  key={i}>
+                return <a href='#'  key={i}>
                   <img src={brand.image} alt="" className="max-w-full mx-auto" />
-                </div>;
+                </a>;
               })}
             </Slider>
           </Container>

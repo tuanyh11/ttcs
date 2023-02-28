@@ -59,7 +59,7 @@ const QuickView = ({
 
   return (
     <div>
-      <div className="fixed inset-0 z-[9999999]">
+      <div className="fixed inset-0 z-[999999999999]">
         <div className=" absolute inset-0 bg-[#0b0b0b] opacity-80 z-[9999999]"></div>
         <div className="md:px-[6px] lg:px-5 absolute  md:top-1/2 md:left-1/2 z-[99999999999] md:-translate-y-1/2 md:-translate-x-1/2 w-full xl:max-w-[980px] xl:px-0">
           <button

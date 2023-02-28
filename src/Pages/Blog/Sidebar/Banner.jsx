@@ -12,8 +12,8 @@ const Banner = () => {
         }}
       >
         <div className="relative z-50">
-          <h2 className="text-[40px] leading-[50px] mb-[25px] text-white text-center">
-            <span className="block">Need Any</span>
+          <h2 className="text-[40px] leading-[50px] font-semibold mb-[25px] text-white text-center">
+            <span className="block font-light">Need Any</span>
             Auto Services
           </h2>
           <div className="flex justify-center">

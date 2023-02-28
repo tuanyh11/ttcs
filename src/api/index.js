@@ -89,29 +89,9 @@ export const getProductCate = async (limit) => {
 
 
 export const getProductByCategory = async (filter, start = 0, end = 12) => {
-  await new Promise(resolve => setTimeout(resolve, 2000));
 
   let newProducts = products
-  if(filter?.category?.length > 0) {
-    newProducts = products.filter(({node: product}) => 
-      product.productCategories.edges.some(({node}) => filter?.category?.some(cate => cate?.databaseId == node.databaseId)) 
-    );
-  }
-
-  if(filter?.price?.length > 0) {
-    newProducts =  newProducts.filter(({node: product}) => {
-      const priceOne = filter?.price?.[0]
-      const priceTwo = filter?.price?.[1]
-      const price = Number(product.regularPrice?.substring(1))
-      return price >= priceOne && price <= priceTwo
-    })
-  }
-
-
-  return {
-    data: newProducts.slice(start, end),
-    totalLength: newProducts.length
-  };
+  
 }
 
 

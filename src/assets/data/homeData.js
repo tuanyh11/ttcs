@@ -93,7 +93,7 @@ const data = {
             contentQuote: [
               {
                 id: new Date().getTime() * Math.random(),
-                rating: Math.floor(Math.random() * 5),
+                rating: 5,
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "Daisy Lana",
@@ -106,7 +106,7 @@ const data = {
               },
               {
                 id: new Date().getTime() * Math.random(),
-                rating: Math.floor(Math.random() * 5),
+                rating: 5,
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "Oliver Greenwood",
@@ -119,7 +119,7 @@ const data = {
               },
               {
                 id: new Date().getTime() * Math.random(),
-                rating: Math.floor(Math.random() * 5),
+                rating: 5,
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "David Warner",
@@ -132,7 +132,7 @@ const data = {
               },
               {
                 id: new Date().getTime() * Math.random(),
-                rating: Math.floor(Math.random() * 5),
+                rating: 5,
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
                 name: "Alden Smith",

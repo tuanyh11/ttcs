@@ -11,7 +11,7 @@ const Exclusive = ({data}) => {
         <Container>
           <div className="md:p-[15px]  text-center flex justify-center">
             <div className="w-full md:w-9/12 lg:w-6/12 mb-[25px]">
-              <h2 className="mb-[15px] font-poppins text-[27px] text-black leading-[32px] font-semibold">
+              <h2 className="mb-[15px] font-poppins text-[27px] text-dark-color leading-[32px] font-semibold">
                 Exclusive Products{" "}
               </h2>
               <p>
@@ -35,7 +35,7 @@ const Exclusive = ({data}) => {
             </Row>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-5">
             <ButtonArrow
               Tag="Link"
               to="/shop"
