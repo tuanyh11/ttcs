@@ -1,4 +1,5 @@
 import { Markup } from 'interweave';
+import { Link } from 'react-router-dom';
 
 const ContentTop = ({ contentTop }) => {
     // console.log(contentTop);
@@ -24,14 +25,16 @@ const ContentTop = ({ contentTop }) => {
             <div className='lg:w-1/2 w-full'>
 
                 <div className='p-[15px]'>
-                    <div className='xl:px-[100px] px-0 '>
+                    <div className='xl:px-[100px] px-[15px] '>
                         <span className='text-main-color inline-block mb-[10px]' >About Us</span>
-                        <h2 className='mb-[15px] text-[27px] leading-[32px] font-poppins font-semibold text-dark-color'>Explore Great Auto - Car Buiness Solutions</h2>
+                        <h2 className='mb-[15px] sm:text-[27px] sm:leading-[32px] font-poppins font-semibold text-dark-color text-[28px] leading-[40px] '>
+                            Explore Great Auto - Car Buiness Solutions
+                        </h2>
                         <Markup content={contentTop.data} className='content-more' />
-                        <a href='#'
-                            className='mt-[25px] inline-block font-semibold font-poppins text-white uppercase rounded-[28px] py-[14px] px-[45px] leading-[28px] bg-main-color'>
+                        <Link to='/product/cHJvZHVjdDoxNzU='
+                            className='mt-[25px] inline-block font-semibold font-poppins text-white uppercase rounded-[28px] py-[14px] px-[45px] leading-[28px] bg-main-color text-[14px]'>
                             Read more
-                            <i className="fa-solid fa-circle-right ml-[10px] text-[14px]"></i></a>
+                            <i className="fa-solid fa-circle-right ml-[10px] text-[14px]"></i></Link>
                     </div>
                 </div>
             </div>

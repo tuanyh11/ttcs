@@ -24,6 +24,7 @@ const TeamMembers = ({ teamMembers }) => {
                                 <Popup
                                     className='check-box'
                                     modal
+                                    nested
                                     trigger={
                                         <p
                                             style={{ cursor: "pointer" }}
@@ -38,8 +39,12 @@ const TeamMembers = ({ teamMembers }) => {
                                             </div>
                                         </p>
                                     }
-                                >
-                                    <PopupDetail data={item} />
+                                >{
+                                        close => (
+                                            <PopupDetail data={item} close={close} />
+                                        )
+                                    }
+
                                 </Popup>
 
                                 <Popup
@@ -51,7 +56,7 @@ const TeamMembers = ({ teamMembers }) => {
                                             href="#"
                                             className="check-box-list"
                                         >
-                                            <h5 className='text-[15px] font-poppins text-dark-color font-semibold'>{item.name}</h5>
+                                            <h5 className='text-[18px] font-poppins text-dark-color font-semibold'>{item.name}</h5>
                                         </p>
                                     }
                                 >

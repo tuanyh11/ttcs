@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import data from '../../assets/data/Aboutus';
 import { BreadcrumbPath, SliderForm } from '../../Components';
@@ -8,6 +8,7 @@ import LatestNew from './LatestNew/LatestNew';
 import OurMainGoals from './OurMainGoals/OurMainGoals';
 import './style.css';
 import TeamMembers from './TeamMembers/TeamMembers';
+import blogData from '../../assets/data/blog';
 const About = () => {
   // const { pathname } = useLocation();
   // console.log(pathname);
@@ -40,6 +41,16 @@ const About = () => {
   if (dataContent !== null) {
     customerReviews = dataContent[3].contentQuote
   }
+  useEffect(() => {
+    window.scrollTo(
+      {
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      }
+    )
+  }, [])
+  // console.log(blogData.data.posts.edges);
   return (
     <div>
       <BreadcrumbPath pathname={'About Us'} />
@@ -60,7 +71,7 @@ const About = () => {
         </div>
       </div>
       <div className='max-w-[1200px] m-auto py-[65px] px-[0px]'>
-        <LatestNew />
+        <LatestNew blogData={blogData.data.posts.edges} />
       </div>
       <SliderForm />
     </div>

@@ -36,7 +36,7 @@ const CustomerReviews = ({ customerReviews }) => {
     };
     return (
         <div>
-            <div className='md:w-[560px] m-auto p-[15px] mb-[10px] w-full'>
+            <div className='md:w-[560px] m-auto p-[15px] mb-[25px] w-full'>
                 <h2 className='mb-[15px] leading-[32px] text-[27px] text-dark-color font-poppins font-semibold text-center'>
                     Customer Reviews
                 </h2>
@@ -58,7 +58,7 @@ const CustomerReviews = ({ customerReviews }) => {
                                 </div>
 
                             </div>
-                            <div className='relative bg-white lg:p-[40px] p-[20px]'>
+                            <div className='relative bg-white p-[40px] '>
                                 <Markup content={item.contentData} className='content-custom-review' />
                             </div>
                         </div>
