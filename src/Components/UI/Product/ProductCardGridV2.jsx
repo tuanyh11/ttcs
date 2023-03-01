@@ -16,7 +16,7 @@ const ProductCardGridV2 = ({
   description,
   ...rest
 }) => {
-  
+
   const stars = generateStart(averageRating);
 
   const image = featuredImage?.node?.mediaItemUrl
@@ -38,11 +38,11 @@ const ProductCardGridV2 = ({
 
   const saleInfo = salePrice
     ? -Math.round(
-        (1 -
-          Number(salePrice?.toString()?.substring(1)) /
-            Number(regularPrice?.toString()?.substring(1))) *
-          100
-      )
+      (1 -
+        Number(salePrice?.toString()?.substring(1)) /
+        Number(regularPrice?.toString()?.substring(1))) *
+      100
+    )
     : null;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +52,7 @@ const ProductCardGridV2 = ({
     setIsOpen(true);
   };
 
-  const { items, hasProduct, addItem } = useCartStore();
+  const { items, hasProduct, addItem, addToWishlistItems } = useCartStore();
 
   const handleAddToCart = function (e) {
     e.preventDefault();
@@ -70,6 +70,21 @@ const ProductCardGridV2 = ({
     });
   };
 
+  const handleAddToWish = function (e) {
+    e.preventDefault();
+    addToWishlistItems({
+      featuredImage,
+      name,
+      description,
+      id,
+      salePrice,
+      regularPrice,
+      slug,
+      averageRating,
+      shortDescription,
+      ...rest,
+    });
+  };
   return (
     <div>
       {isOpen && (
@@ -120,7 +135,10 @@ const ProductCardGridV2 = ({
             </p>
           </div>
           <div>
-            <button className="fa-solid fa-heart w-10 h-10  bg-white border border-border-color rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out "></button>
+            <button className="fa-solid fa-heart w-10 h-10  bg-white border border-border-color rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out "
+              onClick={(e) => handleAddToWish(e)}
+            >
+            </button>
           </div>
         </div>
       </div>

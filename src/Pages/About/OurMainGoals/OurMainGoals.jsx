@@ -1,5 +1,6 @@
 import { Markup } from 'interweave';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const OurMainGoals = ({ ourMainGoals }) => {
     // console.log(ourMainGoals);
@@ -20,12 +21,12 @@ const OurMainGoals = ({ ourMainGoals }) => {
                             <div className='flex items-center justify-center bg-main-color w-[130px] h-[130px] rounded-full mx-auto mb-[30px]'>
                                 <img src={item.image.mediaItemUrl} />
                             </div>
-                            <h5 className='pb-[10px] text-[18px] text-dark-color font-semibold font-poppins'>{item.title}</h5>
+                            <h5 className='ourMainGoals-title-content pb-[10px] text-[18px] text-dark-color font-semibold font-poppins leading-[1.2]'>{item.title}</h5>
                             <Markup content={item.content} />
-                            <a href='#'
-                                className='uppercase inline-block font-semibold font-poppins text-[14px] py-[7px] px-[19px] bg-[#f7f7f7] rounded-[28px] mt-[25px]'>
+                            <Link to='/shop'
+                                className='uppercase inline-block font-semibold font-poppins text-[14px] py-[7px] px-[19px] bg-[#f7f7f7] rounded-[28px] mt-[25px] text-[#696969]'>
                                 Read more
-                                <i className="fa-solid fa-circle-right ml-[10px] text-[14px] uppercase "></i></a>
+                                <i className="fa-solid fa-circle-right ml-[10px] text-[14px] uppercase text-[#696969] "></i></Link>
                         </div>
                     </div>
                 ))}

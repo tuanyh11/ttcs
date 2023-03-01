@@ -109,11 +109,11 @@ const BlogCard = ({ type = "image", settings = {}, list = true, ...rest }) => {
 
           {!list && (
             <div
-            className={`mb-[25px]  `}
-            dangerouslySetInnerHTML={{ __html: contentParagraph }}
-          ></div>
+              className={`mb-[25px]  `}
+              dangerouslySetInnerHTML={{ __html: contentParagraph }}
+            ></div>
           )}
-          
+
 
           <div className="mb-[25px]">
             {!list && (

@@ -11,8 +11,8 @@ import { getProductCate } from "../../../api";
 
 const Sidebar = ({ categories }) => {
 
-  
-  const {data} = useQuery({
+
+  const { data } = useQuery({
     queryKey: ["shop"],
     queryFn: () =>
       Promise.all([getProductCate()]).then(([categories]) => ({ categories })),

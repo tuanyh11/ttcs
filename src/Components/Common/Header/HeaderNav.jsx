@@ -46,16 +46,17 @@ const HeaderNav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const {length} = useCartStore()
-
+  const { items, length } = useCartStore()
+  // console.log(length());
+  // console.log(items.reduce((prevValue, currentValue) => prevValue + currentValue.quantity,
+  //   0));
 
   return (
     <div
-      className={` transition-all duration-200  ${
-        sticky
-          ? "bg-white  z-[9999999] fixed top-0 left-0 right-0 shadow-[0px_7px_12px_0px_rgb(225_225_225_/50%)] "
-          : ""
-      }`}
+      className={` transition-all duration-200  ${sticky
+        ? "bg-white  z-[9999999] fixed top-0 left-0 right-0 shadow-[0px_7px_12px_0px_rgb(225_225_225_/50%)] "
+        : ""
+        }`}
     >
       <Container className={"xl:max-w-[1420px]"}>
         <div className="flex justify-between items-center py-[15px] xl:py-0">
@@ -125,9 +126,16 @@ const HeaderNav = () => {
               </Link>
               <Link to={"/cart"} className="relative ml-5">
                 <i className="fa-solid fa-cart-shopping"></i>
-                <span className="absolute text-[11px] rounded-full min-w-[16px] h-4 text-center bg-main-color leading-4 text-white  top-[-5px] right-[-13px]">
-                  {length()}
-                </span>
+                {
+                  items.length > 0 ? (
+                    <span className="absolute text-[11px] rounded-full min-w-[16px] h-4 text-center bg-main-color leading-4 text-white  top-[-5px] right-[-13px]">
+                      {length()}
+                    </span>
+                  ) : (
+                    null
+                  )
+                }
+
               </Link>
             </div>
           </div>
@@ -166,9 +174,8 @@ function ResHeaderNav({ onSetOpen, data, isOpen }) {
 
   return (
     <div
-      className={`xl:hidden fixed w-[300px] z-[9999999] bg-white duration-500 shadow-[0_5px_20px_rgb(0_0_0_/_10%)]  top-0 bottom-0 pt-[70px] left-0 transition ${
-        isOpen ? "" : "-translate-x-full"
-      }`}
+      className={`xl:hidden fixed w-[300px] z-[9999999] bg-white duration-500 shadow-[0_5px_20px_rgb(0_0_0_/_10%)]  top-0 bottom-0 pt-[70px] left-0 transition ${isOpen ? "" : "-translate-x-full"
+        }`}
     >
       <button
         className="absolute right-0 top-0 bg-main-color  p-[5px]"
@@ -204,11 +211,10 @@ function ResHeaderNav({ onSetOpen, data, isOpen }) {
 
                 {isHasChildren && (
                   <div
-                    className={`${
-                      selectedPage.includes(nav?.databaseId)
-                        ? "block"
-                        : "hidden"
-                    }`}
+                    className={`${selectedPage.includes(nav?.databaseId)
+                      ? "block"
+                      : "hidden"
+                      }`}
                   >
                     {children?.map((child) => {
                       const slug = child?.node?.label

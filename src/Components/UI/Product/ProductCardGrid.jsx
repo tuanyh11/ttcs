@@ -34,11 +34,11 @@ const ProductCardGrid = ({
 
   const saleInfo = salePrice
     ? -Math.round(
-        (1 -
-          Number(salePrice?.toString()?.substring(1)) /
-            Number(regularPrice?.toString()?.substring(1))) *
-          100
-      )
+      (1 -
+        Number(salePrice?.toString()?.substring(1)) /
+        Number(regularPrice?.toString()?.substring(1))) *
+      100
+    )
     : null;
 
   const handleQuickView = function (e) {
@@ -64,7 +64,7 @@ const ProductCardGrid = ({
     });
   };
 
-  console.log(items);
+  // console.log(items);
 
   return (
     <div>

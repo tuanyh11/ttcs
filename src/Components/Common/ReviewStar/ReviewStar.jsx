@@ -5,7 +5,7 @@ const ReviewStar = ({ starNumber, className }) => {
         for (let index = 0; index < starTotal; index++) {
             list.push(
                 <li key={index}>
-                    <i className="fa-solid fa-star text-[#fbb71c]"></i>
+                    <i className="fa-solid fa-star text-[#fbb71c] text-[13px]"></i>
                 </li>
             );
         }
