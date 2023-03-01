@@ -5,7 +5,7 @@ const Brand = () => {
   return (
     <div>
       {" "}
-      <div className="py-10 px-[30px] border-[2px] ">
+      <div className="py-10 px-[30px] border border-[#f7f7f7]">
         <h4 className="pb-[13px] mb-5 border-b-[2px] text-dark-color font-semibold text-2xl font-poppins">
           Brand
         </h4>

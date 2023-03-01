@@ -256,7 +256,7 @@ function Selector({ sortDatatypesFilter, setSortDatatypesFilter, onSelect = () =
 
   return (
     <div ref={selectRef} className=" relative">
-      <div className="block relative cursor-pointer p-2.5 h-[50px] px-5 border border-[#111] outline-none w-full md:w-[250px]">
+      <div className="block relative cursor-pointer p-2.5 h-[50px] px-5 border border-[#e8e8e8]   outline-none w-full md:w-[250px]">
         {sortDatatypesFilter?.name}
         <i className="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs"></i>
       </div>

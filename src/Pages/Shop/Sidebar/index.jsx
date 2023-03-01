@@ -22,11 +22,22 @@ const Sidebar = ({ categories }) => {
 
   const isHasProducts = loc.state ? loc.state?.products?.length > 0 : true;
 
-  console.log(loc)
-
   return (
     <div>
       <ul>
+        <li>
+          <div className="relative mb-[30px]">
+            <input
+              type="text"
+              className=" h-[50px] border-[1px] pl-5 text-black  w-full pr-[84px]  outline-none "
+              placeholder="Search..."
+              // onChange={handleOnSearch}
+            />
+            <button className="absolute top-1/2 text-[#333] text-sm right-0 -translate-y-1/2 px-4  ">
+              <i className="far fa-search"></i>
+            </button>
+          </div>
+        </li>
         {isHasProducts && (
           <li
             className="mb-[30px]"
@@ -58,7 +69,6 @@ const Sidebar = ({ categories }) => {
             <Brand />
           </li>
         )}
-
       </ul>
     </div>
   );

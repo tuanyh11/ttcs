@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
+import { useUiStore } from "../../Components/store";
 import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
@@ -15,6 +16,8 @@ const Shop = ({ categories }) => {
   });
 
   const searchText = useLocation().state?.searchText;
+
+  const { setIsOpeningFilterProduct, isOpeningFilterProduct } = useUiStore();
 
   const handleOnSelectCate = (category) => {
     const id = category.databaseId;
@@ -57,12 +60,12 @@ const Shop = ({ categories }) => {
   };
 
   const handleFilterPrice = (price) => {
-    setFilter({ ...filter, price})
-  }
+    setFilter({ ...filter, price });
+  };
 
+  console.log(isOpeningFilterProduct);
 
   const { Provider } = useShopContext();
-
 
   return (
     <div>
@@ -74,31 +77,43 @@ const Shop = ({ categories }) => {
           handleOnSelectStatus,
           handleOnRemoveCate,
           handleOnRemoveStatus,
-          handleFilterPrice
+          handleFilterPrice,
         }}
       >
-        <BreadCrumb label={ searchText ? `Search Results for: ${searchText}` : 'Products'} isForSearching={searchText} offPath={searchText}/>
+        <BreadCrumb
+          label={searchText ? `Search Results for: ${searchText}` : "Products"}
+          isForSearching={searchText}
+          offPath={searchText}
+        />
         <div className="lg:hidden">
-          <MobileSidebar/>
+          <div
+            className={`fixed  w-[400px] overflow-auto top-0 h-[100vh] bg-white z-[99999999999] transition-all duration-500 ease-linear ${
+              isOpeningFilterProduct ? "-left-full" : "left-[0]"
+            }  `}
+          >
+            <div className="py-[18px] px-5 bg-[#1c2224] text-white text-[16px] font-semibold font-poppins flex justify-between">
+              <h5>Product Filters </h5>
+              <button
+                onClick={() => setIsOpeningFilterProduct(true)}
+                className="w-[26px] h-[26px] leading-[26px] bg-white rounded-full text-black font-bold"
+              >
+                <i className="fa fa-times"></i>
+              </button>
+            </div>
+            <div className="py-5 px-[10px]">
+              <MobileSidebar />
+            </div>
+          </div>
         </div>
         <div className="py-20 relative">
           <Container>
             <Row>
               <Col
-                className={"w-full lg:w-3/12 order-2 mt-10 md:mt-0  md:order-1"}
+                className={
+                  "w-full hidden md:block lg:w-3/12 order-2 mt-10 md:mt-0  md:order-1"
+                }
               >
                 <div className="">
-                  <div className="relative mb-[30px]">
-                    <input
-                      type="text"
-                      className=" h-[50px] border-[1px] pl-5  w-full pr-[84px]  outline-none "
-                      placeholder="Search..."
-                      // onChange={handleOnSearch}
-                    />
-                    <button className="absolute top-1/2 right-0 -translate-y-1/2 px-4  ">
-                      <i className="fas fa-search"></i>
-                    </button>
-                  </div>
                   <Sidebar categories={categories} />
                 </div>
               </Col>

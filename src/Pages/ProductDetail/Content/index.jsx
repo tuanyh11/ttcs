@@ -47,7 +47,7 @@ const index = () => {
         </Container>
       </div>
 
-      <div className="bg-white">
+      <div className="bg-white pb-[55px]">
         <Container>
           <Nav
             onSetPage={setPage}

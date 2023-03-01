@@ -57,10 +57,7 @@ const HeaderNav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const { items, length } = useCartStore()
-  // console.log(length());
-  // console.log(items.reduce((prevValue, currentValue) => prevValue + currentValue.quantity,
-  //   0));
+  const { items, length } = useCartStore()  
 
   return (
     <div
@@ -127,8 +124,8 @@ const HeaderNav = () => {
                 placeholder="Search"
                 onChange={(e) => setText(e.target.value)}
               />
-              <button onClick={() => handleOnSearch()} className="absolute top-1/2 right-0 -translate-y-1/2 text-[#111111] -translate-x-5">
-                <i className="fas fa-search"></i>
+              <button onClick={() => handleOnSearch()} className="absolute top-1/2 text-sm right-0 -translate-y-1/2 text-[#111111] -translate-x-5">
+                <i className="far fa-search font-normal"></i>
               </button>
             </div>
             <div className="mr-[10px] ml-[30px] relative group">
