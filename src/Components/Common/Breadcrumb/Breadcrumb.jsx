@@ -17,7 +17,7 @@ const Breadcrumb = ({ image, label, offPath = false}) => {
       >
         <h3
           to={"/"}
-          className="text-center mb-[10px] block text-white relative z-50  text-[32px] md:text-4xl lg:text-[40px] xl:text-[60px] font-[600] font-poppins  "
+          className="text-center lg:leading-[1.2] mb-[10px] block text-white relative z-50  text-[32px] md:text-4xl lg:text-[40px] xl:text-[60px] font-[600] font-poppins  "
         >
           { label}
         </h3>

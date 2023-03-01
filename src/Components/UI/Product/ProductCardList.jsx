@@ -125,7 +125,7 @@ const ProductCard = ({
 
             <ButtonV1
               Tag="Link"
-              to={`/product/${id}`}
+              to={`/product/${name}`} state={{id}}
               className=" rounded-[28px] px-5 py-[6px] leading-[23px]"
             >
               Shop Now

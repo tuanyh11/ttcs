@@ -6,6 +6,7 @@ import { useBlogContext } from "../../hooks";
 import { getSideBarBlogData, searchBlogs } from "../../api";
 import { Outlet, useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
+import queryString from "query-string";
 
 const Blog = () => {
   const { Provider } = useBlogContext();
@@ -19,20 +20,21 @@ const Blog = () => {
 
   const loc = useLocation()
 
+  const query = queryString.parse(loc.search);
+
   const search = loc.state?.search
 
-  const cateName = loc.state?.cateName
+  const cateName = query?.categoryName
 
   const tagName = loc.state?.tagName
 
   let path = 'Blog posts'
 
-  if(search) path = `Search Results for: ${search}}`
+  if(search) path = `Search Results for: ${search}`
 
   const isDetail = loc.pathname.split('/').length > 2
   
 
-  if(cateName) path = `Category : ${cateName}`
   if(cateName) path = `Category : ${cateName}`
   if(tagName) path = `Tag : ${tagName}`
   // cateName

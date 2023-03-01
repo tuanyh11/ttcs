@@ -18,19 +18,19 @@ export const getFooterData = async () => {
 // blog
 export const getSideBarBlogData = async () => {
   const { categories, tags, posts } = blogData.data;
-  const topNewComments = posts.edges.map((blog) => {
-    const newestComment = blog.node.comments.nodes.reduce(
+  const topNewComments = products.map((product) => {
+    const newestComment = product.node.comments.nodes.reduce(
       (prevComment, currComment) => {
         const prevDate = new Date(prevComment.date);
         const currDate = new Date(currComment.date);
         return currDate > prevDate ? currComment : prevComment;
       },
-      blog.node.comments.nodes[0]
+      product.node.comments.nodes[0]
     ); // initialize with the first comment
 
     return {
-      blogId: blog.node.id,
-      blogTitle: blog.node.title,
+      productId: product.node.id,
+      productName: product.node.name,
       newestComment: newestComment,
     };
   });
@@ -59,7 +59,9 @@ export const getListBlog = async (limit = 2) => {
 
 export const getListBlogByCategory = (id) => {
   const data = blogData.data.posts.edges.filter((blog) =>
-    blog.node.categories.nodes.some((cate) => cate.categoryId === id)
+   {
+    return  blog.node.categories.nodes.some((cate) => cate.categoryId.toString() === id)
+   }
   );
   return {
     data,
@@ -69,7 +71,7 @@ export const getListBlogByCategory = (id) => {
 
 export const getListBlogByTag = (id) => {
   const data = blogData.data.posts.edges.filter((blog) =>
-    blog.node.tags.edges.some((tag) => tag.node.databaseId === id)
+    blog.node.tags.edges.some((tag) => tag.node.databaseId.toString() === id)
   );
   return {
     data,

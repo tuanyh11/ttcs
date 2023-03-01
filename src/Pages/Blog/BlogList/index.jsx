@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Link, useLocation } from "react-router-dom";
+import queryString from "query-string";
 import {
   getListBlog,
   getListBlogByCategory,
@@ -12,20 +13,24 @@ import { useBlogContext } from "../../../hooks";
 
 const Content = () => {
   const loc = useLocation();
+  const query = queryString.parse(loc.search);
 
-  const cateId = loc.state?.categoryId;
-  const search = loc?.state?.search;
-  const tag = loc?.state?.tag;
+  const cateId = query?.categoryId;
+  const search = query?.search;
+  const tagId = query?.tagId;
 
   const { data } = useQuery({
-    queryKey: ["blogs", cateId, search, tag],
+    queryKey: ["blogs", cateId, search, tagId],
     queryFn: () => {
       if (cateId) return getListBlogByCategory(cateId);
-      if (tag) return getListBlogByTag(tag);
+      if (tagId) return getListBlogByTag(tagId);
       if (search) return searchBlogs(search);
       return getListBlog().then((res) => res);
     },
+    refetchOnWindowFocus: false,
   });
+
+
 
   const [text, setText] = useState("");
 

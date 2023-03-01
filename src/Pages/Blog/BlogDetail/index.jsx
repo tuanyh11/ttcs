@@ -8,13 +8,21 @@ import {
   InputV2,
 } from "../../../Components";
 import { useDate } from "../../../hooks";
+import queryString from "query-string";
+
 
 const BlogDetail = () => {
   const getDate = useDate();
 
-  const loc = useLocation().state;
-  const id = loc?.id;
-  const commentId = loc?.comment
+  const loc = useLocation();
+
+  const param = useParams();
+  console.log(param)
+
+  const query = queryString.parse(loc.search)
+
+  const id = param?.id || query?.id ;
+  
 
   const [selectId, setSelectId] = useState(null);
 
@@ -37,12 +45,7 @@ const BlogDetail = () => {
     [blogData]
   );
 
-  useEffect(() => {
-    const element = commentId ? document.getElementById(commentId) : null;
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [commentId]);
+
 
 
   return (
@@ -66,7 +69,7 @@ const BlogDetail = () => {
               // console.log(comment)
 
               return (
-                <div id={comment.id} key={comment.id}>
+                <div key={comment.id}>
                   <Comment
                     comment={comment}
                     getDate={getDate}

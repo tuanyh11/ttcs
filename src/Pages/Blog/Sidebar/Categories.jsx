@@ -25,11 +25,7 @@ const Categories = () => {
               >
                 <Link
                   className="hover:text-main-color transition-main"
-                  to={`/blog?category=${id}`}
-                  state={{
-                    categoryId: id,
-                    cateName: name,
-                  }}
+                  to={`/blog?categoryId=${id}&categoryName=${name}&year=${state?.year}`}
                 >
                   <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>
                   {name}

@@ -59,7 +59,7 @@ export default [
         index: false,
       },
       {
-        path: ":slug",
+        path: ":id",
         name: "blog",
         component: BlogDetail,
         index: false,

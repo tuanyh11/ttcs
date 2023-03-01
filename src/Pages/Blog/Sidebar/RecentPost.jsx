@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 import { useBlogContext } from "../../../hooks";
 
 const RecentPost = () => {
+  const { state } = useBlogContext();
 
+  const recentPosts = state?.recentPosts;
 
-  const {state} = useBlogContext()
-
-  const recentPosts = state?.recentPosts
-
-  
   return (
     <div>
       <div className="p-10  border-[2px] ">
@@ -17,15 +14,19 @@ const RecentPost = () => {
           Recent Posts
         </h4>
         <ul>
-          {recentPosts?.map((category) => {
+          {recentPosts?.map((post) => {
             return (
               <li
-                key={category?.node?.id}
+                key={post?.node?.id}
                 className="pb-[15px] last:pb-0 flex items-center justify-between"
               >
-                <Link className="hover:text-main-color transition-main" to={`/blog/${category?.node?.title}`} state={{id: category?.node?.id}}>
+                <Link
+                  className="hover:text-main-color transition-main"
+                  to={`/blog/${post?.node?.id}?categoryTitle=${post?.node?.title}&id=${post?.node?.id}`}
+                  state={{ id: post?.node?.id }}
+                >
                   <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>
-                  {category?.node?.title}
+                  {post?.node?.title}
                 </Link>
               </li>
             );

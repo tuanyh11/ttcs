@@ -22,8 +22,7 @@ const Tags = () => {
                 className=" last:pb-0  inline-block"
               >
                 <Link
-                  to={`/blog?tag=${tag?.node?.slug}`}
-                  state={{ tag: tag?.node?.databaseId, tagName: tag?.node?.name }}
+                  to={`/blog?tag=${tag?.node?.slug}&tagId=${tag?.node?.databaseId}`}
                   className="py-2 px-[11px] leading-[1] block text-[14px] bg-[#f5f7fa] hover:bg-main-color hover:text-white transition-all text-[#646a7c] mr-[10px] mb-[10px]"
                 >
                   {tag?.node?.name}

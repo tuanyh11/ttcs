@@ -67,11 +67,11 @@ const BlogCard = ({ type = "image", settings = {}, list = false, ...rest }) => {
       <div className="pt-[30px] pb-[10px] px-[15px] md:px-10 border-2 border-t-0">
         <div className="flex items-center gap-[22px] pb-[10px] mb-[15px] border-b capitalize">
           <div className="">
-            <i className="mr-[10px] text-main-color fa-regular fa-calendar-days"></i>
+            <i className="mr-[10px] text-main-color far fa-calendar-alt"></i>
             <Link to={`/blog/${id}`}>{getDate(published)}</Link>
           </div>
           <div className="">
-            <i className="mr-[10px] text-main-color fa-regular fa-folder"></i>
+            <i className="mr-[10px] text-main-color far fa-folder"></i>
             <Link to={`/blog/${id}`}>Video</Link>
           </div>
 

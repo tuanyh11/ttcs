@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
 import { useShopContext } from "../../hooks";
@@ -59,6 +59,7 @@ const Shop = ({ categories }) => {
     setFilter({ ...filter, price})
   }
 
+
   const { Provider } = useShopContext();
 
 
@@ -75,7 +76,7 @@ const Shop = ({ categories }) => {
           handleFilterPrice
         }}
       >
-        <BreadCrumb label={searchText} isForSearching={searchText}/>
+        <BreadCrumb label={`Search Results for: ${searchText}` || 'Products'} isForSearching={searchText} offPath={searchText}/>
         <div className="py-20 relative">
           <Container>
             <Row>

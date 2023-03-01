@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useParams } from "react-router-dom";
 import { getProductDetail } from "../../api";
-import product from "../../assets/data/product";
 import {
-  BreadCrumb,
-  Col,
-  Container,
-  ProductCardGrid,
-  Row,
+  BreadCrumb
 } from "../../Components";
 import { useProductDetailContext } from "../../hooks";
 import Content from "./Content";
+import queryString from "query-string";
+
 
 const ProductDetail = () => {
-  const state = useLocation().state
-  const id = state?.id;
+  const loc = useLocation()
+  const state = loc.state
+  const query = queryString.parse(loc.search)
+
+
+  const id = state?.id || query?.productId;
   const productBySearch  = state?.product
 
   const { data, isLoading, error } = useQuery({
@@ -30,7 +31,12 @@ const ProductDetail = () => {
     <div>
       <BreadCrumb />
       <div>
-        <Provider value={productBySearch || data}>
+        <Provider value={productBySearch || {
+          ...data,
+          query: {
+            ...query
+          }
+        }}>
           <Content />
         </Provider>
       </div>

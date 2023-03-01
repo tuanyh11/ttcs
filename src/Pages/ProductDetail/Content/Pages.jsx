@@ -1,11 +1,18 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Button, InputV2 } from "../../../Components";
 import { useDate } from "../../../hooks";
 import { generateStart } from "../../../utils";
 
-const Pages = ({ page, data }) => {
+const Pages = ({ page, data, commentId }) => {
   const getDate = useDate();
   const [selectId, setSelectId] = useState(null);
+
+  useEffect(() => {
+    const element = commentId ? document.getElementById(commentId) : null;
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [commentId]);
 
 
 
@@ -53,7 +60,7 @@ const Pages = ({ page, data }) => {
                 // console.log(comment)
 
                 return (
-                  <div key={comment.id}>
+                  <div id={commentId || index} key={comment.id}>
                     <Comment
                       comment={comment}
                       getDate={getDate}
