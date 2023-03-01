@@ -25,11 +25,11 @@ const HeaderNav = () => {
 
 
   const handleOnSearch = async () => {
-    const data = await  searchProducts(text)
-    if(data?.length > 1 || data?.length === 0) 
-      nav("/shop", {state: {products: data, searchText: text}})
-    if(data?.length === 1) {
-      nav(`/product/${data?.[0]?.node?.name}`, {state: {product: data?.[0]?.node, searchText: text}}) 
+    const data = await searchProducts(text)
+    if (data?.length > 1 || data?.length === 0)
+      nav("/shop", { state: { products: data, searchText: text } })
+    if (data?.length === 1) {
+      nav(`/product/${data?.[0]?.node?.name}`, { state: { product: data?.[0]?.node, searchText: text } })
     }
   };
 
@@ -41,7 +41,7 @@ const HeaderNav = () => {
       ),
   });
 
-  
+
 
   useEffect(() => {
     const onScroll = () => {
@@ -57,14 +57,17 @@ const HeaderNav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const { items, length } = useCartStore()
+  // console.log(length());
+  // console.log(items.reduce((prevValue, currentValue) => prevValue + currentValue.quantity,
+  //   0));
 
   return (
     <div
-      className={` transition-all duration-200  ${
-        sticky
-          ? "bg-white  z-[9999999] fixed top-0 left-0 right-0 shadow-[0px_7px_12px_0px_rgb(225_225_225_/50%)] "
-          : ""
-      }`}
+      className={` transition-all duration-200  ${sticky
+        ? "bg-white  z-[9999999] fixed top-0 left-0 right-0 shadow-[0px_7px_12px_0px_rgb(225_225_225_/50%)] "
+        : ""
+        }`}
     >
       <Container className={"xl:max-w-[1420px]"}>
         <div className="flex justify-between items-center py-[15px] xl:py-0">
@@ -129,7 +132,7 @@ const HeaderNav = () => {
               </button>
             </div>
             <div className="mr-[10px] ml-[30px] relative group">
-                <HeaderCart/>
+              <HeaderCart />
             </div>
           </div>
 
@@ -151,5 +154,7 @@ const HeaderNav = () => {
     </div>
   );
 };
+
+
 
 export default HeaderNav;

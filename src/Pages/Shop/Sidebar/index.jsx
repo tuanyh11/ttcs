@@ -50,13 +50,13 @@ const Sidebar = ({ categories }) => {
         </li>
         {isHasProducts && (
           <li
-          className="mb-[30px]"
-          style={{ boxShadow: `0 5px 0 rgb(200 200 200 / 20%)` }}
-        >
-          <Brand />
-        </li>
+            className="mb-[30px]"
+            style={{ boxShadow: `0 5px 0 rgb(200 200 200 / 20%)` }}
+          >
+            <Brand />
+          </li>
         )}
-        
+
       </ul>
     </div>
   );

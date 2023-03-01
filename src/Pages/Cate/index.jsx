@@ -4,9 +4,8 @@ import SliderForm from '../../Components/Common/Slider/SliderForm'
 import ItemCate from './ItemCate/ItemCate'
 import TitleCate from './TitleCate/TitleCate'
 import dataCategory from '../../assets/data/ListCategory';
-const Cate = () => {
 
-  // console.log(dataCategory.data.productCategories.edges);
+const Cate = () => {
   return (
     <div>
       <BreadcrumbPath pathname={'Categories'} />

@@ -29,15 +29,15 @@ const ProductCardGrid = ({
     ...rest,
   };
 
-  const {selectProduct} = useUiStore()
+  const { selectProduct } = useUiStore()
 
   const saleInfo = salePrice
     ? -Math.round(
-        (1 -
-          Number(salePrice?.toString()?.substring(1)) /
-            Number(regularPrice?.toString()?.substring(1))) *
-          100
-      )
+      (1 -
+        Number(salePrice?.toString()?.substring(1)) /
+        Number(regularPrice?.toString()?.substring(1))) *
+      100
+    )
     : null;
 
   const handleQuickView = function (e) {
@@ -56,7 +56,7 @@ const ProductCardGrid = ({
     <div>
       <div className="group">
         <div className="mb-5 relative">
-          <Link to={`/product/${name}`} state={{id}}>
+          <Link to={`/product/${name}`} state={{ id }}>
             <img
               src={featuredImage?.node?.mediaItemUrl}
               alt=""
@@ -94,7 +94,7 @@ const ProductCardGrid = ({
           <div className="leading-[1]">{stars}</div>
 
           <Link
-            to={`/product/${name}`} state={{id}}
+            to={`/product/${name}`} state={{ id }}
             className=" text-[15px] text-black  font-semibold hover:text-main-color transition-all duration-300"
           >
             {name}

@@ -1,57 +1,72 @@
 import React from 'react';
 
-const WishItems = () => {
+const WishItems = (props) => {
+    console.log(props);
     return (
         <div>
             <form className='overflow-x-auto max-w-full '>
                 <table className='max-w-full bg-transparent w-full border-gray-500'>
                     <thead>
                         <tr>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] '>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] w-[35px] '>
                                 <input type='checkbox' />
                             </th>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px]'>&nbsp;</th>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px]'>&nbsp;</th>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px]'>Product Name</th>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px]'>Unit Price</th>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px]'>Date Added</th>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px]'>Stock Status</th>
-                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px]'>&nbsp;</th>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] w-[35px] align-middle'>&nbsp;</th>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] align-middle min-w-[100px] max-w-full w-[100px]'>&nbsp;</th>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] align-middle'>Product Name</th>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] align-middle'>Unit Price</th>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] align-middle'>Date Added</th>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] align-middle'>Stock Status</th>
+                            <th className='text-center border-[1px] border-[#dee2e6] p-[15px] align-middle w-[180px]'>&nbsp;</th>
 
                         </tr>
                     </thead>
                     <tbody>
+                        {
+                            props.wishItems.map((item, index) => (
+                                <tr key={index}>
+                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'><input type='checkbox' /></td>
+                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                        <button className='w-[27px] h-[27px] flex justify-center m-auto rounded-full bg-[#f7f7f7] text-[18px] text-[#000] pt-[3px]'
+                                            title='Remove'>
+                                            <i className="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </td>
+                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6] '>
+                                        <a href='#'>
+                                            <img src={item.featuredImage.node.mediaItemUrl} alt=''
+                                                className='max-w-full h-auto'
+                                            />
+                                        </a>
+                                    </td>
+                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                        <a href='#'>{item.name}</a>
+                                    </td>
+                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                        <span>&pound; 80.05</span>
+                                        {/* <span>&pound; 85.00</span> */}
+                                    </td>
+                                    {/* <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>February 23, 2023</td> */}
+                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>{`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`}</td>
+                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                        <i className="fa-solid fa-check mr-[5px]"></i>
+                                        <span>In Stock</span>
+                                    </td>
+                                    <td className='p-[15px] text-center border-[1px] border-[#dee2e6]'>
+                                        <button className='inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[20px] py-[20px]  font-poppins text-white lg:px-[16px] lg:py-0'>
+                                            <span className='lg:block hidden' >add to cart</span>
+                                            <i className="fa-solid fa-cart-shopping lg:hidden block" ></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))
+                        }
                         <tr>
-                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'><input type='checkbox' /></td>
-                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                <button className='w-[27px] h-[27px] flex justify-center m-auto rounded-full bg-[#f7f7f7] text-[18px] text-dark-color pt-[3px]'
-                                    title='Remove'>
-                                    <i className="fa-solid fa-xmark"></i>
-                                </button>
-                            </td>
-                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6] '>
-                                <a href='#'>
-                                    <img src='https://klbtheme.com/chakta/wp-content/uploads/2021/01/products-6-90x90.jpg' alt=''
-                                        className='m-auto md:max-w'
-                                    />
-                                </a>
-                            </td>
-                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                <a href='#'>Carbon Ceramic Brake Kit</a>
-                            </td>
-                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>&pound; 80.00</td>
-                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>February 23, 2023</td>
-                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                <i className="fa-solid fa-check mr-[5px]"></i>
-                                <span>In Stock</span>
-                            </td>
-                            <td className='p-[15px] text-center border-[1px] border-[#dee2e6]'>
-                                <button className='inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[20px] py-[20px]  font-poppins text-white lg:px-[16px] lg:py-0'>
-                                    <span className='lg:block hidden' >add to cart</span>
-                                    <i className="fa-solid fa-cart-shopping lg:hidden block" ></i>
-                                </button>
+                            <td>
+
                             </td>
                         </tr>
+
                     </tbody>
 
                 </table>
@@ -76,11 +91,11 @@ const WishItems = () => {
                 <div className="social-buttons float-right mt-[30px]">
                     <span className='mr-[27px]'>Share on</span>
                     <ul className='inline-flex align-middle text-center justify-center items-center'>
-                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="Facebook" ><i className="fa-brands fa-facebook-f"></i></a></li>
-                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="Twitter"><i className="fa-brands fa-twitter"></i></a></li>
-                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="Pinterest"><i className="fa-brands fa-pinterest-p"></i></a></li>
-                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="WhatsApp"><i className="fa-brands fa-whatsapp"></i></a></li>
-                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="mailto:?" title="Email"><i className="fa-solid fa-envelope"></i></a></li>
+                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="Facebook" ><i className="fa-brands fa-facebook-f text-[20px]"></i></a></li>
+                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="Twitter"><i className="fa-brands fa-twitter text-[20px]"></i></a></li>
+                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="Pinterest"><i className="fa-brands fa-pinterest-p text-[20px]"></i></a></li>
+                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="#" title="WhatsApp"><i className="fa-brands fa-whatsapp text-[20px]"></i></a></li>
+                        <li className='w-[40px] h-[40px] pt-[5px]'><a href="mailto:?" title="Email"><i className="fa-solid fa-envelope text-[20px]"></i></a></li>
                     </ul>
                 </div>
             </form>
