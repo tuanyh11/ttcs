@@ -9,7 +9,7 @@ import Filter from "./Filter";
 import { useQuery } from "react-query";
 import { getProductCate } from "../../../api";
 
-const Sidebar = ({ categories }) => {
+const MobileSidebar = ({ categories }) => {
   const { data } = useQuery({
     queryKey: ["shop"],
     queryFn: () =>
@@ -20,9 +20,7 @@ const Sidebar = ({ categories }) => {
 
   const loc = useLocation();
 
-  const isHasProducts = loc.state ? loc.state?.products?.length > 0 : true;
-
-  console.log(loc)
+  const isHasProducts = loc.state?.products?.length > 0;
 
   return (
     <div>
@@ -64,4 +62,4 @@ const Sidebar = ({ categories }) => {
   );
 };
 
-export default Sidebar;
+export default MobileSidebar;

@@ -85,7 +85,7 @@ const Content = () => {
 
   const showProducts = sortProduct(products, selectedFilter?.slug, filter)
   
-    
+  console.log(filter)  
 
 
   if (isLoading)

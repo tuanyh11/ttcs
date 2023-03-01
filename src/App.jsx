@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { Col, Footer, Header, QuickView, Row } from "./Components";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import routeData from "./Routes";
 import { useUiStore } from "./Components/store";
+import Sidebar from "./Pages/Shop/Sidebar";
 
 function App() {
   const [backToHeader, setBackToHeader] = useState(false);
@@ -66,11 +67,14 @@ function App() {
     );
   }, []);
 
+  const { pathname } = useLocation();
+
   return (
     <div className="App relative">
       {product && (
         <QuickView {...product} onQuickViewClick={() => selectProduct(null)} />
       )}
+
 
       {Children}
 
@@ -78,12 +82,17 @@ function App() {
         <Row className={"bg-white text-center"}>
           <Col className={"w-3/12"}>
             <div className="py-5">
-              <Link to={"/"} className="fa-solid fa-house "></Link>
+              <Link to={"/"} className="fal fa-home "></Link>
             </div>
           </Col>
           <Col className={"w-3/12"}>
             <div className="py-5">
-              <Link to="/shop" className="fa-solid fa-table-cells-large"></Link>
+            {pathname !== "/shop" ? (
+
+              <Link to="/shop" className="fal fa-th-large"></Link>
+            ) : (
+              <button className="fal fa-filter"></button>
+            )}
             </div>
           </Col>
           <Col className={"w-3/12"}>

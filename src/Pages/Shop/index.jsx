@@ -4,6 +4,7 @@ import { BreadCrumb, Col, Row, Container } from "../../Components";
 import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
+import MobileSidebar from "./Sidebar/MobileSidebar";
 
 const Shop = ({ categories }) => {
   const [filter, setFilter] = useState({
@@ -76,7 +77,10 @@ const Shop = ({ categories }) => {
           handleFilterPrice
         }}
       >
-        <BreadCrumb label={`Search Results for: ${searchText}` || 'Products'} isForSearching={searchText} offPath={searchText}/>
+        <BreadCrumb label={ searchText ? `Search Results for: ${searchText}` : 'Products'} isForSearching={searchText} offPath={searchText}/>
+        <div className="lg:hidden">
+          <MobileSidebar/>
+        </div>
         <div className="py-20 relative">
           <Container>
             <Row>
