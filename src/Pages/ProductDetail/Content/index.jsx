@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "../../../Components";
 import { useProductDetailContext } from "../../../hooks";
@@ -9,7 +9,15 @@ import Pages from "./Pages";
 
 const index = () => {
   const [page, setPage] = useState("description");
+  const [commentId, setCommentId] = useState(null);
   const { state: data } = useProductDetailContext();
+
+  useEffect(() => {
+    if(data?.query?.type && data?.query?.commentId ) {
+      setPage(data.query.type);
+      setCommentId(data.query.commentId)
+    }
+  }, [data])
 
   return (
     <div className="bg-[#f7f7f7] ">
@@ -46,7 +54,7 @@ const index = () => {
             commentCount={data?.commentCount}
             page={page}
           />
-          <Pages page={page} data={data} />
+          <Pages page={page} data={data} commentId={commentId} />
         </Container>
       </div>
     </div>

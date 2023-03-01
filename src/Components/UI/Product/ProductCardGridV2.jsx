@@ -92,7 +92,7 @@ const ProductCardGridV2 = ({
       )}
       <div className="group">
         <div className="mb-5 relative">
-          <Link to={`/product/${id}`}>
+          <Link to={`/product/${name}`} state={{ id }}>
             <div >
               <img src={image} alt="" className="w-full h-full" />
             </div>
@@ -107,31 +107,30 @@ const ProductCardGridV2 = ({
                         after:bg-[rgba(0,0,0,0.55)] group-hover:after:opacity-100 group-hover:after:visible after:transition-all after:duration-[400] after:ease-out "
             >
               <div className="relative z-50">
-                <button onClick={(e) => handleAddToCart(e)} className="fa-solid fa-cart-shopping w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
+                <button onClick={(e) => handleAddToCart(e)} className="far fa-cart-plus w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
                 {hasProduct(id) && (
                   <button className="fa-solid fa-check w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
                 )}
                 <button
                   onClick={handleQuickView}
-                  className="fa-solid fa-magnifying-glass w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
+                  className="far fa-search-plus w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
                 ></button>
               </div>
             </div>
           </Link>
         </div>
-
         <div className="text-start font-poppins flex justify-between items-center">
           <div>
             <Link
-              to={`/product/:id`}
+              to={`/product/${name}`} state={{ id }}
               className=" text-[15px] text-black  font-semibold hover:text-main-color transition-all duration-300"
             >
               {name}
             </Link>
 
-            <p className=" font-semibold ">
-              <del className="text-[#696969] text-sm mr-1">${salePrice}</del>
-              <span className="text-main-color ">${regularPrice}</span>
+            <p className=" font-rubik font-medium">
+              <del className="text-[#696969] text-sm mr-1 ">{salePrice}</del>
+              <span className="text-main-color ">{regularPrice}</span>
             </p>
           </div>
           <div>

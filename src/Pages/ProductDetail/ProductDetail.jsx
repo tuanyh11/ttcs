@@ -1,46 +1,47 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import {  useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getProductDetail } from "../../api";
-import product from "../../assets/data/product";
 import {
-  BreadCrumb,
-  Col,
-  Container,
-  ProductCardGrid,
-  Row,
+  BreadCrumb
 } from "../../Components";
 import { useProductDetailContext } from "../../hooks";
-import Content from './Content'
-
+import Content from "./Content";
+import queryString from "query-string";
 
 
 const ProductDetail = () => {
+  const loc = useLocation()
+  const state = loc.state
+  const query = queryString.parse(loc.search)
 
 
+  const id = state?.id || query?.productId;
+  const productBySearch  = state?.product
 
-  const id = useParams()?.id;
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => getProductDetail(id).then((res) => res?.node),
+    enabled: !productBySearch
+  });
 
-  const { data, isLoading, error } = useQuery(["product", id], () =>
-    getProductDetail(id).then((res) => res?.node)
-  );
-
-
-  const {Provider} = useProductDetailContext()
-
+  const { Provider } = useProductDetailContext();
 
   return (
     <div>
       <BreadCrumb />
-      <div >
-        <Provider value={data}>
-          <Content/>
+      <div>
+        <Provider value={productBySearch || {
+          ...data,
+          query: {
+            ...query
+          }
+        }}>
+          <Content />
         </Provider>
-       
       </div>
     </div>
   );
 };
 
 export default ProductDetail;
-

@@ -45,9 +45,11 @@ body {
 }
 
 
-
 /* button */
 @layer components {
+  button {
+    @apply outline-none 
+  }
   .button-v1,
   .button-v2 {
     @apply px-4 text-[14px] inline-block font-semibold border-none leading-[50px] font-poppins text-[#fff] bg-main-color cursor-pointer;

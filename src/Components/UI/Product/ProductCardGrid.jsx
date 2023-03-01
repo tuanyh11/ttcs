@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { generateStart } from "../../../utils";
-import { useCartStore } from "../../store";
-import QuickView from "./QuickView";
+import { useCartStore, useUiStore } from "../../store";
 
 const ProductCardGrid = ({
   featuredImage,
@@ -30,7 +29,7 @@ const ProductCardGrid = ({
     ...rest,
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  const { selectProduct } = useUiStore()
 
   const saleInfo = salePrice
     ? -Math.round(
@@ -43,38 +42,21 @@ const ProductCardGrid = ({
 
   const handleQuickView = function (e) {
     e.preventDefault();
-    setIsOpen(true);
+    selectProduct(product, true)
   };
 
-  const { items, hasProduct, addItem } = useCartStore();
+  const { hasProduct, addItem } = useCartStore();
 
   const handleAddToCart = function (e, item) {
     e.preventDefault();
-    addItem({
-      featuredImage,
-      name,
-      description,
-      id,
-      salePrice,
-      regularPrice,
-      slug,
-      averageRating,
-      shortDescription,
-      ...rest,
-    });
+    addItem(product);
   };
-
-  // console.log(items);
 
   return (
     <div>
-      {isOpen && (
-        <QuickView {...product} onQuickViewClick={() => setIsOpen(false)} />
-      )}
-
       <div className="group">
         <div className="mb-5 relative">
-          <Link to={`/product/${id}`}>
+          <Link to={`/product/${name}`} state={{ id }}>
             <img
               src={featuredImage?.node?.mediaItemUrl}
               alt=""
@@ -93,14 +75,14 @@ const ProductCardGrid = ({
               <div className="relative z-[99999]">
                 <button
                   onClick={(e) => handleAddToCart(e, product)}
-                  className="fa-solid fa-cart-shopping w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
+                  className="far fa-cart-plus w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
                 ></button>
                 {hasProduct(id) && (
                   <button className="fa-solid fa-check w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
                 )}
                 <button
                   onClick={handleQuickView}
-                  className="fa-solid fa-magnifying-glass w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
+                  className="far fa-search-plus w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
                 ></button>
                 <button className="fa-solid fa-heart w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
               </div>
@@ -112,7 +94,7 @@ const ProductCardGrid = ({
           <div className="leading-[1]">{stars}</div>
 
           <Link
-            to={`/product/${id}`}
+            to={`/product/${name}`} state={{ id }}
             className=" text-[15px] text-black  font-semibold hover:text-main-color transition-all duration-300"
           >
             {name}

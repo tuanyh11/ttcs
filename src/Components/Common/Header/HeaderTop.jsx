@@ -11,11 +11,11 @@ const langues = [
   },
   {
     id: 2,
-    name: "Français",
+    name: "French",
   },
   {
     id: 3,
-    name: "Español",
+    name: "German",
   },
 ];
 
@@ -33,7 +33,6 @@ const currencies = [
     name: "gbr",
   },
 ];
-
 
 const HeaderTop = () => {
   const [langue, setLangue] = useState(langues[0]);
@@ -84,7 +83,7 @@ const HeaderTop = () => {
                   label={"SHOP NOW"}
                   Tag="Link"
                   to={"/"}
-                  className="button-v2 ml-2 p-[7px_15px] leading-3 text-xs font-bold"
+                  className="button-v2 ml-2 p-[7px_15px] leading-3 text-xs font-bold font-rubik"
                 />
               </p>
             </div>
@@ -92,14 +91,18 @@ const HeaderTop = () => {
 
           <Col className="md:w-3/12 lg:w-3/12">
             <div className="flex lg:justify-end flex-wrap">
-              <Link to="/sign-in" className="pl-[15px] leading-[42px]">
+              <div className="pl-[15px]">
                 <i className="fa-solid fa-lock mr-[6px]"></i>
-                Sign in
-              </Link>
-              <Link to="/sign-up" className="pl-[15px] leading-[42px]">
+                <Link to="/my-account" className=" leading-[42px]">
+                  Sign in
+                </Link>
+              </div>
+              <div className="pl-[15px] ">
                 <i className="fa-solid fa-user mr-[6px]"></i>
-                Sign up
-              </Link>
+                <Link to="/my-account" className="leading-[42px]">
+                  Sign up
+                </Link>
+              </div>
             </div>
           </Col>
         </Row>

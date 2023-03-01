@@ -104,10 +104,12 @@ const CartList = () => {
             });
             {/* console.log(); */ }
             const subTotal = formatter.format(priceNumber * item.quantity);
+            const name = item?.name;
+            const id = item?.id;
             return (
               <tr>
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
-                  <Link to={`/product/${item?.id}`}>
+                  <Link to={`/product/${name}`} state={{ id }}>
                     <img
                       src={image}
                       alt=""
@@ -116,7 +118,7 @@ const CartList = () => {
                   </Link>
                 </td>
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
-                  <Link to={`/product/${item?.id}`}>{item?.name}</Link>
+                  <Link to={`/product/${name}`} state={{ id }}>{item?.name}</Link>
                 </td>
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
                   &pound;{price.slice(1).replace(/$/g, ' ')}

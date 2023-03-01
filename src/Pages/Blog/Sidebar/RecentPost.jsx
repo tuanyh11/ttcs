@@ -2,35 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useBlogContext } from "../../../hooks";
 
-const Categories = () => {
+const RecentPost = () => {
   const { state } = useBlogContext();
 
-  const categories = state?.categories?.edges;
+  const recentPosts = state?.recentPosts;
 
   return (
     <div>
       <div className="p-10  border-[2px] ">
         <h4 className="pb-[13px] mb-5 border-b-[2px] text-dark-color font-semibold text-2xl font-poppins">
-          Categories
+          Recent Posts
         </h4>
         <ul>
-          {categories?.map((category) => {
-            const id = category?.node?.categoryId
-            const name = category.node.name
-            const count = category?.node?.count
+          {recentPosts?.map((post) => {
             return (
               <li
-                key={id}
+                key={post?.node?.id}
                 className="pb-[15px] last:pb-0 flex items-center justify-between"
               >
                 <Link
                   className="hover:text-main-color transition-main"
-                  to={`/blog?categoryId=${id}&categoryName=${name}&year=${state?.year}`}
+                  to={`/blog/${post?.node?.id}?categoryTitle=${post?.node?.title}&id=${post?.node?.id}`}
+                  state={{ id: post?.node?.id }}
                 >
                   <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>
-                  {name}
+                  {post?.node?.title}
                 </Link>
-                <span className="">({count})</span>
               </li>
             );
           })}
@@ -40,4 +37,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default RecentPost;

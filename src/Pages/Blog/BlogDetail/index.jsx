@@ -1,6 +1,6 @@
-import React, {  useMemo, useState } from "react";
+import React, {  useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import {  useParams } from "react-router-dom";
+import {  useLocation, useParams } from "react-router-dom";
 import { getBlogDetail } from "../../../api";
 import {
   BlogCard,
@@ -8,11 +8,21 @@ import {
   InputV2,
 } from "../../../Components";
 import { useDate } from "../../../hooks";
+import queryString from "query-string";
+
 
 const BlogDetail = () => {
   const getDate = useDate();
 
-  const id = useParams()?.slug;
+  const loc = useLocation();
+
+  const param = useParams();
+  console.log(param)
+
+  const query = queryString.parse(loc.search)
+
+  const id = param?.id || query?.id ;
+  
 
   const [selectId, setSelectId] = useState(null);
 
@@ -20,7 +30,6 @@ const BlogDetail = () => {
     queryKey: ["blogDetailData", id],
     queryFn: () => getBlogDetail(id).then((res) => res?.node),
   });
-
 
 
   const commentData = blogData?.comments?.nodes || [];
@@ -35,6 +44,8 @@ const BlogDetail = () => {
 
     [blogData]
   );
+
+
 
 
   return (

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-const   ButtonArrow = ({
+const ButtonArrow = ({
     label,
     onClick,
     children,

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDebounce } from "../../../hooks";
 import Col from "../Col/Col";
 import Container from "../Container/Container";
 import Row from "../Row/Row";
 // import "./header.css";
-import { getHeaderData } from "../../../api/index";
+import { getHeaderData, searchProducts } from "../../../api/index";
 import { useCartStore } from "../../store";
+import ResHeaderNav from "./ResHeaderNav";
+import ButtonV1 from "../Button/Button";
+import HeaderCart from "./HeaderCart";
 
 // lg, md, sm, xs display
 
@@ -18,10 +21,16 @@ const HeaderNav = () => {
 
   const [text, setText] = useState("");
 
-  const textSearch = useDebounce(text, 2000);
+  const nav = useNavigate()
 
-  const handleOnSearch = (e) => {
-    setText(e.target.value);
+
+  const handleOnSearch = async () => {
+    const data = await searchProducts(text)
+    if (data?.length > 1 || data?.length === 0)
+      nav("/shop", { state: { products: data, searchText: text } })
+    if (data?.length === 1) {
+      nav(`/product/${data?.[0]?.node?.name}`, { state: { product: data?.[0]?.node, searchText: text } })
+    }
   };
 
   const { data: headerData = [] } = useQuery({
@@ -31,6 +40,8 @@ const HeaderNav = () => {
         (res) => res?.data?.menus?.edges?.[0]?.node?.menuItems?.nodes
       ),
   });
+
+
 
   useEffect(() => {
     const onScroll = () => {
@@ -85,7 +96,7 @@ const HeaderNav = () => {
                       <i className="fa-solid fa-chevron-down ml-1 text-[10px] -translate-y-[2px] font-bold"></i>
                     )}
                   </Link>
-                  <div className="absolute top-[120%] left-0 transition-main  w-[200px] bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible z-[9999] group-hover:top-[102%] after:inset-0 after:absolute after:h-2 after:z-[9999] after:-translate-y-2  ">
+                  <div className="absolute top-[120%] left-0 transition-main  w-[200px] bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible z-[9999] group-hover:top-full after:inset-0 after:absolute after:h-2 after:z-[9999] after:-translate-y-2  ">
                     {children?.map((child) => {
                       const slug = child?.node?.label
                         ?.replace(" ", "-")
@@ -112,31 +123,16 @@ const HeaderNav = () => {
             <div className="relative">
               <input
                 type="text"
-                className="h-[45px] w-[170px] rounded-[22px] border-[2px] pl-5 pr-10 outline-none "
+                className="h-[45px] w-[170px] rounded-[22px] border-[2px] border-[#ededed] pl-5 pr-10 outline-none "
                 placeholder="Search"
-                onChange={handleOnSearch}
+                onChange={(e) => setText(e.target.value)}
               />
-              <button className="absolute top-1/2 right-0 -translate-y-1/2 -translate-x-5">
+              <button onClick={() => handleOnSearch()} className="absolute top-1/2 right-0 -translate-y-1/2 text-[#111111] -translate-x-5">
                 <i className="fas fa-search"></i>
               </button>
             </div>
-            <div className="mr-[10px] ml-[30px]">
-              <Link to={"/my-account"} className="relative">
-                <i className="fa-solid fa-user"></i>
-              </Link>
-              <Link to={"/cart"} className="relative ml-5">
-                <i className="fa-solid fa-cart-shopping"></i>
-                {
-                  items.length > 0 ? (
-                    <span className="absolute text-[11px] rounded-full min-w-[16px] h-4 text-center bg-main-color leading-4 text-white  top-[-5px] right-[-13px]">
-                      {length()}
-                    </span>
-                  ) : (
-                    null
-                  )
-                }
-
-              </Link>
+            <div className="mr-[10px] ml-[30px] relative group">
+              <HeaderCart />
             </div>
           </div>
 

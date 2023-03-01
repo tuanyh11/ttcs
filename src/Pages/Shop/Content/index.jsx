@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import { getProductByCategory, getProducts } from "../../../api";
+import { Link, useLocation } from "react-router-dom";
+import {  getProducts } from "../../../api";
 import { fakeData } from "../../../assets/data";
 import {
   Col,
@@ -52,29 +52,40 @@ const Content = () => {
     sortDatatypes[0]
   );
 
+  const loc = useLocation()
+  const productSearch = loc.state?.products
+
   const [offset, setOffset] = useState({
     start: 0,
     end: 10,
   });
 
+  const [products, setProducts] = useState([]);
+
+
+
   const [selectedFilter, setSelectedFilter] = useState()
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: ["productList", filter],
+  const { data, isLoading } = useQuery({
+    queryKey: ["productList"],
     queryFn: () => {
-      if (filter?.category?.length > 0 || filter?.price?.length > 0)
-        return getProductByCategory({...filter, selectedFilter}).then((res) => res);
-
       return getProducts().then((res) => res);
     },
+    enabled: !productSearch,
+    refetchOnWindowFocus: false,
+    
   });
+
+
+  useEffect(() => {
+    setProducts( productSearch || data?.data)
+  }, [data, productSearch])
 
   const categories = filter?.category
 
-  const showProducts = selectedFilter ? (
-    sortProduct(products, selectedFilter?.slug)
-  ) : products?.data
-
+  const showProducts = sortProduct(products, selectedFilter?.slug, filter)
+  
+    
 
 
   if (isLoading)
@@ -89,8 +100,8 @@ const Content = () => {
 
   return (
     <div>
-      {showProducts.length === 0 ? (
-          <span className="text-lg" >Not found Products</span>
+      {showProducts?.length === 0 ? (
+          <span className="text-[15px]" >No products were found matching your selection.</span>
       ) : 
       
       <>
@@ -126,13 +137,13 @@ const Content = () => {
           <div className="hidden md:block">
             <button
               onClick={() => setFeatured("grid")}
-              className={`border fa-solid fa-grip-vertical w-[50px] h-[50px]  ${
+              className={`border fal text-[22px] fa-th fa-grip-vertical w-[50px] h-[50px]  ${
                 featured === "grid" ? "bg-main-color  text-white" : "bg-white"
               } mr-[5px]`}
             ></button>
             <button
               onClick={() => setFeatured("list")}
-              className={`border fa-solid fa-list w-[50px] h-[50px] ${
+              className={`border text-[22px] far fa-list w-[50px] h-[50px] ${
                 featured === "list" ? "bg-main-color  text-white" : "bg-white"
               } `}
             ></button>
@@ -173,7 +184,7 @@ const Content = () => {
         {featured === "list" ? (
           <div>
             <Row className="flex flex-wrap">
-              {products?.data?.map((item, index) => {
+              {showProducts?.map((item, index) => {
                 const product = item?.node;
                 console.log(product);
                 return (

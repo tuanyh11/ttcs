@@ -495,6 +495,7 @@ const blogData = {
         },
       ],
     },
+    
     categories: {
       edges: [
         {
