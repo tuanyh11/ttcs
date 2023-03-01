@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../../../Components";
 import Banner from "./Banner";
@@ -8,6 +8,7 @@ import Brand from "./Brand";
 import Filter from "./Filter";
 import { useQuery } from "react-query";
 import { getProductCate } from "../../../api";
+import { useShopContext } from "../../../hooks";
 
 const Sidebar = ({ categories }) => {
   const { data } = useQuery({
@@ -16,9 +17,17 @@ const Sidebar = ({ categories }) => {
       Promise.all([getProductCate()]).then(([categories]) => ({ categories })),
   });
 
+
+
   const categoriesData = data?.categories;
 
   const loc = useLocation();
+
+  const {state}  = useShopContext()
+
+  const [text, setText] = useState("");
+
+  const handleOnSearch = state?.handleOnSearch
 
   const isHasProducts = loc.state ? loc.state?.products?.length > 0 : true;
 
@@ -31,9 +40,9 @@ const Sidebar = ({ categories }) => {
               type="text"
               className=" h-[50px] border-[1px] pl-5 text-black  w-full pr-[84px]  outline-none "
               placeholder="Search..."
-              // onChange={handleOnSearch}
+              onChange={(e) => setText(e.target.value)}
             />
-            <button className="absolute top-1/2 text-[#333] text-sm right-0 -translate-y-1/2 px-4  ">
+            <button onClick={() => handleOnSearch(text)} className="absolute top-1/2 text-[#333] text-sm right-0 -translate-y-1/2 px-4  ">
               <i className="far fa-search"></i>
             </button>
           </div>

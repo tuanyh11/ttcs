@@ -20,7 +20,8 @@ export {default as SpinningLoader} from './Common/Spinning/Spinning'
 
 export {default as NextButton} from './UI/Product/NextButton'
 export {default as PreButton} from './UI/Product/PreButton'
- 
+export {default as Selector} from './UI/Selector/Selector'
+export {default as SelectorV2} from './UI/Selector/SelectorV2'
 
 
 

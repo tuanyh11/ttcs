@@ -4,6 +4,8 @@ import headerData from "../assets/data/header";
 import homeData from "../assets/data/homeData";
 import product from "../assets/data/product";
 import categories from "../assets/data/ListCategory";
+import cars from '../assets/data/cars'
+import carModel from '../assets/data/carModel'
 
 const products = product.data.products.edges;
 
@@ -162,3 +164,16 @@ export const searchBlogs = async (text) => {
 };
 
 // end header search
+ 
+
+// home page 
+
+export const getCars = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return cars.data
+}
+
+export const searchCarModel = async (id) => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return carModel.data.parts.edges.filter(({ node: car }) => car.cartId === id)
+}

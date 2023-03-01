@@ -4,7 +4,6 @@ import { Col, Footer, Header, QuickView, Row } from "./Components";
 import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import routeData from "./Routes";
 import { useUiStore } from "./Components/store";
-import Sidebar from "./Pages/Shop/Sidebar";
 
 function App() {
   const [backToHeader, setBackToHeader] = useState(false);
@@ -65,8 +64,6 @@ function App() {
       </>
     );
   }, []);
-
-  console.log(isOpeningFilterProduct);
 
 
   const { pathname } = useLocation();

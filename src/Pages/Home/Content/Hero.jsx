@@ -1,10 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { ButtonArrow, Col, Container, Row } from "../../../Components";
+import { ScaleLoader } from "react-spinners";
+import { searchCarModel } from "../../../api";
+import {
+  ButtonArrow,
+  Col,
+  Container,
+  Row,
+  SelectorV2,
+} from "../../../Components";
 
-const Hero = ({data}) => {
+const Hero = ({ data }) => {
+  const cars = data?.cars?.edges?.map(({ node }) => ({ ...node }));
 
+  const [car, setCar] = useState();
+
+  const [models, setModels] = useState([]);
+
+  const [selectModel, setSelectModel] = useState();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [selectYear, setSelectYear] = useState([]);
+
+  useEffect(() => {
+    setCar(cars?.[0]);
+  }, [data]);
+
+  const handleSearchModel = async () => {
+    const data = await searchCarModel(car?.id);
+    setModels(data?.map(({ node }) => ({ ...node })));
+    setSelectModel(data?.[0]?.node);
+    setIsLoading(false);
+  };
+
+  const handLeOnSelect = (car) => {
+    handleSearchModel();
+    setCar(car);
+    setIsLoading(true);
+  };
+
+  const years = data?.years?.edges?.map(({ node }) => ({ ...node }))
+
+  console.log(selectYear)
 
   return (
     <div>
@@ -15,8 +54,8 @@ const Hero = ({data}) => {
         }}
       >
         <div className="">
-          <Container >
-            <Row  >
+          <Container>
+            <Row>
               <Col className={"w-full lg:w-8/12"}>
                 <div className="md:p-[70px] md:pb-[80px] p-5 bg-white font-semibold">
                   <div className="">
@@ -62,7 +101,7 @@ const Hero = ({data}) => {
                           voluptatem accusantium remque laudantium totam aperiam
                           eaque ipsa quae abillo inventore veritatis
                         </p>
-                        <div >
+                        <div>
                           <ButtonArrow
                             Tag="Link"
                             to="/shop"
@@ -88,7 +127,6 @@ const Hero = ({data}) => {
         </div>
 
         <div className="mx-[15px] md:mx-0">
-          
           <div
             className="mt-[100px] mb-[-215px] bg-main-color max-w-[1400px] mx-auto py-10 md:py-[60px] px-[15px] md:px-[115px] rounded-[20px]  "
             style={{
@@ -101,39 +139,49 @@ const Hero = ({data}) => {
             <Row>
               <Col className="w-full lg:w-3/12 mb-5 ">
                 <div className="">
-                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px] outline-none">
-                    <span className="text-[#444] font-medium">Select Make</span>
-                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-7 text-main-color  text-xs"></i>
-                  </button>
+                  <SelectorV2
+                    title={car?.name || "Select Make"}
+                    setTitle={(car) => handLeOnSelect(car)}
+                    data={cars}
+                    isSelected={item => item?.name === car?.name}
+                  />
+                </div>
+              </Col>
+
+              <Col className="w-full lg:w-3/12 mb-5 relative">
+                {isLoading && (
+                  <div className="absolute top-1/2 left-1/2 z-40  -translate-x-1/2 -translate-y-1/2">
+                    <ScaleLoader color="#ff4545" />
+                  </div>
+                )}
+                <div className="">
+                  <SelectorV2
+                    title={selectModel?.name || "Select Model"}
+                    setTitle={(model) => setSelectModel(model)}
+                    data={models}
+                    disabled={models.length === 0}
+                    isSelected={model => model?.name === selectModel?.name}
+                  />
                 </div>
               </Col>
 
               <Col className="w-full lg:w-3/12 mb-5">
-                <div className="">
-                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px] outline-none">
-                    <span className="text-[#444] font-medium">Select Mode</span>
-                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-7 text-main-color  text-xs"></i>
-                  </button>
-                </div>
+                <SelectorV2
+                  title={selectYear?.year || "Select Year"}
+                  setTitle={(year) => setSelectYear(year)}
+                  data={years}
+                  disabled={years?.length === 0}
+                  disPlayKey={year => year?.year}
+                  isSelected={year => year?.year === selectYear?.year }
+                />
               </Col>
 
               <Col className="w-full lg:w-3/12 mb-5">
                 <div className="">
-                  <button className="relative w-full text-start px-[30px] left-0 leading-[55px] h-[55px] bg-white  rounded-[28px] outline-none">
-                    <span className="text-[#444] font-medium">Select Year</span>
-                    <i className="fa-solid fa-angle-down absolute top-1/2 -translate-y-1/2 right-7 text-main-color  text-xs"></i>
-                  </button>
-                </div>
-              </Col>
-
-              <Col className="w-full lg:w-3/12 mb-5">
-                <div className="">
-                  <button className=" text-[14px] font-semibold line-clamp-1 relative w-full text-center transition-all duration-[400]  outline-none   font-poppins py-[11px] px-[15px] xl:px-[35px] bg-main-color border-2 border-white border-solid hover:bg-white hover:text-main-color text-white   rounded-[28px]">
-                    <span className="uppercase">
-                      find auto parts
-                    </span>
+                  <Link to={"/shop"} className=" text-[14px] font-semibold line-clamp-1 relative w-full text-center transition-all duration-[400]  outline-none   font-poppins py-[11px] px-[15px] xl:px-[35px] bg-main-color border-2 border-white border-solid hover:bg-white hover:text-main-color text-white   rounded-[28px]">
+                    <span className="uppercase">find auto parts</span>
                     <i className="fa-solid fa-circle-arrow-right  ml-3"></i>
-                  </button>
+                  </Link>
                 </div>
               </Col>
             </Row>
