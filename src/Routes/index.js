@@ -15,6 +15,11 @@ import {
   Wishlist,
   ResetPassword,
   Auth,
+  Dashboard,
+  OrderPage,
+  IndexPage,
+  DownloadPage,
+  
 } from "../Pages";
 import NotFound from "../Pages/NotFound";
 
@@ -54,10 +59,11 @@ export default [
     index: false,
     children: [
       {
-        path: "/blog",
+        path: "",
         name: "blog",
         component: BlogList,
-        index: false,
+        index: true,
+        children: [],
       },
       {
         path: ":slug",
@@ -100,6 +106,28 @@ export default [
     component: Account,
     index: false,
     children: [
+      {
+        path: "",
+        component: Dashboard,
+        index: true,
+        children : [
+          {
+            path: "",
+            component: IndexPage,
+            index: true,
+          },
+          {
+            path: "orders",
+            component: OrderPage,
+            index: true,
+          },
+          {
+            path: "downloads",
+            component: DownloadPage,
+            index: true,
+          }
+        ],
+      },
       {
         path: "/my-account",
         component: Auth,
