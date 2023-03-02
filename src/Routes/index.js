@@ -16,6 +16,7 @@ import {
   ResetPassword,
   Auth,
 } from "../Pages";
+import NotFound from "../Pages/NotFound";
 
 export default [
   {
@@ -59,7 +60,7 @@ export default [
         index: false,
       },
       {
-        path: ":id",
+        path: ":slug",
         name: "blog",
         component: BlogDetail,
         index: false,
@@ -112,7 +113,7 @@ export default [
     ],
   },
   {
-    path: "/product/:id",
+    path: "/product/:slug",
     component: ProductDetail,
     index: false,
     children: [],
@@ -128,6 +129,13 @@ export default [
     path: "/cart",
     name: "cart",
     component: Cart,
+    index: false,
+    children: [],
+  },
+  {
+    path: "*",
+    name: "notfound",
+    component: NotFound,
     index: false,
     children: [],
   },

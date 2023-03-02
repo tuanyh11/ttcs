@@ -114,7 +114,7 @@ const QuickView = ({
                         onChange={handleChange}
                         onKeyDown={handleKeyDown}
                         onBlur={(e) => e.target.value === "" && setValue(1)}
-                        className="w-[50px] h-[50px] border outline-none text-center"
+                        className="w-[50px] h-[50px] border outline-none text-center text-[#000000]"
                       />
                       <button onClick={() => setValue(value + 1)} className="fa-solid fa-plus w-[50px] h-[50px] border"></button>
                       <div className="ml-3">

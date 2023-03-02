@@ -82,6 +82,10 @@ body {
     @apply bg-main-color 
   }
 
+  p {
+    @apply text-[#646a7c]
+  }
+
 }
 
 /* input shop checked */

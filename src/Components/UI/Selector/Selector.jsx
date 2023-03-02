@@ -58,7 +58,7 @@ function Selector({
               <div
                 onClick={() => handleOnSelect(item)}
                 className={`h-10 leading-10 pl-[18px] pr-[30px] cursor-pointer ${
-                  title === item?.name ? "bg-[#f6f6f6] font-semibold" : ""
+                  title === item?.name ? "bg-[#f6f6f6] font-bold" : ""
                 }`}
                 key={index}
               >

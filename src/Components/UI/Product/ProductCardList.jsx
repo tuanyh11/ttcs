@@ -6,6 +6,7 @@ import Col from "../../Common/Col/Col";
 import Row from "../../Common/Row/Row";
 import { useCartStore } from "../../store";
 import QuickView from "./QuickView";
+import urlSlug from 'url-slug'
 
 const ProductCard = ({
   featuredImage,
@@ -51,22 +52,16 @@ const ProductCard = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { hasProduct, addItem } = useCartStore();
+  const { hasProduct, addItem, addToWishlistItems } = useCartStore();
 
   const handleAddToCart = function (e) {
     e.preventDefault();
-    addItem({
-      featuredImage,
-      name,
-      description,
-      id,
-      salePrice,
-      regularPrice,
-      slug,
-      averageRating,
-      shortDescription,
-      ...rest,
-    });
+    addItem(product);
+  };
+
+  const handleAddToWish = function (e) {
+    e.preventDefault();
+    addToWishlistItems(product);
   };
 
   return (
@@ -77,7 +72,7 @@ const ProductCard = ({
       <Row className="group ">
         <Col className="w-full lg:w-4/12">
           <div className=" relative">
-            <Link to={`/product/${name}`} state={{id}}>
+            <Link  to={`/product/${urlSlug(name)}`} state={{id}}>
               <img src={ image} alt="" className="w-full h-full" />
               {saleInfo && (
                 <span className=" absolute z-[70] text-white bg-main-color translate-x-4 px-[7px] py-1 text-xs leading-[1] translate-y-4 top-0 left-0 rounded-sm">
@@ -98,7 +93,7 @@ const ProductCard = ({
                     onClick={handleQuickView}
                     className="far fa-search-plus w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
                   ></button>
-                  <button className="fa-solid fa-heart w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
+                  <button onClick={handleAddToWish} className="fa-regular fa-heart w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
                 </div>
               </div>
             </Link>
@@ -110,7 +105,7 @@ const ProductCard = ({
             <div className="leading-[1] mb-2">{stars}</div>
 
             <Link
-              to={`/product/${name}`} state={{id}}
+               to={`/product/${urlSlug(name)}`} state={{id}}
               className=" text-lg mb-1 font-poppins block text-black  font-semibold hover:text-main-color transition-all duration-300"
             >
               {name}
@@ -125,7 +120,7 @@ const ProductCard = ({
 
             <ButtonV1
               Tag="Link"
-              to={`/product/${name}`} state={{id}}
+               to={`/product/${urlSlug(name)}`} state={{id}}
               className=" rounded-[28px] px-5 py-[6px] leading-[23px]"
             >
               Shop Now

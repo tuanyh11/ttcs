@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router";
 import { searchProducts } from "../../api";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
@@ -18,6 +17,8 @@ const Shop = ({ categories }) => {
   });
 
   const searchText = useLocation().state?.searchText;
+
+  const nav = useNavigate()
 
   const { setIsOpeningFilterProduct, isOpeningFilterProduct } = useUiStore();
 
@@ -65,8 +66,6 @@ const Shop = ({ categories }) => {
     setFilter({ ...filter, price });
   };
 
-  const nav = useNavigate()
-
   const handleOnSearch = async (text) => {
     const data = await searchProducts(text)
     if (data?.length > 1 || data?.length === 0)
@@ -75,9 +74,10 @@ const Shop = ({ categories }) => {
       nav(`/product/${data?.[0]?.node?.name}`, { state: { product: data?.[0]?.node, searchText: text } })
     }
   };
+
   const { Provider } = useShopContext();
 
-  return ( 
+  return (
     <div>
       <Provider
         value={{
@@ -99,7 +99,7 @@ const Shop = ({ categories }) => {
         <div className="lg:hidden">
           <div
             className={`fixed  w-[400px] overflow-auto top-0 h-[100vh] bg-white z-[99999999999] transition-all duration-500 ease-linear ${
-              isOpeningFilterProduct ? "left-[0] " : "-left-full"
+              isOpeningFilterProduct ? "left-[0]" : "-left-full"
             }  `}
           >
             <div className="py-[18px] px-5 bg-[#1c2224] text-white text-[16px] font-semibold font-poppins flex justify-between">
@@ -117,11 +117,11 @@ const Shop = ({ categories }) => {
           </div>
         </div>
         <div className="py-20 relative">
-          <Container>
+          <Container className={"screens-576:max-w-[540px]"}>
             <Row>
               <Col
                 className={
-                  "w-full hidden md:block lg:w-3/12 order-2 mt-10 md:mt-0  md:order-1"
+                  "w-full hidden screens-600:block lg:w-3/12 order-2 mt-10 md:mt-0  screens-600:order-1"
                 }
               >
                 <div className="">

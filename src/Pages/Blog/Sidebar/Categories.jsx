@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useBlogContext } from "../../../hooks";
+import urlSlug from 'url-slug'
 
 const Categories = () => {
   const { state } = useBlogContext();
@@ -16,7 +17,7 @@ const Categories = () => {
         <ul>
           {categories?.map((category) => {
             const id = category?.node?.categoryId
-            const name = category.node.name
+            const name = urlSlug(category.node.name)
             const count = category?.node?.count
             return (
               <li

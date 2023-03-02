@@ -27,6 +27,7 @@
     "react-spinners": "^0.13.8",
     "reactjs-popup": "^2.0.5",
     "slick-carousel": "^1.8.1",
+    "url-slug": "^3.0.4",
     "zustand": "^4.3.3"
   },
   "devDependencies": {
