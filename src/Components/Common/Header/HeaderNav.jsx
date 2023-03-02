@@ -61,9 +61,9 @@ const HeaderNav = () => {
 
   return (
     <div
-      className={` transition-all duration-200  ${sticky
+      className={` transition-all duration-200   ${sticky
         ? "bg-white  z-[9999999] fixed top-0 left-0 right-0 shadow-[0px_7px_12px_0px_rgb(225_225_225_/50%)] "
-        : ""
+        : "border border-[#eaeaea]"
         }`}
     >
       <Container className={"xl:max-w-[1420px]"}>

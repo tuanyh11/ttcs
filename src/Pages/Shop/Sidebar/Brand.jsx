@@ -17,7 +17,6 @@ const Brand = () => {
                 className="pb-[15px] last:pb-0 flex items-center justify-between"
               >
                 <Link to={`/shop?brand=${index}`}>
-                  <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>
                   Auto Parts
                 </Link>
                 <span className="">({1})</span>

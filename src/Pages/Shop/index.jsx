@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { searchProducts } from "../../api";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
 import { useUiStore } from "../../Components/store";
 import { useShopContext } from "../../hooks";
@@ -16,6 +17,8 @@ const Shop = ({ categories }) => {
   });
 
   const searchText = useLocation().state?.searchText;
+
+  const nav = useNavigate()
 
   const { setIsOpeningFilterProduct, isOpeningFilterProduct } = useUiStore();
 
@@ -63,7 +66,14 @@ const Shop = ({ categories }) => {
     setFilter({ ...filter, price });
   };
 
-  console.log(isOpeningFilterProduct);
+  const handleOnSearch = async (text) => {
+    const data = await searchProducts(text)
+    if (data?.length > 1 || data?.length === 0)
+      nav("/shop", { state: { products: data, searchText: text } })
+    if (data?.length === 1) {
+      nav(`/product/${data?.[0]?.node?.name}`, { state: { product: data?.[0]?.node, searchText: text } })
+    }
+  };
 
   const { Provider } = useShopContext();
 
@@ -78,6 +88,7 @@ const Shop = ({ categories }) => {
           handleOnRemoveCate,
           handleOnRemoveStatus,
           handleFilterPrice,
+          handleOnSearch
         }}
       >
         <BreadCrumb
@@ -88,13 +99,13 @@ const Shop = ({ categories }) => {
         <div className="lg:hidden">
           <div
             className={`fixed  w-[400px] overflow-auto top-0 h-[100vh] bg-white z-[99999999999] transition-all duration-500 ease-linear ${
-              isOpeningFilterProduct ? "-left-full" : "left-[0]"
+              isOpeningFilterProduct ? "left-[0]" : "-left-full"
             }  `}
           >
             <div className="py-[18px] px-5 bg-[#1c2224] text-white text-[16px] font-semibold font-poppins flex justify-between">
               <h5>Product Filters </h5>
               <button
-                onClick={() => setIsOpeningFilterProduct(true)}
+                onClick={() => setIsOpeningFilterProduct(false)}
                 className="w-[26px] h-[26px] leading-[26px] bg-white rounded-full text-black font-bold"
               >
                 <i className="fa fa-times"></i>

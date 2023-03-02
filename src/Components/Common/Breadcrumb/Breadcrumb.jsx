@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import {revert} from 'url-slug'
 
 const Breadcrumb = ({ image, label, offPath = false}) => {
 
   const loc = useLocation()
-
+  console.log(loc)
   const pathname = loc.pathname.substring(1).split("/")
   //  `Search Results for: ${label}`
   return (
@@ -24,7 +25,7 @@ const Breadcrumb = ({ image, label, offPath = false}) => {
         {!offPath && <div className="flex justify-center relative z-50 leading-[28px]">
           <Link to={"/"} className="text-white uppercase">Home</Link>
           {pathname.map((item, i) => {
-            const  path = decodeURIComponent(item?.replace("-", " "))
+            const  path = revert(item)
             return (
               <div key={item} >
                 <i className="fa-solid fa-angle-right text-white ml-3 mr-2"></i>

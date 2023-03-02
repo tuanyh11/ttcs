@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useBlogContext } from "../../../hooks";
+import urlSlug from 'url-slug'
 
 const RecentComment = () => {
   const { state } = useBlogContext();
@@ -24,7 +25,7 @@ const RecentComment = () => {
                 <span> on </span>
                 <Link
                   className="hover:text-main-color transition-main font-medium "
-                  to={`/product/${node?.productName}?type=reviews&commentId=${comment?.id}&productId=${node?.productId}`}
+                  to={`/product/${urlSlug(node?.productName)}?type=reviews&commentId=${comment?.id}&productId=${node?.productId}`}
                   state={{ comment: comment?.id, id: node?.productId }}
                 >
                   {node?.productName}

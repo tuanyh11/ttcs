@@ -6,7 +6,7 @@ import product from "../assets/data/product";
 import categories from "../assets/data/ListCategory";
 import cars from '../assets/data/cars'
 import carModel from '../assets/data/carModel'
-
+import {revert} from 'url-slug'
 const products = product.data.products.edges;
 
 export const getHeaderData = async () => {
@@ -82,7 +82,7 @@ export const getListBlogByTag = (id) => {
 };
 
 export const getBlogDetail = async (id) => {
-  return blogData?.data.posts?.edges.find((post) => post.node.id === id);
+  return blogData?.data.posts?.edges.find((post) => post.node.id === id || post.node.title.toLowerCase() === revert(id)?.toLowerCase());
 };
 
 export const getLatestBlog = async (limit = 3) => {
@@ -97,8 +97,10 @@ export const getLatestBlog = async (limit = 3) => {
 // start product
 
 export const getProductDetail = async (id) => {
-  return products.find((product) => product.node.id === id);
+  return products.find((product) => product.node.id === id || product.node.name === id);
 };
+
+
 
 export const getHomepageData = async () => {
   return homeData;

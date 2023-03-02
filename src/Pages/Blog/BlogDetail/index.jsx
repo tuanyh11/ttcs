@@ -1,6 +1,6 @@
 import React, {  useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-query";
-import {  useLocation, useParams } from "react-router-dom";
+import {  Navigate, useLocation, useParams } from "react-router-dom";
 import { getBlogDetail } from "../../../api";
 import {
   BlogCard,
@@ -17,18 +17,17 @@ const BlogDetail = () => {
   const loc = useLocation();
 
   const param = useParams();
-  console.log(param)
 
   const query = queryString.parse(loc.search)
 
-  const id = param?.id || query?.id ;
+  const slug = param?.slug || query?.id ;
   
 
   const [selectId, setSelectId] = useState(null);
 
-  const { data: blogData } = useQuery({
-    queryKey: ["blogDetailData", id],
-    queryFn: () => getBlogDetail(id).then((res) => res?.node),
+  const { data: blogData, status } = useQuery({
+    queryKey: ["blogDetailData", slug],
+    queryFn: () => getBlogDetail(slug).then((res) => res?.node),
   });
 
 
@@ -45,6 +44,8 @@ const BlogDetail = () => {
     [blogData]
   );
 
+
+  if (!blogData && status === 'success') return <Navigate to={"*"} state={{content: `This blog not found try new Params  `}}/>;
 
 
 

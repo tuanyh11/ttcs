@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { generateStart } from "../../../utils";
 import { useCartStore, useUiStore } from "../../store";
+import urlSlug from "url-slug";
 
 const ProductCardGrid = ({
   featuredImage,
@@ -29,34 +30,39 @@ const ProductCardGrid = ({
     ...rest,
   };
 
-  const { selectProduct } = useUiStore()
+  const { selectProduct } = useUiStore();
 
   const saleInfo = salePrice
     ? -Math.round(
-      (1 -
-        Number(salePrice?.toString()?.substring(1)) /
-        Number(regularPrice?.toString()?.substring(1))) *
-      100
-    )
+        (1 -
+          Number(salePrice?.toString()?.substring(1)) /
+            Number(regularPrice?.toString()?.substring(1))) *
+          100
+      )
     : null;
 
   const handleQuickView = function (e) {
     e.preventDefault();
-    selectProduct(product, true)
+    selectProduct(product, true);
   };
 
-  const { hasProduct, addItem } = useCartStore();
+  const { hasProduct, addItem, addToWishlistItems } = useCartStore();
 
   const handleAddToCart = function (e, item) {
     e.preventDefault();
     addItem(product);
   };
 
+  const handleAddToWish = function (e) {
+    e.preventDefault();
+    addToWishlistItems(product);
+  };
+
   return (
     <div>
       <div className="group">
         <div className="mb-5 relative">
-          <Link to={`/product/${name}`} state={{ id }}>
+          <Link to={`/product/${urlSlug(name)}`} state={{ id }}>
             <img
               src={featuredImage?.node?.mediaItemUrl}
               alt=""
@@ -84,25 +90,28 @@ const ProductCardGrid = ({
                   onClick={handleQuickView}
                   className="far fa-search-plus w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
                 ></button>
-                <button className="fa-solid fa-heart w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "></button>
+                <button
+                  onClick={handleAddToWish}
+                  className="fa-regular fa-heart w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
+                ></button>
               </div>
             </div>
           </Link>
         </div>
-
         <div className="text-center font-poppins">
           <div className="leading-[1]">{stars}</div>
 
           <Link
-            to={`/product/${name}`} state={{ id }}
+            to={`/product/${urlSlug(name)}`}
+            state={{ id }}
             className=" text-[15px] text-black  font-semibold hover:text-main-color transition-all duration-300"
           >
             {name}
           </Link>
 
           <p className=" font-semibold ">
-            <del className="text-[#696969] text-sm mr-1">{salePrice}</del>
-            <span className="text-main-color ">{regularPrice}</span>
+            <bdi className="text-[#696969] text-sm mr-1">{salePrice}</bdi>
+            <bdi className="text-main-color  ">{regularPrice}</bdi>
           </p>
         </div>
       </div>
