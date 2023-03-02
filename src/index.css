@@ -19,7 +19,7 @@ body {
 
 #root {
   max-width: 100%;
-  padding: 0; 
+  padding: 0;
   text-align: start;
   position: relative;
 }
@@ -48,22 +48,24 @@ body {
 /* button */
 @layer components {
   button {
-    @apply outline-none 
+    @apply outline-none
   }
+
   .button-v1,
   .button-v2 {
     @apply px-4 text-[14px] inline-block font-semibold border-none leading-[50px] font-poppins text-[#fff] bg-main-color cursor-pointer;
   }
+
   .button-v2 {
     @apply rounded-[13px];
   }
 
   .product-detail-slider .slick-prev {
-    @apply !opacity-0 invisible transition-all duration-200 ease-linear 
+    @apply !opacity-0 invisible transition-all duration-200 ease-linear
   }
 
   .product-detail-slider .slick-next {
-    @apply !opacity-0 invisible transition-all duration-200 ease-linear 
+    @apply !opacity-0 invisible transition-all duration-200 ease-linear
   }
 
   .product-detail-slider:hover .slick-prev {
@@ -79,7 +81,7 @@ body {
   }
 
   .filter-price .range-slider__range {
-    @apply bg-main-color 
+    @apply bg-main-color
   }
 
   p {
@@ -90,19 +92,17 @@ body {
 
 /* input shop checked */
 
-.input-shop[type="checkbox"]:checked + label span::after {
+.input-shop[type="checkbox"]:checked+label span::after {
   opacity: 1 !important;
 }
 
 /* home css */
 
 .home-banner::after {
-  background: linear-gradient(
-    10deg,
-    rgba(17, 17, 17, 0.70196) 0%,
-    rgba(17, 17, 17, 0.01) 99%,
-    #111111 100%
-  );
+  background: linear-gradient(10deg,
+      rgba(17, 17, 17, 0.70196) 0%,
+      rgba(17, 17, 17, 0.01) 99%,
+      #111111 100%);
 }
 
 .triangle::after {
@@ -120,5 +120,6 @@ body {
 
 
 /* product-detail */
-
-
+.animation {
+  transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25);
+}

@@ -90,7 +90,7 @@ const CartList = () => {
             const image = item?.featuredImage?.node?.mediaItemUrl;
             const price = item?.salePrice || item?.regularPrice;
             const priceNumber = currency(price);
-            console.log()
+            {/* console.log() */ }
             {/* const subTotal = (currency(item.quantity * priceNumber?.intValue, {
               decimal: ".",
               precision: 0,
