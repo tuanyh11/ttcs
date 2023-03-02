@@ -117,7 +117,7 @@ const BodyRight = () => {
                   const node = category?.node;
                   return (
                     <Link
-                      key={node?.id}
+                      key={i}
                       className=" capitalize"
                       to={`/category/${node.id}`}
                     >

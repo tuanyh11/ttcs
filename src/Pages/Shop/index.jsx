@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+import { searchProducts } from "../../api";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
+import { useUiStore } from "../../Components/store";
 import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
+import MobileSidebar from "./Sidebar/MobileSidebar";
 
 const Shop = ({ categories, dataCate }) => {
   const [filter, setFilter] = useState({
@@ -14,6 +17,11 @@ const Shop = ({ categories, dataCate }) => {
   });
 
   const searchText = useLocation().state?.searchText;
+
+  const nav = useNavigate()
+
+  const { setIsOpeningFilterProduct, isOpeningFilterProduct } = useUiStore();
+
   const handleOnSelectCate = (category) => {
     const id = category.databaseId;
     const isExisting = filter.category.find((item) => item.databaseId === id);
@@ -55,9 +63,17 @@ const Shop = ({ categories, dataCate }) => {
   };
 
   const handleFilterPrice = (price) => {
-    setFilter({ ...filter, price })
-  }
+    setFilter({ ...filter, price });
+  };
 
+  const handleOnSearch = async (text) => {
+    const data = await searchProducts(text)
+    if (data?.length > 1 || data?.length === 0)
+      nav("/shop", { state: { products: data, searchText: text } })
+    if (data?.length === 1) {
+      nav(`/product/${data?.[0]?.node?.name}`, { state: { product: data?.[0]?.node, searchText: text } })
+    }
+  };
 
   const { Provider } = useShopContext();
 
@@ -75,7 +91,8 @@ const Shop = ({ categories, dataCate }) => {
           handleOnSelectStatus,
           handleOnRemoveCate,
           handleOnRemoveStatus,
-          handleFilterPrice
+          handleFilterPrice,
+          handleOnSearch
         }}
       >
         {
@@ -85,12 +102,32 @@ const Shop = ({ categories, dataCate }) => {
             <BreadCrumb label={`Search Results for: ${searchText}` || 'Products'} isForSearching={searchText} offPath={searchText} />
           )
         }
-
+        <div className="lg:hidden">
+          <div
+            className={`fixed  w-[400px] overflow-auto top-0 h-[100vh] bg-white z-[99999999999] transition-all duration-500 ease-linear ${isOpeningFilterProduct ? "left-[0]" : "-left-full"
+              }  `}
+          >
+            <div className="py-[18px] px-5 bg-[#1c2224] text-white text-[16px] font-semibold font-poppins flex justify-between">
+              <h5>Product Filters </h5>
+              <button
+                onClick={() => setIsOpeningFilterProduct(false)}
+                className="w-[26px] h-[26px] leading-[26px] bg-white rounded-full text-black font-bold"
+              >
+                <i className="fa fa-times"></i>
+              </button>
+            </div>
+            <div className="py-5 px-[10px]">
+              <MobileSidebar />
+            </div>
+          </div>
+        </div>
         <div className="py-20 relative">
-          <Container>
+          <Container className={"screens-576:max-w-[540px]"}>
             <Row>
               <Col
-                className={"w-full lg:w-3/12 order-2 mt-10 md:mt-0  md:order-1"}
+                className={
+                  "w-full hidden screens-600:block lg:w-3/12 order-2 mt-10 md:mt-0  screens-600:order-1"
+                }
               >
                 <div className="">
                   <div className="relative mb-[30px]">

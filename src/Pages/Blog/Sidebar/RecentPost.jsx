@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useBlogContext } from "../../../hooks";
+import urlSlug from 'url-slug'
 
 const RecentPost = () => {
   const { state } = useBlogContext();
@@ -22,7 +23,7 @@ const RecentPost = () => {
               >
                 <Link
                   className="hover:text-main-color transition-main"
-                  to={`/blog/${post?.node?.id}?categoryTitle=${post?.node?.title}&id=${post?.node?.id}`}
+                  to={`/blog/${urlSlug(post?.node?.title)}`}
                   state={{ id: post?.node?.id }}
                 >
                   <i className="fa-solid fa-angle-right mr-[10px] text-xs"></i>

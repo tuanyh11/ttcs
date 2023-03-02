@@ -1,15 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import { Col, Footer, Header, QuickView, Row } from "./Components";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import routeData from "./Routes";
 import { useUiStore } from "./Components/store";
 
 function App() {
   const [backToHeader, setBackToHeader] = useState(false);
 
-  const {  product, selectProduct } = useUiStore();
-
+  const { product, selectProduct, setIsOpeningFilterProduct, isOpeningFilterProduct } = useUiStore();
 
   useEffect(() => {
     const onScroll = () => {
@@ -66,6 +65,9 @@ function App() {
     );
   }, []);
 
+
+  const { pathname } = useLocation();
+
   return (
     <div className="App relative">
       {product && (
@@ -78,17 +80,21 @@ function App() {
         <Row className={"bg-white text-center"}>
           <Col className={"w-3/12"}>
             <div className="py-5">
-              <Link to={"/"} className="fa-solid fa-house "></Link>
+              <Link to={"/"} className="fal fa-home "></Link>
             </div>
           </Col>
           <Col className={"w-3/12"}>
             <div className="py-5">
-              <Link to="/shop" className="fa-solid fa-table-cells-large"></Link>
+              {pathname !== "/shop" ? (
+                <Link to="/shop" className="fal fa-th-large"></Link>
+              ) : (
+                <button onClick={() => setIsOpeningFilterProduct(!isOpeningFilterProduct)} className="fal fa-filter"></button>
+              )}
             </div>
           </Col>
           <Col className={"w-3/12"}>
             <div className="py-5 relative">
-              <Link to={"/cart"} className="fa-solid fa-cart-shopping"></Link>
+              <Link to={"/cart"} className="fal fa-shopping-cart"></Link>
               <span className="w-[18px] h-[18px] text-white text-[10px] rounded-full bg-main-color block text-center leading-[18px] absolute z-10 top-1/2 -translate-y-full -translate-x-1/2 right-0">
                 1
               </span>
@@ -96,7 +102,7 @@ function App() {
           </Col>
           <Col className={"w-3/12"}>
             <div className="py-5">
-              <button className="fa-solid fa-user"></button>
+              <Link to={"/my-account"} className="fal fa-user-circle"></Link>
             </div>
           </Col>
         </Row>

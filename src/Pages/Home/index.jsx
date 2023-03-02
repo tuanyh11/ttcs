@@ -1,6 +1,6 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { getBestSellingProducts, getExclusiveProducts, getHomepageData, getLatestBlog } from "../../api";
+import { useQueries, useQuery } from "react-query";
+import { getBestSellingProducts, getCars, getExclusiveProducts, getHomepageData, getLatestBlog } from "../../api";
 import Banner from "./Content/Banner";
 import BestSelling from "./Content/BestSelling";
 import Brand from "./Content/Brand";
@@ -18,11 +18,16 @@ const Home = () => {
        getHomepageData().then((res) => res?.data?.page?.acf?.component),
        getExclusiveProducts().then((res) => res?.data?.products?.edges),
        getBestSellingProducts().then((res) => res?.data?.products?.edges),
-       getLatestBlog(3).then((res) => res)
-    ]).then(([sectionData, exclusiveProduct, bestSellingProduct, latestBlog]) => {
-      return { sectionData, exclusiveProduct, bestSellingProduct, latestBlog };
-    })
+       getLatestBlog(3).then((res) => res.data),
+       getCars(res => res)
+    ]).then(([sectionData, exclusiveProduct, bestSellingProduct, latestBlog, carData]) => {
+      return { sectionData, exclusiveProduct, bestSellingProduct, latestBlog, carData };
+    }),
+    refetchOnWindowFocus: false,
   })
+
+
+  const carData = data?.carData
 
   const sectionData  = data?.sectionData
   const exclusiveProduct  = data?.exclusiveProduct
@@ -39,7 +44,7 @@ const Home = () => {
   return (
     <div>
       <section>
-        <Hero data={sectionOne} />
+        <Hero data={{...sectionOne, ...carData}}  />
       </section>
 
       <section>

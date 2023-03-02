@@ -10,24 +10,22 @@ import { useQuery } from "react-query";
 import { getProductCate } from "../../../api";
 import { useShopContext } from "../../../hooks";
 
-const Sidebar = ({ categories }) => {
+const MobileSidebar = ({ categories }) => {
   const { data } = useQuery({
     queryKey: ["shop"],
     queryFn: () =>
       Promise.all([getProductCate()]).then(([categories]) => ({ categories })),
   });
 
-
-
   const categoriesData = data?.categories;
 
   const loc = useLocation();
 
-  const {state}  = useShopContext()
+  const { state } = useShopContext();
 
-  const handleOnSearch = state?.handleOnSearch
+  const [text, setText] = useState("");
 
-  console.log(state)
+  const handleOnSearch = state?.handleOnSearch;
 
   const isHasProducts = loc.state ? loc.state?.products?.length > 0 : true;
 
@@ -36,7 +34,7 @@ const Sidebar = ({ categories }) => {
       <ul>
         <li>
           <div className="relative mb-[30px]">
-              <InputSearchV1 onClick={(text) => handleOnSearch(text)}/>
+            <InputSearchV1 onClick={() => handleOnSearch(text)}/>
           </div>
         </li>
         {isHasProducts && (
@@ -75,4 +73,4 @@ const Sidebar = ({ categories }) => {
   );
 };
 
-export default Sidebar;
+export default MobileSidebar;

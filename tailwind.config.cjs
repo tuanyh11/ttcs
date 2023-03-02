@@ -4,7 +4,9 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        '920': '920px'
+        '920': '920px',
+        'screens-576': '540px',
+        'screens-600': '600px',
       },
       transformOrigin: {
         'top-left-1/4-0': 'calc(100% - 30px) 0'

@@ -14,7 +14,7 @@ const Filter = () => {
 
   return (
     <div>
-      <div className="py-10 px-[30px]  border-[2px] shadow-[0_5px_0_rgb(200_200_200/20%] ">
+      <div className="py-10 px-[30px]  border border-[#f7f7f7] shadow-[0_5px_0_rgb(200_200_200/20%] ">
         <h4 className="pb-[13px] mb-7 border-b-[2px] text-dark-color font-semibold text-2xl font-poppins">
           Filter by price
         </h4>

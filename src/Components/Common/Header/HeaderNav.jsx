@@ -57,16 +57,13 @@ const HeaderNav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const { items, length } = useCartStore()
-  // console.log(length());
-  // console.log(items.reduce((prevValue, currentValue) => prevValue + currentValue.quantity,
-  //   0));
+  const { items, length } = useCartStore()  
 
   return (
     <div
-      className={` transition-all duration-200  ${sticky
+      className={` transition-all duration-200   ${sticky
         ? "bg-white  z-[9999999] fixed top-0 left-0 right-0 shadow-[0px_7px_12px_0px_rgb(225_225_225_/50%)] "
-        : ""
+        : "border border-[#eaeaea]"
         }`}
     >
       <Container className={"xl:max-w-[1420px]"}>
@@ -127,8 +124,8 @@ const HeaderNav = () => {
                 placeholder="Search"
                 onChange={(e) => setText(e.target.value)}
               />
-              <button onClick={() => handleOnSearch()} className="absolute top-1/2 right-0 -translate-y-1/2 text-[#111111] -translate-x-5">
-                <i className="fas fa-search"></i>
+              <button onClick={() => handleOnSearch()} className="absolute top-1/2 text-sm right-0 -translate-y-1/2 text-[#111111] -translate-x-5">
+                <i className="far fa-search font-normal"></i>
               </button>
             </div>
             <div className="mr-[10px] ml-[30px] relative group">

@@ -77,11 +77,15 @@ body {
   }
 
   .filter-price .range-slider__thumb {
-    @apply bg-main-color w-4 h-4
+    @apply bg-main-color w-3 h-3
   }
 
   .filter-price .range-slider__range {
     @apply bg-main-color
+  }
+
+  p {
+    @apply text-[#646a7c]
   }
 
 }
