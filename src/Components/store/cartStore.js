@@ -75,8 +75,7 @@ const useCartStore = create(
         }
         return { items: [...state.items, { ...item, quantity: 1 }] };
       }),
-
-
+      getTotal: () => get().items,
       hasProduct: productId => get().items.some(item => item.id === productId),
       length: () => get().items.reduce((prevValue, currentValue) => prevValue + currentValue.quantity, 0),
       removeItem: (itemId) =>

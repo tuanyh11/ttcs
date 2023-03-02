@@ -43,6 +43,8 @@ const HeaderNav = () => {
 
 
 
+
+
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 100) {
@@ -57,7 +59,6 @@ const HeaderNav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const { items, length } = useCartStore()  
 
   return (
     <div
