@@ -131,13 +131,13 @@ const Content = () => {
             <div className="hidden md:block">
               <button
                 onClick={() => setFeatured("grid")}
-                className={`border fal text-[22px] fa-th fa-grip-vertical w-[50px] h-[50px]  ${
+                className={`border fal text-[22px] fa-th fa-grip-vertical w-[50px] h-[50px] hover:bg-main-color hover:text-white transition-main  ${
                   featured === "grid" ? "bg-main-color  text-white" : "bg-white"
                 } mr-[5px]`}
               ></button>
               <button
                 onClick={() => setFeatured("list")}
-                className={`border text-[22px] far fa-list w-[50px] h-[50px] ${
+                className={`border text-[22px] far fa-list w-[50px] h-[50px] hover:bg-main-color hover:text-white transition-main ${
                   featured === "list" ? "bg-main-color  text-white" : "bg-white"
                 } `}
               ></button>

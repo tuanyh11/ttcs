@@ -3,9 +3,6 @@ import { Outlet } from 'react-router'
 import { BreadCrumb, Container } from '../../Components'
 
 const Account = () => {
-
-
-
   return (
     <div>
       <BreadCrumb  label="My Account" />

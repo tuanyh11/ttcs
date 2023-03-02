@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useLocation, useNavigate } from "react-router";
-import { searchProducts } from "../../api";
+import { useLocation } from "react-router";
 import { BreadCrumb, Col, Row, Container } from "../../Components";
 import { useUiStore } from "../../Components/store";
 import { useShopContext } from "../../hooks";
@@ -65,19 +63,11 @@ const Shop = ({ categories }) => {
     setFilter({ ...filter, price });
   };
 
-  const nav = useNavigate()
+  console.log(isOpeningFilterProduct);
 
-  const handleOnSearch = async (text) => {
-    const data = await searchProducts(text)
-    if (data?.length > 1 || data?.length === 0)
-      nav("/shop", { state: { products: data, searchText: text } })
-    if (data?.length === 1) {
-      nav(`/product/${data?.[0]?.node?.name}`, { state: { product: data?.[0]?.node, searchText: text } })
-    }
-  };
   const { Provider } = useShopContext();
 
-  return ( 
+  return (
     <div>
       <Provider
         value={{
@@ -88,7 +78,6 @@ const Shop = ({ categories }) => {
           handleOnRemoveCate,
           handleOnRemoveStatus,
           handleFilterPrice,
-          handleOnSearch
         }}
       >
         <BreadCrumb
@@ -99,13 +88,13 @@ const Shop = ({ categories }) => {
         <div className="lg:hidden">
           <div
             className={`fixed  w-[400px] overflow-auto top-0 h-[100vh] bg-white z-[99999999999] transition-all duration-500 ease-linear ${
-              isOpeningFilterProduct ? "left-[0] " : "-left-full"
+              isOpeningFilterProduct ? "-left-full" : "left-[0]"
             }  `}
           >
             <div className="py-[18px] px-5 bg-[#1c2224] text-white text-[16px] font-semibold font-poppins flex justify-between">
               <h5>Product Filters </h5>
               <button
-                onClick={() => setIsOpeningFilterProduct(false)}
+                onClick={() => setIsOpeningFilterProduct(true)}
                 className="w-[26px] h-[26px] leading-[26px] bg-white rounded-full text-black font-bold"
               >
                 <i className="fa fa-times"></i>
@@ -117,11 +106,11 @@ const Shop = ({ categories }) => {
           </div>
         </div>
         <div className="py-20 relative">
-          <Container>
+          <Container className={"screens-576:max-w-[540px]"}>
             <Row>
               <Col
                 className={
-                  "w-full hidden md:block lg:w-3/12 order-2 mt-10 md:mt-0  md:order-1"
+                  "w-full hidden screens-600:block lg:w-3/12 order-2 mt-10 md:mt-0  screens-600:order-1"
                 }
               >
                 <div className="">

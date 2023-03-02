@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "../../../Components";
+import { Button, InputSearchV1 } from "../../../Components";
 import Banner from "./Banner";
 import Category from "./Category";
 import ProductStatus from "./ProducStatus";
@@ -34,18 +34,7 @@ const MobileSidebar = ({ categories }) => {
       <ul>
         <li>
           <div className="relative mb-[30px]">
-            <input
-              type="text"
-              className=" h-[50px] border-[1px] pl-5 text-black text-sm  w-full pr-[84px]  outline-none "
-              placeholder="Search..."
-              onChange={(e) => setText(e.target.value)}
-            />
-            <button
-              onClick={() => handleOnSearch(text)}
-              className="absolute top-1/2 text-[#333] right-0 -translate-y-1/2 px-4  "
-            >
-              <i className="far fa-search"></i>
-            </button>
+            <InputSearchV1 onClick={() => handleOnSearch(text)}/>
           </div>
         </li>
         {isHasProducts && (
