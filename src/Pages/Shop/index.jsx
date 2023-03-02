@@ -5,7 +5,7 @@ import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
 
-const Shop = ({ categories }) => {
+const Shop = ({ categories, dataCate }) => {
   const [filter, setFilter] = useState({
     status: [],
     category: [],
@@ -14,7 +14,6 @@ const Shop = ({ categories }) => {
   });
 
   const searchText = useLocation().state?.searchText;
-
   const handleOnSelectCate = (category) => {
     const id = category.databaseId;
     const isExisting = filter.category.find((item) => item.databaseId === id);
@@ -56,13 +55,16 @@ const Shop = ({ categories }) => {
   };
 
   const handleFilterPrice = (price) => {
-    setFilter({ ...filter, price})
+    setFilter({ ...filter, price })
   }
 
 
   const { Provider } = useShopContext();
 
-
+  useEffect(() => {
+    dataCate?.node && handleOnSelectCate(dataCate?.node)
+  }, [dataCate])
+  // console.log(dataCate);
   return (
     <div>
       <Provider
@@ -76,7 +78,14 @@ const Shop = ({ categories }) => {
           handleFilterPrice
         }}
       >
-        <BreadCrumb label={`Search Results for: ${searchText}` || 'Products'} isForSearching={searchText} offPath={searchText}/>
+        {
+          dataCate?.node !== undefined ? (
+            <BreadCrumb label={`Category: ${dataCate?.node.name}` || 'Products'} isForSearching={searchText} offPath={searchText} />
+          ) : (
+            <BreadCrumb label={`Search Results for: ${searchText}` || 'Products'} isForSearching={searchText} offPath={searchText} />
+          )
+        }
+
         <div className="py-20 relative">
           <Container>
             <Row>
@@ -89,7 +98,7 @@ const Shop = ({ categories }) => {
                       type="text"
                       className=" h-[50px] border-[1px] pl-5  w-full pr-[84px]  outline-none "
                       placeholder="Search..."
-                      // onChange={handleOnSearch}
+                    // onChange={handleOnSearch}
                     />
                     <button className="absolute top-1/2 right-0 -translate-y-1/2 px-4  ">
                       <i className="fas fa-search"></i>

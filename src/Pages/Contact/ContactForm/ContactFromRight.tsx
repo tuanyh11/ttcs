@@ -36,7 +36,7 @@ const ContactFromRight = ({ updateContacts, setMess, contacts, mess }) => {
                         <Row className={''}>
                             <Col className={'sm:w-1/2 w-full mb-[20px]'}>
                                 <div className="form-group w-full relative">
-                                    <input className="w-full h-[70px] mb-[10px] px-5 focus:outline-none text-dark-color"
+                                    <input className="w-full h-[70px] mb-[10px] px-5 focus:outline-none text-[#000]"
                                         type='text'
                                         placeholder="Your Name"
                                         name="name"
@@ -55,7 +55,7 @@ const ContactFromRight = ({ updateContacts, setMess, contacts, mess }) => {
                             </Col>
                             <Col className={'sm:w-1/2 w-full mb-[20px]'}>
                                 <div className="form-group w-full relative">
-                                    <input className="w-full h-[70px] mb-[10px] px-5 focus:outline-none text-dark-color"
+                                    <input className="w-full h-[70px] mb-[10px] px-5 focus:outline-none text-[#000]"
                                         type='email'
                                         placeholder="Your Email"
                                         name="email"
@@ -71,7 +71,7 @@ const ContactFromRight = ({ updateContacts, setMess, contacts, mess }) => {
                             </Col>
                             <Col className={'w-full mb-[20px]'}>
                                 <div className="form-group w-full relative">
-                                    <input className="w-full h-[70px] mb-[10px] px-5 focus:outline-none text-dark-color"
+                                    <input className="w-full h-[70px] mb-[10px] px-5 focus:outline-none text-[#000]"
                                         type='text'
                                         placeholder="Subject"
                                         name="subject"
@@ -91,7 +91,7 @@ const ContactFromRight = ({ updateContacts, setMess, contacts, mess }) => {
                                     <textarea
                                         rows={10}
                                         cols={40}
-                                        className="w-full h-[70px] mb-8 px-4 py-3 focus:outline-none text-dark-color"
+                                        className="w-full h-[70px] mb-8 px-4 py-3 focus:outline-none text-[#000]"
                                         placeholder="Your Message"
                                         name="message"
 

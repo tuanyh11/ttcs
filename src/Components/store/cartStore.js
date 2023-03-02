@@ -48,7 +48,11 @@ const useCartStore = create(
           return {
             wishItems: state.wishItems.map(oldItem => {
               if (oldItem.id === item.id) {
-                return { ...oldItem, quantity: oldItem?.quantity ? oldItem.quantity + 1 : 1 };
+                return {
+                  ...oldItem,
+                  quantity: oldItem?.quantity,
+                  date: oldItem.date,
+                };
               }
               return oldItem;
             }),
@@ -87,6 +91,15 @@ const useCartStore = create(
             0
           );
           return { items: updatedItems, total: updatedTotal };
+        }),
+      removeItemWish: (itemId) =>
+        set((state) => {
+          const updatedItems = state.wishItems.filter((item) => item.id !== itemId);
+          const updatedTotal = updatedItems.reduce(
+            (total, item) => total + item.price,
+            0
+          );
+          return { wishItems: updatedItems, total: updatedTotal };
         }),
     }),
     {

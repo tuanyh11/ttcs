@@ -1,0 +1,24 @@
+@media screen and (max-width: 768px) {
+    .wishlist thead th:not(.product-name) {
+        display: none;
+    }
+
+    .wishlist tbody td {
+        display: block;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .wishlist .btn-add {
+        width: 100%;
+    }
+
+    .wishlist .title-add {
+        display: block !important;
+    }
+
+    .wishlist .icon-add {
+        display: none !important;
+        ;
+    }
+}
