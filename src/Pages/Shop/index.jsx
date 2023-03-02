@@ -99,7 +99,11 @@ const Shop = ({ categories, dataCate }) => {
           dataCate?.node !== undefined ? (
             <BreadCrumb label={`Category: ${dataCate?.node.name}` || 'Products'} isForSearching={searchText} offPath={searchText} />
           ) : (
-            <BreadCrumb label={`Search Results for: ${searchText}` || 'Products'} isForSearching={searchText} offPath={searchText} />
+            <BreadCrumb
+              label={searchText ? `Search Results for: ${searchText}` : "Products"}
+              isForSearching={searchText}
+              offPath={searchText}
+            />
           )
         }
         <div className="lg:hidden">
@@ -130,17 +134,6 @@ const Shop = ({ categories, dataCate }) => {
                 }
               >
                 <div className="">
-                  <div className="relative mb-[30px]">
-                    <input
-                      type="text"
-                      className=" h-[50px] border-[1px] pl-5  w-full pr-[84px]  outline-none "
-                      placeholder="Search..."
-                    // onChange={handleOnSearch}
-                    />
-                    <button className="absolute top-1/2 right-0 -translate-y-1/2 px-4  ">
-                      <i className="fas fa-search"></i>
-                    </button>
-                  </div>
                   <Sidebar categories={categories} />
                 </div>
               </Col>
