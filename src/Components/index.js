@@ -7,13 +7,10 @@ export { default as Container } from './Common/Container/Container'
 export { default as Row } from './Common/Row/Row'
 export { default as Col } from './Common/Col/Col'
 export { default as BlogCard } from './UI/Blog/BlogCard'
-export { default as InputV2 } from './Common/Input/InputV2'
-export { default as InputV1 } from './Common/Input/InputV1'
 export { default as Pagination } from './Common/Pagination/Pagination'
 export { default as BreadcrumbPath } from './Common/Breadcrumb/BreadcrumbPath'
 export { default as SliderForm } from './Common/Slider/SliderForm'
 export {default as SpinningLoader} from './Common/Spinning/Spinning'
-export {default as InputSearchV1} from './Common/Input/InputSearchV1'
 
 
 
@@ -27,3 +24,8 @@ export { default as ProductCardGridV2 } from './UI/Product/ProductCardGridV2'
 export { default as QuickView } from './UI/Product/QuickView'
 
 
+// Input
+export { default as InputV2 } from './Common/Input/InputV2'
+export {default as InputSearchV1} from './Common/Input/InputSearchV1'
+export { default as InputV1 } from './Common/Input/InputV1'
+export {default as InputV3} from './Common/Input/InputV3'

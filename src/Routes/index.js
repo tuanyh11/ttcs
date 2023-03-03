@@ -19,6 +19,8 @@ import {
   OrderPage,
   IndexPage,
   DownloadPage,
+  AddressPage,
+  AccountDetail,
   
 } from "../Pages";
 import NotFound from "../Pages/NotFound";
@@ -124,6 +126,16 @@ export default [
           {
             path: "downloads",
             component: DownloadPage,
+            index: true,
+          },
+          {
+            path: "addresses",
+            component: AddressPage,
+            index: true,
+          },
+          {
+            path: "account-details",
+            component: AccountDetail,
             index: true,
           }
         ],

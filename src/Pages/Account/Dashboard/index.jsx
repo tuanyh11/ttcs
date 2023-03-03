@@ -36,7 +36,7 @@ const Dashboard = () => {
   return (
     <div>
       <Row>
-        <Col>
+        <Col className={"w-full"}>
           <div className="">
             <div className="flex gap-1 mb-[25px]">
               {buttons.map((button, index) => (
