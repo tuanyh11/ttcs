@@ -7,6 +7,7 @@ module.exports = {
         '920': '920px',
         'screens-576': '540px',
         'screens-600': '600px',
+        'screens-1200': '1200px',
       },
       transformOrigin: {
         'top-left-1/4-0': 'calc(100% - 30px) 0'

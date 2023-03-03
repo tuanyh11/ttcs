@@ -5,10 +5,32 @@ import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import routeData from "./Routes";
 import { useUiStore } from "./Components/store";
 
+function createRoutes(routes) {
+  return routes.map((route) => {
+    const { path, component: Component, isIndex, children, ...rest } = route;
+    return (
+      <Route
+        key={path}
+        path={path}
+        index={isIndex}
+
+        element={ <Component />}
+      >
+        {children && createRoutes(children)}
+      </Route>
+    );
+  });
+}
+
 function App() {
   const [backToHeader, setBackToHeader] = useState(false);
 
-  const { product, selectProduct, setIsOpeningFilterProduct, isOpeningFilterProduct } = useUiStore();
+  const {
+    product,
+    selectProduct,
+    setIsOpeningFilterProduct,
+    isOpeningFilterProduct,
+  } = useUiStore();
 
   useEffect(() => {
     const onScroll = () => {
@@ -35,36 +57,13 @@ function App() {
 
         <Routes>
           <Route path={"/"} element={<Navigate to={"/home"} />} />
-          {routeData.map(({ path, component: Component, children }, index) => {
-            if (children.length > 0) {
-              return (
-                <Route key={index} path={path} element={<Component />}>
-                  {children.map(
-                    (
-                      { path, component: ComponentChil, children, index },
-                      i
-                    ) => {
-                      return (
-                        <Route
-                          key={i}
-                          index={index}
-                          path={path}
-                          element={<ComponentChil />}
-                        />
-                      );
-                    }
-                  )}
-                </Route>
-              );
-            }
-            return <Route key={index} path={path} element={<Component />} />;
-          })}
+        {createRoutes(routeData)}
+
         </Routes>
         <Footer />
       </>
     );
   }, []);
-
 
   const { pathname } = useLocation();
 
@@ -88,7 +87,12 @@ function App() {
               {pathname !== "/shop" ? (
                 <Link to="/shop" className="fal fa-th-large"></Link>
               ) : (
-                <button onClick={() => setIsOpeningFilterProduct(!isOpeningFilterProduct)} className="fal fa-filter"></button>
+                <button
+                  onClick={() =>
+                    setIsOpeningFilterProduct(!isOpeningFilterProduct)
+                  }
+                  className="fal fa-filter"
+                ></button>
               )}
             </div>
           </Col>

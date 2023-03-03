@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "../../../Components";
-import Signin from "./Signin";
+import SignIn from "./SignIn";
 import SignOut from "./SignOut";
 
 const Auth = () => {
@@ -10,7 +10,7 @@ const Auth = () => {
         <Col className={"w-full"}>
           <div className="flex">
             <Col className={"md:w-1/2 w-full"}>
-              <Signin />
+              <SignIn />
             </Col>
             <Col className={"md:w-1/2 w-full md:mt-0 mt-[30px]"}>
               <SignOut />

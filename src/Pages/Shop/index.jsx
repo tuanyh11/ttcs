@@ -8,7 +8,7 @@ import Content from "./Content";
 import Sidebar from "./Sidebar/index";
 import MobileSidebar from "./Sidebar/MobileSidebar";
 
-const Shop = ({ categories }) => {
+const Shop = ({ categories, dataCate }) => {
   const [filter, setFilter] = useState({
     status: [],
     category: [],
@@ -77,6 +77,10 @@ const Shop = ({ categories }) => {
 
   const { Provider } = useShopContext();
 
+  useEffect(() => {
+    dataCate?.node && handleOnSelectCate(dataCate?.node)
+  }, [dataCate])
+  // console.log(dataCate);
   return (
     <div>
       <Provider
@@ -91,16 +95,21 @@ const Shop = ({ categories }) => {
           handleOnSearch
         }}
       >
-        <BreadCrumb
-          label={searchText ? `Search Results for: ${searchText}` : "Products"}
-          isForSearching={searchText}
-          offPath={searchText}
-        />
+        {
+          dataCate?.node !== undefined ? (
+            <BreadCrumb label={`Category: ${dataCate?.node.name}` || 'Products'} isForSearching={searchText} offPath={searchText} />
+          ) : (
+            <BreadCrumb
+              label={searchText ? `Search Results for: ${searchText}` : "Products"}
+              isForSearching={searchText}
+              offPath={searchText}
+            />
+          )
+        }
         <div className="lg:hidden">
           <div
-            className={`fixed  w-[400px] overflow-auto top-0 h-[100vh] bg-white z-[99999999999] transition-all duration-500 ease-linear ${
-              isOpeningFilterProduct ? "left-[0]" : "-left-full"
-            }  `}
+            className={`fixed  w-[400px] overflow-auto top-0 h-[100vh] bg-white z-[99999999999] transition-all duration-500 ease-linear ${isOpeningFilterProduct ? "left-[0]" : "-left-full"
+              }  `}
           >
             <div className="py-[18px] px-5 bg-[#1c2224] text-white text-[16px] font-semibold font-poppins flex justify-between">
               <h5>Product Filters </h5>
