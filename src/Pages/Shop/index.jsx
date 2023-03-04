@@ -112,7 +112,7 @@ const Shop = ({ categories, dataCate }) => {
               }  `}
           >
             <div className="py-[18px] px-5 bg-[#1c2224] text-white text-[16px] font-semibold font-poppins flex justify-between">
-              <h5>Product Filters </h5>
+              <h5 className="text-white">Product Filters </h5>
               <button
                 onClick={() => setIsOpeningFilterProduct(false)}
                 className="w-[26px] h-[26px] leading-[26px] bg-white rounded-full text-black font-bold"
@@ -130,14 +130,14 @@ const Shop = ({ categories, dataCate }) => {
             <Row>
               <Col
                 className={
-                  "w-full hidden screens-600:block lg:w-3/12 order-2 mt-10 md:mt-0  screens-600:order-1"
+                  "w-full hidden screens-600:block screens-992:w-3/12 order-2 mt-10 md:mt-0  screens-600:order-1 screens-992:order-none"
                 }
               >
                 <div className="">
                   <Sidebar categories={categories} />
                 </div>
               </Col>
-              <Col className={"w-full lg:w-9/12 order-1 md:order-2"}>
+              <Col className={"w-full screens-992:w-9/12 order-1 md:order-2 "}>
                 <Content />
               </Col>
             </Row>

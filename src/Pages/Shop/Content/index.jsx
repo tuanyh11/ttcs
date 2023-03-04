@@ -133,7 +133,7 @@ const Content = () => {
                 onClick={() => setFeatured("grid")}
                 className={`border fal text-[22px] fa-th fa-grip-vertical w-[50px] h-[50px] hover:bg-main-color hover:text-white transition-main  ${
                   featured === "grid" ? "bg-main-color  text-white" : "bg-white"
-                } mr-[5px]`}
+                } mr-[8px]`}
               ></button>
               <button
                 onClick={() => setFeatured("list")}
@@ -160,7 +160,7 @@ const Content = () => {
                 {showProducts?.map((item, index) => {
                   const product = item?.node;
                   return (
-                    <Col key={index} className=" w-full md:w-6/12 lg:w-4/12">
+                    <Col key={index} className=" w-full md:w-6/12 screens-992:w-4/12">
                       <div className="mb-[30px] ">
                         <ProductCardGrid
                           {...product}

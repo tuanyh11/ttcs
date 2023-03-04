@@ -27,7 +27,6 @@ const Sidebar = ({ categories }) => {
 
   const handleOnSearch = state?.handleOnSearch
 
-  console.log(state)
 
   const isHasProducts = loc.state ? loc.state?.products?.length > 0 : true;
 

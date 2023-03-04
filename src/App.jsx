@@ -75,41 +75,41 @@ function App() {
 
       {Children}
 
-      <div className="fixed z-[999999] bottom-0 right-0 left-0 text-[21px] text-[#9b9b9b] lg:hidden">
-        <Row className={"bg-white text-center"}>
-          <Col className={"w-3/12"}>
-            <div className="py-5">
-              <Link to={"/"} className="fal fa-home "></Link>
+      <div className="fixed z-[999999] bottom-0 right-0 left-0 text-[21px] text-[#9b9b9b] lg:hidden shadow-[(0_.5rem_1rem_rgba(0,0,0,.15))]">
+        <div className={"bg-white text-center flex"}>
+          <div className={"w-3/12 border-r border-[#edf1f4]"}>
+            <div className="py-5 px-[7px] ">
+              <Link to={"/"} className="fal text-[21px] font-medium fa-home "></Link>
             </div>
-          </Col>
-          <Col className={"w-3/12"}>
-            <div className="py-5">
+          </div>
+          <div className={"w-3/12 border-r border-[#edf1f4]"}>
+            <div className="py-5 px-[7px] ">
               {pathname !== "/shop" ? (
-                <Link to="/shop" className="fal fa-th-large"></Link>
+                <Link to="/shop" className="fal text-[21px] font-medium fa-th-large"></Link>
               ) : (
                 <button
                   onClick={() =>
                     setIsOpeningFilterProduct(!isOpeningFilterProduct)
                   }
-                  className="fal fa-filter"
+                  className="fal text-[21px] font-medium fa-filter"
                 ></button>
               )}
             </div>
-          </Col>
-          <Col className={"w-3/12"}>
-            <div className="py-5 relative">
-              <Link to={"/cart"} className="fal fa-shopping-cart"></Link>
-              <span className="w-[18px] h-[18px] text-white text-[10px] rounded-full bg-main-color block text-center leading-[18px] absolute z-10 top-1/2 -translate-y-full -translate-x-1/2 right-0">
+          </div>
+          <div className={"w-3/12 border-r border-[#edf1f4]"}>
+            <div className="py-5 px-[7px]  relative">
+              <Link to={"/cart"} className="fal text-[21px] font-medium fa-shopping-cart"></Link>
+              <span className="w-[18px] h-[18px] text-white text-[10px] rounded-full bg-main-color block text-center leading-[18px] absolute z-10 top-1/2 -translate-y-full  right-[20px]">
                 1
               </span>
             </div>
-          </Col>
-          <Col className={"w-3/12"}>
-            <div className="py-5">
-              <Link to={"/my-account"} className="fal fa-user-circle"></Link>
+          </div>
+          <div className={"w-3/12"}>
+            <div className="py-5 px-[7px] ">
+              <Link to={"/my-account"} className="fal text-[21px] font-medium fa-user-circle"></Link>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
 
       {backToHeader && (

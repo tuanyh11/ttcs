@@ -46,6 +46,11 @@ body {
 
 /* button */
 @layer components {
+
+  .custom-container {
+    @apply xl:max-w-[1420px] mx-auto px-5 block w-full
+  }
+
   button {
     @apply outline-none;
   }

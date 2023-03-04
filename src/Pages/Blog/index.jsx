@@ -50,10 +50,10 @@ const Blog = () => {
         }>
           <Container >
             <Row>
-              <Col className={"w-full order-2 920:order-1 lg:w-4/12 "}>
+              <Col className={"w-full order-2 screens-768:order-1 lg:w-4/12 mt-10  screens-768:mt-0 "}>
                 <Sidebar />
               </Col>
-              <Col className={"w-full order-1 920:order-2 lg:w-8/12"}>
+              <Col className={"w-full order-1 screens-768:order-2 lg:w-8/12"}>
                 <Outlet />
               </Col>
             </Row>

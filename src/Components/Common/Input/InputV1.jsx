@@ -1,11 +1,13 @@
 import React from "react";
 
-const InputV1 = ({label, register = {}, error,  ...rest}) => {
+const InputV1 = ({ label, register = {}, offLabel, offRequired, error, ...rest }) => {
   return (
     <div className="flex flex-wrap mb-[15px]">
-      <label className="block w-full mb-[8px] capitalize">
-        {label} <span className="text-[#e4573d]">*</span>{" "}
-      </label>
+      {!offLabel && (
+        <label className="block w-full mb-[8px] capitalize">
+          {label}  {!offRequired && <span className="text-[#e4573d]">*</span>}{" "}
+        </label>
+      )}
       {error && <span className="text-main-color  ">{error}</span>}
       <input
         {...register}

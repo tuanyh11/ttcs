@@ -65,24 +65,24 @@ const BlogCard = ({ type = "image", settings = {}, list = false, ...rest }) => {
       )}
 
       <div className="pt-[30px] pb-[10px] px-[15px] md:px-10 border-2 border-t-0">
-        <div className="flex items-center gap-[22px] pb-[10px] mb-[15px] border-b capitalize">
-          <div className="">
+        <div className="flex items-center flex-wrap  pb-[10px] mb-[15px] border-b capitalize">
+          <div className="mr-5">
             <i className="mr-[10px] text-main-color far fa-calendar-alt"></i>
             <Link to={`/blog/${id}`}>{getDate(published)}</Link>
           </div>
-          <div className="">
+          <div className="mr-5">
             <i className="mr-[10px] text-main-color far fa-folder"></i>
             <Link to={`/blog/${id}`}>Video</Link>
           </div>
 
-          <div className="">
+          <div className="mr-5">
             <i className="mr-[10px] text-main-color fa-regular fa-bookmark"></i>
             <Link to={`/blog/${id}`}>video, Images</Link>
           </div>
         </div>
         <Link
           to={`/blog/${id}`}
-          className="text-[30px] leading-[35px] mb-5 block text-black font-poppins font-semibold"
+          className="text-[26px] leading-[35px] mb-5 block text-black font-poppins font-semibold"
         >
           {rest?.title}
         </Link>

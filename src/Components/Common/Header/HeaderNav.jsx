@@ -67,7 +67,7 @@ const HeaderNav = () => {
         : "border border-[#eaeaea]"
         }`}
     >
-      <Container className={"xl:max-w-[1420px]"}>
+      <div className={"custom-container"}>
         <div className="flex justify-between items-center py-[15px] xl:py-0">
           <Link to="/">
             <img
@@ -148,7 +148,7 @@ const HeaderNav = () => {
           isOpen={isOpen}
           data={headerData}
         />
-      </Container>
+      </div>
     </div>
   );
 };

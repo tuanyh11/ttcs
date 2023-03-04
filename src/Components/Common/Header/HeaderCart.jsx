@@ -6,8 +6,6 @@ import ButtonV1 from "../Button/Button";
 const HeaderCart = () => {
   const { length, items, removeItem, getTotal } = useCartStore();
 
-  console.log(getTotal());
-
   return (
     <>
       <Link to={"/cart"} className="relative ml-5">
