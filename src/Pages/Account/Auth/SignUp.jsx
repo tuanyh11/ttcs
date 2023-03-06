@@ -1,34 +1,27 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { Button, InputV1 } from "../../../Components";
+import useAuth from "../../../Components/store/authStore";
 
-const SignOut = () => {
+const SignUp = () => {
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
-  } = useForm({
-    password: "",
-    userName: "",
-    passwordConfirmation: "",
-    email: "",
-  });
+  } = useFormContext().formSignUp ;
 
   const password = watch("password");
 
-  console.log(errors)
 
 
   return (
     <>
-      <h2 className="text-[27px] mb-[10px] text-[#111111] font-semibold font-poppins">
+      <h2 className="text-[27px] leading-[48px] mb-[10px] text-[#111111] font-semibold font-poppins">
         Register
       </h2>
       <form onSubmit={handleSubmit((value) => console.log(value))}>
         <InputV1
           label={"user name"}
-          error={errors?.userName?.message}
           register={{
             ...register("userName", {
               required: {
@@ -40,7 +33,6 @@ const SignOut = () => {
         />
         <InputV1
           label={"Email address"}
-          error={errors?.email?.message}
           register={{
             ...register("email", {
               required: {
@@ -53,7 +45,6 @@ const SignOut = () => {
         <InputV1
           label={"password"}
           type={"password"}
-          error={errors?.password?.message}
           register={{
             ...register("password", {
               required: {
@@ -67,10 +58,8 @@ const SignOut = () => {
           label={"Password Confirm"}
           type={"password"}
 
-          error={errors?.passwordConfirmation?.message}
           register={{
             ...register("passwordConfirmation", {
-                required: true,
                 validate: (value) => value === password || "Passwords do not match"
             }),
           }}
@@ -90,4 +79,4 @@ const SignOut = () => {
   );
 };
 
-export default SignOut;
+export default SignUp;

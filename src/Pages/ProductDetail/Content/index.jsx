@@ -6,6 +6,7 @@ import BodyLeft from "./BodyLeft";
 import BodyRight from "./BodyRight";
 import Nav from "./Nav";
 import Pages from "./Pages";
+import RelatedProduct from "./RelatedProduct";
 
 const index = () => {
   const [page, setPage] = useState("description");
@@ -13,22 +14,22 @@ const index = () => {
   const { state: data } = useProductDetailContext();
 
   useEffect(() => {
-    if(data?.query?.type && data?.query?.commentId ) {
+    if (data?.query?.type && data?.query?.commentId) {
       setPage(data.query.type);
-      setCommentId(data.query.commentId)
+      setCommentId(data.query.commentId);
     }
-  }, [data])
+  }, [data]);
 
   return (
     <div className="bg-[#f7f7f7] ">
       <Container>
         <div className="pt-[30px]">
-         <div className=" p-2  border border-solid">
-         <Link to={"/cart"} className=" font-medium">
-            {data?.name}
-          </Link>{" "}
-          “Titanium Wheel Cover” has been added to your cart.
-         </div>
+          <div className=" p-2  border border-solid">
+            <Link to={"/cart"} className=" font-medium">
+              {data?.name}
+            </Link>{" "}
+            “Titanium Wheel Cover” has been added to your cart.
+          </div>
         </div>
       </Container>
       <div className="py-20 ">
@@ -47,7 +48,7 @@ const index = () => {
         </Container>
       </div>
 
-      <div className="bg-white pb-[55px]">
+      <div className="bg-white pb-[80px] pt-[70px] ">
         <Container>
           <Nav
             onSetPage={setPage}
@@ -55,6 +56,12 @@ const index = () => {
             page={page}
           />
           <Pages page={page} data={data} commentId={commentId} />
+        </Container>
+      </div>
+
+      <div className="bg-white mb-[55px] ">
+        <Container>
+          <RelatedProduct />
         </Container>
       </div>
     </div>

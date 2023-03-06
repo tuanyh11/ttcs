@@ -44,11 +44,15 @@ body {
   top: -8px;
 }
 
-
 /* button */
 @layer components {
+
+  .custom-container {
+    @apply xl:max-w-[1420px] mx-auto px-5 block w-full
+  }
+
   button {
-    @apply outline-none
+    @apply outline-none;
   }
 
   .button-v1,
@@ -61,48 +65,66 @@ body {
   }
 
   .product-detail-slider .slick-prev {
-    @apply !opacity-0 invisible transition-all duration-200 ease-linear
+    @apply !opacity-0 invisible transition-all duration-200 ease-linear;
   }
 
   .product-detail-slider .slick-next {
-    @apply !opacity-0 invisible transition-all duration-200 ease-linear
+    @apply !opacity-0 invisible transition-all duration-200 ease-linear;
   }
 
   .product-detail-slider:hover .slick-prev {
-    @apply !opacity-100 visible !left-0
+    @apply !opacity-100 visible !left-0;
   }
 
   .product-detail-slider:hover .slick-next {
-    @apply !opacity-100 visible !right-4
+    @apply !opacity-100 visible !right-4;
   }
 
   .filter-price .range-slider__thumb {
-    @apply bg-main-color w-3 h-3
+    @apply bg-main-color w-3 h-3;
   }
 
   .filter-price .range-slider__range {
-    @apply bg-main-color
+    @apply bg-main-color;
   }
 
   p {
-    @apply text-[#646a7c]
+    @apply text-[#646a7c];
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-poppins text-black;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-semibold;
+  }
 }
 
 /* input shop checked */
 
-.input-shop[type="checkbox"]:checked+label span::after {
+.input-shop[type="checkbox"]:checked + label span::after {
   opacity: 1 !important;
 }
 
 /* home css */
 
 .home-banner::after {
-  background: linear-gradient(10deg,
-      rgba(17, 17, 17, 0.70196) 0%,
-      rgba(17, 17, 17, 0.01) 99%,
-      #111111 100%);
+  background: linear-gradient(
+    10deg,
+    rgba(17, 17, 17, 0.70196) 0%,
+    rgba(17, 17, 17, 0.01) 99%,
+    #111111 100%
+  );
 }
 
 .triangle::after {
@@ -116,8 +138,6 @@ body {
   border-right: 13px solid transparent;
   border-bottom: 14px solid #fff;
 }
-
-
 
 /* product-detail */
 .animation {

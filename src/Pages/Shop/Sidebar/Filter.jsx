@@ -23,7 +23,7 @@ const Filter = () => {
           <div className="mb-6">
             <RangeSlider min={0} max={max} className="filter-price h-1" onInput={(e) => setPrice(e)} />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap">
             <button onClick={() => handleFilterPrice(price)}  className="bg-main-color  py-[5px] px-[10px] uppercase text-white">
               filter
             </button>

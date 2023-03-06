@@ -1,6 +1,6 @@
 import currency from "currency.js";
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 const CART_STORAGE_KEY = "shopping_cart";
 
@@ -104,8 +104,8 @@ const useCartStore = create(
         }
         return { items: [...state.items, { ...item, quantity: 1 }] };
       }),
-
-
+      getTotal: () => get().items,
+      isInWishList: productId => get().wishItems?.some(item => item.id === productId),
       hasProduct: productId => get().items.some(item => item.id === productId),
       length: () => get().items.reduce((prevValue, currentValue) => prevValue + currentValue.quantity, 0),
       removeItem: (itemId) =>

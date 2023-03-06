@@ -30,7 +30,6 @@ const ProductCardGrid = ({
     ...rest,
   };
 
-  const { selectProduct } = useUiStore();
 
   const saleInfo = salePrice
     ? -Math.round(
@@ -46,7 +45,8 @@ const ProductCardGrid = ({
     selectProduct(product, true);
   };
 
-  const { hasProduct, addItem, addToWishlistItems } = useCartStore();
+  const { hasProduct, addItem, addToWishlistItems, isInWishList  } = useCartStore();
+  const { setIsOpeningWishlist, selectProductWishlist , selectProduct} = useUiStore();
 
   const handleAddToCart = function (e, item) {
     e.preventDefault();
@@ -55,8 +55,12 @@ const ProductCardGrid = ({
 
   const handleAddToWish = function (e) {
     e.preventDefault();
+    isInWishList(id)  ? selectProductWishlist({...product, isAlreadyInWishlist: isInWishList(id)}) : selectProductWishlist({...product, isAlreadyInWishlist: isInWishList(id)});
     addToWishlistItems(product);
+    setIsOpeningWishlist(true)
   };
+
+  // console.log(isInWishList);
 
   return (
     <div>
@@ -92,7 +96,7 @@ const ProductCardGrid = ({
                 ></button>
                 <button
                   onClick={handleAddToWish}
-                  className="fa-regular fa-heart w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible "
+                  className={`fa-regular fa-heart ${isInWishList(id) ? 'font-black' : '' } w-[35px] h-[35px] mx-[5px] bg-white rounded-full hover:bg-main-color hover:text-white transition-all duration-500 ease-out translate-y-5 group-hover:translate-y-0 group-hover:opacity-100 group-hover:visible opacity-0 invisible `}
                 ></button>
               </div>
             </div>

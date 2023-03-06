@@ -39,7 +39,7 @@ const HeaderTop = () => {
   const [currency, setCurrency] = useState(currencies[0]);
   return (
     <div className={`p-[2px] bg-dark-color text-gray-color-100 `}>
-      <Container className={"xl:max-w-[1420px]"}>
+      <div className={"custom-container"}>
         <Row className={"items-center"}>
           <Col className="md:w-4/12 lg:w-3/12">
             <div>
@@ -106,7 +106,7 @@ const HeaderTop = () => {
             </div>
           </Col>
         </Row>
-      </Container>
+      </div>
     </div>
   );
 };

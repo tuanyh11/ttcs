@@ -5,7 +5,7 @@ const Nav = ({commentCount, onSetPage, page}) => {
 
   return (
     <div>
-          <div className="pt-20 pb-[70px] ">
+          <div className="mb-[30px] ">
               <ul className="md:flex border-b-[2px] border-[#ddd] mb-[30px]">
                 <li
                   onClick={() => onSetPage("description")}

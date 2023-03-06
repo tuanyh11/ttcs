@@ -6,7 +6,9 @@ const Account = () => {
   return (
     <div>
       <BreadCrumb  label="My Account" />
+      
       <div className='py-20'>
+
         <Container >
           <Outlet/>
         </Container>

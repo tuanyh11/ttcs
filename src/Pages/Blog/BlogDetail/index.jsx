@@ -84,7 +84,7 @@ const BlogDetail = () => {
             })}
           </div>
 
-          {selectId === null && <CommentForm />}
+          {selectId === null && <div  className="pt-4 "><CommentForm /></div> }
         </div>
       </div>
     </div>
@@ -95,7 +95,7 @@ export default BlogDetail;
 
 function CommentForm({ nameUser, onCancel = () => {} }) {
   return (
-    <div className="mt-4 mb-10">
+    <div>
       {!nameUser ? (
         <h3 className="mb-[5px] text-[24px]  font-poppins text-dark-color font-semibold">
           Leave a Reply
@@ -137,7 +137,9 @@ function CommentForm({ nameUser, onCancel = () => {} }) {
           comment.
         </div>
 
+        <div className="mb-4">
         <Button label={"POST COMMENT"} />
+        </div>
       </form>
     </div>
   );
@@ -151,12 +153,12 @@ function Comment({ comment, getDate, children, showReply, onReply, onCancel }) {
   return (
     <div>
       <div className="mb-10">
-        <div className="flex ">
-          <div className="min-w-[90px] min-h-[90px] h-[90px]">
+        <div className="flex flex-wrap screens-480:flex-nowrap  ">
+          <div className=" min-w-[90px] min-h-[90px] h-[90px]">
             <img src={avatar} alt="" className="w-full h-full rounded-full" />
           </div>
 
-          <div className="ml-[30px]">
+          <div className=" screens-480:ml-[30px] w-full screens-480:w-auto mt-[15px] screens-480:mt-0 ">
             <div className="">
               <span className=" text-[18px]  font-medium text-dark-color">
                 {authorName}
@@ -179,7 +181,9 @@ function Comment({ comment, getDate, children, showReply, onReply, onCancel }) {
       </div>
 
       {showReply(comment.id) && (
-        <CommentForm nameUser={authorName} onCancel={onCancel} />
+       <div className="mb-10">
+         <CommentForm nameUser={authorName} onCancel={onCancel} />
+       </div>
       )}
 
       {children.map((commentChil) => {

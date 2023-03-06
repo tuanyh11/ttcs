@@ -26,7 +26,7 @@ const BodyRight = () => {
 
   return (
     <div>
-      <div className="py-5 px-[15px] md:py-[50px] md:px-[70px] bg-white ">
+      <div className="py-5 px-[15px] md:py-[50px] md:px-[130px] md:mt-10 lg:mt-0 bg-white ">
         <h3 className="text-[27px] mb-[10px] font-poppins text-black font-semibold">
           {data?.name}
         </h3>
@@ -36,8 +36,8 @@ const BodyRight = () => {
           <p className="ml-2">(1 customer review)</p>
         </div>
 
-        <p className="mb-5 mt-3 font-poppins font-semibold ">
-          <del className="text-[#696969] text-sm mr-1 ">{data?.salePrice}</del>
+        <p className="mb-5 mt-3  font-medium ">
+          <del className="text-[#696969] text-sm mr-1  ">{data?.salePrice}</del>
           <span className="text-main-color text-[19px] ">
             {data?.regularPrice}
           </span>
@@ -55,8 +55,8 @@ const BodyRight = () => {
               <tbody key={i}>
                 {row?.map((cell, j) => {
                   return (
-                    <tr key={j}>
-                      <th className="p-2 text-start text-black">
+                    <tr key={j} className={`${j % 2 !== 0 ?'bg-[#f8f8f8]' : ''}`}>
+                      <th className="p-2 text-start text-black font-medium">
                         {cell?.head}
                       </th>
                       <td>
@@ -78,7 +78,7 @@ const BodyRight = () => {
           })}
         </table>
         <div className="mt-[25px] mb-5">
-          <h3 className="pb-5 ">In Stock</h3>
+          <p className="pb-5 ">In Stock</p>
           <div className="flex">
             <button
               onClick={() => setValue(Math.max(1, value - 1))}
@@ -90,7 +90,7 @@ const BodyRight = () => {
               onChange={handleChange}
               onKeyDown={handleKeyDown}
               onBlur={(e) => e.target.value === "" && setValue(1)}
-              className="w-[50px] h-[50px] border outline-none text-center"
+              className="w-[50px] h-[50px] text-black border outline-none text-center"
             />
             <button
               onClick={() => setValue(value + 1)}

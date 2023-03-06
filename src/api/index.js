@@ -179,3 +179,10 @@ export const searchCarModel = async (id) => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   return carModel.data.parts.edges.filter(({ node: car }) => car.cartId === id)
 }
+
+// login
+
+export const loginAsync = async (user) => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return user
+}

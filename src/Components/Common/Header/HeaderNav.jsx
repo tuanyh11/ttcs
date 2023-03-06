@@ -43,6 +43,8 @@ const HeaderNav = () => {
 
 
 
+
+
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 100) {
@@ -57,7 +59,6 @@ const HeaderNav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const { items, length } = useCartStore()  
 
   return (
     <div
@@ -66,7 +67,7 @@ const HeaderNav = () => {
         : "border border-[#eaeaea]"
         }`}
     >
-      <Container className={"xl:max-w-[1420px]"}>
+      <div className={"custom-container"}>
         <div className="flex justify-between items-center py-[15px] xl:py-0">
           <Link to="/">
             <img
@@ -147,7 +148,7 @@ const HeaderNav = () => {
           isOpen={isOpen}
           data={headerData}
         />
-      </Container>
+      </div>
     </div>
   );
 };

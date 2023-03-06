@@ -116,7 +116,7 @@ const ProductCard = ({
               <span className="text-main-color ">{regularPrice}</span>
             </p>
 
-            <div dangerouslySetInnerHTML={{__html: shortDescription}} className=" line-clamp-3 pb-4">{}</div>
+            <div dangerouslySetInnerHTML={{__html: shortDescription}} className=" line-clamp-3 mb-4"/>
 
             <ButtonV1
               Tag="Link"

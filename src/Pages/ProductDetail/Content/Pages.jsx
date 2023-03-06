@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Button, InputV2 } from "../../../Components";
 import { useDate } from "../../../hooks";
 import { generateStart } from "../../../utils";
@@ -7,14 +7,14 @@ const Pages = ({ page, data, commentId }) => {
   const getDate = useDate();
   const [selectId, setSelectId] = useState(null);
 
+  const [selectRating, setSelectRating] = useState(0);
+
   useEffect(() => {
     const element = commentId ? document.getElementById(commentId) : null;
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   }, [commentId]);
-
-
 
   const commentData = data?.comments?.nodes || [];
   return (
@@ -55,6 +55,9 @@ const Pages = ({ page, data, commentId }) => {
 
         {page === "reviews" && (
           <div className="">
+            <h1 className=" font-poppins text-2xl mb-5 font-medium">
+              {commentData?.length} review for Titanium Wheel Cover
+            </h1>
             <div>
               {commentData?.map((comment, index) => {
                 // console.log(comment)
@@ -68,30 +71,48 @@ const Pages = ({ page, data, commentId }) => {
                       onReply={(id) => setSelectId(id)}
                       showReply={(id) => selectId === id}
                       onCancel={() => setSelectId(null)}
+                      onSelectRating={setSelectRating}
+                      rating={selectRating}
                     />
                   </div>
                 );
               })}
             </div>
-            <div className="">{!selectId && <CommentForm />}</div>
+            <div className="">
+              {!selectId && (
+                <CommentForm
+                  onSelectRating={setSelectRating}
+                  rating={selectRating}
+                />
+              )}
+            </div>
           </div>
         )}
       </div>
     </div>
   );
 };
+const StarRating = (number, onSelect, rating) => (
+  <div role={"button"} onClick={() => onSelect(number)} className="group">
+    {[...new Array(number).keys()].map((star) => (
+      <button
+        key={star}
+        className={`fa-regular group-hover:text-[#000] group-hover:font-black fa-star  text-[15px] ${
+          rating === number ? "text-[#000] font-black" : "text-[#666] "
+        } `}
+      />
+    ))}
+  </div>
+);
 
-const StarRating = (number) =>
-  [...new Array(number).keys()].map((star) => (
-    <button
-      key={star}
-      className={`fa-regular fa-star text-[#646a7c] text-base `}
-    />
-  ));
-
-function CommentForm({ nameUser, onCancel = () => {} }) {
+function CommentForm({
+  nameUser,
+  onCancel = () => {},
+  onSelectRating,
+  rating = 0,
+}) {
   return (
-    <div className="mt-4 mb-10">
+    <div className="mt-4 ">
       {!nameUser ? (
         <h3 className="pb-[15px] mb-[30px] text-[18px]  font-poppins text-[#333333] font-semibold border-b ">
           Add Review
@@ -115,18 +136,22 @@ function CommentForm({ nameUser, onCancel = () => {} }) {
         <p className="mb-2">
           Your rating <span className="text-main-color">*</span>
         </p>
-        <ul className="flex flex-wrap  gap-[10px] md:gap-0  mb-4">
-          <li className= " cursor-pointer w-full md:w-1/12 flex md:justify-center">{StarRating(1)}</li>
-          <li className= " cursor-pointer w-full flex md:w-2/12 md:justify-center md:border-x border-[#e1e1e1] md:px-4">
-            {StarRating(2)}
+        <ul className="mb-4">
+          <li className=" cursor-pointer w-[2em] mr-[1em] border-r border-[#e1e1e1] inline-block">
+            {StarRating(1, onSelectRating, rating)}
           </li>
-          <li className= " cursor-pointer w-full flex md:w-2/12 md:justify-center  md:border-x border-[#e1e1e1] md:px-4">
-            {StarRating(3)}
+          <li className=" cursor-pointer w-[3em] mr-[1em] border-r  border-[#e1e1e1] inline-block ">
+            {StarRating(2, onSelectRating, rating)}
           </li>
-          <li className= " cursor-pointer w-full flex md:w-3/12 md:justify-center flex-shrink-0 md:border-x border-[#e1e1e1] md:px-4">
-            {StarRating(4)}
+          <li className=" cursor-pointer  w-[4em] border-r  mr-[1em] border-[#e1e1e1] inline-block ">
+            {StarRating(3, onSelectRating, rating)}
           </li>
-          <li className= " cursor-pointer w-full flex md:w-3/12 md:justify-center">{StarRating(5)}</li>
+          <li className=" cursor-pointer w-[5em] border-r  mr-[1em] border-[#e1e1e1] inline-block ">
+            {StarRating(4, onSelectRating, rating)}
+          </li>
+          <li className=" cursor-pointer w-[6em] mr-[1em] inline-block">
+            {StarRating(5, onSelectRating, rating)}
+          </li>
         </ul>
       </div>
       <div>
@@ -134,7 +159,7 @@ function CommentForm({ nameUser, onCancel = () => {} }) {
           Your Review <span className="text-main-color">*</span>
         </p>
       </div>
-      <form action="" className="">
+      <form action="" className="" onSubmit={(e) => e.preventDefault()}>
         <textarea
           cols={45}
           rows={8}
@@ -147,13 +172,22 @@ function CommentForm({ nameUser, onCancel = () => {} }) {
           <span className="mb-2 block">
             Email <span className="text-main-color">*</span>
           </span>
-          <InputV2 className={"border-[#eaeaea] "} placeholder="Name * " />
+          <InputV2
+            className={"border-[#eaeaea] "}
+            placeholder="Name * "
+            required={true}
+          />
         </div>
         <div className="">
           <span className="mb-2 block">
             Name <span className="text-main-color">*</span>
           </span>
-          <InputV2 className={"border-[#eaeaea] "} placeholder="Email * " />
+          <InputV2
+            className={"border-[#eaeaea] "}
+            placeholder="Email * "
+            required={true}
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          />
         </div>
 
         <div className="mb-4 ">
@@ -167,13 +201,24 @@ function CommentForm({ nameUser, onCancel = () => {} }) {
           comment.
         </div>
 
-        <Button label={"SUBMIT"} />
+        <div className="mb-4">
+          <Button label={"SUBMIT"} type="submit" />
+        </div>
       </form>
     </div>
   );
 }
 
-function Comment({ comment, getDate, children, showReply, onReply, onCancel }) {
+function Comment({
+  comment,
+  getDate,
+  children,
+  showReply,
+  onReply,
+  onCancel,
+  onSelectRating,
+  rating,
+}) {
   const authorName = comment?.author?.node?.name;
 
   const stars = generateStart(comment?.rating);
@@ -182,41 +227,38 @@ function Comment({ comment, getDate, children, showReply, onReply, onCancel }) {
 
   return (
     <div>
-      <div className="mb-10">
+      <div className="py-[15px]">
         <div className="flex ">
           <div className="min-w-[60px] min-h-[60px] h-[60px]">
             <img src={avatar} alt="" className="w-full h-full rounded-full" />
           </div>
 
           <div className="ml-[30px]">
-            <div className="">
-              <div className="">{stars}</div>
-              <div className="">
+            <div>
+              <div className="leading-[1] mb-[5px]">{stars}</div>
+              <div className="mb-[5px]">
                 <strong>{authorName}</strong>
                 <span className="mx-1">-</span>
                 <span>{getDate()}</span>
               </div>
             </div>
             <div
-              className="mb-3"
+              className="mb-[16px]"
               dangerouslySetInnerHTML={{ __html: comment?.content }}
             ></div>
-            <button
-              onClick={() => onReply(comment.id)}
-              className=" font-medium transition hover:text-main-color"
-            >
-              Reply
-              <i className="fa-solid fa-arrow-right-long ml-[10px]"></i>
-            </button>
           </div>
         </div>
       </div>
 
       {showReply(comment.id) && (
-        <CommentForm nameUser={authorName} onCancel={onCancel} />
+        <CommentForm
+          nameUser={authorName}
+          onCancel={onCancel}
+          rating={rating}
+        />
       )}
 
-      {children.map((commentChil) => {
+      {/* {children.map((commentChil) => {
         return (
           <div key={commentChil?.id} className="md:pl-[60px]">
             <Comment
@@ -226,10 +268,12 @@ function Comment({ comment, getDate, children, showReply, onReply, onCancel }) {
               onCancel={onCancel}
               onReply={() => onReply(commentChil.id)}
               showReply={showReply}
+              onSelectRating={onSelectRating}
+              rating={rating}
             />
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }

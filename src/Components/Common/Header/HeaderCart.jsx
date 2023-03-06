@@ -4,7 +4,7 @@ import { useCartStore } from "../../store";
 import ButtonV1 from "../Button/Button";
 
 const HeaderCart = () => {
-  const { length, items, removeItem } = useCartStore();
+  const { length, items, removeItem, getTotal } = useCartStore();
 
   return (
     <>
@@ -69,7 +69,7 @@ const HeaderCart = () => {
             <div className=" bottom-0 border-t left-0 right-0 bg-white z-[9999] text-[#333333]">
               <div className="px-[15px] py-[10px]  flex justify-between">
                 <strong className=" text-base">Subtotal:</strong>
-                <span className="font-semibold">£679.00</span>
+                <span className="font-semibold">{1}</span>
               </div>
               <div className="pt-[5px] pb-[15px] px-[15px] flex justify-center gap-[15px]">
                 <ButtonV1 label={"View Cart"} Tag="Link" to="/cart" />
