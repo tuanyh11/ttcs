@@ -1,21 +1,28 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
-import { Col, Footer, Header, QuickView, Row } from "./Components";
-import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Button,
+  Col,
+  Footer,
+  Header,
+  MobileNav,
+  QuickView,
+  Row,
+} from "./Components";
+import { Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import routeData from "./Routes";
 import { useUiStore } from "./Components/store";
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+const client = new ApolloClient({
+  uri: 'http://localhost:3000/graphql',
+  cache: new InMemoryCache(),
+});
 function createRoutes(routes) {
   return routes.map((route) => {
     const { path, component: Component, isIndex, children, ...rest } = route;
     return (
-      <Route
-        key={path}
-        path={path}
-        index={isIndex}
-
-        element={ <Component />}
-      >
+      <Route key={path} path={path} index={isIndex} element={<Component />}>
         {children && createRoutes(children)}
       </Route>
     );
@@ -27,10 +34,15 @@ function App() {
 
   const {
     product,
+    productWishlist,
     selectProduct,
     setIsOpeningFilterProduct,
     isOpeningFilterProduct,
+    isOpeningWishlist,
+    setIsOpeningWishlist,
   } = useUiStore();
+
+  const nav = useNavigate()
 
   useEffect(() => {
     const onScroll = () => {
@@ -57,15 +69,28 @@ function App() {
 
         <Routes>
           <Route path={"/"} element={<Navigate to={"/home"} />} />
-        {createRoutes(routeData)}
-
+          {createRoutes(routeData)}
         </Routes>
         <Footer />
       </>
     );
   }, []);
 
-  const { pathname } = useLocation();
+  useEffect(() => {
+    let id;
+    if (isOpeningWishlist) {
+      id = setTimeout(() => {
+        setIsOpeningWishlist(false);
+        if(!productWishlist?.isAlreadyInWishlist) {
+          nav('/wishList')
+        }
+      }, 9000);
+
+      
+    }
+
+    return () => clearTimeout(id);
+  }, [isOpeningWishlist]);
 
   return (
     <div className="App relative">
@@ -75,42 +100,53 @@ function App() {
 
       {Children}
 
-      <div className="fixed z-[999999] bottom-0 right-0 left-0 text-[21px] text-[#9b9b9b] lg:hidden shadow-[(0_.5rem_1rem_rgba(0,0,0,.15))]">
-        <div className={"bg-white text-center flex"}>
-          <div className={"w-3/12 border-r border-[#edf1f4]"}>
-            <div className="py-5 px-[7px] ">
-              <Link to={"/"} className="fal text-[21px] font-medium fa-home "></Link>
-            </div>
-          </div>
-          <div className={"w-3/12 border-r border-[#edf1f4]"}>
-            <div className="py-5 px-[7px] ">
-              {pathname !== "/shop" ? (
-                <Link to="/shop" className="fal text-[21px] font-medium fa-th-large"></Link>
-              ) : (
-                <button
-                  onClick={() =>
-                    setIsOpeningFilterProduct(!isOpeningFilterProduct)
-                  }
-                  className="fal text-[21px] font-medium fa-filter"
-                ></button>
-              )}
-            </div>
-          </div>
-          <div className={"w-3/12 border-r border-[#edf1f4]"}>
-            <div className="py-5 px-[7px]  relative">
-              <Link to={"/cart"} className="fal text-[21px] font-medium fa-shopping-cart"></Link>
-              <span className="w-[18px] h-[18px] text-white text-[10px] rounded-full bg-main-color block text-center leading-[18px] absolute z-10 top-1/2 -translate-y-full  right-[20px]">
-                1
-              </span>
-            </div>
-          </div>
-          <div className={"w-3/12"}>
-            <div className="py-5 px-[7px] ">
-              <Link to={"/my-account"} className="fal text-[21px] font-medium fa-user-circle"></Link>
+      <MobileNav
+        onClickOpen={() => setIsOpeningFilterProduct(!isOpeningFilterProduct)}
+      />
+
+      {isOpeningWishlist && (
+        <div className={`fixed   inset-0 z-[99999999] `}>
+          <div className="absolute inset-0 -z-30 bg-[#191919] opacity-50"></div>
+          <div className="absolute bg-white  opacity-100 top-1/2 left-1/2 -translate-x-1/2 z-[9999999999999999] -translate-y-1/2 ">
+            <div className="max-w-[360px] w-full  p-10 relative z-[9999999999999999]">
+              <div className="text-center">
+                <button className=" fa-solid fa-check"></button>
+                <span className="block mb-[25px]">
+                  {productWishlist?.isAlreadyInWishlist
+                    ? `"${productWishlist?.name}" Already in Wishlist`
+                    : `"${productWishlist?.name}" added to Wishlist`}
+                </span>
+                <div className="mb-[10px]">
+                  <Button
+                    className={"block w-full"}
+                    Tag={"Link"}
+                    to="/wishlist"
+                    onClick={() => setIsOpeningWishlist(false)}
+                    children={
+                      <>
+                        <i className="fa-regular fa-heart mr-[6px] text-base"></i>{" "}
+                        VIEW WISHLIST
+                      </>
+                    }
+                  />
+                </div>
+                <div className="mb-[10px]">
+                  <Button
+                    className={"block w-full"}
+                    onClick={() => setIsOpeningWishlist(false)}
+                    children={
+                      <>
+                        <i className="fa-sharp fa-solid fa-xmark mr-[6px] "></i>{" "}
+                        CLOSE
+                      </>
+                    }
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {backToHeader && (
         <div className="fixed z-[999999] bottom-[50px] right-[30px]">

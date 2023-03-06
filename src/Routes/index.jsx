@@ -20,10 +20,10 @@ import {
   IndexPage,
   DownloadPage,
   AddressPage,
-  AccountDetail,
-  
+  AccountDetail
 } from "../Pages";
 import NotFound from "../Pages/NotFound";
+import {ProtectedRouter} from "../Components"
 
 export default [
   {
@@ -110,7 +110,7 @@ export default [
     children: [
       {
         path: "",
-        component: Dashboard,
+        component:  ProtectedRouter((user, Nav) => user? <Dashboard/> : <Nav to="/my-account/auth"/> ) ,
         index: true,
         children : [
           {
@@ -141,8 +141,8 @@ export default [
         ],
       },
       {
-        path: "/my-account",
-        component: Auth,
+        path: "auth",
+        component: ProtectedRouter((user, Nav) => !user? <Auth/> : <Nav to="/my-account/"/> ),
         index: true,
       },
       {

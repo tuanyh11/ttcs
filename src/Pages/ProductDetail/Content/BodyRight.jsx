@@ -26,7 +26,7 @@ const BodyRight = () => {
 
   return (
     <div>
-      <div className="py-5 px-[15px] md:py-[50px] md:px-[130px] md:mt-10 bg-white ">
+      <div className="py-5 px-[15px] md:py-[50px] md:px-[130px] md:mt-10 lg:mt-0 bg-white ">
         <h3 className="text-[27px] mb-[10px] font-poppins text-black font-semibold">
           {data?.name}
         </h3>

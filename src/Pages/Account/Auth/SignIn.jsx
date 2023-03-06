@@ -1,48 +1,54 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
+import React, { useEffect } from "react";
+import { useForm, useFormContext } from "react-hook-form";
+import { useMutation, useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { loginAsync } from "../../../api";
 import { Button, InputV1 } from "../../../Components";
+import { useAuthStore } from "../../../Components/store";
 // rsc
 const SignIn = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    password: "",
-    userName: "",
-  });
+  } = useFormContext().formSignIn  ;
 
+
+  const login = useAuthStore(state => state.login)
+
+  const {isLoading, mutate, data, error} = useMutation((data) => loginAsync(data).then(user => user)  )
+
+  useEffect(( ) => {
+    data && login(data)
+  }, [data])
 
   return (
     <>
-      <h2 className="text-[27px] mb-[10px] text-[#111111] font-semibold font-poppins">
+  
+      <h2 className="text-[27px] leading-[48px] mb-[10px] text-[#111111] font-semibold font-poppins">
         Login
       </h2>
-      <form onSubmit={handleSubmit((value) => console.log(value))}>
+      <form onSubmit={handleSubmit((value) => mutate(value))}>
         <InputV1
           label={"user name"}
-          error={errors?.userName?.message}
           register={{
             ...register("userName", {
               required: {
                 value: true,
-                message: "Please enter your user name",
+                message: "Username is required.",
               },
             }),
           }}
         />
         <InputV1
           label={"password"}
-          error={errors?.password?.message}
           type={"password"}
 
           register={{
             ...register("password", {
               required: {
                 value: true,
-                message: "Please enter your password",
+                message: "Password is required.",
               },
             }),
           }}

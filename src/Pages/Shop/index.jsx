@@ -7,6 +7,7 @@ import { useShopContext } from "../../hooks";
 import Content from "./Content";
 import Sidebar from "./Sidebar/index";
 import MobileSidebar from "./Sidebar/MobileSidebar";
+import slugUrl from "url-slug"
 
 const Shop = ({ categories, dataCate }) => {
   const [filter, setFilter] = useState({
@@ -71,7 +72,7 @@ const Shop = ({ categories, dataCate }) => {
     if (data?.length > 1 || data?.length === 0)
       nav("/shop", { state: { products: data, searchText: text } })
     if (data?.length === 1) {
-      nav(`/product/${data?.[0]?.node?.name}`, { state: { product: data?.[0]?.node, searchText: text } })
+      nav(`/product/${slugUrl(data?.[0]?.node?.name)}`, { state: { product: data?.[0]?.node, searchText: text } })
     }
   };
 
