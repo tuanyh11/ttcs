@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BreadcrumbPath } from '../../Components'
 import { useCartStore } from '../../Components/store'
 import Bill from './Bill/Bill'
@@ -7,6 +7,15 @@ import YourOrder from './YourOrder/YourOrder'
 const Checkout = () => {
   const { items } = useCartStore();
   // console.log(items);
+  useEffect(() => {
+    window.scrollTo(
+      {
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      }
+    )
+  }, []);
   return (
     <div>
       <BreadcrumbPath pathname={'Checkout'} />

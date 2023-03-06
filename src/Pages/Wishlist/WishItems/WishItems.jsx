@@ -1,18 +1,64 @@
 import moment from 'moment/moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 const WishItems = (props) => {
-    // console.log(props.removeItem());
+    // console.log(props.wishItems);
     const [isActive, setIsActive] = useState(false);
     const [active, setActive] = useState('Actions')
+    const [filter, setFilter] = useState({
+        category: [],
+    });
+
     const handleClick = event => {
         setIsActive(current => !current);
     };
-    console.log(props);
-    const handleAddToCart = function (item) {
 
+    const handleAddToCart = function (item) {
         props.addItem(item);
+        props.removeItemWish(item.id);
     };
+
+    const handleOnSelectCate = (category) => {
+        const id = category.databaseId;
+        const isExisting = filter.category.find((item) => item.databaseId === id);
+
+        if (isExisting) {
+            setFilter({
+                ...filter,
+                category: [
+                    ...filter?.category.filter((item) => item.databaseId !== id),
+                ],
+            });
+        } else setFilter({ ...filter, category: [...filter?.category, category] });
+    };
+
+    const handleSelectedAddToCart = (e) => {
+        filter.category.map((category) => {
+            props.addItem(category),
+                props.removeItemWish(category.id)
+        })
+
+    };
+
+    const handleAllAddToCart = (e) => {
+        props.wishItems.map((item) => {
+            props.addItem(item),
+                props.removeItemWish(item.id)
+        })
+    };
+
+    const handleActionsAddToCart = (e) => {
+        filter.category.map((category) => {
+            props.addItem(category),
+                props.removeItemWish(category.id)
+        })
+    };
+    const handleActionsRemove = (e) => {
+        filter.category.map((category) => {
+            props.removeItemWish(category.id)
+        })
+    }
+    // console.log('add SL', filter.category);
     return (
         <div>
             <form className='s max-w-full '>
@@ -20,7 +66,9 @@ const WishItems = (props) => {
                     <thead>
                         <tr>
                             <th className='product-cb text-center border-[1px] border-[#dee2e6] p-[15px] w-[35px] '>
-                                <input type='checkbox' />
+                                <input type='checkbox'
+
+                                />
                             </th>
                             <th className='product-remove text-center border-[1px] border-[#dee2e6] p-[15px] w-[35px] align-middle '>&nbsp;</th>
                             <th className='product-thumbnail text-center border-[1px] border-[#dee2e6] p-[15px] align-middle min-w-[100px] max-w-full w-[100px] '>&nbsp;</th>
@@ -37,67 +85,76 @@ const WishItems = (props) => {
                     </thead>
                     <tbody>
                         {
-                            props.wishItems.map((item, index) => (
-                                <tr key={index}>
-                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6] '><input type='checkbox' /></td>
-                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                        <div
-                                            className='w-[27px] h-[27px] flex justify-center m-auto rounded-full bg-[#f7f7f7] text-[18px] text-[#000] pt-[3px]'
-                                            title='Remove'
-                                            onClick={() => props.removeItemWish(item.id)}
-                                        >
-                                            <i className="fa-solid fa-xmark"></i>
-                                        </div>
-                                    </td>
-                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6] '>
-                                        <a href='#'>
-                                            <img src={item.featuredImage.node.mediaItemUrl} alt=''
-                                                className='max-w-full h-auto'
+                            props.wishItems.map((item, index) => {
+                                const cate = item
+                                const id = cate?.databaseId
+                                return (
+                                    <tr key={index}>
+                                        <td className='p-[15px] text-left border-[1px] border-[#dee2e6] '>
+                                            <input
+                                                type='checkbox'
+                                                value={item.name}
+                                                onChange={(e) => handleOnSelectCate(cate)}
+                                                checked={filter?.category?.some((item) => item.databaseId === id)}
+                                            // onChange={handleCheck}
                                             />
-                                        </a>
-                                    </td>
-                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                        <a href='#'>{item.name}</a>
-                                    </td>
+                                        </td>
+                                        <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                            <div
+                                                className='w-[27px] h-[27px] flex justify-center m-auto rounded-full bg-[#f7f7f7] text-[18px] text-[#000] pt-[3px] cursor-pointer'
+                                                title='Remove'
+                                                onClick={() => props.removeItemWish(item.id)}
+                                            >
+                                                <i className="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </td>
+                                        <td className='p-[15px] text-left border-[1px] border-[#dee2e6] '>
+                                            <a href='#'>
+                                                <img src={item.featuredImage.node.mediaItemUrl} alt=''
+                                                    className='max-w-full h-auto'
+                                                />
+                                            </a>
+                                        </td>
+                                        <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                            <a href='#'>{item.name}</a>
+                                        </td>
 
-                                    {
-                                        item.salePrice !== null ? (
-                                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                                <span className='line-through'>&pound;{(item.regularPrice).slice(1).replace(/$/g, ' ')}</span>
-                                                <span>&pound;{(item.salePrice.slice(1).replace(/$/g, ' '))}</span>
-                                            </td>
-                                        ) : (
-                                            <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                                <span>&pound;{(item.regularPrice).slice(1).replace(/$/g, ' ')}</span>
-                                            </td>
-                                        )
-                                    }
+                                        {
+                                            item.salePrice !== null ? (
+                                                <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                                    <span className='line-through'>&pound;{(item.regularPrice).slice(1).replace(/$/g, ' ')}</span>
+                                                    <span>&pound;{(item.salePrice.slice(1).replace(/$/g, ' '))}</span>
+                                                </td>
+                                            ) : (
+                                                <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                                    <span>&pound;{(item.regularPrice).slice(1).replace(/$/g, ' ')}</span>
+                                                </td>
+                                            )
+                                        }
 
-
-                                    {/* <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>February 23, 2023</td> */}
-                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-
-                                        {moment(`${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()}`).format("LL")}
-                                    </td>
-                                    <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
-                                        <i className="fa-solid fa-check mr-[5px]"></i>
-                                        <span>In Stock</span>
-                                    </td>
-                                    <td className='p-[15px] text-center border-[1px] border-[#dee2e6]'>
-                                        <div
-                                            className='cursor-pointer inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[20px] py-[20px] font-poppins text-white lg:px-[16px] lg:py-0 w-full'
-                                            onClick={() => handleAddToCart(item)
-                                            }
-                                        >
-                                            <span className='title-add lg:block hidden' >add to cart</span>
-                                            <i className="fa-solid fa-cart-shopping lg:hidden block icon-add" ></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))
+                                        <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                            {moment(item.dateAddWish).format("LL")}
+                                        </td>
+                                        <td className='p-[15px] text-left border-[1px] border-[#dee2e6]'>
+                                            <i className="fa-solid fa-check mr-[5px]"></i>
+                                            <span>In Stock</span>
+                                        </td>
+                                        <td className='p-[15px] text-center border-[1px] border-[#dee2e6]'>
+                                            <div
+                                                className='cursor-pointer inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[20px] py-[20px] font-poppins text-white lg:px-[16px] lg:py-0 w-full'
+                                                onClick={() => handleAddToCart(item)
+                                                }
+                                            >
+                                                <span className='title-add lg:block hidden' >add to cart</span>
+                                                <i className="fa-solid fa-cart-shopping lg:hidden block icon-add" ></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })
                         }
                         <tr className=' align-middle border-[1px] border-[#dee2e6] text-left '>
-                            <td colspan='100' className='p-[15px] text-left '>
+                            <td colSpan='100' className='p-[15px] text-left '>
                                 <div className='float-left lg:w-[35%] w-full table relative'>
                                     <div className={`${isActive === true ? 'border-[#999] shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)]' : 'border-[#e8e8e8]'} h-[50px] border-[1px] px-[20px] float-left lg:w-[65%] w-[78%] table-cell leading-[50px] relative z-[1] m-0 cursor-pointer mr-[10px]`}
                                         onClick={handleClick}
@@ -119,23 +176,83 @@ const WishItems = (props) => {
                                                 onClick={() => setActive('Remove')}
                                             >
                                                 Remove
+
                                             </li>
                                         </ul>
                                     </div>
-                                    <button className='md:block hidden lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'>
-                                        Apply Action
-                                    </button>
-                                    <button className='md:hidden block lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'>
-                                        Apply
-                                    </button>
+                                    {
+                                        active === 'Add to Cart' && (
+                                            <button
+                                                className='md:block hidden lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'
+                                                onClick={(e) => handleActionsAddToCart()}
+                                            >
+                                                Apply Action
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        active === 'Remove' && (
+                                            <button
+                                                className='md:block hidden lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'
+                                                onClick={(e) => handleActionsRemove()}
+                                            >
+                                                Apply Action
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        active === 'Actions' && (
+                                            <button
+                                                className='md:block hidden lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'
+                                            >
+                                                Apply Action
+                                            </button>
+                                        )
+                                    }
+
+                                    {
+                                        active === 'Add to Cart' && (
+                                            <button
+                                                className='md:hidden block lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'
+                                                onClick={(e) => handleActionsAddToCart()}
+                                            >
+                                                Apply
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        active === 'Remove' && (
+                                            <button
+                                                className='md:hidden block lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'
+                                                onClick={(e) => handleActionsRemove()}
+                                            >
+                                                Apply
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        active === 'Actions' && (
+                                            <button
+                                                className='md:hidden block lg:w-[30%] w-[20%] bg-main-color uppercase leading-[50px] font-semibold text-[14px]  font-poppins text-white'
+                                            >
+                                                Apply
+                                            </button>
+                                        )
+                                    }
+
                                 </div>
                                 <div className='lg:float-right float-left lg:w-[63%] w-full lg:text-right lg:mt-[0px] mt-[10px] md:mb-0 mb-[15px] '>
-                                    <button className='btn-selected-to-cart inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white mr-[10px] md:w-auto w-full md:mb-0 mb-[10px]'>
+                                    <div className='btn-selected-to-cart inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white mr-[10px] md:w-auto w-full md:mb-0 mb-[10px] cursor-pointer'
+                                        onClick={(e) => handleSelectedAddToCart()}
+                                    >
                                         Add Selected to Cart
-                                    </button>
-                                    <button className='btn-all-to-cart inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white md:w-auto w-full'>
+                                    </div>
+                                    <div
+                                        className='btn-all-to-cart inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white md:w-auto w-full cursor-pointer'
+                                        onClick={(e) => handleAllAddToCart()}
+                                    >
                                         Add All to Cart
-                                    </button>
+                                    </div>
                                 </div>
 
                             </td>
@@ -155,8 +272,8 @@ const WishItems = (props) => {
                         <li className='w-[40px] h-[40px] pt-[5px]'><a href="mailto:?" title="Email"><i className="fa-solid fa-envelope text-[20px]"></i></a></li>
                     </ul>
                 </div>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 };
 

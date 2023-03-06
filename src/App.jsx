@@ -44,6 +44,8 @@ function App() {
 
   const nav = useNavigate()
 
+  const loc = useLocation()
+
   useEffect(() => {
     const onScroll = () => {
       if (window.scrollY > 100) {
@@ -54,7 +56,7 @@ function App() {
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [loc.pathnames]);
 
   const backToHeaderHandler = () =>
     window.scrollTo({
@@ -81,12 +83,12 @@ function App() {
     if (isOpeningWishlist) {
       id = setTimeout(() => {
         setIsOpeningWishlist(false);
-        if(!productWishlist?.isAlreadyInWishlist) {
+        if (!productWishlist?.isAlreadyInWishlist) {
           nav('/wishList')
         }
       }, 9000);
 
-      
+
     }
 
     return () => clearTimeout(id);
