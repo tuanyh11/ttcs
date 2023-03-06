@@ -7,6 +7,8 @@ import categories from "../assets/data/ListCategory";
 import cars from '../assets/data/cars'
 import carModel from '../assets/data/carModel'
 import {revert} from 'url-slug'
+import axios from "axios";
+import axiosInstance from "./config";
 const products = product.data.products.edges;
 
 export const getHeaderData = async () => {
@@ -183,6 +185,18 @@ export const searchCarModel = async (id) => {
 // login
 
 export const loginAsync = async (user) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  try {
+    const response = await axiosInstance.get(`/users`);
+    const user =  response.data.find((user) => user.email === user.email && user.password === user.password)
+    if(user) return user
+    throw new Error({
+      status: 404,
+      message: `User ${user.username} does not exist`
+    })
+  } catch (error) {
+    const { response } = error;
+    const message = response?.data?.message || error.message;
+    throw new Error(message);
+  }
   return user
 }
