@@ -80,7 +80,7 @@ const Shop = ({ categories, dataCate }) => {
   useEffect(() => {
     dataCate?.node && handleOnSelectCate(dataCate?.node)
   }, [dataCate])
-  // console.log(dataCate);
+  console.log(filter);
   return (
     <div>
       <Provider

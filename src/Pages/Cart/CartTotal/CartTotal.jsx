@@ -1,5 +1,6 @@
 import currency from 'currency.js';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useCartStore } from '../../../Components/store';
 
 const CartTotal = () => {
@@ -54,7 +55,7 @@ const CartTotal = () => {
                     </tr>
                 </tbody>
             </table>
-            <button className='inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white float-right mt-[20px]'>Proceed to checkout</button>
+            <Link to='/checkout'><button className='inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white float-right mt-[20px]'>Proceed to checkout</button></Link>
 
         </div>
     );

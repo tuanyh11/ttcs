@@ -26,9 +26,28 @@ const useCartStore = create(
         return { items: [...state.items, { ...item, quantity: 1 }] };
       }),
 
-      addItemWithQuantity: (item) => set(state => {
+      addItemWishtoCart: (item) => set(state => {
         const existingItem = state.items.find(oldItem => oldItem.id === item.id);
 
+        if (existingItem) {
+          return {
+            items: state.items.map(oldItem => {
+              if (oldItem.id === item.id) {
+                return {
+                  ...oldItem,
+                  quantity: oldItem?.quantity ? oldItem.quantity + 1 : 1
+                };
+              }
+              return oldItem;
+            }),
+          };
+        }
+        return { items: [...state.items, { ...item, quantity: 1 }] };
+      }),
+
+      addItemWithQuantity: (item) => set(state => {
+        const existingItem = state.items.find(oldItem => oldItem.id === item.id);
+        console.log(existingItem);
         if (existingItem) {
           return {
             items: state.items.map(oldItem => {
@@ -41,6 +60,7 @@ const useCartStore = create(
         }
         return { items: [...state.items, { ...item, quantity: 1 }] };
       }),
+
       addToWishlistItems: (item) => set(state => {
         const existingItem = state.wishItems.find(oldItem => oldItem.id === item.id);
 
@@ -51,19 +71,24 @@ const useCartStore = create(
                 return {
                   ...oldItem,
                   quantity: oldItem?.quantity,
-                  date: oldItem.date,
-                };
+                  dateNow: new Date(),
+
+                }
               }
-              return oldItem;
-            }),
+              return {
+                ...oldItem,
+                dateNow: new Date(),
+              }
+            }
+
+            ),
           };
         }
-        return { wishItems: [...state.wishItems, { ...item, quantity: 1 }] };
+        return { wishItems: [...state.wishItems, { ...item, quantity: 1, dateAddWish: new Date() }] };
       }),
 
       upadateItemWithQuantity: (item) => set(state => {
         const existingItem = state.items.find(oldItem => oldItem.id === item.id);
-        // console.log(existingItem);
         if (existingItem) {
           return {
             items: state.items.map(oldItem => {

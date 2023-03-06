@@ -5,11 +5,11 @@ import currency from "currency.js";
 
 const CartList = () => {
   const { addItemWithQuantity, upadateItemWithQuantity, removeItem, items } = useCartStore();
-  // console.log(items);
   const [isUpdated, setIsUpdated] = useState(false);
+  // console.log(isUpdated);
   const [cart, setCart] = useState([]);
-  const [itemRemoved, setItemRemoved] = useState();
-  // console.log(itemRemoved);
+  const [itemSale, setItemSale] = useState("");
+  const [sale, setSale] = useState();
 
   const inCreaseQty = (id) => {
     const newCart = items.map((item) => {
@@ -54,11 +54,18 @@ const CartList = () => {
 
   // console.log(items);
   const handleUpdate = () => {
+    setIsUpdated(false)
     cart.map((item) => {
       upadateItemWithQuantity(item);
       // console.log(item);
     });
   };
+  const handleSale = () => {
+    itemSale && (
+      setSale(50)
+    );
+  };
+  console.log(sale);
   return (
 
     <form className="overflow-x-auto ">
@@ -145,9 +152,16 @@ const CartList = () => {
                     </div>
                   </div>
                 </td>
+                {/* {sale === undefined ? (
+                  <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
+                    &pound;{(subTotal.slice(1).replace(/$/g, ' ')) * (sale / 100)}
+                  </td>
+                ) : ( */}
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px]">
                   &pound;{subTotal.slice(1).replace(/$/g, ' ')}
                 </td>
+                {/* )} */}
+
                 <td className="border-[1px] border-[#dee2e6] text-center py-[20px] px-[10px] cursor-pointer"
                   onClick={() => removeItem(item.id)}>
                   <i className="fa-solid fa-xmark"></i>
@@ -162,12 +176,17 @@ const CartList = () => {
                   className=" focus:outline-none w-auto float-left mb-0 h-[50px] px-[20px] border-[1px] border-[#eaeaea]"
                   type="text"
                   placeholder="Coupon code"
+                  onChange={(e) => setItemSale(e.target.value)}
                 />
-                <button className="inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white float-right ">
+                <div
+                  className="cursor-pointer inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white float-right "
+                  onClick={handleSale}
+                >
                   Apply coupon
-                </button>
+                </div>
               </div>
-              <div className="inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white float-right opacity-[0.7]"
+              <div
+                className={`inline-block bg-main-color uppercase leading-[50px] font-semibold text-[14px] px-[16px] font-poppins text-white float-right ${isUpdated === true ? 'opacity-[1]' : 'opacity-[0.7]'} cursor-pointer`}
                 disabled={!isUpdated}
                 onClick={() => handleUpdate()}
               >
