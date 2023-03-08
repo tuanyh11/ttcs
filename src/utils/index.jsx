@@ -83,3 +83,97 @@ export function sortProduct(products, sortBy, filter) {
 
   return newProducts
 }
+
+export function handleErrorMessage(error)  {
+  const { response } = error;
+  const message = response?.data?.message || error.message;
+  throw new Error(message);
+}
+
+
+export   const strongPassword = (value = "") => {
+  if (
+    /^(?=.*[A-Z\d@$!%*#?&])[\w!@#$%^&*()+={}\[\]|\-\\:";'<>?,.\/]*$/.test(
+      value
+    )
+  ) {
+    if (value?.length < 4) {
+      return {
+        message: "Very weak - Please enter a stronger password.",
+        type: "very-weak",
+        hint: 'The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).',
+      };
+    }
+    if (value?.length >= 4  && value?.length < 11 ) {
+      return {
+        message: "Weak - Please enter a stronger password.",
+        type: "weak",
+        hint: 'The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).',
+      };
+    }
+    if (value?.length >= 11 && value?.length < 13) {
+      return {
+        message: "Medium",
+        type: "medium",
+        hint: "",
+      };
+    }
+    if (value?.length >= 13) {
+      return {
+        message: "Strong",
+        type: "strong",
+        hint: "",
+      };
+    }
+  } else {
+    if (value?.length === 0) {
+      return {
+        message: "",
+        type: "",
+        hint: "",
+      };
+    }
+    if (value?.length < 10 && value?.length < 18) {
+      return {
+        message: "Very weak - Please enter a stronger password.",
+        type: "very-weak",
+        hint: 'The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).',
+      };
+    }
+    if (value?.length >= 10 && value?.length < 18) {
+      return {
+        message: "Weak - Please enter a stronger password.",
+        type: "weak",
+        hint: 'The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).',
+      };
+    }
+    if (value?.length >= 18 && value?.length < 24) {
+      return {
+        message: "Very weak - Please enter a stronger password.",
+        type: "very-weak",
+        hint: 'The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).',
+      };
+    }
+    if (value?.length >= 24 && value?.length < 25) {
+      return {
+        message: "Weak - Please enter a stronger password.",
+        type: "weak",
+        hint: 'The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).',
+      };
+    }
+    if (value?.length >= 25 && value?.length < 29) {
+      return {
+        message: "Medium",
+        type: "medium",
+        hint: null,
+      };
+    }
+    if (value?.length >= 29) {
+      return {
+        message: "Strong",
+        type: "strong",
+        hint: null,
+      };
+    }
+  }
+};

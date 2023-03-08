@@ -9,6 +9,7 @@ import carModel from '../assets/data/carModel'
 import {revert} from 'url-slug'
 import axios from "axios";
 import axiosInstance from "./config";
+import { handleErrorMessage } from "../utils";
 const products = product.data.products.edges;
 
 export const getHeaderData = async () => {
@@ -184,19 +185,23 @@ export const searchCarModel = async (id) => {
 
 // login
 
-export const loginAsync = async (user) => {
+export const registerAsync = async (data) => {
+  try {
+    const res = await axiosInstance.post("users/", data)
+    return res.data;
+  } catch (error) {
+    handleErrorMessage(error)
+    // console.log(error);
+  }
+}
+
+export const loginAsync = async (userInput) => {
   try {
     const response = await axiosInstance.get(`/users`);
-    const user =  response.data.find((user) => user.email === user.email && user.password === user.password)
-    if(user) return user
-    throw new Error({
-      status: 404,
-      message: `User ${user.username} does not exist`
-    })
+    const user =  response.data.find((user) => (user?.userName === userInput.userName || userInput.userName === user.email) && user.password === userInput.password)
+    return user
   } catch (error) {
-    const { response } = error;
-    const message = response?.data?.message || error.message;
-    throw new Error(message);
+    handleErrorMessage(error)
   }
-  return user
+  // return user
 }

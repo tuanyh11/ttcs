@@ -1,25 +1,63 @@
-import React from "react";
+import { useMutation } from "react-query";
+import React, { useEffect, useState } from "react";
 import { useForm, useFormContext } from "react-hook-form";
+import { registerAsync } from "../../../api";
 import { Button, InputV1 } from "../../../Components";
 import useAuth from "../../../Components/store/authStore";
+import { strongPassword } from "../../../utils";
 
 const SignUp = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-  } = useFormContext().formSignUp ;
+  const { register, handleSubmit, watch, setError, clearErrors } =
+    useFormContext().formSignUp;
+
+  const [disPlayError, setDisPlayError] = useState({
+    message: "",
+    hint: "",
+    type: ""
+  });
+
+  const {login} = useAuth();
 
   const password = watch("password");
+  const confirmPassword = watch("passwordConfirmation");
+
+  // console.log(confirmPassword)
+
+  const { isLoading, mutate, error } = useMutation(registerAsync, {
+    onSuccess: (data) => login(data)
+  });
+
+  useEffect(() => {
+    if (error)
+      setError("error", {
+        type: "error",
+        message: error?.message,
+      });
+  }, [error]);
 
 
+
+  useEffect(() => {
+    setDisPlayError(strongPassword(confirmPassword));
+  }, [confirmPassword]);
+
+ 
+
+  const handleRegister = (data) => {
+    if (
+      disPlayError.type.toLocaleLowerCase() !== "weak" &&
+      disPlayError.type.toLocaleLowerCase() !== "very-weak"
+    ) {
+      mutate(data);
+    }
+  };
 
   return (
     <>
       <h2 className="text-[27px] leading-[48px] mb-[10px] text-[#111111] font-semibold font-poppins">
         Register
       </h2>
-      <form onSubmit={handleSubmit((value) => console.log(value))}>
+      <form onSubmit={handleSubmit((value) => handleRegister(value))}>
         <InputV1
           label={"user name"}
           register={{
@@ -57,13 +95,18 @@ const SignUp = () => {
         <InputV1
           label={"Password Confirm"}
           type={"password"}
-
+          className="!mb-0"
           register={{
             ...register("passwordConfirmation", {
-                validate: (value) => value === password || "Passwords do not match"
+              validate: value => value === password || "passwords do not match",
             }),
+            
           }}
         />
+        <div className="mb-[15px]">
+          <div className="">{disPlayError?.message}</div>
+          <small className="">{disPlayError?.hint}</small>
+        </div>
         <div className="flex flex-wrap mb-[15px]">
           <label className="block w-full mb-[8px]">
             <span className="">
@@ -72,7 +115,7 @@ const SignUp = () => {
               other purposes described in our{" "}
             </span>
           </label>
-          <Button label={"REGISTER"} type="submit" />
+          <Button onClick={() => clearErrors("error")} label={"REGISTER"} type="submit" />
         </div>
       </form>
     </>

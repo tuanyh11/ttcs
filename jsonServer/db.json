@@ -1,9 +1,9 @@
 {
-
   "users": [
     {
       "id": 1,
       "name": "John Doe",
+      "userName": "johndoe",
       "email": "johndoe@example.com",
       "age": 30,
       "password": "mysecretpassword"
@@ -11,6 +11,7 @@
     {
       "id": 2,
       "name": "Jane Smith",
+      "userName": "johndoe Smith",
       "email": "janesmith@example.com",
       "age": 25,
       "password": "anothersecretpassword"
@@ -18,9 +19,24 @@
     {
       "id": 3,
       "name": "Bob Johnson",
+      "userName": "Bob Smith",
       "email": "bobjohnson@example.com",
       "age": 40,
       "password": "thirdsecretpassword"
+    },
+    {
+      "userName": "tuan leo",
+      "email": "vantuanxyz741@gmail.com",
+      "password": "123456",
+      "passwordConfirmation": "123456",
+      "id": 4
+    },
+    {
+      "userName": "tuan leo",
+      "email": "vantuanxyz741@gmail.com",
+      "password": "12345678",
+      "passwordConfirmation": "12345678",
+      "id": 5
     }
   ]
 }

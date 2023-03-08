@@ -5,19 +5,23 @@ import SignUp from "./SignUp";
 import { useForm, FormProvider } from "react-hook-form";
 
 const Auth = () => {
+  
   const methodsSignUp = useForm();
 
   const methodsSignIn = useForm();
 
   const {
     formState: formStateSignUp,
+    
   } = methodsSignUp;
 
   const {
     formState: formStateSignIn,
   } = methodsSignIn;
 
-  console.log(formStateSignIn.errors);
+  // console.log(formStateSignUp.errors);
+
+  // const test = register("password",)
 
   const Error = Object.values(Object.keys(formStateSignUp.errors).length > 0 ? formStateSignUp.errors : formStateSignIn.errors).map((error, i) => {
     return (

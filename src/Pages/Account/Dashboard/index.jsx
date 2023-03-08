@@ -26,7 +26,7 @@ const buttons = [
   },
   {
     name: "wishlist",
-    link: "wishlist",
+    link: "/wishlist",
   },
 ];
 
