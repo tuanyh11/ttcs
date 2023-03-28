@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  body {
+    @apply  px-8 py-4 font-Roboto font-medium overflow-x-hidden text-sm leading-[1.25rem] text-[#1e293b]
+
+  }
+
+  .nav-half-moon {
+    @apply before:w-10 before:absolute before:h-10 before:rounded-full before:-left-10 before:bottom-0 before:shadow-[20px_20px_#f1f5f9] after:w-10 after:absolute after:h-10 after:rounded-full after:-right-9 after:bottom-0 after:shadow-[-20px_20px_#f1f5f9]
+  }
+
+  html {
+    background-color: #064E3B;
+  }
+}
+
+
+
+:root {
+  --ck-color-image-upload-icon: #fff;
+  --ck-color-image-upload-icon-background: #008a00;
+  --ck-image-upload-icon-size: 20;
+  --ck-image-upload-icon-width: 2px;
+  --ck-image-upload-icon-is-visible: clamp(0px,100% - 50px,1px);
+}
+
