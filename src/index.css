@@ -9,7 +9,11 @@
   }
 
   .nav-half-moon {
-    @apply before:w-10 before:absolute before:h-10 before:rounded-full before:-left-10 before:bottom-0 before:shadow-[20px_20px_#f1f5f9] after:w-10 after:absolute after:h-10 after:rounded-full after:-right-9 after:bottom-0 after:shadow-[-20px_20px_#f1f5f9]
+    @apply before:w-10 before:absolute before:h-10 before:rounded-full before:-left-10 before:bottom-0 before:shadow-[20px_20px_#f1f5f9] after:w-10 after:absolute after:h-10 after:rounded-full after:-right-10 after:bottom-0 after:shadow-[-20px_20px_#f1f5f9]
+  }
+
+  input[type="text"] {
+    @apply px-3 py-2 outline-none
   }
 
   html {
@@ -17,6 +21,13 @@
   }
 }
 
+.box {
+  box-shadow: 0 3px 20px #0000000b;
+  background-color: #fff;
+  border-color: transparent;
+  border-radius: .375rem;
+  position: relative
+}
 
 
 :root {
@@ -27,3 +38,7 @@
   --ck-image-upload-icon-is-visible: clamp(0px,100% - 50px,1px);
 }
 
+
+.ck-content {
+  min-height: 250px !important;
+}

@@ -99,12 +99,15 @@ const Nav = () => {
     <div>
       <div className="relative z-50 hidden md:block">
         <ul className="pb-3 xl:pb-0 xl:px-[50px] flex flex-wrap">
-          <li className=" nav-half-moon  relative [&:hover>ul]:block [&:hover>a>div:nth-child(2)>svg]:-rotate-90">
-            <Link
+          <li className="   relative [&:hover>ul]:block [&:hover>a>div:nth-child(2)>svg]:-rotate-90">
+            <NavLink
               to={"/"}
-              className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-5 mr-1 z-10 bg-slate-100 dark:bg-darkmode-700 before:content-[''] before:w-[20px] before:h-[20px] before:-ml-[20px] before:rotate-90 before:scale-[1.04] before:bg-[length:100%] before:bg-menu-corner before:absolute before:bottom-0 before:left-0 before:hidden before:xl:block dark:before:bg-menu-corner-dark after:content-[''] after:w-[20px] after:h-[20px] after:-mr-[20px] after:rotate-180 after:scale-[1.04] after:bg-[length:100%] after:bg-menu-corner after:absolute after:bottom-0 after:right-0 after:hidden after:xl:block dark:after:bg-menu-corner-dark"
+              className={({isActive}) => {
+                return `h-[55px] ${isActive ? 'bg-slate-100 nav-half-moon text-black' : 'text-white'} rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center  relative px-5 mr-1 opacity-100  animate-[0.4s_ease-in-out_0.3s_intro-menu] animate-fill-mode-forwards animate-delay-20`
+              }}
+              // className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-5 mr-1 z-10 bg-slate-100 dark:bg-darkmode-700 before:content-[''] before:w-[20px] before:h-[20px] before:-ml-[20px] before:rotate-90 before:scale-[1.04] before:bg-[length:100%] before:bg-menu-corner before:absolute before:bottom-0 before:left-0 before:hidden before:xl:block dark:before:bg-menu-corner-dark after:content-[''] after:w-[20px] after:h-[20px] after:-mr-[20px] after:rotate-180 after:scale-[1.04] after:bg-[length:100%] after:bg-menu-corner after:absolute after:bottom-0 after:right-0 after:hidden after:xl:block dark:after:bg-menu-corner-dark"
             >
-              <div className="dark:text-slate-400 text-primary dark:text-white">
+              <div className="dark:text-slate-400 text-primary ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -121,16 +124,18 @@ const Nav = () => {
                   <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
               </div>
-              <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400 text-black font-medium dark:text-white">
+              <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400  font-medium ">
                 Dashboard
               </div>
-            </Link>
+            </NavLink>
           </li>
 
           <li className=" relative [&:hover>ul]:block [&:hover>a>div:nth-child(2)>svg]:-rotate-90 [&:hover>a>div:nth-child(1)]:before:bg-white/5 [&:hover>a>div:nth-child(1)]:before:dark:bg-darkmode-500/70">
             <NavLink
               to="/apps"
-              className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-5 mr-1 opacity-100  animate-[0.4s_ease-in-out_0.3s_intro-menu] animate-fill-mode-forwards animate-delay-20"
+              className={({isActive}) => {
+                return `h-[55px] ${isActive ? 'bg-slate-100 nav-half-moon text-black' : 'text-white'} rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center  relative px-5 mr-1 opacity-100  animate-[0.4s_ease-in-out_0.3s_intro-menu] animate-fill-mode-forwards animate-delay-20`
+              }}
             >
               <div className="dark:text-slate-400 before:content-[''] before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:rounded-full xl:before:rounded-b-none xl:before:rounded-t-lg before:transition before:ease-in before:duration-100">
                 <svg
@@ -170,7 +175,7 @@ const Nav = () => {
             <ul className="xl:left-[100%] xl:-ml-[4px] shadow-[0px_3px_20px_#0000000b] bg-primary hidden w-56 absolute rounded-md z-20 px-0 top-0 mt-14 xl:-mt-5 before:block before:absolute before:w-full before:h-full before:bg-black/10 before:inset-0 before:rounded-md before:z-[-1] dark:bg-darkmode-600 dark:shadow-[0px_3px_7px_#0000001c]">
               <li className="px-5 relative [&:hover>ul]:block [&:hover>a>div:nth-child(2)>svg]:-rotate-90">
                 <Link
-                  to={"users"}
+                  to={"apps/users"}
                   className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-0 mr-0"
                 >
                   <div className="dark:text-slate-400 before:content-[''] before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:rounded-full xl:before:rounded-b-none xl:before:rounded-t-lg before:transition before:ease-in before:duration-100">
@@ -200,7 +205,7 @@ const Nav = () => {
 
               <li className="px-5 relative [&:hover>ul]:block [&:hover>a>div:nth-child(2)>svg]:-rotate-90">
                 <Link
-                  to={"/e-commerce"}
+                  to={"/apps/e-commerce"}
                   className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-0 mr-0"
                 >
                   <div className="dark:text-slate-400 before:content-[''] before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:rounded-full xl:before:rounded-b-none xl:before:rounded-t-lg before:transition before:ease-in before:duration-100">
@@ -243,7 +248,7 @@ const Nav = () => {
                 <ul className="left-[100%] ml-0 shadow-[0px_3px_20px_#0000000b] bg-primary hidden w-56 absolute rounded-md z-20 px-0 top-0 mt-0 before:block before:absolute before:w-full before:h-full before:bg-black/10 before:inset-0 before:rounded-md before:z-[-1] dark:bg-darkmode-600 dark:shadow-[0px_3px_7px_#0000001c]">
                   <li className="px-5 relative [&amp;:hover>ul]:block [&amp;:hover>a>div:nth-child(2)>svg]:-rotate-90">
                     <Link
-                      to="/e-commerce/category"
+                      to="apps/e-commerce/category"
                       className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-0 mr-0"
                     >
                       <div className="dark:text-slate-400 before:content-[''] before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:rounded-full xl:before:rounded-b-none xl:before:rounded-t-lg before:transition before:ease-in before:duration-100">
@@ -270,7 +275,7 @@ const Nav = () => {
 
                   <li className="px-5 relative [&amp;:hover>ul]:block [&amp;:hover>a>div:nth-child(2)>svg]:-rotate-90">
                     <Link
-                      to="/e-commerce/add-product"
+                      to="apps/e-commerce/add-product"
                       className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-0 mr-0"
                     >
                       <div className="dark:text-slate-400 before:content-[''] before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:rounded-full xl:before:rounded-b-none xl:before:rounded-t-lg before:transition before:ease-in before:duration-100">
@@ -296,7 +301,7 @@ const Nav = () => {
                   </li>
                   <li className="px-5 relative [&amp;:hover>ul]:block [&amp;:hover>a>div:nth-child(2)>svg]:-rotate-90">
                     <Link
-                      to={"/e-commerce/product-list"}
+                      to={"apps/e-commerce/list-products"}
                       className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-0 mr-0"
                     >
                       <div className="dark:text-slate-400 before:content-[''] before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:rounded-full xl:before:rounded-b-none xl:before:rounded-t-lg before:transition before:ease-in before:duration-100">
@@ -323,7 +328,7 @@ const Nav = () => {
 
                   <li className="px-5 relative [&amp;:hover>ul]:block [&amp;:hover>a>div:nth-child(2)>svg]:-rotate-90">
                     <Link
-                        to={"/e-commerce/reviews"}
+                        to={"apps/e-commerce/reviews"}
                       className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-0 mr-0"
                     >
                       <div className="dark:text-slate-400 before:content-[''] before:z-[-1] before:absolute before:w-full before:h-full before:top-0 before:left-0 before:rounded-full xl:before:rounded-b-none xl:before:rounded-t-lg before:transition before:ease-in before:duration-100">

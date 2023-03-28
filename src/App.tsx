@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, Router, Routes } from "react-router-dom";
 import { Header, Layout } from "./Components";
-import { AddProduct, Home } from "./Pages";
+import { AddProduct, Home, ListProduct } from "./Pages";
 
 function App() {
   return (
@@ -9,15 +9,18 @@ function App() {
       {/* <Header/> */}
 
       <Routes>
-        <Route path="/" element={<Layout/>} >
-          <Route index element={<Home/>} />
-          <Route path="/e-commerce">
-            <Route index />
+        <Route path="/" element={<Layout />} >
+          <Route index element={<Home />} />
+          <Route path="/apps">
+            <Route path="e-commerce">
+              <Route index path="list-products" element={<ListProduct />} />
+              <Route path="add-product" element={<AddProduct />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
 
-     
+
     </div>
   );
 }
