@@ -19,6 +19,10 @@
   html {
     background-color: #064E3B;
   }
+
+  .date-sales-picker {
+    @apply absolute top-full -left-[30%] bg-white z-50
+  }
 }
 
 .box {

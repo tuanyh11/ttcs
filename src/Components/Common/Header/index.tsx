@@ -14,7 +14,7 @@ const Header = () => {
               className="w-6"
               src="http://rubick-react.left4code.com/assets/logo.9a88cec5.svg"
             />
-            <span className="ml-3 text-lg text-white"> Rubick </span>
+            <span className="ml-3 text-lg text-white"> Chakta </span>
           </a>
 
           <nav className="flex h-full md:ml-10 md:pl-10 md:border-l border-white/[0.08] mr-auto -intro-x">
