@@ -1,16 +1,22 @@
+import { ImageListType } from "react-images-uploading";
+
 export interface ProductInterface {
   _id?: string;
   name: string;
   description: string;
-  price: number;
-  images: [string | File] | [];
+  price: {
+    raw: number;
+    formatted: string;
+  };
+  images: ImageListType | any;
   sku: string;
   quantityInStock: number;
   rating?: number;
   category: string;
   isActive: boolean;
   previews?: [];
-  deletedImages?: [];
+  deletedImages?: any[];
+  oldImagesUpload?: string[];
 }
 
 export interface CategoryInterface {

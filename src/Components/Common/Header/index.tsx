@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import userStore from "../../../store/user.store";
+import UserIcon from "../../../assets/icons/UserIcon";
 
 const Header = () => {
+
+  const [isOpening, setIsOpening] = useState(false)
+
+  const {user, logOut} = userStore()
+
+  const handleLogout = () => {
+    logOut()
+    setIsOpening(false)
+  }
+
   return (
     <div>
       <div className="border-b border-white/[0.08] mt-[2.2rem] md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 pt-3 md:pt-0 mb-10">
@@ -19,11 +31,11 @@ const Header = () => {
 
           <nav className="flex h-full md:ml-10 md:pl-10 md:border-l border-white/[0.08] mr-auto -intro-x">
             <ol className="flex items-center text-primary dark:text-slate-300 text-white/90">
-              <li className="">
-                <a href="/">Application</a>
-              </li>
+              {/* <li className="">
+                <a href="/">Ứng Dụng </a>
+              </li> */}
               <li className="relative ml-5 pl-0.5 before:content-[''] before:w-[14px] before:h-[14px] before:bg-bredcrumb-chevron-light before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-bredcrumb-chevron-darkmode text-white/70">
-                <a href="/">Dashboard</a>
+                <a href="/">Bảng Điều khiển</a>
               </li>
             </ol>
           </nav>
@@ -76,7 +88,6 @@ const Header = () => {
           >
             <div
               className="cursor-pointer relative text-white/70 outline-none block before:content-[''] before:w-[8px] before:h-[8px] before:rounded-full before:absolute before:top-[-2px] before:right-0 before:bg-danger"
-              id="headlessui-popover-button-:ro:"
               aria-expanded="false"
               data-headlessui-state=""
             >
@@ -98,20 +109,183 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="relative" data-headlessui-state="">
+          {<div className="relative" data-headlessui-state="">
             <div
+              onClick={() => setIsOpening(!isOpening)}
+
               className="cursor-pointer block w-8 h-8 overflow-hidden scale-110 rounded-full shadow-lg image-fit zoom-in intro-x"
               id="headlessui-menu-button-:rr:"
               aria-haspopup="true"
               aria-expanded="false"
               data-headlessui-state=""
             >
-              <img
+              {/* <img
                 alt="Midone Tailwind HTML Admin Template"
                 src="/assets/profile-14.67599da9.jpg"
-              />
+              /> */}
+              
+              <div className=" text-white"><UserIcon/></div>
             </div>
-          </div>
+            {isOpening && <div className="absolute z-30 top-[100%] right-0 mt-1 visible opacity-100 translate-y-0">
+              <div
+                className="p-2 shadow-[0px_3px_10px_#00000017] border-transparent rounded-md dark:bg-darkmode-600 dark:border-transparent w-56 mt-px relative bg-primary/70 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white"
+                aria-labelledby="headlessui-menu-button-:rk:"
+                id="headlessui-menu-items-:r2o:"
+                role="menu"
+                data-headlessui-state="open"
+              >
+                <div className="p-2 font-normal" role="none">
+                  <div className="font-medium capitalize" role="none">
+                    {user?.userName}
+                  </div>
+                  <div
+                    className="text-xs text-white/70 mt-0.5 dark:text-slate-500"
+                    role="none"
+                  >
+                    {user?.admin && 'Administrator'} 
+                  </div>
+                </div>
+                <div
+                  className="h-px my-2 -mx-2 dark:bg-darkmode-400 bg-white/[0.08]"
+                  role="none"
+                ></div>
+                <a
+                  className="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md dark:bg-darkmode-600 dark:hover:bg-darkmode-400 hover:bg-white/5"
+                  id="headlessui-menu-item-:r2p:"
+                  role="menuitem"
+                  data-headlessui-state=""
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="stroke-1.5 w-4 h-4 mr-2"
+                  >
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>{" "}
+                  Profile
+                </a>
+                <a
+                  className="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md dark:bg-darkmode-600 dark:hover:bg-darkmode-400 hover:bg-white/5"
+                  id="headlessui-menu-item-:r2q:"
+                  role="menuitem"
+                  data-headlessui-state=""
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="stroke-1.5 w-4 h-4 mr-2"
+                  >
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>{" "}
+                  Add Account
+                </a>
+                <a
+                  className="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md dark:bg-darkmode-600 dark:hover:bg-darkmode-400 hover:bg-white/5"
+                  id="headlessui-menu-item-:r2r:"
+                  role="menuitem"
+                  data-headlessui-state=""
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="stroke-1.5 w-4 h-4 mr-2"
+                  >
+                    <rect
+                      x="3"
+                      y="11"
+                      width="18"
+                      height="11"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>{" "}
+                  Reset Password
+                </a>
+                <a
+                  className="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md dark:bg-darkmode-600 dark:hover:bg-darkmode-400 hover:bg-white/5"
+                  id="headlessui-menu-item-:r2s:"
+                  role="menuitem"
+                  data-headlessui-state=""
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="stroke-1.5 w-4 h-4 mr-2"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>{" "}
+                  Help
+                </a>
+                <div
+                  className="h-px my-2 -mx-2 dark:bg-darkmode-400 bg-white/[0.08]"
+                  role="none"
+                ></div>
+                <button
+                  onClick={handleLogout}
+                  className="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md dark:bg-darkmode-600 dark:hover:bg-darkmode-400 hover:bg-white/5"
+                  role="menuitem"
+                  data-headlessui-state=""
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="stroke-1.5 w-4 h-4 mr-2"
+                  >
+                    <rect
+                      x="1"
+                      y="5"
+                      width="22"
+                      height="14"
+                      rx="7"
+                      ry="7"
+                    ></rect>
+                    <circle cx="16" cy="12" r="3"></circle>
+                  </svg>{" "}
+                  Logout
+                </button>
+              </div>
+            </div> }
+          </div>}
         </div>
       </div>
     </div>

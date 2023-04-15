@@ -4,12 +4,12 @@
 
 @layer components {
   body {
-    @apply  px-8 py-4 font-Roboto font-medium overflow-x-hidden text-sm leading-[1.25rem] text-[#1e293b]
+    @apply  px-8 py-4 font-Roboto font-medium overflow-x-hidden text-sm leading-[1.25rem] text-[#1e293b] capitalize
 
   }
 
   .nav-half-moon {
-    @apply before:w-10 before:absolute before:h-10 before:rounded-full before:-left-10 before:bottom-0 before:shadow-[20px_20px_#f1f5f9] after:w-10 after:absolute after:h-10 after:rounded-full after:-right-10 after:bottom-0 after:shadow-[-20px_20px_#f1f5f9]
+    @apply before:w-10 before:absolute before:h-10 before:rounded-full  before:-left-10 before:bottom-0 before:shadow-[20px_20px_#f1f5f9] after:w-10 after:absolute after:h-10 after:rounded-full after:-right-10 after:bottom-0 after:shadow-[-20px_20px_#f1f5f9]
   }
 
   input[type="text"] {
@@ -17,7 +17,7 @@
   }
 
   html {
-    background-color: #064E3B;
+    background-color: #064E3B ;
   }
 
   .date-sales-picker {
@@ -26,7 +26,7 @@
 }
 
 .box {
-  box-shadow: 0 3px 20px #0000000b;
+  box-shadow: 0 3px 20px #0000000b ;
   background-color: #fff;
   border-color: transparent;
   border-radius: .375rem;

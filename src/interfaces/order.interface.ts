@@ -6,7 +6,10 @@ export interface ShippingAddress {
   state: string;
   country: string;
   postal_code: string;
-  amount: number;
+  amount: {
+    raw: number;
+    formatted: string;
+  };
 }
 
 export interface OrderInterface {

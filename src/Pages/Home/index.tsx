@@ -76,13 +76,13 @@ const Home = () => {
   const totalUsers = userTotalStatisticData?.totalUsers;
 
   const totalItemsSales = productStatisticSales?.total_items_sold
-  const percentChangeProductSales = productStatisticSales?.product_sales?.[0].percent_change as number;
+  const percentChangeProductSales = productStatisticSales?.product_sales?.[0]?.percent_change as number;
 
   const totalOrders = orderStatistic?.totalOrderAmount
   const percentChangeOrder = orderStatistic?.percentChange as number;
 
-  const currentMonthSales = productStatisticSales?.product_sales?.[0].current_month_sales
-  const previousMonthSales = productStatisticSales?.product_sales?.[0].previous_month_sales
+  const currentMonthSales = productStatisticSales?.product_sales?.[0]?.current_month_sales
+  const previousMonthSales = productStatisticSales?.product_sales?.[0]?.previous_month_sales
 
   const chartData = productStatisticSales?.chartData
 
@@ -99,10 +99,12 @@ const Home = () => {
     ],
   };
 
+  console.log(percentChangeProductSales)
+
   return (
     <div>
       <div className="col-span-12 mt-8">
-        <HeadingV1 title="General Report" />
+        <HeadingV1 title="Báo Cáo Chung" />
 
         <div className="grid grid-cols-12 gap-6 mt-5">
           <div className="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
@@ -120,8 +122,8 @@ const Home = () => {
                           : "bg-gray-500"
                       } py-[3px] flex rounded-full capitalize text-white text-xs pl-2 pr-1 items-center font-medium`}
                     >
-                      {percentChangeProductSales === 0
-                        ? "No change"
+                      {percentChangeProductSales  === 0 || !percentChangeProductSales
+                        ? "Không Thay Đổi"
                         :  
                             percentChangeProductSales > 0 ?<>{percentChangeProductSales}% <ArrowUpIcon /></>  :<>{Math.abs(percentChangeProductSales)}% <ArrowDown /></>
                           }
@@ -129,7 +131,7 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="mt-6 text-3xl font-medium leading-8">{totalItemsSales}</div>
-                <div className="mt-1 text-base text-slate-500">Item Sales</div>
+                <div className="mt-1 text-base text-slate-500">số sản phẩm đã bán</div>
               </div>
             </div>
           </div>
@@ -150,14 +152,14 @@ const Home = () => {
                       } py-[3px] flex rounded-full capitalize text-white text-xs pl-2 pr-1 items-center font-medium`}
                     >
                       {percentChangeOrder === 0
-                        ? "No change"
+                        ? "Không Thay Đổi"
                         :  
                             percentChangeOrder > 0 ?<>{percentChangeOrder}% <ArrowUpIcon /></>  :<>{Math.abs(percentChangeOrder)}% <ArrowDown /></>
                           }
                     </div>
                   </div>                </div>
                 <div className="mt-6 text-3xl font-medium leading-8">{totalOrders}</div>
-                <div className="mt-1 text-base text-slate-500">New Orders</div>
+                <div className="mt-1 text-base text-slate-500">Đơn Đặt Hàng Mới</div>
               </div>
             </div>
           </div>
@@ -179,7 +181,7 @@ const Home = () => {
                       } py-[3px] flex rounded-full capitalize text-white text-xs pl-2 pr-1 items-center font-medium`}
                     >
                       {percentChange === 0
-                        ? "No change"
+                        ? "Không Thay Đổi"
                         :  
                             percentChange > 0 ?<>{percentChange}% <ArrowUpIcon /></>  :<>{Math.abs(percentChange)}% <ArrowDown /></>
                           }
@@ -190,7 +192,7 @@ const Home = () => {
                   {totalProduct}
                 </div>
                 <div className="mt-1 text-base text-slate-500">
-                  Total Products
+                  Tổng số sản phẩm
                 </div>
               </div>
             </div>
@@ -212,7 +214,7 @@ const Home = () => {
                       } py-[3px] flex rounded-full capitalize text-white text-xs pl-2 pr-1 items-center font-medium`}
                     >
                       {percentChangeUser === 0
-                        ? "No change"
+                        ? "Không Thay Đổi"
                         :  
                             percentChangeUser > 0 ?<>{percentChangeUser}% <ArrowUpIcon /></>  :<>{Math.abs(percentChangeUser)}% <ArrowDown /></>
                           }
@@ -223,7 +225,7 @@ const Home = () => {
                   {totalUsers}
                 </div>
                 <div className="mt-1 text-base text-slate-500">
-                  Unique Visitor
+                  Số Lượng Người Dùng
                 </div>
               </div>
             </div>
@@ -233,7 +235,7 @@ const Home = () => {
 
       <div className="col-span-12 mt-8 lg:col-span-6">
         <div className="items-center block h-10 intro-y sm:flex">
-          <h2 className="mr-5 text-lg font-medium truncate">Sales Report</h2>
+          <h2 className="mr-5 text-lg font-medium truncate">Báo Cáo Bán Hàng</h2>
           <div
             role="button"
             onClick={() => setIsOpenCalendar(!isOpenCalendar)}
@@ -270,14 +272,14 @@ const Home = () => {
                 <div className="text-lg font-medium text-primary dark:text-slate-300 xl:text-xl">
                   {currentMonthSales}
                 </div>
-                <div className="mt-0.5 text-slate-500">This Month</div>
+                <div className="mt-0.5 text-slate-500">Tháng Hiện Tại</div>
               </div>
               <div className="w-px h-12 mx-4 border border-r border-dashed border-slate-200 dark:border-darkmode-300 xl:mx-5"></div>
               <div>
                 <div className="text-lg font-medium text-slate-500 xl:text-xl">
                   {previousMonthSales}
                 </div>
-                <div className="mt-0.5 text-slate-500">Last Month</div>
+                <div className="mt-0.5 text-slate-500">Tháng Trước</div>
               </div>
             </div>
           </div>

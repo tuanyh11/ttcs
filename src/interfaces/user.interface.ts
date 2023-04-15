@@ -10,7 +10,7 @@ export interface UserInterface {
   _id?: string;
   userName: string;
   email: string;
-  isAdmin: boolean;
+  admin: boolean;
   createdAt?: string;
   confirmPassword?: string;
   password?: string;

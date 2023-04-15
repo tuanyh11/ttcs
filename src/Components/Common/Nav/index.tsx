@@ -116,7 +116,7 @@ const Nav = () => {
                 <Home/>
               </div>
               <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400  font-medium ">
-                Dashboard
+                Bảng Điều Khiển
               </div>
             </NavLink>
           </li>
@@ -150,7 +150,7 @@ const Nav = () => {
                        <Thunder/>
                       </div>
                       <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400 w-full">
-                        Categories
+                         Danh Mục
                       </div>
                     </Link>
                   </li>
@@ -164,7 +164,7 @@ const Nav = () => {
                        <Thunder/>
                       </div>
                       <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400 w-full">
-                        Add Product
+                        Tạo Sản Phẩm
                       </div>
                     </Link>
                   </li>
@@ -177,12 +177,12 @@ const Nav = () => {
                        <Thunder/>
                       </div>
                       <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400 w-full">
-                        Product List
+                        Danh Sách Sản phẩm
                       </div>
                     </Link>
                   </li>
 
-                  <li className="px-5 relative [&amp;:hover>ul]:block [&amp;:hover>a>div:nth-child(2)>svg]:-rotate-90">
+                  {/* <li className="px-5 relative [&amp;:hover>ul]:block [&amp;:hover>a>div:nth-child(2)>svg]:-rotate-90">
                     <Link
                         to={"/e-commerce/reviews"}
                       className="h-[55px] rounded-full xl:rounded-b-none xl:rounded-t-[1rem] flex items-center text-white relative px-0 mr-0"
@@ -194,7 +194,7 @@ const Nav = () => {
                         Reviews
                       </div>
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
           </li>
 
@@ -210,8 +210,8 @@ const Nav = () => {
                 <Box/>
               </div>
               <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400">
-                Orders
-                <ArrowDown/>
+                Đặt Hàng
+                {/* <ArrowDown/> */}
               </div>
             </NavLink>
           </li>
@@ -227,8 +227,8 @@ const Nav = () => {
                 <UserIcon/>
               </div>
               <div className="ml-3 flex items-center whitespace-nowrap dark:text-slate-400">
-                Users
-                <ArrowDown/>
+                Người Dùng
+                {/* <ArrowDown/> */}
               </div>
             </NavLink>
           </li>
