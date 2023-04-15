@@ -117,14 +117,7 @@ export const getBestSellingProducts = async () => {
   return product;
 };
 
-export const getProducts = async (start = 0, end = 12) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  const length = products.length;
-  return {
-    data: product.data.products.edges.slice(start, end),
-    totalLength: length,
-  };
-};
+
 
 export const getProductCate = async (limit) => {
   return categories.data.productCategories.edges.slice(0, limit);
@@ -151,11 +144,7 @@ export const getRangePriceProduct = () => {
 
 // start header search
 export const searchProducts = async (text) => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  return products.filter(
-    ({ node: product }) =>
-      product.name.toLocaleLowerCase().indexOf(text?.toLocaleLowerCase()) >= 0
-  );
+  return (await axiosInstance.get(`/products/search/query?name=${text}`)).data
 };
 
 export const searchBlogs = async (text) => {

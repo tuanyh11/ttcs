@@ -4,118 +4,79 @@ import { useForm, useFormContext } from "react-hook-form";
 import { registerAsync } from "../../../api";
 import { Button, InputV1 } from "../../../Components";
 import useAuth from "../../../Components/store/authStore";
-import { strongPassword } from "../../../utils";
+import { handleError, moveToTop, strongPassword } from "../../../utils";
+import { registerApi } from "../../../api/auth.api";
+import { FadeLoader } from "react-spinners";
 
 const SignUp = () => {
   const { register, handleSubmit, watch, setError, clearErrors } =
     useFormContext().formSignUp;
 
-  const [disPlayError, setDisPlayError] = useState({
-    message: "",
-    hint: "",
-    type: ""
-  });
+  const { login } = useAuth();
 
-  const {login} = useAuth();
-
-  const password = watch("password");
-  const confirmPassword = watch("passwordConfirmation");
-
-  // console.log(confirmPassword)
-
-  const { isLoading, mutate, error } = useMutation(registerAsync, {
-    onSuccess: (data) => login(data)
-  });
-
-  useEffect(() => {
-    if (error)
+  const { isLoading, mutate } = useMutation(registerApi, {
+    onSuccess: (data) => login(data),
+    onError: (error) => {
       setError("error", {
         type: "error",
-        message: error?.message,
+        message: handleError(error),
       });
-  }, [error]);
+      moveToTop();
+    },
+  });
 
-
-
-  useEffect(() => {
-    setDisPlayError(strongPassword(confirmPassword));
-  }, [confirmPassword]);
-
- 
-
-  const handleRegister = (data) => {
-    if (
-      disPlayError.type.toLocaleLowerCase() !== "weak" &&
-      disPlayError.type.toLocaleLowerCase() !== "very-weak"
-    ) {
-      mutate(data);
-    }
-  };
 
   return (
     <>
       <h2 className="text-[27px] leading-[48px] mb-[10px] text-[#111111] font-semibold font-poppins">
-        Register
+        Đăng Ký
       </h2>
-      <form onSubmit={handleSubmit((value) => handleRegister(value))}>
+      <form onSubmit={handleSubmit(mutate)}>
         <InputV1
-          label={"user name"}
+          label={"Tên Người Dùng"}
           register={{
-            ...register("userName", {
-              required: {
-                value: true,
-                message: "Please enter your user name",
-              },
-            }),
+            ...register("userName"),
           }}
         />
         <InputV1
-          label={"Email address"}
+          label={"Email"}
           register={{
-            ...register("email", {
-              required: {
-                value: true,
-                message: "Please enter your Email",
-              },
-            }),
+            ...register("email"),
           }}
         />
         <InputV1
-          label={"password"}
+          label={"Mật Khẩu"}
           type={"password"}
           register={{
-            ...register("password", {
-              required: {
-                value: true,
-                message: "Please enter your password",
-              },
-            }),
+            ...register("password"),
           }}
         />
         <InputV1
-          label={"Password Confirm"}
+          label={"Xác Nhận mật khẩu"}
           type={"password"}
           className="!mb-0"
           register={{
-            ...register("passwordConfirmation", {
-              validate: value => value === password || "passwords do not match",
-            }),
-            
+            ...register("password_confirmation"),
           }}
         />
-        <div className="mb-[15px]">
-          <div className="">{disPlayError?.message}</div>
-          <small className="">{disPlayError?.hint}</small>
-        </div>
-        <div className="flex flex-wrap mb-[15px]">
+
+        <div className="flex flex-wrap my-[15px] ">
           <label className="block w-full mb-[8px]">
             <span className="">
-              Your personal data will be used to support your experience
-              throughout this website, to manage access to your account, and for
-              other purposes described in our{" "}
+              Dữ liệu cá nhân của bạn sẽ được sử dụng để hỗ trợ trải nghiệm của
+              bạn trên toàn bộ trang web này, để quản lý quyền truy cập vào tài
+              khoản của bạn và để các mục đích khác được mô tả trong{" "}
             </span>
           </label>
-          <Button onClick={() => clearErrors("error")} label={"REGISTER"} type="submit" />
+          {isLoading ? (
+            <FadeLoader color="#ff4545" />
+          ) : (
+            <Button
+              onClick={() => clearErrors("error")}
+              label={"Đăng Ký"}
+              type="submit"
+            />
+          )}
         </div>
       </form>
     </>

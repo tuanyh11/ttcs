@@ -4,7 +4,6 @@ import { revert } from "url-slug";
 
 const Breadcrumb = ({ image, label, offPath = false }) => {
   const loc = useLocation();
-  console.log(loc);
   const pathname = loc.pathname.substring(1).split("/");
   //  `Search Results for: ${label}`
   return (
@@ -24,7 +23,7 @@ const Breadcrumb = ({ image, label, offPath = false }) => {
         {!offPath && (
           <div className="flex justify-center relative z-50 leading-[28px]">
             <Link to={"/"} className="text-white uppercase">
-              Home
+               Trang Chủ
             </Link>
             {pathname.map((item, i) => {
               const path = revert(item);

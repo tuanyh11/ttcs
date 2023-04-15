@@ -1,36 +1,43 @@
+export const moveToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
-
-export const generateStart =  (rating = 0, className) => {
-    const filledStars = Math.round(rating);
+export const generateStart = (rating = 0, className) => {
+  const filledStars = Math.round(rating);
   const emptyStars = 5 - filledStars;
   const stars = [];
 
   for (let i = 0; i < filledStars; i++) {
     stars.push(
-      <i key={i} className={`fa fa-star filled text-[#fbb71c] text-xs ${className || ''}`}></i>
+      <i
+        key={i}
+        className={`fa fa-star filled text-[#fbb71c] text-xs ${
+          className || ""
+        }`}
+      ></i>
     );
   }
   for (let i = 0; i < emptyStars; i++) {
     stars.push(
       <i
         key={filledStars + i}
-        className={`fa-light fa-star text-[#ccc] text-xs ${className || ''}`}
+        className={`fa-light fa-star text-[#ccc] text-xs ${className || ""}`}
       ></i>
     );
   }
 
   return stars;
-}
+};
 
 export const fakeData = (num, schema) => {
-  return Array.from([...new Array(num)], ( _, k) => {
+  return Array.from([...new Array(num)], (_, k) => {
     return {
-     ...schema(k)
-    }
+      ...schema(k),
+    };
   });
-}
+};
 
-export  function randomDateInCurrentMonth() {
+export function randomDateInCurrentMonth() {
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
@@ -43,59 +50,66 @@ export  function randomDateInCurrentMonth() {
 }
 
 export function sortProduct(products, sortBy, filter) {
-  let newProducts = products
+  let newProducts = products;
 
-  if(sortBy === 'averageRating') {
-    newProducts =  newProducts?.sort((a, b) => {
-      return Number(b?.node?.averageRating) - Number(a?.node?.averageRating)
-    })
-  }
-
-  if(sortBy === 'priceHigh') {
+  if (sortBy === "averageRating") {
     newProducts = newProducts?.sort((a, b) => {
-      return Number(a?.node?.regularPrice?.substring(1)) - Number(b?.node?.regularPrice?.substring(1))
-    })
+      return Number(b?.node?.averageRating) - Number(a?.node?.averageRating);
+    });
   }
 
-  if(sortBy === 'priceLow') {
+  if (sortBy === "priceHigh") {
     newProducts = newProducts?.sort((a, b) => {
-      return Number(b?.node?.regularPrice?.substring(1)) - Number(a?.node?.regularPrice?.substring(1))
-    })
+      return Number(a?.price.raw) - Number(b?.price.raw);
+    });
   }
 
-  if(filter?.category?.length > 0) {
-    newProducts = newProducts?.filter(({node: product}) => 
-      product.productCategories.edges.some(({node}) => filter?.category?.some(cate => cate?.databaseId == node.databaseId)) 
+  if (sortBy === "priceLow") {
+    newProducts = newProducts?.sort((a, b) => {
+      return Number(b?.price.raw) - Number(a?.price.raw);
+    });
+  }
+
+  if (filter?.category?.length > 0) {
+    newProducts = newProducts?.filter((product) =>
+      filter.category.find(({ _id }) => _id === product?.category?._id)
     );
   }
 
-  if(filter?.price?.length > 0) {
-    newProducts =  newProducts?.filter(({node: product}) => {
-      const priceOne = filter?.price?.[0]
-      const priceTwo = filter?.price?.[1]
-      const price = Number(product.regularPrice?.substring(1))
-      return price >= priceOne && price <= priceTwo
-    })
-
+  if (filter?.price?.length > 0) {
+    newProducts = newProducts?.filter((product) => {
+      const priceOne = filter?.price?.[0];
+      const priceTwo = filter?.price?.[1];
+      const price = Number(product.price.raw);
+      console.log(priceOne, priceTwo, price);
+      return price >= priceOne && price <= priceTwo;
+    });
   }
 
-  
-
-  return newProducts
+  return newProducts;
 }
 
-export function handleErrorMessage(error)  {
+export function handleErrorMessage(error) {
   const { response } = error;
   const message = response?.data?.message || error.message;
   throw new Error(message);
 }
 
+export const formatMoney = (amount, currency = "VND", locale = "vi-VN") => {
+  return new Intl.NumberFormat(locale, { style: "currency", currency }).format(
+    amount
+  );
+};
 
-export   const strongPassword = (value = "") => {
+export  function handleError(error) {
+  const errorMessage = error.response?.data?.message || error.message;
+  return (errorMessage);
+}
+
+
+export const strongPassword = (value = "") => {
   if (
-    /^(?=.*[A-Z\d@$!%*#?&])[\w!@#$%^&*()+={}\[\]|\-\\:";'<>?,.\/]*$/.test(
-      value
-    )
+    /^(?=.*[A-Z\d@$!%*#?&])[\w!@#$%^&*()+={}\[\]|\-\\:";'<>?,.\/]*$/.test(value)
   ) {
     if (value?.length < 4) {
       return {
@@ -104,7 +118,7 @@ export   const strongPassword = (value = "") => {
         hint: 'The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).',
       };
     }
-    if (value?.length >= 4  && value?.length < 11 ) {
+    if (value?.length >= 4 && value?.length < 11) {
       return {
         message: "Weak - Please enter a stronger password.",
         type: "weak",

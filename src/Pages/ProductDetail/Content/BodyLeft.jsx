@@ -35,7 +35,7 @@ function SamplePrevArrow(props) {
   );
 }
 
-const BodyLeft = ({ featuredImage, galleryImages }) => {
+const BodyLeft = ({ featuredImage, galleryImages = [] }) => {
   const slider1 = useRef(null);
   const slider2 = useRef(null);
 
@@ -111,13 +111,13 @@ const BodyLeft = ({ featuredImage, galleryImages }) => {
   return (
     <div>
       <Slider {...settings1} ref={slider1}>
-        {galleryImages?.map((image) => {
+        {galleryImages?.map((image, j) => {
           return (
-            <div key={image?.id} className="">
+            <div key={j} className="">
               <img
                 onClick={() => setIsOpening(true)}
                 className="w-full p-2 bg-white border border-[#ddd] outline-none overflow-hidden"
-                src={image?.mediaItemUrl}
+                src={image}
                 alt=""
               />
             </div>
@@ -132,11 +132,11 @@ const BodyLeft = ({ featuredImage, galleryImages }) => {
       >
         {galleryImages?.map((image) => {
           return (
-            <div key={image?.id}>
+            <div key={image}>
               <div className=" w-full px-1">
                 <img
                   className="w-full p-2 bg-white border border-[#ddd] outline-none overflow-hidden"
-                  src={image?.mediaItemUrl}
+                  src={image}
                   alt=""
                 />
               </div>

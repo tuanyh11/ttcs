@@ -21,8 +21,8 @@ const data = {
             fieldGroupName: "Page_Acf_Component_ImageWithTextCol",
             content: [
               {
-                content: "<p>Modern Auto Wheel Up To 25% Offer</p>\n",
-                title: "25% big offer",
+                content: "<p>Bánh xe tự động hiện đại Ưu đãi tới 25%</p>\n",
+                title: "ƯU ĐÃI LỚN 25%",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
                     Math.floor(Math.random() * 4) + 1
@@ -33,8 +33,9 @@ const data = {
                 },
               },
               {
-                content: "<p>BMW i880s Model Best Remote Control Car</p>\n",
-                title: "flash sale (15%)",
+                content:
+                  "<p>BMW i880s Model Xe điều khiển từ xa tốt nhất</p>\n",
+                title: "BÁN CHẠY (15%)",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
                     Math.floor(Math.random() * 4) + 1
@@ -45,8 +46,8 @@ const data = {
                 },
               },
               {
-                content: "<p>Hobbypark 5x10x4mm Ball Bearings RC Car</p>\n",
-                title: "New arrival",
+                content: "<p>Hobbypark Vòng bi 5x10x4mm Xe RC</p>\n",
+                title: "Hàng mới về",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
                     Math.floor(Math.random() * 4) + 1
@@ -57,8 +58,8 @@ const data = {
                 },
               },
               {
-                content: "<p>OEM ODM Customized High Precision CNC</p>\n",
-                title: "30% big offer",
+                content: "<p>OEM ODM Tùy chỉnh độ chính xác cao CNC</p>\n",
+                title: "Ưu đãi lớn 30%",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/of-bg-${
                     Math.floor(Math.random() * 4) + 1
@@ -74,8 +75,8 @@ const data = {
             fieldGroupName: "Page_Acf_Component_ImageWithText",
             data: "<p>email</p>\n",
             imagePosition: "Background",
-            subTitle: "newsletter subscribe",
-            title: "Every Update Subscribe Our Newsletter",
+            subTitle: "đăng ký bản tin",
+            title: "Mọi cập nhật Đăng ký Bản tin của chúng tôi",
             images: [
               {
                 image: {
@@ -85,7 +86,7 @@ const data = {
               },
             ],
             button: {
-              titleButton: "subscribe now",
+              titleButton: "Đăng Ký Ngay",
             },
           },
           {
@@ -95,8 +96,8 @@ const data = {
                 id: new Date().getTime() * Math.random(),
                 rating: 5,
                 contentData:
-                  "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
-                name: "Daisy Lana",
+                  "<p>Tôi đã mua bộ phụ kiện ô tô này và tôi rất hài lòng với chất lượng của sản phẩm. Tất cả các phụ kiện đều được làm bằng vật liệu chất lượng cao và rất dễ dàng để lắp đặt. Tôi đặc biệt thích bộ phụ kiện này vì nó giúp tôi giữ xe của mình sạch sẽ và gọn gàng hơn. Tôi sẽ chắc chắn giới thiệu sản phẩm này cho bạn bè của tôi</p>\n",
+                name: "Tuấn Lèo",
                 position: "Web Designer",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
@@ -108,8 +109,8 @@ const data = {
                 id: new Date().getTime() * Math.random(),
                 rating: 5,
                 contentData:
-                  "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
-                name: "Oliver Greenwood",
+                  "<p>Tôi đã sử dụng bộ phụ kiện ô tô này trong một thời gian và tôi rất hài lòng với hiệu suất của nó. Tất cả các phụ kiện đều rất chắc chắn và không bị trầy xước hay hỏng hóc sau một thời gian sử dụng. Tôi cũng thích cách thiết kế của bộ phụ kiện này, nó giúp tôi tiết kiệm không gian và giữ xe của tôi sạch sẽ hơn. Tôi sẽ chắc chắn mua lại sản phẩm này nếu cần thiết</p>\n",
+                name: "Trần Quân",
                 position: "Computer Engineer",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
@@ -121,8 +122,8 @@ const data = {
                 id: new Date().getTime() * Math.random(),
                 rating: 5,
                 contentData:
-                  "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
-                name: "David Warner",
+                  "<p>ôi đã mua bộ phụ kiện ô tô này và tôi rất hài lòng với giá cả và chất lượng của sản phẩm. Tất cả các phụ kiện đều được làm bằng vật liệu chất lượng cao và rất dễ dàng để lắp đặt. Tôi cũng thích cách thiết kế của bộ phụ kiện này, nó giúp tôi tiết kiệm không gian và giữ xe của tôi sạch sẽ hơn. Tôi sẽ chắc chắn giới thiệu sản phẩm này cho bạn bè của tôi vì nó là một giải pháp tuyệt vời cho việc giữ xe của bạn sạch sẽ và gọn gàng.</p>\n",
+                name: "Quan Vũ",
                 position: "Business Manager",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${
@@ -135,7 +136,7 @@ const data = {
                 rating: 5,
                 contentData:
                   "<p>Sed ut perspiciatis unde omnis istese us error sit voluptatem accusa oloque laudantium totam aperiam eaqupsa quae ab illo inventore veritatis quasc architecto beatae vitae dicta suntey plicabo enim ipsam volupt</p>\n",
-                name: "Alden Smith",
+                name: "Thế Tài",
                 position: "Designer",
                 image: {
                   mediaItemUrl: `https://klbtheme.com/chakta/wp-content/uploads/2021/01/thumb-${

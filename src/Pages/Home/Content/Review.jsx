@@ -4,9 +4,8 @@ import { fakeData } from "../../../assets/data";
 import { Container } from "../../../Components";
 import { generateStart } from "../../../utils";
 
-const Review = ({data}) => {
-
-  const quoteList = data?.contentQuote
+const Review = ({ data }) => {
+  const quoteList = data?.contentQuote;
 
   const customerReviewSettings = {
     dots: false,
@@ -15,48 +14,48 @@ const Review = ({data}) => {
     slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: true
-          }
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
         },
+      },
 
-        {
-          breakpoint: 800,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            initialSlide: 2
-          }
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
         },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            initialSlide: 2
-          }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 2,
         },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            initialSlide: 2,
-          },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
         },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <div>
@@ -65,11 +64,11 @@ const Review = ({data}) => {
           <div className="md:p-[15px]  text-center flex justify-center">
             <div className="w-full md:w-9/12 lg:w-6/12  mb-[30px]">
               <h2 className="mb-[15px] font-poppins text-[27px] text-black leading-[32px] font-semibold">
-                Customer Reviews{" "}
+                Phản hồi khách hàng{" "}
               </h2>
               <p>
-                Quis autem vel eum iure reprehenderit qui in ea voluptate velit
-                esse quam nihil molestiae consequatur vel illum dolorem
+                Phản hồi của khách hàng là những ý kiến, đánh giá và nhận xét
+                của khách hàng về sản phẩm hoặc dịch vụ mà họ đã sử dụng
               </p>
             </div>
           </div>
@@ -77,7 +76,10 @@ const Review = ({data}) => {
             <div>
               <Slider {...customerReviewSettings} className="-mx-[15px] ">
                 {quoteList?.map((review) => {
-                  const stars = generateStart(review.rating, "!text-[13px] !font-semibold ");
+                  const stars = generateStart(
+                    review.rating,
+                    "!text-[13px] !font-semibold "
+                  );
 
                   return (
                     <div key={review?.id}>
@@ -102,9 +104,14 @@ const Review = ({data}) => {
                             </div>
                           </div>
 
-                          <div className="p-10 bg-white relative triangle">
-                            <div dangerouslySetInnerHTML={{__html: review?.contentData}} className="pb-5"/>
-                            <div className="flex justify-between items-center">
+                          <div className="p-10 bg-white relative triangle flex flex-col">
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: review?.contentData,
+                              }}
+                              className=" flex-1 line-clamp-6"
+                            />
+                            <div className="flex justify-between items-center mt-5  ">
                               <div>{stars}</div>
                               <div>
                                 <i className="fa-solid fa-quote-right text-5xl text-main-color"></i>

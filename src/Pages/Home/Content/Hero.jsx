@@ -41,9 +41,9 @@ const Hero = ({ data }) => {
     setIsLoading(true);
   };
 
-  const years = data?.years?.edges?.map(({ node }) => ({ ...node }))
+  const years = data?.years?.edges?.map(({ node }) => ({ ...node }));
 
-  console.log(selectYear)
+  console.log(selectYear);
 
   return (
     <div>
@@ -62,15 +62,15 @@ const Hero = ({ data }) => {
                     <Slider fade={true}>
                       <div className="relative z-[9999]">
                         <h3 className="mb-6 uppercase text-[#4bc871] underline font-bold ">
-                          great offer for every auto & cars
+                          ưu đãi tuyệt vời cho mọi ô tô và ô tô
                         </h3>
                         <h1 className="text-[32px] tracking-tighter text-dark-color md:text-[48px] leading-[44px] md:leading-[60px]  lg:text-[70px] lg:leading-[70px] font-semibold mb-5 font-poppins">
-                          25% Off For Auto Car Services
+                          Giảm 25% Cho Dịch Vụ Xe Ô Tô
                         </h1>
                         <p className="text-dark-color font-normal pb-5">
-                          Sed ut perspiciatis unde omnis iste natus error
-                          voluptatem accusantium remque laudantium totam aperiam
-                          eaque ipsa quae abillo inventore veritatis
+                          Được tạo ra từ những nguyên liệu tự nhiên, sản phẩm
+                          này mang lại cho bạn trải nghiệm tuyệt vời và đầy thú
+                          vị.
                         </p>
                         <div>
                           <ButtonArrow
@@ -78,28 +78,28 @@ const Hero = ({ data }) => {
                             to="/shop"
                             className="py-[14px]  inline-block  mb-2 text-center md:mr-2 text-[14px] px-[40px]  leading-[29px] rounded-[28px]"
                           >
-                            Shop Now
+                            Mua Ngay
                           </ButtonArrow>
                           <ButtonArrow
                             Tag="Link"
                             to="/shop"
                             className="py-[14px]  inline-block text-[14px] text-center px-[40px]  leading-[29px] rounded-[28px] bg-white hover:border-main-color transition-main hover:text-white  hover:bg-main-color border-2 border-[#eaeaea] border-solid text-[#777777]"
                           >
-                            Read more
+                            Đọc Thêm
                           </ButtonArrow>
                         </div>
                       </div>
                       <div className="relative z-[9999]">
                         <h3 className="mb-6 uppercase text-[#4bc871] underline">
-                          great offer for every auto & cars
+                          ưu đãi tuyệt vời cho mọi ô tô và ô tô
                         </h3>
                         <h1 className="text-[32px] tracking-tighter md:text-[48px] lg:text-[70px] font-semibold leading-[44px] md:leading-[60px] lg:leading-[70px] text-dark-color mb-5 font-poppins">
-                          35% Off For Auto Parts Services
+                          Giảm 35% Cho Dịch Vụ Xe Ô Tô
                         </h1>
                         <p className="text-dark-color font-normal pb-5  max-[320px]:hidden">
-                          Sed ut perspiciatis unde omnis iste natus error
-                          voluptatem accusantium remque laudantium totam aperiam
-                          eaque ipsa quae abillo inventore veritatis
+                          Được tạo ra từ những nguyên liệu tự nhiên, sản phẩm
+                          này mang lại cho bạn trải nghiệm tuyệt vời và đầy thú
+                          vị.
                         </p>
                         <div>
                           <ButtonArrow
@@ -107,14 +107,14 @@ const Hero = ({ data }) => {
                             to="/shop"
                             className="py-[14px] mb-2 mr-2 text-[14px] px-[40px]  leading-[29px] rounded-[28px]"
                           >
-                            Shop Now
+                            Mua Ngay
                           </ButtonArrow>
                           <ButtonArrow
                             Tag="Link"
                             to="/shop"
                             className="py-[14px] text-[14px] px-[40px]  leading-[29px] rounded-[28px] bg-white border-2 border-[#eaeaea] border-solid text-[#777777]"
                           >
-                            Read more
+                            Đọc Thêm
                           </ButtonArrow>
                         </div>
                       </div>
@@ -126,7 +126,7 @@ const Hero = ({ data }) => {
           </Container>
         </div>
 
-        <div className="mx-[15px] md:mx-0">
+        {/* <div className="mx-[15px] md:mx-0">
           <div
             className="mt-[100px] mb-[-215px] bg-main-color max-w-[1400px] mx-auto py-10 md:py-[60px] px-[15px] md:px-[115px] rounded-[20px]  "
             style={{
@@ -134,7 +134,7 @@ const Hero = ({ data }) => {
             }}
           >
             <h1 className="text-white text-lg md:text-2xl text-center font-semibold font-poppins mb-[30px]">
-              Over 2500 Cars. Find Your Auto Parts
+            Hơn 2500 Ô tô. Tìm phụ tùng ô tô của bạn
             </h1>
             <Row>
               <Col className="w-full lg:w-3/12 mb-5 ">
@@ -143,7 +143,7 @@ const Hero = ({ data }) => {
                     title={car?.name || "Select Make"}
                     setTitle={(car) => handLeOnSelect(car)}
                     data={cars}
-                    isSelected={item => item?.name === car?.name}
+                    isSelected={(item) => item?.name === car?.name}
                   />
                 </div>
               </Col>
@@ -160,7 +160,7 @@ const Hero = ({ data }) => {
                     setTitle={(model) => setSelectModel(model)}
                     data={models}
                     disabled={models.length === 0}
-                    isSelected={model => model?.name === selectModel?.name}
+                    isSelected={(model) => model?.name === selectModel?.name}
                   />
                 </div>
               </Col>
@@ -171,14 +171,17 @@ const Hero = ({ data }) => {
                   setTitle={(year) => setSelectYear(year)}
                   data={years}
                   disabled={years?.length === 0}
-                  disPlayKey={year => year?.year}
-                  isSelected={year => year?.year === selectYear?.year }
+                  disPlayKey={(year) => year?.year}
+                  isSelected={(year) => year?.year === selectYear?.year}
                 />
               </Col>
 
               <Col className="w-full lg:w-3/12 mb-5">
                 <div className="">
-                  <Link to={"/shop"} className=" text-[14px] font-semibold line-clamp-1 relative w-full text-center transition-all duration-[400]  outline-none   font-poppins py-[11px] px-[15px] xl:px-[35px] bg-main-color border-2 border-white border-solid hover:bg-white hover:text-main-color text-white   rounded-[28px]">
+                  <Link
+                    to={"/shop"}
+                    className=" text-[14px] font-semibold line-clamp-1 relative w-full text-center transition-all duration-[400]  outline-none   font-poppins py-[11px] px-[15px] xl:px-[35px] bg-main-color border-2 border-white border-solid hover:bg-white hover:text-main-color text-white   rounded-[28px]"
+                  >
                     <span className="uppercase">find auto parts</span>
                     <i className="fa-solid fa-circle-arrow-right  ml-3"></i>
                   </Link>
@@ -186,7 +189,7 @@ const Hero = ({ data }) => {
               </Col>
             </Row>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

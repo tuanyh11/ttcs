@@ -9,6 +9,7 @@ import OurMainGoals from './OurMainGoals/OurMainGoals';
 import './style.css';
 import TeamMembers from './TeamMembers/TeamMembers';
 import blogData from '../../assets/data/blog';
+import { moveToTop } from '../../utils';
 const About = () => {
   // const { pathname } = useLocation();
   // console.log(pathname);
@@ -42,13 +43,7 @@ const About = () => {
     customerReviews = dataContent[3].contentQuote
   }
   useEffect(() => {
-    window.scrollTo(
-      {
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      }
-    )
+    moveToTop()
   }, [])
   // console.log(blogData.data.posts.edges);
   return (
@@ -65,14 +60,14 @@ const About = () => {
       <div className='max-w-[1200px] m-auto py-[65px] px-[0px]'>
         <TeamMembers teamMembers={teamMembers} />
       </div>
-      <div className='bg-[#F7F7F7]'>
+      {/* <div className='bg-[#F7F7F7]'>
         <div className='max-w-[1200px] m-auto py-[65px] px-[0px] '>
           <CustomerReviews customerReviews={customerReviews} />
         </div>
       </div>
       <div className='max-w-[1200px] m-auto py-[65px] px-[0px]'>
         <LatestNew blogData={blogData.data.posts.edges} />
-      </div>
+      </div> */}
       <SliderForm />
     </div>
   )

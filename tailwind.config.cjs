@@ -4,21 +4,19 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        '920': '920px',
-        'screens-480': '480px',
-        'screens-576': '576px',
-        'screens-600': '600px',
-        'screens-768': '768px',
-        'screens-992': '992px',
-        'screens-1200': '1200px',
-
-        
+        920: "920px",
+        "screens-480": "480px",
+        "screens-576": "576px",
+        "screens-600": "600px",
+        "screens-768": "768px",
+        "screens-992": "992px",
+        "screens-1200": "1200px",
       },
       transformOrigin: {
-        'top-left-1/4-0': 'calc(100% - 30px) 0'
+        "top-left-1/4-0": "calc(100% - 30px) 0",
       },
       colors: {
-        "black": "#111111",
+        black: "#111111",
         "dark-color": "#111111",
         "main-color": "#ff4545",
         "#646a7c": "#646a7c",
@@ -31,7 +29,7 @@ module.exports = {
       },
       fontFamily: {
         poppins: "Poppins, sans-serif",
-        rubik: "Rubik, sans-serif"
+        rubik: "Rubik, sans-serif",
       },
       container: {
         screens: {

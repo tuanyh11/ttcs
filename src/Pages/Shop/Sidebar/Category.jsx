@@ -10,13 +10,14 @@ const Categories = ({ data }) => {
     <div>
       <div className="py-10 px-[30px]  border border-[#f7f7f7] shadow-[0_5px_0_rgb(200_200_200/20%] ">
         <h4 className="pb-[13px] mb-5 border-b-[2px] text-dark-color font-semibold text-2xl font-poppins">
-          Categories
+          Danh Mục
         </h4>
         <div>
           <ul className="">
             {data?.map((category, index) => {
-              const cate = category.node
-              const id = cate?.databaseId
+              const cate = category
+              const id = cate?._id
+              console.log(cate);
               return (
                 <li key={id} className="pb-[15px]">
                   <div className="group">
@@ -24,15 +25,15 @@ const Categories = ({ data }) => {
                       type="checkbox"
                       className=" opacity-0  hidden input-shop"
                       name=""
-                      id={`input-cate${id}`}
+                      id={`input-cate-${id}`}
                       onChange={(e) => handleOnSelectCate(cate)}
                       checked={filter?.category?.some(
-                        (item) => item.databaseId === id
+                        (item) => item._id === id
                       )}
                     />
                     <label
                       className="cursor-pointer flex items-center gap-[10px] hover:text-main-color transition duration-300"
-                      htmlFor={`input-cate${id}`}
+                      htmlFor={`input-cate-${id}`}
                     >
                       <span
                         className={`w-4 h-4  border inline-block relative after:opacity-0 group-hover:after:opacity-100 after:-rotate-45 after:border-solid after:border-[#222] after:border-t-0 after:border-r-0 after:border-b-[2px] after:border-l-[2px] after:h-[4px] after:w-[8px] after:absolute  after:top-[4px] after:left-[3px]`}

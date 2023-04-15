@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { useDebounce } from "../../../hooks";
-import Col from "../Col/Col";
-import Container from "../Container/Container";
-import Row from "../Row/Row";
-// import "./header.css";
 import { getHeaderData, searchProducts } from "../../../api/index";
-import { useCartStore } from "../../store";
 import ResHeaderNav from "./ResHeaderNav";
-import ButtonV1 from "../Button/Button";
 import HeaderCart from "./HeaderCart";
 
 // lg, md, sm, xs display
@@ -87,7 +80,7 @@ const HeaderNav = () => {
                 <div key={nav?.databaseId} className="relative group">
                   <Link
                     className="text-[16px] font-poppins hover:text-main-color transition-main  py-[34px] px-[15px] block font-semibold text-dark-color uppercase"
-                    to={`/${slug}`}
+                    to={`/${nav.path}`}
                   >
                     {nav?.label}
                     {isHasChildren && (
@@ -103,7 +96,7 @@ const HeaderNav = () => {
                       return (
                         <Link
                           className="text-[16px] font-poppins hover:text-main-color transition-main  py-2 border border-t-0 px-[15px] block font-semibold text-dark-color uppercase"
-                          to={`/${slug}`}
+                          to={`/${child.node.path}`}
                           key={child?.node?.id}
                         >
                           {child?.node?.label}

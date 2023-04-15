@@ -12,7 +12,8 @@ const headerData = {
                 {
                   databaseId: 260,
                   id: "cG9zdDoyNjA=",
-                  label: "Home",
+                  label: "Trang Chủ",
+                  path: 'home',
                   childItems: {
                     edges: [],
                   },
@@ -20,7 +21,8 @@ const headerData = {
                 {
                   databaseId: 262,
                   id: "cG9zdDoyNjI=",
-                  label: "About",
+                  label: "Giới Thiệu",
+                  path: 'about',
                   childItems: {
                     edges: [],
                   },
@@ -28,13 +30,15 @@ const headerData = {
                 {
                   databaseId: 261,
                   id: "cG9zdDoyNjE=",
-                  label: "Shop",
+                  label: "Cửa Hàng",
+                  path: 'shop',
                   childItems: {
                     edges: [
                       {
                         node: {
                           id: "cG9zdDoyODI=",
-                          label: "Cart",
+                          label: "Giỏ Hàng",
+                          path: 'cart'
                         },
                       },
                     ],
@@ -43,23 +47,26 @@ const headerData = {
                 {
                   databaseId: 259,
                   id: "cG9zdDoyNTk=",
-                  label: "Categories",
+                  label: "Danh Mục",
+                  path: 'categories',
                   childItems: {
                     edges: [],
                   },
                 },
-                {
-                  databaseId: 258,
-                  id: "cG9zdDoyNTg=",
-                  label: "Blog",
-                  childItems: {
-                    edges: [],
-                  },
-                },
+                // {
+                //   databaseId: 258,
+                //   id: "cG9zdDoyNTg=",
+                //   label: "Blog",
+                //   path: 'blog',
+                //   childItems: {
+                //     edges: [],
+                //   },
+                // },
                 {
                   databaseId: 257,
                   id: "cG9zdDoyNTc=",
-                  label: "Contact us",
+                  label: "Liên Hệ",
+                  path: 'contact-us',
                   childItems: {
                     edges: [],
                   },

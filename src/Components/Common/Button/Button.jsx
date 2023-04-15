@@ -11,6 +11,7 @@ const ButtonV1 = ({
   Tag = "button",
   to = "/",
   state = {},
+  disabled = false,
 }) => {
   if (Tag === "Link")
     return (
@@ -28,9 +29,10 @@ const ButtonV1 = ({
   return (
     <button
       type={type}
-      className={`button-v1 ${className}`}
+      className={`button-v1 ${className} ${disabled ? " opacity-60 cursor-not-allowed" : ''}`}
       style={style}
       onClick={onClick}
+      disabled={disabled}
     >
       {label || children}
     </button>

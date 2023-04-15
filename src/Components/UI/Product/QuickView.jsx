@@ -6,21 +6,23 @@ import ButtonV1 from "../../Common/Button/Button";
 import Col from "../../Common/Col/Col";
 import Row from "../../Common/Row/Row";
 import { useCartStore } from "../../store";
+import urlSlug from "url-slug";
 
-const QuickView = ({
-  onQuickViewClick = () => {},
+const QuickView = (props) => {
+  const [value, setValue] = useState(1);
+  const {
+    onQuickViewClick = () => {},
     featuredImage,
     name,
     description,
-    id,
+    _id,
     salePrice,
-    regularPrice,
+    price,
     slug,
     averageRating = 0,
-    shortDescription
-}) => {
-  const [value, setValue] = useState(1);
-
+    shortDescription,
+    images,
+  } = props;
   const handleKeyDown = (event) => {
     if (event.key === "Backspace") {
       return;
@@ -33,29 +35,23 @@ const QuickView = ({
     setValue(event.target.value);
   };
 
-  const image = featuredImage?.node?.mediaItemUrl
+  const stars = generateStart(averageRating);
 
-  const stars = generateStart(averageRating)
+  const { addItem } = useCartStore();
 
-  const {addItemWithQuantity} = useCartStore()
-
-  const nav = useNavigate()
+  const nav = useNavigate();
 
   const handleOnAddCart = () => {
-    addItemWithQuantity({
-      featuredImage,
-      name,
-      description,
-      id,
-      salePrice,
-      regularPrice,
-      slug,
-      averageRating,
-      shortDescription,
-      quantity: value
-    })
-    nav(`/product/${id}`)
-  }
+    addItem({
+      ...props,
+      quantity: value,
+    });
+    nav(`/product/${urlSlug(name)}`, {
+      state: {
+        _id,
+      },
+    });
+  };
 
   return (
     <div>
@@ -71,18 +67,14 @@ const QuickView = ({
               <Col className={"w-full md:w-6/12 mb-10 md:mb-0 "}>
                 <div>
                   <div>
-                    <img src={image} alt="" className="w-full h-full" />
+                    <img src={images?.[0]} alt="" className="w-full h-full" />
                   </div>
                   <ul className="flex -mx-[5px] mt-[10px]">
-                    <li className="w-4/12 mx-[5px]">
-                      <img src={image} alt="" className="" />
-                    </li>
-                    <li className="w-4/12 mx-[5px]">
-                      <img src={image} alt="" className="" />
-                    </li>
-                    <li className="w-4/12 mx-[5px]">
-                      <img src={image} alt="" className="" />
-                    </li>
+                    {images?.slice(0, 3)?.map((img) => (
+                      <li key={img} className="w-4/12 mx-[5px]">
+                        <img src={img} alt="" className="" />
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </Col>
@@ -94,20 +86,23 @@ const QuickView = ({
                   </h3>
 
                   <p className=" my-4 font-poppins font-semibold ">
-                    <del className="text-[#696969] text-sm mr-1 ">
-                      {salePrice}
-                    </del>
                     <span className="text-main-color text-[19px] ">
-                      {regularPrice}
+                      {price?.formatted}
                     </span>
                   </p>
                   <div className="leading-[0.8] mb-[15px]">{stars}</div>
-                  <div dangerouslySetInnerHTML={{__html: shortDescription}}>{}</div>
+                  <div
+                    className=" line-clamp-3"
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  ></div>
 
                   <div className="my-5">
                     <span className="">In Stock</span>
                     <div className="flex">
-                      <button onClick={() => setValue(Math.max(1, value - 1))} className="fa-solid fa-minus w-[50px] h-[50px] border"></button>
+                      <button
+                        onClick={() => setValue(Math.max(1, value - 1))}
+                        className="fa-solid fa-minus w-[50px] h-[50px] border"
+                      ></button>
                       <input
                         type="text"
                         value={value}
@@ -116,9 +111,15 @@ const QuickView = ({
                         onBlur={(e) => e.target.value === "" && setValue(1)}
                         className="w-[50px] h-[50px] border outline-none text-center text-[#000000]"
                       />
-                      <button onClick={() => setValue(value + 1)} className="fa-solid fa-plus w-[50px] h-[50px] border"></button>
+                      <button
+                        onClick={() => setValue(value + 1)}
+                        className="fa-solid fa-plus w-[50px] h-[50px] border"
+                      ></button>
                       <div className="ml-3">
-                        <ButtonV1 onClick={() => handleOnAddCart()} label={"ADD TO CART"} />
+                        <ButtonV1
+                          onClick={() => handleOnAddCart()}
+                          label={"ADD TO CART"}
+                        />
                       </div>
                     </div>
                   </div>

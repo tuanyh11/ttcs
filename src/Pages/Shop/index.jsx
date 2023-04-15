@@ -19,6 +19,16 @@ const Shop = ({ categories, dataCate }) => {
 
   const searchText = useLocation().state?.searchText;
 
+  const [rangePrice, setRangePrice] = useState({
+    min: 0,
+    max: 0,
+  })
+
+  const [filterPrice, setFilterPrice] = useState({
+    min: 0,
+    max: 0,
+  })
+
   const nav = useNavigate()
 
   const { setIsOpeningFilterProduct, isOpeningFilterProduct } = useUiStore();
@@ -72,7 +82,7 @@ const Shop = ({ categories, dataCate }) => {
     if (data?.length > 1 || data?.length === 0)
       nav("/shop", { state: { products: data, searchText: text } })
     if (data?.length === 1) {
-      nav(`/product/${slugUrl(data?.[0]?.node?.name)}`, { state: { product: data?.[0]?.node, searchText: text } })
+      nav(`/product/${slugUrl(data?.[0]?.name)}`, { state: { product: data?.[0], searchText: text } })
     }
   };
 
@@ -81,7 +91,6 @@ const Shop = ({ categories, dataCate }) => {
   useEffect(() => {
     dataCate?.node && handleOnSelectCate(dataCate?.node)
   }, [dataCate])
-  console.log(filter);
   return (
     <div>
       <Provider
@@ -93,15 +102,20 @@ const Shop = ({ categories, dataCate }) => {
           handleOnRemoveCate,
           handleOnRemoveStatus,
           handleFilterPrice,
+          rangePrice,
+          filterPrice,
+          setFilterPrice,
+          
+          setRangePrice,
           handleOnSearch
         }}
       >
         {
           dataCate?.node !== undefined ? (
-            <BreadCrumb label={`Category: ${dataCate?.node.name}` || 'Products'} isForSearching={searchText} offPath={searchText} />
+            <BreadCrumb label={`Danh Mục: ${dataCate?.node.name}` || 'Sản Phẩm'} isForSearching={searchText} offPath={searchText} />
           ) : (
             <BreadCrumb
-              label={searchText ? `Search Results for: ${searchText}` : "Products"}
+              label={searchText ? `Search Results for: ${searchText}` : "Sản Phẩm"}
               isForSearching={searchText}
               offPath={searchText}
             />
@@ -129,7 +143,7 @@ const Shop = ({ categories, dataCate }) => {
         <div className="py-20 relative">
           <Container className={"screens-576:max-w-[540px]"}>
             <Row>
-              <Col
+              <Col 
                 className={
                   "w-full hidden screens-600:block screens-992:w-3/12 order-2 mt-10 md:mt-0  screens-600:order-1 screens-992:order-none"
                 }

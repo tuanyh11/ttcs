@@ -37,8 +37,8 @@ const index = () => {
           <Row>
             <Col className={"w-full lg:w-6/12"}>
               <BodyLeft
-                featuredImage={data?.featuredImage?.node?.mediaItemUrl}
-                galleryImages={data?.galleryImages?.nodes}
+                featuredImage={data?.images?.[0]}
+                galleryImages={data?.images}
               />
             </Col>
             <Col className={"w-full lg:w-6/12"}>

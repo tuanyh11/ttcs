@@ -3,61 +3,65 @@ import { useForm, useFormContext } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { loginAsync } from "../../../api";
+import { login } from "../../../api/auth.api";
 import { Button, InputV1 } from "../../../Components";
 import { useAuthStore } from "../../../Components/store";
+import { handleError, moveToTop } from "../../../utils";
+import { FadeLoader } from "react-spinners";
 // rsc
 const SignIn = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
-  } = useFormContext().formSignIn  ;
+  } = useFormContext().formSignIn;
 
+  const loginSync = useAuthStore((state) => state.login);
 
-  const login = useAuthStore(state => state.login)
+  const { isLoading, mutate } = useMutation(login, {
+    onSuccess: (data) => {
+      loginSync(data);
+    },
+    onError: (error) => {
+      setError("error", {
+        type: "error",
+        message: handleError(error),
+      });
+      moveToTop();
+    },
+  });
 
-  const {isLoading, mutate, data, error} = useMutation((data) => loginAsync(data).then(user => user)  )
-
-  useEffect(( ) => {
-    data && login(data)
-  }, [data])
 
   return (
     <>
-  
       <h2 className="text-[27px] leading-[48px] mb-[10px] text-[#111111] font-semibold font-poppins">
-        Login
+        Đăng Nhập
       </h2>
       <form onSubmit={handleSubmit((value) => mutate(value))}>
         <InputV1
-          label={"user name"}
+          label={"Email"}
           register={{
-            ...register("userName", {
-              required: {
-                value: true,
-                message: "Username is required.",
-              },
-            }),
+            ...register("email"),
           }}
         />
         <InputV1
-          label={"password"}
+          label={"Mật khẩu"}
           type={"password"}
-
           register={{
-            ...register("password", {
-              required: {
-                value: true,
-                message: "Password is required.",
-              },
-            }),
+            ...register("password"),
           }}
         />
 
-        <Button label={"Login"} type="submit"  />
-        <div className="mt-[15px]">
+        {isLoading ? (
+          <FadeLoader color="#ff4545" />
+        ) : (
+          <Button label={"Đăng Nhập"} type="submit" />
+        )}
+
+        {/* <div className="mt-[15px]">
           <Link to="lost-password">Lost your password?</Link>
-        </div>
+        </div> */}
       </form>
     </>
   );

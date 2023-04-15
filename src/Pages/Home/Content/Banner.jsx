@@ -21,7 +21,7 @@ const Banner = ({data}) => {
                       <h2 className="text-[15px] uppercase text-[#fbb71c] font-normal ">
                         {item.title}
                       </h2>
-                      <div dangerouslySetInnerHTML={{__html: item?.content}} className=" font-semibold text-white mb-[15px] text-[24px] font-poppins md:pr-[30%]  ">
+                      <div dangerouslySetInnerHTML={{__html: item?.content}} className=" relative z-[999999] font-semibold !text-white mb-[15px] text-[24px] font-poppins md:pr-[30%]  ">
                         {item.desc}
                       </div>
                       <ButtonArrow

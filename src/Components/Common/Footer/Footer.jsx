@@ -32,9 +32,7 @@ const Footer = () => {
                 </Link>
 
                 <p className="mb-[22px] ">
-                  Sed perspiciatis unde omnis natus error voluptatem accusan
-                  doloreqe laudantium totam aperiam eaque sipsa quae abillo
-                  inventore
+                  Chúng tôi hân hạnh cung cấp các dịch  và sản phẩm tốt nhất đến với khách hàng 
                 </p>
 
                 <div className="">
@@ -91,20 +89,20 @@ const Footer = () => {
             <Col className={"md:w-6/12 w-full lg:w-3/12"}>
               <div className="mb-10 lg:mb-0">
                 <h3 className=" text-2xl font-poppins font-semibold mb-[22px]">
-                  Contact Us
+                  Liên hệ với chúng tôi
                 </h3>
                 <ul className="text-[#c5cad8]">
                   <li className="pb-[10px] relative pl-[27px]">
                     <i className="fal fa-map-marker-alt absolute text-main-color  top-[7px] left-0"></i>
-                    <p>250 Main Street. 2nd Floor D - Block, New York</p>
+                    <p>Tổ 22 Thành phố Tuyên Quang</p>
                   </li>
                   <li className="pb-[10px] relative pl-[27px] ">
                     <i className="fal fa-envelope absolute text-main-color top-[7px] left-0"></i>
-                    <p>support@example.com</p>
+                    <p>vantuanxyz741@example.com</p>
                   </li>
                   <li className="pb-[10px] relative pl-[27px]">
                     <i className="fal fa-phone absolute text-main-color top-[7px] left-0"></i>
-                    <p>+898 - 123 - 456 - 98</p>
+                    <p>+84 - 0889 - 091 - 654</p>
                   </li>
                   <li className="pb-[10px] relative ">
                     <img

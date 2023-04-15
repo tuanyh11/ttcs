@@ -25,14 +25,14 @@ const Subscribe = ({ data }) => {
                 <h4 className="uppercase underline text-[#fbb71c] mb-5">
                   {subTitle}
                 </h4>
-                <h2 className="mb-[35px]  lg:px-[50px] leading-[1.2] text-[27px]  md:text-[32px] lg:text-[36px] xl:text-[48px] text-white font-poppins font-semibold">
+                <h2 className="mb-[35px] capitalize  lg:px-[50px] leading-[1.2] text-[27px]  md:text-[32px] lg:text-[36px] xl:text-[48px] text-white font-poppins font-semibold">
                   {title}
                 </h2>
                 <form action="">
                   <div className="relative">
                     <input
                       type="text"
-                      placeholder="Enter Your Email Address"
+                      placeholder="Nhập địa chỉ email của bạn"
                       className="h-[85px] leading-[85px] placeholder-[#757575] w-full rounded-[43px] outline-none border px-5"
                     />
                     <div className="md:absolute mt-[15px] md:mt-0 top-1/2 right-[15px] md:-translate-y-1/2">

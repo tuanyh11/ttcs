@@ -11,28 +11,28 @@ const useCartStore = create(
       total: 0,
       wishItems: [],
       addItem: (item) => set(state => {
-        const existingItem = state.items.find(oldItem => oldItem.id === item.id);
+        const existingItem = state.items.find(oldItem => oldItem._id === item._id);
 
         if (existingItem) {
           return {
             items: state.items.map(oldItem => {
-              if (oldItem.id === item.id) {
-                return { ...oldItem, quantity: oldItem?.quantity ? oldItem.quantity + 1 : 1 };
+              if (oldItem._id === item._id) {
+                return { ...oldItem, quantity: oldItem?.quantity + item.quantity };
               }
               return oldItem;
             }),
           };
         }
-        return { items: [...state.items, { ...item, quantity: 1 }] };
+        return { items: [...state.items, { ...item, quantity: item.quantity }] };
       }),
 
       addItemWishtoCart: (item) => set(state => {
-        const existingItem = state.items.find(oldItem => oldItem.id === item.id);
+        const existingItem = state.items.find(oldItem => oldItem._id === item._id);
 
         if (existingItem) {
           return {
             items: state.items.map(oldItem => {
-              if (oldItem.id === item.id) {
+              if (oldItem._id === item._id) {
                 return {
                   ...oldItem,
                   quantity: oldItem?.quantity ? oldItem.quantity + 1 : 1
@@ -45,29 +45,31 @@ const useCartStore = create(
         return { items: [...state.items, { ...item, quantity: 1 }] };
       }),
 
-      addItemWithQuantity: (item) => set(state => {
-        const existingItem = state.items.find(oldItem => oldItem.id === item.id);
-        console.log(existingItem);
-        if (existingItem) {
-          return {
-            items: state.items.map(oldItem => {
-              if (oldItem.id === item.id) {
-                return { ...oldItem, quantity: oldItem?.quantity + item?.quantity };
-              }
-              return oldItem;
-            }),
-          };
-        }
-        return { items: [...state.items, { ...item, quantity: 1 }] };
-      }),
+      // addItemWithQuantity: (item) => set(state => {
+      //   const existingItem = state.items.find(oldItem => oldItem._id === item._id);
+      //   if (existingItem) {
+      //     return {
+      //       items: state.items.map(oldItem => {
+      //         if (oldItem._id === item._id) {
+      //           return {
+      //             ...oldItem,
+      //             quantity: Number(oldItem?.quantity) + Number(item?.quantity),
+      //           };
+      //         }
+      //         return oldItem;
+      //       }),
+      //     };
+      //   }
+      //   return { items: [...state.items, { ...item, quantity: item?.quantity || 1 }] };
+      // }),
 
       addToWishlistItems: (item) => set(state => {
-        const existingItem = state.wishItems.find(oldItem => oldItem.id === item.id);
+        const existingItem = state.wishItems.find(oldItem => oldItem._id === item._id);
 
         if (existingItem) {
           return {
             wishItems: state.wishItems.map(oldItem => {
-              if (oldItem.id === item.id) {
+              if (oldItem._id === item._id) {
                 return {
                   ...oldItem,
                   quantity: oldItem?.quantity,
@@ -86,31 +88,24 @@ const useCartStore = create(
         }
         return { wishItems: [...state.wishItems, { ...item, quantity: 1, dateAddWish: new Date() }] };
       }),
+      clearCart() {
+        set(state => ({...state, items: []}))
+      },
 
-      upadateItemWithQuantity: (item) => set(state => {
-        const existingItem = state.items.find(oldItem => oldItem.id === item.id);
-        if (existingItem) {
-          return {
-            items: state.items.map(oldItem => {
-              if (oldItem.id === item.id) {
-                return {
-                  ...oldItem,
-                  quantity: oldItem?.quantity,
-                };
-              }
-              return oldItem;
-            }),
-          };
+      upadateItemWithQuantity: (items) => set(state => {
+        return {
+          ...state, 
+          items,
         }
-        return { items: [...state.items, { ...item, quantity: 1 }] };
       }),
-      getTotal: () => get().items,
-      isInWishList: productId => get().wishItems?.some(item => item.id === productId),
-      hasProduct: productId => get().items.some(item => item.id === productId),
+      getTotal: () => get().items?.reduce((total, item) => total + item.quantity, 0 ),
+      getTotalWithQuantity: () => get().items?.reduce((total, item) => total + (item.quantity * item.price.raw), 0),
+      isInWishList: productId => get().wishItems?.some(item => item._id === productId),
+      hasProduct: productId => get().items.some(item => item._id === productId),
       length: () => get().items.reduce((prevValue, currentValue) => prevValue + currentValue.quantity, 0),
       removeItem: (itemId) =>
         set((state) => {
-          const updatedItems = state.items.filter((item) => item.id !== itemId);
+          const updatedItems = state.items.filter((item) => item._id !== itemId);
           const updatedTotal = updatedItems.reduce(
             (total, item) => total + item.price,
             0
@@ -119,7 +114,7 @@ const useCartStore = create(
         }),
       removeItemWish: (itemId) =>
         set((state) => {
-          const updatedItems = state.wishItems.filter((item) => item.id !== itemId);
+          const updatedItems = state.wishItems.filter((item) => item._id !== itemId);
           const updatedTotal = updatedItems.reduce(
             (total, item) => total + item.price,
             0

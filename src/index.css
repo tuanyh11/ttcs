@@ -89,7 +89,7 @@ body {
   }
 
   p {
-    @apply text-[#646a7c];
+    /* @apply text-[#646a7c]; */
   }
 
   h1,

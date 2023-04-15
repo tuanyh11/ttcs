@@ -1,6 +1,7 @@
 import React from "react";
 import { useQueries, useQuery } from "react-query";
 import { getBestSellingProducts, getCars, getExclusiveProducts, getHomepageData, getLatestBlog } from "../../api";
+import { getProducts } from "../../api/product";
 import Banner from "./Content/Banner";
 import BestSelling from "./Content/BestSelling";
 import Brand from "./Content/Brand";
@@ -26,6 +27,11 @@ const Home = () => {
     refetchOnWindowFocus: false,
   })
 
+  const {data: exclusiveProducts} = useQuery({
+    queryKey: ['exclusive'],
+    queryFn: getProducts
+  })
+
 
   const carData = data?.carData
 
@@ -39,6 +45,7 @@ const Home = () => {
   const subscribeData = sectionData?.find(data => data?.fieldGroupName === 'Page_Acf_Component_ImageWithText')
   const quoteData = sectionData?.find(data => data?.fieldGroupName === 'Page_Acf_Component_Quote')
 
+  console.log(exclusiveProducts);
 
 
   return (
@@ -52,7 +59,7 @@ const Home = () => {
       </section>
 
       <section>
-        <Exclusive data={exclusiveProduct} />
+        <Exclusive data={exclusiveProducts} />
       </section>
 
       <section>
@@ -60,16 +67,16 @@ const Home = () => {
       </section>
 
       <section>
-        <BestSelling data={bestSellingProduct}/>
+        <BestSelling data={exclusiveProducts}/>
       </section>
 
       <section>
         <Review data={quoteData}/>
       </section>
 
-      <section>
+      {/* <section>
         <LatestBlog data={latestBlog}/>
-      </section>
+      </section> */}
 
       <section>
         <Brand/>

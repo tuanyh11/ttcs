@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Link, useLocation } from "react-router-dom";
-import { getProducts } from "../../../api";
+import { getProducts } from "../../../api/product";
 import { fakeData } from "../../../assets/data";
 import {
   Col,
@@ -16,35 +16,31 @@ import { useShopContext } from "../../../hooks";
 import { sortProduct } from "../../../utils";
 
 const sortDatatypes = [
+  // {
+  //   name: "Sort by popularity",
+  //   slug: "popularity",
+  // },
   {
-    name: "Sort by popularity",
-    slug: "popularity",
-  },
-  {
-    name: "Sort by average rating",
+    name: "Sắp xếp theo đánh giá trung bình",
     slug: "averageRating",
   },
   {
-    name: "Sort by latest",
+    name: "Sắp xếp theo mới nhất",
     slug: "Latest",
   },
   {
-    name: "Numerical",
-    slug: "numerical",
-  },
-  {
-    name: "Sort by price: Low to High",
+    name: "Sắp xếp theo giá: Thấp đến Cao",
     slug: "priceHigh",
   },
   {
-    name: "Sort by price: High to Low",
+    name: "Sắp xếp theo giá: Cao đến Thấp",
     slug: "priceLow",
   },
 ];
 
 const Content = () => {
   const {
-    state: { filter, handleOnRemoveCate, handleOnRemoveStatus },
+    state: { filter, handleOnRemoveCate, handleOnRemoveStatus, setRangePrice, setFilterPrice },
   } = useShopContext();
 
   const [featured, setFeatured] = useState("grid");
@@ -67,15 +63,30 @@ const Content = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["productList"],
-    queryFn: () => {
-      return getProducts().then((res) => res);
-    },
+    queryFn: getProducts,
     enabled: !productSearch,
     refetchOnWindowFocus: false,
+    onSuccess: (data) => {
+      let range = data?.map(item => 
+        item.price.raw
+      )
+
+      setRangePrice({
+        max: Math.max(...range),
+        min: Math.min(...range)
+      })
+
+      setFilterPrice({
+        min: 0,
+        max: Math.max(...range)
+      })
+    }
   });
 
+  console.log(data);
+
   useEffect(() => {
-    setProducts(productSearch || data?.data);
+    setProducts(productSearch || data);
   }, [data, productSearch]);
 
   const categories = filter?.category;
@@ -95,7 +106,7 @@ const Content = () => {
     <div>
       {showProducts?.length === 0 ? (
         <span className="text-[15px]">
-          No products were found matching your selection.
+          Không tìm thấy sản phẩm nào phù hợp với lựa chọn của bạn.
         </span>
       ) : (
         <>
@@ -158,7 +169,7 @@ const Content = () => {
             <div>
               <Row className="flex flex-wrap">
                 {showProducts?.map((item, index) => {
-                  const product = item?.node;
+                  const product = item;
                   return (
                     <Col key={index} className=" w-full md:w-6/12 screens-992:w-4/12">
                       <div className="mb-[30px] ">
@@ -180,7 +191,7 @@ const Content = () => {
             <div>
               <Row className="flex flex-wrap">
                 {showProducts?.map((item, index) => {
-                  const product = item?.node;
+                  const product = item;
                   console.log(product);
                   return (
                     <Col key={index} className=" w-full">

@@ -33,7 +33,6 @@ const BestSelling = ({ data }) => {
           slidesToScroll: 1,
           initialSlide: 2,
           infinite: true,
-
         },
       },
       {
@@ -43,7 +42,6 @@ const BestSelling = ({ data }) => {
           slidesToScroll: 1,
           initialSlide: 2,
           infinite: true,
-
         },
       },
       {
@@ -52,7 +50,7 @@ const BestSelling = ({ data }) => {
           slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 2,
-          infinite: true
+          infinite: true,
         },
       },
       {
@@ -60,7 +58,7 @@ const BestSelling = ({ data }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true
+          infinite: true,
         },
       },
     ],
@@ -72,11 +70,11 @@ const BestSelling = ({ data }) => {
           <div className="md:p-[15px]  text-center flex justify-center">
             <div className="w-full md:w-9/12 lg:w-6/12  mb-[25px]">
               <h2 className="mb-[15px] font-poppins text-[27px] text-black leading-[32px] font-semibold">
-                Best Selling Products{" "}
+                Các Sản Phẩm Bán Chạy Nhất{" "}
               </h2>
               <p>
-                Quis autem vel eum iure reprehenderit qui in ea voluptate velit
-                esse quam nihil molestiae consequatur vel illum dolorem
+                Các sản phẩm bán chạy nhất là những sản phẩm được yêu thích và
+                mua nhiều nhất trong một thời gian nhất định
               </p>
             </div>
           </div>
@@ -87,7 +85,7 @@ const BestSelling = ({ data }) => {
                   return (
                     <div key={i}>
                       <div className="px-[15px]">
-                        <ProductCardGrid {...product?.node} />
+                        <ProductCardGrid {...product} />
                       </div>
                     </div>
                   );

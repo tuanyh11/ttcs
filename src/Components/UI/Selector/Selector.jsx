@@ -44,7 +44,7 @@ function Selector({
       {renderHeader ? (
         renderHeader()
       ) : (
-        <div className="block relative cursor-pointer p-2.5 h-[50px] px-5 border border-[#e8e8e8]   outline-none w-full md:w-[250px]">
+        <div className="block relative cursor-pointer p-2.5 h-[50px] px-5 border border-[#e8e8e8] capitalize outline-none w-full md:w-[300px]">
           {title}
           <i className="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs"></i>
         </div>
@@ -57,7 +57,7 @@ function Selector({
             {data.map((item, index) => (
               <div
                 onClick={() => handleOnSelect(item)}
-                className={`h-10 leading-10 pl-[18px] pr-[30px] cursor-pointer ${
+                className={`h-10 leading-10 pl-[18px] pr-[30px] cursor-pointer capitalize ${
                   title === item?.name ? "bg-[#f6f6f6] font-bold" : ""
                 }`}
                 key={index}

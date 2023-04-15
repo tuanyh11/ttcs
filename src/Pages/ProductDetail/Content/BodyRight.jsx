@@ -5,7 +5,7 @@ import { useCartStore } from "../../../Components/store";
 import { useProductDetailContext } from "../../../hooks";
 import { generateStart } from "../../../utils";
 
-const BodyRight = () => {                                                                                                                           
+const BodyRight = () => {
   const [value, setValue] = useState(1);
   const handleKeyDown = (event) => {
     if (event.key === "Backspace") {
@@ -17,12 +17,39 @@ const BodyRight = () => {
   };
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setValue(Number(event.target.value));
   };
 
-  const {state: data} = useProductDetailContext()
+  const { state: data } = useProductDetailContext();
 
-  const {addItemWithQuantity} = useCartStore()
+  const { addItem } = useCartStore();
+
+  const isLimited = value > data?.quantityInStock;
+
+  const Warning = !isLimited ? null : (
+    <div
+      class="flex p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+      role="alert"
+    >
+      <svg
+        aria-hidden="true"
+        class="flex-shrink-0 inline w-5 h-5 mr-3"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+      <span class="sr-only">Info</span>
+      <div>
+        <span class="font-medium">Warning alert!</span> Số lượng sản phẩm của bạn đã đạt được Số lượng trong kho
+      </div>
+    </div>
+  );
 
   return (
     <div>
@@ -33,22 +60,22 @@ const BodyRight = () => {
 
         <div className="flex items-center">
           <div>{generateStart(data?.averageRating)}</div>
-          <p className="ml-2">(1 customer review)</p>
+          <p className="ml-2">(0 customer review)</p>
         </div>
 
         <p className="mb-5 mt-3  font-medium ">
           <del className="text-[#696969] text-sm mr-1  ">{data?.salePrice}</del>
           <span className="text-main-color text-[19px] ">
-            {data?.regularPrice}
+            ${data?.price?.formatted}
           </span>
         </p>
 
         <div
-          className="mb-5"
-          dangerouslySetInnerHTML={{ __html: data?.shortDescription }}
+          className="mb-5 line-clamp-4"
+          dangerouslySetInnerHTML={{ __html: data?.description }}
         />
 
-        <table className=" border border-collapse w-full  ">
+        {/* <table className=" border border-collapse w-full  ">
           {data?.act_product?.table?.map((table, i) => {
             const row = table?.row;
             return (
@@ -76,30 +103,39 @@ const BodyRight = () => {
               </tbody>
             );
           })}
-        </table>
+        </table> */}
         <div className="mt-[25px] mb-5">
-          <p className="pb-5 ">In Stock</p>
-          <div className="flex">
-            <button
-              onClick={() => setValue(Math.max(1, value - 1))}
-              className="fa-solid fa-minus w-[50px] h-[50px] border"
-            ></button>
-            <input
-              type="text"
-              value={value}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              onBlur={(e) => e.target.value === "" && setValue(1)}
-              className="w-[50px] h-[50px] text-black border outline-none text-center"
-            />
-            <button
-              onClick={() => setValue(value + 1)}
-              className="fa-solid fa-plus w-[50px] h-[50px] border"
-            ></button>
-            <div className="ml-3">
-              <ButtonV1 onClick={() => addItemWithQuantity({...data, quantity: value})} label={"ADD TO CART"} />
+          <p className="pb-5 ">{data?.inStock ? "In Stock" : "Out of Stock"}</p>
+          {Warning}
+          {data?.inStock && (
+            <div className="flex">
+              <button
+                onClick={() => setValue(Math.max(1, value - 1))}
+                className="fa-solid fa-minus w-[50px] h-[50px] border"
+              ></button>
+              <input
+                type="text"
+                value={value}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                onBlur={(e) => e.target.value === "" && setValue(1)}
+                className="w-[50px] h-[50px] text-black border outline-none text-center"
+              />
+              <button
+                onClick={() => setValue(value + 1)}
+                className="fa-solid fa-plus w-[50px] h-[50px] border"
+              ></button>
+              <div className="ml-3">
+                <ButtonV1
+                  disabled={isLimited}
+                  onClick={() =>
+                    addItem({ ...data, quantity: value })
+                  }
+                  label={"ADD TO CART"}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="">
@@ -129,7 +165,7 @@ const BodyRight = () => {
             </div>
           )}
 
-          <div className="flex">
+          {/* <div className="flex">
             <span className="text-black font-medium">Share:</span>
             <div className="ml-2">
               {[...new Array(3)].map((_, i) => {
@@ -140,7 +176,7 @@ const BodyRight = () => {
                 );
               })}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

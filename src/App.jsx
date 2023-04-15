@@ -13,11 +13,10 @@ import { Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-r
 import routeData from "./Routes";
 import { useUiStore } from "./Components/store";
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
-  cache: new InMemoryCache(),
-});
+// import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { moveToTop } from "./utils";
+import { ThanksPage } from "./Pages";
+
 function createRoutes(routes) {
   return routes.map((route) => {
     const { path, component: Component, isIndex, children, ...rest } = route;
@@ -33,16 +32,11 @@ function App() {
   const [backToHeader, setBackToHeader] = useState(false);
 
   const {
-    product,
-    productWishlist,
     selectProduct,
     setIsOpeningFilterProduct,
     isOpeningFilterProduct,
-    isOpeningWishlist,
-    setIsOpeningWishlist,
   } = useUiStore();
 
-  const nav = useNavigate()
 
   const loc = useLocation()
 
@@ -56,13 +50,13 @@ function App() {
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, [loc.pathnames]);
+  }, []);
 
-  const backToHeaderHandler = () =>
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  useEffect(() => {
+    moveToTop()
+  }, [loc.pathname])
+
+   
 
   const Children = useMemo(() => {
     return (
@@ -71,6 +65,7 @@ function App() {
 
         <Routes>
           <Route path={"/"} element={<Navigate to={"/home"} />} />
+          <Route path={"/thank-you"} element={<ThanksPage/>} />
           {createRoutes(routeData)}
         </Routes>
         <Footer />
@@ -78,27 +73,10 @@ function App() {
     );
   }, []);
 
-  useEffect(() => {
-    let id;
-    if (isOpeningWishlist) {
-      id = setTimeout(() => {
-        setIsOpeningWishlist(false);
-        if (!productWishlist?.isAlreadyInWishlist) {
-          nav('/wishList')
-        }
-      }, 9000);
-
-
-    }
-
-    return () => clearTimeout(id);
-  }, [isOpeningWishlist]);
+  
 
   return (
     <div className="App relative">
-      {product && (
-        <QuickView {...product} onQuickViewClick={() => selectProduct(null)} />
-      )}
 
       {Children}
 
@@ -106,7 +84,7 @@ function App() {
         onClickOpen={() => setIsOpeningFilterProduct(!isOpeningFilterProduct)}
       />
 
-      {isOpeningWishlist && (
+      {/* {isOpeningWishlist && (
         <div className={`fixed   inset-0 z-[99999999] `}>
           <div className="absolute inset-0 -z-30 bg-[#191919] opacity-50"></div>
           <div className="absolute bg-white  opacity-100 top-1/2 left-1/2 -translate-x-1/2 z-[9999999999999999] -translate-y-1/2 ">
@@ -148,12 +126,12 @@ function App() {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       {backToHeader && (
         <div className="fixed z-[999999] bottom-[50px] right-[30px]">
           <button
-            onClick={() => backToHeaderHandler()}
+            onClick={() => moveToTop()}
             className="fas fa-angle-up text-[20px] hover:bg-black transition-main font-black w-[50px] h-[50px] bg-main-color text-white rounded-full"
           ></button>
         </div>

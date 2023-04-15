@@ -25,4 +25,6 @@ export { default as DownloadPage } from './Account/Dashboard/DownloadPage'
 export { default as AddressPage } from './Account/Dashboard/AddressPage'
 export { default as AccountDetail } from './Account/Dashboard/AccountDetail'
 
+export { default as ThanksPage } from './PaymentSuccess'
+
 

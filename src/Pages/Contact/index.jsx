@@ -8,7 +8,7 @@ const Contact = () => {
   const [mess, setMess] = useState(false);
   return (
     <div className="list-none">
-      <BreadcrumbPath pathname={'Contact Us'} />
+      <BreadCrumb label={'Liên Hệ Với Chúng Tôi '} />
       <div className="max-w-[1200px] ml-auto mr-auto relative">
         <Row className={'w-full !mx-0 my-0 lg:flex-row md:flex-col items-center'}>
           <Col className={'lg:w-1/3 md:w-full'}>

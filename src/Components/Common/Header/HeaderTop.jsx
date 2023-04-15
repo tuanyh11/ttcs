@@ -78,7 +78,7 @@ const HeaderTop = () => {
           <Col className="md:w-5/12 lg:w-6/12">
             <div className="text-center">
               <p className="leading-[1.8] inline-block">
-                15% every product we have a great offer for you{" "}
+                15% mỗi sản phẩm chúng tôi có một đề nghị tuyệt vời cho bạn{" "}
                 <Button
                   label={"SHOP NOW"}
                   Tag="Link"
@@ -94,13 +94,13 @@ const HeaderTop = () => {
               <div className="pl-[15px]">
                 <i className="fa-solid fa-lock mr-[6px]"></i>
                 <Link to="/my-account" className=" leading-[42px]">
-                  Sign in
+                  Đăng Nhập
                 </Link>
               </div>
               <div className="pl-[15px] ">
                 <i className="fa-solid fa-user mr-[6px]"></i>
                 <Link to="/my-account" className="leading-[42px]">
-                  Sign up
+                  Đăng Ký
                 </Link>
               </div>
             </div>
