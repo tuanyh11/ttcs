@@ -1,0 +1,96 @@
+$xl: 1350px;
+$lg: 1180px;
+$xs: 540px;
+$sm: 768px;
+$md: 992px;
+$gap-lg: 1rem;
+
+.container {
+  width: 100%;
+  max-width: $lg;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 (-$gap-lg);
+}
+
+.row.off-gap {
+  margin: 0;
+}
+
+.off-gap>[class*="col-"] {
+  padding: 0;
+}
+
+.row.align-v-center {
+  align-items: center;
+}
+
+.row.align-v-bottom {
+  align-items: flex-end;
+} 
+
+.row.align-h-center {
+  justify-content: center;
+}
+
+.row.align-h-right {
+  justify-content: flex-end;
+}
+
+.row.reverse {
+  flex-direction: row-reverse;
+}
+
+[class*="col-"] {
+  padding: 0 $gap-lg;
+}
+
+
+.gap-y {
+  padding: 0 $gap-lg; 
+}
+
+@for $i from 1 to 13 {
+  .col-#{$i}  {
+    width: calc(100% * (#{$i} / 12));
+  }
+}
+
+@media (min-width: $sm) {
+  @for $i from 1 to 13 {
+    .col-sm-#{$i}  {
+      width: calc(100% * (#{$i} / 12));
+    }
+  }
+}
+
+@media (min-width: $md) {
+  @for $i from 1 to 13 {
+    .col-md-#{$i} {
+      width: calc(100% * (#{$i} / 12));
+    }
+  }
+}
+
+@media (min-width: $lg) {
+  @for $i from 1 to 13 {
+    .col-lg-#{$i} {
+      width: calc(100% * (#{$i} / 12));
+    }
+  }
+}
+
+
+
+
+
+
+
+

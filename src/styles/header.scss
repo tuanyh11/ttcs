@@ -1,0 +1,61 @@
+.header {
+    padding-top: 10rem;
+    @include breakpoint($sm, "pc") {
+      padding-top: 40px;
+    }
+    &__container {
+      @include flex(center, space-between);
+      position: relative;
+    }
+  
+    &__bar {
+      $offset-bar: 1rem;
+      display: none;
+      width: 13rem;
+      height: 13rem;
+      border-radius: 100%;
+      // background-color:#ffe200;
+      text-align: center;
+      flex-direction: column;
+      border: 2px solid $border-gray-f8f8;
+      span {
+        width: 8rem;
+        height: 4px;
+        background-color: $text-black-100;
+        display: block;
+      }
+  
+      :first-child {
+        transform: translateY(-$offset-bar);
+      }
+  
+      :last-child {
+        transform: translateY($offset-bar);
+      }
+  
+      @include breakpoint($sm, "pc") {
+      @include flex(center, center);
+  
+      }
+    }
+  
+    &__button {
+      @include absolute(top);
+      right: -8rem;
+      width: 12rem;
+      height: 3.5rem;
+      text-align: center;
+      display: block;
+      line-height: 3.5rem;
+      border: solid 1px #1a1a1a;
+      font-family: "Kozuka Gothic Pr6N", sans-serif;
+      font-size: 1.4rem;
+      @include breakpoint($sm, "pc") {
+        display: none;
+      }
+
+      @include pc-first-breakpoint($xl) {
+        display: none;
+      }
+    }
+  }

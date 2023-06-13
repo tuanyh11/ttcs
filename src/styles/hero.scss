@@ -1,0 +1,155 @@
+// start style hero
+
+.hero {
+  padding-top: 12rem;
+  $padding-x: 4rem;
+  @include breakpoint($sm, "pc") {
+    padding-top: 12.5rem;
+    & > .container {
+      padding: 0;
+    }
+  }
+  &__title {
+    @include pc-first-breakpoint {
+      padding: 0 $padding-x;
+    }
+    &-head {
+      text-transform: uppercase;
+      color: $text-gray-800;
+      @include breakpoint($sm, "pc") {
+        font-size: 2.5rem;
+      }
+    }
+
+    &-body {
+      font-family: "KozGoPr6N";
+      color: $text-black-100;
+      font-size: 1.8rem;
+      line-height: 3.5;
+      @include breakpoint($sm, "pc") {
+        font-size: 4rem;
+        line-height: 3;
+      }
+    }
+
+    &-foot {
+      @include flex(center);
+      margin-top: 1.5rem;
+
+      & img {
+        margin-right: 0.8rem;
+        vertical-align: middle;
+        @include breakpoint($sm, "pc") {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+
+      & span {
+        margin-left: 0.8rem;
+        @include breakpoint($sm, "pc") {
+          font-size: 2.5rem;
+        }
+        position: relative;
+        padding-left: 1rem;
+
+        &::after {
+          content: "";
+          left: -0.8rem;
+          @include absolute("top");
+          @include breakpoint($sm, "pc") {
+            height: 2.5rem;
+          }
+          background-color: $text-gray-800;
+          width: 1px;
+          height: 12px;
+        }
+      }
+    }
+  }
+
+  &__img {
+    padding-top: 8rem;
+    @include flex(center);
+    flex-wrap: wrap;
+    @include breakpoint($sm, "pc") {
+      padding-top: 16rem;
+    }
+    &-content {
+      width: 30%;
+      margin-top: 14rem;
+      font-size: 18px;
+      font-family: "Kozuka Gothic Pr6N";
+      color: $text-black-100;
+      line-height: 1.75;
+      text-align: left;
+      padding-right: 5.5rem;
+      order: 1;
+      @include breakpoint($sm, "pc") {
+        width: 100%;
+        order: 2;
+        margin-top: 14.5rem;
+        font-weight: bold;
+        font-size: 3.5rem;
+        padding-right: 19rem;
+        padding-left: $padding-x;
+      }
+
+      @include pc-first-breakpoint($xs) {
+        padding-right: 0;
+      }
+    }
+
+    & img {
+      width: 70%;
+      order: 2;
+      @include breakpoint($sm, "pc") {
+        width: 100%;
+        order: 1;
+      }
+    }
+  }
+
+  &__content {
+    width: 67%;
+    font-family: "Kozuka Gothic Pr6N";
+    line-height: 2.5;
+    padding-top: 3rem;
+    padding-right: 4rem;
+    margin-top: -8rem;
+    @include breakpoint($sm, "pc") {
+      margin-top: 0;
+      width: 100%;
+      font-size: 3rem;
+      padding: 12rem $padding-x 0 $padding-x;
+    //   padding-top: 12rem;
+      // color: $border-gray-f8f8;
+    }
+    position: relative;
+    z-index: 999;
+
+    &-text {
+      position: relative;
+      z-index: 9999;
+
+      & p:not(:last-child) {
+        margin-bottom: 3.5rem;
+        @include breakpoint($sm, "pc") {
+          margin-bottom: 6.5rem;
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: white;
+      opacity: 0.9;
+      z-index: 0;
+    }
+    // opacity: 0.1;
+  }
+}
+
+// end of hero

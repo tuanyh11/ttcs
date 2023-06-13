@@ -1,0 +1,212 @@
+// start declare class common
+
+.button {
+  font-size: 13px;
+  font-family: "Kozuka Gothic Pr6N";
+  cursor: pointer;
+  border: none;
+}
+
+.button-black {
+  background: black;
+  color: white;
+}
+
+.box-circle {
+  border-radius: 100%;
+  // @include size;
+  background-color: $primary-color;
+  padding: 1rem;
+}
+
+.menu {
+  &__close {
+    display: none;
+  }
+
+  &__list {
+    @include flex(center);
+  }
+
+  &__item {
+    margin-right: 4rem;
+    &:last-child {
+      margin-right: 0;
+    }
+    &:last-child > a {
+      @include pc-first-breakpoint($xl) {
+        display: inline-block;
+        position: inherit;
+        transform: none;
+      }
+    }
+  }
+
+  &__link {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+
+  @include breakpoint($sm, "pc") {
+    &:not(.footer__menu) {
+      position: fixed;
+      inset: 0;
+      background: white;
+      z-index: $max-zIndex;
+      transition: all 0.2s;
+      transform: translateX(-100%);
+    }
+
+    &:not(.footer__menu).active {
+      transform: translateX(0);
+    }
+
+    &__close {
+      position: absolute;
+      z-index: $max-zIndex;
+      display: block;
+      top: 0;
+      right: 0;
+      transform: translate(-2rem, 2rem);
+      i {
+        font-size: 2rem;
+      }
+    }
+
+    & {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__item {
+      margin-right: 0;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    &__list {
+      display: block;
+    }
+  }
+}
+
+.p-t-10 {
+  padding-top: 1rem !important;
+}
+
+.p-l-xl {
+  padding-left: 22rem;
+}
+
+.p-r-lg {
+  padding-right: 4.5rem;
+}
+
+.section__title {
+  font-size: 2.2rem;
+  color: $text-black-100;
+  line-height: 1.591;
+  text-align: center;
+  margin-bottom: 3rem;
+  @include breakpoint($sm, "pc") {
+    font-size: 4rem;
+    margin-bottom: 7rem;
+  }
+  & h1 {
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+  }
+  & img {
+    margin-left: auto;
+    margin-right: auto;
+    @include breakpoint($sm, "pc") {
+      width: 15rem;
+      height: 10rem;
+    }
+  }
+}
+
+.section__content {
+  &-text {
+    font-size: 1.4rem;
+    font-family: "Kozuka Gothic Pr6N";
+    line-height: 2.2;
+    margin-bottom: 4.8rem;
+    @include breakpoint($sm, "pc") {
+      font-size: 3rem;
+    }
+  }
+
+  &-box {
+    padding: 1.6rem;
+    background: $text-gray-900;
+    @include breakpoint($sm, "pc") {
+      padding: 2rem;
+      margin: 0 -4rem;
+    }
+    .content__box {
+      border: 1px solid white;
+      font-family: "Kozuka Gothic Pr6N";
+      padding: 2.6rem 1.6rem;
+
+      h2 {
+        line-height: 2.043;
+        text-align: center;
+        @include breakpoint($sm, "pc") {
+          font-size: 3rem;
+          line-height: 1;
+          padding-bottom: 4rem;
+        }
+      }
+
+      @include breakpoint($sm, "pc") {
+        padding: 5rem 4rem;
+      }
+
+      p {
+        font-size: 1.3rem;
+        line-height: 2.2;
+        @include breakpoint($sm, "pc") {
+          font-size: 2.4rem;
+        }
+      }
+
+      .content__img-list {
+        margin-top: 2.3rem;
+
+        .content__img-item {
+          img {
+            width: 100%;
+          }
+        }
+      }
+
+      &-button {
+        margin-top: 3rem;
+        text-align: center;
+
+        .button {
+          padding: 0.6rem 2rem 0.6rem 5rem;
+          @include pc-first-breakpoint {
+            line-height: 1;
+            padding: 4rem;
+            border-radius: 2px;
+            font-size: 3rem;
+          }
+          i {
+            margin-left: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.p-t-24 {
+  padding-top: 24rem;
+}
+
+.flex-center {
+  @include flex(center, center);
+}

@@ -1,0 +1,219 @@
+.slider {
+    padding-top: 13.5rem;
+    $left-slickBtn: -7rem;
+    &__count {
+      position: absolute;
+      bottom: 0;
+      left: -11%;
+  
+      @include pc-first-breakpoint {
+        display: none;
+      }
+    }
+  
+    // .custom_next-btn,
+    .slick-next {
+      position: absolute;
+      top: 72%;
+      /* transform: translateY(-99px); */
+      left: $left-slickBtn;
+      height: 4rem;
+      width: 4rem;
+      border: none;
+      border-radius: 100%;
+      z-index: 999;
+      background: yellow;
+      cursor: pointer;
+      @include pc-first-breakpoint {
+        right: 100%;
+        left: calc(100% - 4rem);
+        transform: translateY(-45px);
+        top: 100%;
+      }
+    }
+  
+    .custom_next-btn {
+      display: none;
+      // width: 14.5rem;
+      // height: 5rem;
+      margin-top: -5rem;
+      position: relative;
+      z-index: 9999;
+      @include pc-first-breakpoint {
+        button {
+          padding: 1.6rem 3rem;
+          background: $primary-color;
+          font-size: 2rem;
+          border-radius: 3rem;
+          text-transform: uppercase;
+        }
+        @include flex(center, end);
+        i {
+          margin-left: 4px;
+        }
+        border-radius: 0;
+      }
+    }
+  
+    .slick-prev {
+      position: absolute;
+      top: 83%;
+      /* transform: translateY(-99px); */
+      left: $left-slickBtn;
+      height: 4rem;
+      width: 4rem;
+      border: none;
+      border-radius: 100%;
+      background: yellow;
+      cursor: pointer;
+      @include pc-first-breakpoint {
+        display: none !important;
+      }
+    }
+  
+    &__inner {
+      @include flex;
+      flex-wrap: wrap;
+    }
+  
+    &__title {
+      @include pc-first-breakpoint {
+        @include flex(center, space-between);
+      }
+      margin-bottom: 10rem;
+      & h1 {
+        font-size: 2.4rem;
+        font-weight: 500;
+        margin-bottom: 2.8rem;
+        @include pc-first-breakpoint {
+          margin-bottom: 0;
+        }
+      }
+  
+      & h3 {
+        font-size: 1.5rem;
+        line-height: 2.2;
+      }
+  
+      @include pc-first-breakpoint {
+        span {
+          display: none;
+        }
+      }
+  
+      // @include breakpoint($lg, "mobile") {
+      //   width: 33.3333%;
+      // }
+    }
+  
+    &__content {
+      // padding: 0 5.5rem 0 1rem;  
+      $top: 2rem;
+      margin-top: -$top;
+      .slick-slide {
+        padding-top: $top;
+      }
+      @include pc-first-breakpoint {
+        padding: 0;
+      }
+    }
+  
+    &__item {
+      padding: 5rem 3rem;
+      border: 1px solid $text-gray-900;
+      position: relative;
+      margin: 0 4rem;
+      @include pc-first-breakpoint {
+        padding: 7rem 0 0 0;
+        border-top: 3px solid $text-gray-900;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+      }
+      & .item__box {
+        &-title {
+          text-align: center;
+          font-family: "Kozuka Gothic Pr6N", sans-serif;
+          font-size: 1.6rem;
+          line-height: 1.75;
+          font-weight: 700;
+          padding-bottom: 3rem;
+          margin-bottom: 3rem;
+          position: relative;
+          @include pc-first-breakpoint {
+            line-height: 1;
+            margin-bottom: 6rem;
+            padding-bottom: 4.5rem;
+          }
+          &::after {
+            content: "";
+            background-color: $text-gray-900;
+            width: 16px;
+            height: 2px;
+            z-index: 452;
+            top: 100%;
+            @include absolute(left);
+            @include pc-first-breakpoint {
+              width: 100%;
+            }
+          }
+        }
+        &-counter {
+          position: absolute;
+          text-transform: uppercase;
+          top: 0;
+          transform: translate(-50%, -50%);
+          left: 50%;
+          line-height: 1;
+          font-size: 1.3rem;
+          text-align: center;
+          background-color: $text-gray-900;
+          padding: 0.6rem 1.6rem;
+          border-radius: 2rem;
+          @include pc-first-breakpoint {
+            font-size: 2rem;
+          }
+        }
+      }
+  
+      & .item__content {
+        &-title {
+          text-align: center;
+          font-size: 1.6rem;
+          @include pc-first-breakpoint {
+            font-size: 3rem;
+          }
+          font-family: "Kozuka Gothic Pr6N";
+          margin-bottom: 3rem;
+        }
+  
+        &-text {
+          font-size: 1.4rem;
+          line-height: 2.2;
+          padding-bottom: 8rem;
+          @include pc-first-breakpoint {
+            font-size: 2.6rem;
+          }
+        }
+      }
+    }
+  
+    &__circle {
+      @include flex(center, end);
+  
+      button {
+        display: none;
+  
+        @include pc-first-breakpoint {
+          width: 175px;
+          height: 175px;
+          text-transform: uppercase;
+          background: black;
+          font-size: 2rem;
+          color: white;
+          display: inline-block;
+          margin-top: 17rem;
+        }
+      }
+    }
+  }

@@ -1,0 +1,50 @@
+@mixin circle($size: 40px) {
+    border-radius: 100%;
+    width: $size;
+    height: $size;
+  }
+  
+  @mixin flex($align: flex-start, $justify: flex-start, $wrap: nowrap) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+  }
+  
+  @mixin breakpoint($point, $type: "mobile") {
+    @if $type == "mobile" {
+      @media (min-width: $point) {
+        @content;
+      }
+    } 
+    @if $type == "pc" {
+      @media (max-width: $point) {
+        @content;
+      }
+    }
+  }
+
+  @mixin pc-first-breakpoint($point: $sm) {
+    @media (max-width: $point) {
+        @content;
+      }
+  }
+  
+  @mixin size($width: 180px, $height: 180px) {
+    width: $width;
+    height: $height;
+    // line-height: $line-height;
+  }
+  
+  @mixin absolute($dir: "left") {
+    position: absolute;
+    @if $dir == "left" {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    @if $dir == "top" {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }

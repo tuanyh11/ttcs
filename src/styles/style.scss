@@ -1,0 +1,24 @@
+
+@import "./variables.scss";
+@import "./grid.scss";
+@import "./mixin.scss";
+@import "./reset.scss";
+@import "./common.scss";
+@import "./header.scss";
+@import "./hero.scss";
+@import "./footer.scss";
+@import "./consultation.scss";
+@import "./slider.scss";
+
+
+
+
+.contact {
+  padding: 16rem 0;
+  @include flex(center, center);
+  &__button {
+    @include size(250px, 250px);
+    font-size: 3.2rem;
+    font-weight: 500;
+  }
+}

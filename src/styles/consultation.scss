@@ -1,0 +1,54 @@
+// start style consultation
+
+.consultation {
+    padding-top: 20rem;
+  
+    @include breakpoint($md) {
+      .flex-center {
+        justify-content: end;
+      }
+    }
+  
+    &__button {
+      display: none;
+      @include pc-first-breakpoint {
+        display: flex;
+        margin-top: 11rem;
+      }
+  
+      button {
+        font-size: 3rem;
+        padding: 4rem;
+        background: $primary-color;
+        line-height: 1;
+        border-radius: 2px;
+      }
+    }
+  
+    &__inner {
+      @include flex(flex-start, flex-start, wrap);
+    }
+  
+    &__content {
+      // width: 83.3333%;
+      // padding-right:
+      padding-left: 0;
+  
+      @include breakpoint($lg) {
+        padding-left: 22rem;
+        padding-right: 4.5rem;
+      }
+    }
+  
+    &__circle {
+      @include size;
+      @include flex(center, center);
+      text-align: center;
+      line-height: 1.75;
+      @include pc-first-breakpoint($sm) {
+        display: none;
+      }
+    }
+  }
+  
+  // end of consultation
